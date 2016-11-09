@@ -1,0 +1,443 @@
+\ProvidesPackage{scs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Longtable meets tabularx
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ltxtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rotate page to landscape
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lscape}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Provides amongst other options the [H] option wich means PUT IT HERE!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{float}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Provides \top- \mid- \bottomrule for professional tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Allows usage of longtables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Allows usage of bibtex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{natbib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define data sets and print them as list,chart,pie...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{datatool}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define linespaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Force figures to stay within a sectiong (use \FloagBarrier)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{placeins}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math type set
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amsthm,amssymb}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Nice code listings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% URLs in LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{url}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For nested directories
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{import}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Used so one can display the date in the formate dd.mm.yyyy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[ddmmyyyy]{datetime}
+\newdateformat{scsdate}{
+\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+\newcommand{\scstoday}{\scsdate\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Used so äöü
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Used so one can display page/totalpages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lastpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For fixed width tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tabularx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For spanning multiple columns in a table
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multirow}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For coloring table background
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{colortbl}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Default Font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{helvet}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create hyperlinks in pdf documents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{hyperref}
+\hypersetup{pdfborder = {0 0 0}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create configurable headers and footers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\setlength{\footskip}{34.67992pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Used for including graphics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Used for defining colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{color}
+\usepackage{xcolor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Multiple references to footnotes and roman index for footnote
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{footmisc}
+\renewcommand{\thefootnote}{\roman{footnote}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Used for calculating things like border widths in latex functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{calc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Used for editing the title styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make narrow borders
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[top=2.5cm,left=2.5cm,right=2.5cm,bottom=2.5cm]{geometry}
+%\usepackage[margin=2.5cm]{geometry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SCS Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{scs-tableheader}{rgb}{0.8,0.8,0.8}
+\definecolor{scs-title}{rgb}{0.46, 0.46, 0.46}
+\definecolor{scs-red}{rgb}{0.937,0.215,0.156}
+\definecolor{scs-grey}{rgb}{0.666,0.67,0.67}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font change to no serife font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\familydefault}{\sfdefault}
+%\newcommand{\footersize}{\fontfamily{helvet}\fontsize{6.5pt}{1pt}\selectfont}
+\newcommand{\footersize}{\fontsize{6.8pt}{1pt}\selectfont}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change the size and color of the sections 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\section}{\fontsize{35pt}{20pt}\selectfont\color{scs-title}}{\thesection}{1em}{}
+\titlespacing{\section}{0em}{0em}{2.3cm}[2.5cm] % {cmd}{left}{before-sep}{after-sep}[right-sep]
+\titleformat{\subsection}{\fontsize{18pt}{20pt}\selectfont}{\thesubsection}{1cm}{}
+\titlespacing{\subsection}{0em}{2.5em}{1.5em}[2.5cm] % {cmd}{left}{before-sep}{after-sep}[right-sep]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Let sections start on a new page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\let\stdsection\section  
+\renewcommand\section{\newpage\stdsection}  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change the row spacing of the tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\arraystretch}{1.5}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set zero paragraph identation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parindent}{0cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set space between two paragraphs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parskip}{0.4em}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Provide relative sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ifthen}
+\newcounter{section-level}
+\setcounter{section-level}{0}
+\newcommand{\leveldown}{\addtocounter{section-level}{1}}
+\newcommand{\levelup}{\addtocounter{section-level}{-1}}
+\newcommand{\dynsection}[1]
+{
+    \ifthenelse{\equal{\value{section-level}}{0}}{\section{#1}}{
+      \ifthenelse{\equal{\value{section-level}}{1}}{\subsection{#1}}{
+        \ifthenelse{\equal{\value{section-level}}{2}}{\subsubsection{#1}}{
+          \ifthenelse{\equal{\value{section-level}}{3}}{\paragraph{#1}}{
+            \subparagraph{#1}
+          }
+        }
+      }
+    }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Allow paragraphs to show in toc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% \@startsection {NAME}{LEVEL}{INDENT}{BEFORESKIP}{AFTERSKIP}{STYLE} 
+%            optional * [ALTHEADING]{HEADING}
+%    Generic command to start a section.  
+%    NAME       : e.g., 'subsection'
+%    LEVEL      : a number, denoting depth of section -- e.g., chapter=1,
+%                 section = 2, etc.  A section number will be printed if
+%                 and only if LEVEL < or = the value of the secnumdepth
+%                 counter.
+%    INDENT     : Indentation of heading from left margin
+%    BEFORESKIP : Absolute value = skip to leave above the heading.  
+%                 If negative, then paragraph indent of text following 
+%                 heading is suppressed.
+%    AFTERSKIP  : if positive, then skip to leave below heading,
+%                       else - skip to leave to right of run-in heading.
+%    STYLE      : commands to set style
+%  If '*' missing, then increments the counter.  If it is present, then
+%  there should be no [ALTHEADING] argument.  A sectioning command
+%  is normally defined to \@startsection + its first six arguments.
+
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+{-3.25ex\@plus -1ex \@minus -.2ex}%
+{1.5ex \@plus .2ex}%
+{\bf}%
+}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
+{-1.25ex\@plus -.001ex \@minus -.0001ex}%
+{0.5ex \@plus .0001ex}%
+{\bf}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SCS Address for footer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def \scsaddress {
+  \footersize\color{scs-grey} Supercomputing Systems AG 
+  \color{scs-red}  $\bullet$ 
+  \color{scs-grey} Technoparkstrasse 1 
+  \color{scs-red}  $\bullet$ 
+  \color{scs-grey} CH-8005 Zurich 
+  \color{scs-red}  $\bullet$ 
+  \color{scs-grey} Tel.: +41 43 456 16 00 
+  \color{scs-red}  $\bullet$ 
+  \color{scs-grey} Fax.: +41 43 456 16 00 
+  \color{scs-red}  $\bullet$ 
+  \color{scs-grey} www.scs.ch 
+  \color{scs-red}  $\bullet$ 
+  \color{scs-grey} info@scs.ch
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header and footer for empty pages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fancypagestyle{empty}{
+  \fancyhf{}
+  \fancyfootoffset[L,R]{0.5cm}
+  \fancyhead[L]{
+    \includegraphics{scs/scs} %Supercomputing Systems AG
+  }
+  \fancyfoot[L]{
+    \begin{tabular}[t]{l r}
+      \multicolumn{2}{l}{
+        \scsaddress
+      }
+    \end{tabular}
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header and footer for fancy pages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfootoffset[L,R]{0.5cm}
+\fancyfoot[C]{
+\begin{tabular}[b]{c}
+\footersize\color{scs-grey}\confidentiality\\
+\footersize\color{scs-grey}\version
+\end{tabular}
+}
+\fancyfoot[L]{
+\begin{tabular}[t]{l r}
+\footersize\color{scs-grey}\scstoday & \footersize\color{scs-grey}Page \thepage/\pageref*{LastPage} \\ % the * after pageref supresses the hyperref in the pdf document
+\multicolumn{2}{l}{
+  \scsaddress
+}
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Remove line beneath the header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\headrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Revisioning
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DTLnewdb{revisions}
+\newcommand*{\revision}[4]{%
+  \DTLnewrow{revisions}%
+  \DTLnewdbentry{revisions}{version}{#1}%
+  \DTLnewdbentry{revisions}{date}{#2}%
+  \DTLnewdbentry{revisions}{author}{#3}%
+  \DTLnewdbentry{revisions}{comment}{#4}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Distribution
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DTLnewdb{distribution}
+\newcommand*{\distribution}[2]{%
+  \DTLnewrow{distribution}%
+  \DTLnewdbentry{distribution}{name}{#1}%
+  \DTLnewdbentry{distribution}{company}{#2}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document information 
+% \IfFileExists{file}{then-code}{else-code}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{docinfo.tex}{\input{docinfo}}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+% \maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\maketitle}{
+\begin{titlepage}
+\begin{flushleft}
+%  \vspace{\fill}
+\vspace*{7.5cm}
+{\begin{spacing}{0.9}
+\color{scs-title}\fontsize{48pt}{48pt} \selectfont \tptitle
+\end{spacing}
+}
+\par
+\vspace*{0.5cm}
+{\fontsize{18pt}{2pt} \selectfont \tpsubtitle} \newline
+\vspace{\fill}
+\begin{minipage}{\textwidth}
+\par
+{\fontsize{18pt}{2pt} \selectfont \confidentiality} \newline
+\par
+\vspace*{0.5cm}
+{\normalsize
+\begin{tabular}[b!]{l l}
+\textbf{Customer         } & \customer\\[0.1cm]
+\textbf{Project          } & \project\\[0.1cm]
+\textbf{Project Manager  } & \projectmanager \\[0.1cm]
+\textbf{Author(s)        } & \tpauthor\\[0.1cm]
+\textbf{Reviewer(s)      } & \reviewer\\
+\end{tabular}
+}
+\end{minipage}
+\end{flushleft}
+\end{titlepage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sparse title page without project information
+% \maketitlesparse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\maketitlesparse}{
+\begin{titlepage}
+\begin{flushleft}
+\vspace*{7.5cm}
+{\begin{spacing}{0.9}
+\color{scs-title}\fontsize{48pt}{48pt} \selectfont \tptitle
+\end{spacing}
+}
+\par
+\vspace*{1cm}
+{\fontsize{18pt}{2pt} \selectfont \tpsubtitle} \newline
+\par
+\vspace{4.0cm}
+{\fontsize{18pt}{2pt} \selectfont \confidentiality} \newline
+\par
+\vspace{\fill}
+\end{flushleft}
+\end{titlepage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copyright
+% \scscopyright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\scscopyright}{
+\paragraph*{Copyright reminder}
+Copyright \copyright{} \the\year \ by Supercomputing Systems AG, Switzerland.\\
+$~~$\\
+All rights reserved. No part of this publication may be reproduced, stored in a retrieval system, or transmitted, in any form by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior written permission of the publisher. Printed and published in Switzerland.\\
+$~~$\\
+While Supercomputing Systems AG believes the information included in this publication is correct as of the date of publication, it is subject to change without notice.\\
+$~~$\\
+All cited trademarks and registered trademarks are the property of their respective owner.
+\paragraph*{Non-disclosure reminder}
+All information in this document is strictly confidential and may only be published by Supercomputing Systems AG, Switzerland. The permissions of the reader are defined in the non-disclosure agreement. Any violation of the non-disclosure agreement terms will be handled as described in the agreement.
+
+\paragraph*{Distribution}
+
+\begin{tabularx}{16cm}{|l|X|}
+ \hline
+ \rowcolor{scs-tableheader} \textbf{Name}\hspace{6cm}$~~$& \textbf{Company}\\
+ \hline
+ \DTLforeach{distribution}{\distname=name,\distcompany=company}{
+
+ \distname & \distcompany  
+\\
+\hline}
+ & \\
+ \hline
+\end{tabularx}
+
+
+\paragraph*{Versions}
+\begin{longtable}{|p{0.25\textwidth}|p{0.15\textwidth}|p{0.1\textwidth}|p{0.39\textwidth}|}
+ \hline
+ \rowcolor{scs-tableheader} \textbf{Version} & \textbf{Date}\hspace{1cm}$~~$& \textbf{Author}& \textbf{Changes}\\
+ \hline 
+ \endhead
+ \DTLforeach{revisions}{\crversion=version,\crdate=date,\crauth=author,\crcomment=comment}{
+ \crversion & \crdate & \crauth & \crcomment 
+ \\
+\hline}
+ & & &\\
+ \hline
+\end{longtable}
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create a default document, you can use this in your document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def \scsdefault {
+  \maketitle
+  \scscopyright
+  \tableofcontents
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create restructured text document skeleton
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def \rstdefault {
+  \maketitle
+  \scscopyright
+  \tableofcontents
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create document skeleton for regmapper tool
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def \regmapper {
+  \newcommand{\version}{}
+
+  \setcounter{tocdepth}{2}
+  \setcounter{secnumdepth}{3}
+
+  \maketitlesparse
+  \tableofcontents
+}

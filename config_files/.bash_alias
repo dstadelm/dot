@@ -1,0 +1,18 @@
+###############################################################
+# Alias
+###############################################################
+alias e='emacs -nw -l ~/.emacs-nobackup'
+alias ls='ls --color=auto'
+alias ll='ls -la --color=auto'
+alias pull='git stash && git pull; git stash pop'
+alias push='git stash && git pull && git push; git stash pop'
+alias hg='history | grep'
+###############################################################
+# Project Aliases
+###############################################################
+alias cdgit='cd $(git root)'
+alias apt-get='sudo apt-get'
+alias disp='export $(tmux show-env | grep DISP)'
+alias git-head='git logk | head && echo'
+alias rebooto='ssh zynq reboot'
+
