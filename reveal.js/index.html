@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<meta charset="utf-8">
+
+		<title>Brusa – PPR Presentation</title>
+
+		<meta name="description" content="Abschlussvortrag BRUSA im PPR vom 14.11.2017">
+		<meta name="author" content="David Stadelmann">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+    r
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/SCS.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Abschlussvortrag</h2>
+					<h3>Brusa Inverter Studie</h3>
+					<h4>PPR vom 14.11.2017</h4>
+					<p>
+						<small>Created by <a href="mailto:david.stadelmann@scs.ch">David Stadelmann</a></small>
+					</p>
+				</section>
+
+				<section id="inhalt">
+					<!--<h2>Vortragsinhalt?</h2>-->
+					<h2>Vortragsinhalt?</h2>
+
+					<ul class="fragment">
+						<li>Projektinhalt</li>
+						<li>Das etwas andere Organigramm</li>
+						<li>Projektorganisation</li>
+						<li>Herausforderungen</li>
+						<li>Bewährtes</li>
+						<li>Status</li>
+					</ul>
+
+				</section>
+
+
+				<section>
+					<section>
+						<h2>Projektinhalt?</h2>
+						<p class="fragment">Thema: Inverter, DC/DC converter</p>
+						<p class="fragment">Studie 400h nach Aufwand (Projektgrösse C)</p>
+						<ul class="fragment">
+							<li>System Design</li>
+							<li>Development Toolchain</li>
+							<li>Functional Safety</li>
+							<li>Software Architektur</li>
+						</ul>
+					</section>
+
+						<!--<section data-background="System_Schematic.svg" data-background-size="contain">-->
+						<section>
+							<h2>Inverter was?</h2>
+							<img class="stretch" style="border:none;box-shadow: none;margin:none; background:none" src="System_Schematic.svg"></img>
+						</section>
+
+						<!--<section data-background="System_Detailed_Schematic.svg" data-background-size="contain">-->
+						<section>
+							<h2>Sieht ja einfach aus...</h2>
+							<img class="stretch" style="border:none;box-shadow: none;margin:none; background:none" src="System_Detailed_Schematic.svg"></img>
+						</section>
+						<!--<section data-background="B6.svg" data-background-size="contain">-->
+						<section>
+							<h2>Power Electronics</h2>
+							<img class="stretch" style="border:none;box-shadow: none;margin:none; background:none" src="B6.svg"></img>
+						</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Das etwas andere Organigramm?</h2>
+					</section>
+					  <h2 style="visibility:hidden;">Animiertes Organigramm</h2>
+					<section data-background-transition="zoom" data-background-video="Organigramm.webm" data-background-color="#000000">
+					</section>
+
+
+						<!--<video src="PPR.webm" controls></video>-->
+
+					<section data-background-transition="zoom" data-background="Organigramm.png" data-background-size="contain">
+					</section>
+				</section>
+
+				<section>
+					<h2>Projektorganisation?</h2>
+					<ul class="fragment">
+						<li>Einarbeitung in Domäne</li>
+						<li>Workshops mit Fachabteilungsleitern</li>
+						<li>Weekly TelCos</li>
+						<li>Shared Wiki</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Herausforderungen?</h2>
+					<ul>
+						<li class="fragment">Unterschiedliche Vorstellung der Ziele</li>
+						<li class="fragment">Vertrag sehr vage</li>
+						<li class="fragment">Sparringspartner abwesend, ausgelastet</li>
+						<li class="fragment">System Design, Funktionale Sicherheit</li>
+						<li class="fragment">Was kann ich als einzelner Beitragen?</li>
+						<li class="fragment">Was ist das Kernproblem?</li>
+						<li class="fragment">Neuer CEO vor Abschluss der Studie</li>
+						<li class="fragment">Wissensaufbau ist chaotisch</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>ACAL, Josef, Fachabteilungsleiter</li>
+							<li>Felix 6 Wochen in den Ferien, als solches kein Problem. Es braucht aber ein Sparringpartner</li>
+							<li>Toni mit DB beschäftigt</li>
+							<li>Beratung des Kunden in seinen Domänenkernthemen</li>
+							<li>Funktionale Sicherheit bei BRUSA schon ein Thema ASIL, ASPICE, CMMI, ISO 26262-11, IEC 61508, Safety Element out of Context </li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Bewährtes <text class="fragment">... Rezept?</text></h2>
+						<table class="fragment">
+							<tbody>
+								<tr>
+									<th>250g</th>
+									<th>Mehl</th>
+								</tr>
+								<tr>
+									<td>250g</td>
+									<td>Butter</td>
+								</tr>
+								<tr>
+									<td>250g</td>
+									<td>Zucker</td>
+								</tr>
+								<tr>
+									<td>1TL</td>
+									<td>Backpulver</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>Eier</td>
+								</tr>
+								<tr>
+									<td>1 Prise</td>
+									<td>Salz</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+						<section>
+							<h2 >Im Ernst</h2>
+							<ul>
+								<li>Ein Diskussionspartner</li>
+								<li>Regelmässige TelCos und Meetings</li>
+								<li>Protokolle</li>
+								<li>Zuhören<text class="fragment">, sinnieren</text><text class="fragment">, reflektieren</text></li>
+							</ul>
+							<aside class="notes">
+								TelCos mit allen, und oder mit den Einzelnen Parteien
+							</aside>
+						</section>
+						<section>
+							<h2>Was hätte man besser machen können</h2>
+							<ul>
+								<li>Offene ToDos auf den Protokollen wiederholen</li>
+								<li>Transparentere Kommunikation zwischen den Parteien</li>
+								<li>Verantwortlichkeiten als erstes klären und fixieren</li>
+							</ul>
+							<aside class="notes">
+								<p>Es gab kein Projektleiter auf der Seite des Kunden</p>
+								<p>Es gab eignetlich kein Projekt auf der Seite des Kunden</p>s
+							</aside>
+						</section>
+				</section>
+
+				<section>
+					<h2>Status</h2>
+					<ul>
+						<li class="fragment fade-left">Schlussbericht ausgeliefert</li>
+						<li class="fragment fade-left">Projekt abgeschlossen</li>
+						<li class="fragment fade-left">Zahlung ausstehend</li>
+						<li class="fragment fade-left">Folgeprojekt angeboten für 90k Fr.</li>
+					</ul>
+				</section>
+				<section>
+					<!--<section>-->
+					 <h2>Schöne Slides?</h2>
+
+
+					 <table class="fragment">
+						 <tbody>
+							 <tr>
+								 <th>Organigramm</th>
+								 <th><a href="https://www.videoscribe.co/en/">VideoScribe</a></th>
+							 </tr>
+							 <tr>
+								 <td>Slides</td>
+								 <td><a href="https://github.com/hakimel/reveal.js/">reveal.js</a></td>
+							 </tr>
+						 </tbody>
+					 </table>
+					<!--</section>-->
+				</section>
+
+				<section data-transition="zoom" >
+					<h1>Fragen?</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+				//chalkboard: {
+					// optionally load pre-recorded chalkboard drawing from file
+				//	src: "chalkboard.json",
+				//},
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+ 					//{ src: 'plugin/chalkboard/chalkboard.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/menu/menu.js', async: true}
+				],
+
+				keyboard: {
+					67: function() { RevealChalkboard.toggleNotesCanvas() },	// toggle notes canvas when 'c' is pressed
+					66: function() { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
+					46: function() { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
+		 			 8: function() { RevealChalkboard.reset() },	// reset chalkboard data on current slide when 'BACKSPACE' is pressed
+					68: function() { RevealChalkboard.download() },	// downlad recorded chalkboard drawing when 'd' is pressed
+				},
+
+				menu: {
+					// Specifies which side of the presentation the menu will
+					// be shown. Use 'left' or 'right'.
+					side: 'left',
+
+					// Add slide numbers to the titles in the slide list.
+					// Use 'true' or format string (same as reveal.js slide numbers)
+					numbers: false,
+
+					// Specifies which slide elements will be used for generating
+					// the slide titles in the menu. The default selects the first
+					// heading element found in the slide, but you can specify any
+					// valid css selector and the text from the first matching
+					// element will be used.
+					// Note: that a section data-menu-title attribute or an element
+					// with a menu-title class will take precedence over this option
+					titleSelector: 'h1, h2, h3, h4, h5, h6',
+
+					// If slides do not have a matching title, attempt to use the
+					// start of the text content as the title instead
+					useTextContentForMissingTitles: false,
+
+					// Hide slides from the menu that do not have a title.
+					// Set to 'true' to only list slides with titles.
+					hideMissingTitles: false,
+
+					// Add markers to the slide titles to indicate the
+					// progress through the presentation
+					markers: true,
+
+					// Specify custom panels to be included in the menu, by
+					// providing an array of objects with 'title', 'icon'
+					// properties, and either a 'src' or 'content' property.
+					custom: false,
+
+					// Specifies the themes that will be available in the themes
+					// menu panel. Set to 'false' to hide themes panel.
+					themes: [
+			  		{ name: 'SCS', theme: 'css/theme/SCS.css' },
+						{ name: 'Black', theme: 'css/theme/black.css' },
+						{ name: 'White', theme: 'css/theme/white.css' },
+						{ name: 'League', theme: 'css/theme/league.css' },
+						{ name: 'Sky', theme: 'css/theme/sky.css' },
+						{ name: 'Beige', theme: 'css/theme/beige.css' },
+						{ name: 'Simple', theme: 'css/theme/simple.css' },
+						{ name: 'Serif', theme: 'css/theme/serif.css' },
+						{ name: 'Blood', theme: 'css/theme/blood.css' },
+						{ name: 'Night', theme: 'css/theme/night.css' },
+						{ name: 'Moon', theme: 'css/theme/moon.css' },
+						{ name: 'Solarized', theme: 'css/theme/solarized.css' }
+					],
+
+					// Specifies if the transitions menu panel will be shown.
+					transitions: true,
+
+					// Adds a menu button to the slides to open the menu panel.
+					// Set to 'false' to hide the button.
+					openButton: true,
+
+					// If 'true' allows the slide number in the presentation to
+					// open the menu panel. The reveal.js slideNumber option must
+					// be displayed for this to take effect
+					openSlideNumber: false,
+
+					// If true allows the user to open and navigate the menu using
+					// the keyboard. Standard keyboard interaction with reveal
+					// will be disabled while the menu is open.
+					keyboard: true,
+
+					// Normally the menu will close on user actions such as
+					// selecting a menu item, or clicking the presentation area.
+					// If 'true', the sticky option will leave the menu open
+					// until it is explicitly closed, that is, using the close
+					// button or pressing the ESC or m key (when the keyboard
+					// interaction option is enabled).
+					sticky: false,
+
+					// If 'true' standard menu items will be automatically opened
+					// when navigating using the keyboard. Note: this only takes
+					// effect when both the 'keyboard' and 'sticky' options are enabled.
+					autoOpen: true,
+
+					// If 'true' the menu will not be created until it is explicitly
+					// requested by calling RevealMenu.init(). Note this will delay
+					// the creation of all menu panels, including custom panels, and
+					// the menu button.
+					delayInit: false
+				},
+
+			});
+
+		</script>
+
+	</body>
+</html>
