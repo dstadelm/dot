@@ -1,0 +1,15 @@
+#%Module1.0#####################################################################
+proc ModulesHelp { } {
+	global rkoversion
+
+	puts stderr "\tLoads Altera QuartusII version 15.1"
+}
+
+module-whatis	"Altera QuartusII 15.1"
+
+set rkoversion 3.2.10
+
+conflict quartus
+
+prepend-path PATH /opt/toolchain/altera/QuartusII_15.1/quartus/bin
+setenv LM_LICENSE_FILE "1706@flexlm.scs-ad.scs.ch"

@@ -1,0 +1,18 @@
+#%Module1.0#####################################################################
+##
+## SCS Questa module file
+##
+proc ModulesHelp { } {
+	global rkoversion
+
+	puts stderr "\tLoads Xilinx Vivado version 2017.1"
+}
+
+module-whatis	"Xilinx Vivado 2017.1"
+
+set rkoversion 3.2.10
+
+conflict vivado 
+
+prepend-path PATH /opt/toolchain/xilinx/Vivado_2017.2/Vivado/2017.2/bin
+setenv LM_LICENSE_FILE "2100@flexlm.scs-ad.scs.ch"

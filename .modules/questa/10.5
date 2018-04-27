@@ -1,0 +1,18 @@
+#%Module1.0#####################################################################
+##
+## SCS Questa module file
+##
+proc ModulesHelp { } {
+	global rkoversion
+
+	puts stderr "\tLoads Mentor Questa version 10.5"
+}
+
+module-whatis	"Mentor Questa 10.5"
+
+set rkoversion 3.2.10
+
+conflict questa
+
+prepend-path PATH /opt/toolchain/questa/questa_10.5/linux
+setenv MGLS_LICENSE_FILE "1717@flexlm.scs-ad.scs.ch"

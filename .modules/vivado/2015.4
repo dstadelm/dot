@@ -1,0 +1,33 @@
+#%Module1.0#####################################################################
+##
+## SCS Vivado module file
+##
+set v 2015.4
+
+proc ModulesHelp { } {
+  global v
+
+	puts stderr "\tLoads Xilinx Vivado version $v" 
+}
+module-whatis	"Xilinx Vivado $v"
+
+conflict vivado 
+
+set p /opt/toolchain/xilinx/Vivado_$v
+
+setenv LM_LICENSE_FILE "2100@flexlm.scs-ad.scs.ch"
+
+prepend-path PATH $p/SDK/$v/bin
+prepend-path PATH $p/SDK/$v/gnu/microblaze/lin/bin
+prepend-path PATH $p/SDK/$v/gnu/arm/lin/bin
+prepend-path PATH $p/SDK/$v/gnu/microblaze/linux_toolchain/lin64_be/bin
+prepend-path PATH $p/SDK/$v/gnu/microblaze/linux_toolchain/lin64_le/bin
+prepend-path PATH $p/SDK/$v/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin
+prepend-path PATH $p/SDK/$v/gnu/aarch32/lin/gcc-arm-none-eabi/bin
+prepend-path PATH $p/SDK/$v/gnu/aarch64/lin/aarch64-linux/bin
+prepend-path PATH $p/SDK/$v/gnu/aarch64/lin/aarch64-none/bin
+prepend-path PATH $p/SDK/$v/gnu/armr5/lin/gcc-arm-none-eabi/bin
+prepend-path PATH $p/Vivado_HLS/$v/bin
+prepend-path PATH $p/Vivado/$v/bin
+
+#prepend-path LD_LIBRARY_PATH $p/Vivado/$v/lib/lnx64.o
