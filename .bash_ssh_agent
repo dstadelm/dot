@@ -1,11 +1,25 @@
 ##############################################################
 # SSH Agent
 ###############################################################
-SSHAGENT=/usr/bin/ssh-agent
-SSHAGENTARGS="-s -t 10h"
-if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
-  eval `$SSHAGENT $SSHAGENTARGS`
-  trap "kill $SSH_AGENT_PID" 0
-fi
-ssh-add
 
+if [ -f ${HOME}/.sshagent-${HOSTNAME} ]; then
+  source ${HOME}/.sshagent-${HOSTNAME} > /dev/null
+  echo -n "Found ssh-agent with PID=${SSH_AGENT_PID}..."
+  PROCESS_LINE=$(/bin/ps -u ${USER} | /bin/grep ${SSH_AGENT_PID} | /bin/grep -v grep)
+  if [ -z "${PROCESS_LINE}" ]; then
+    echo " But it seams dead."
+    rm ${HOME}/.sshagent-${HOSTNAME}
+  fi
+fi
+
+if [ ! -f ${HOME}/.sshagent-${HOSTNAME} ]; then
+  /usr/bin/ssh-agent -s -t 10h > ${HOME}/.sshagent-${HOSTNAME}
+  source ${HOME}/.sshagent-${HOSTNAME} > /dev/null
+  echo -n "Started ssh-agent with PID=${SSH_AGENT_PID}..."
+fi
+
+echo " And it seems still running."
+ALREADY_ADDED=$(ssh-add -l)
+if [ "$ALREADY_ADDED" = "The agent has no identities." ]; then
+  ssh-add -t 5d
+fi
