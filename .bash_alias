@@ -14,5 +14,4 @@ alias cdgit='cd $(git root)'
 alias apt-get='sudo apt-get'
 alias disp='export $(tmux show-env | grep DISP)'
 alias git-head='git logk | head && echo'
-alias rebooto='ssh zynq reboot'
-
+alias ncurses='export NCURSES_NO_UTF8_ACS=1'

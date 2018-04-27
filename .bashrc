@@ -9,8 +9,7 @@ fi
 ###############################################################
 # Exports
 ###############################################################
-export ECLIPSE_HOME="~/bin/eclipse"
-export PATH=".:/usr/scs/dstadelmann/bin/eclipse:~/bin/":$PATH
+export PATH="~/bin/":$PATH
 ${HOME}/bin/bin/vim --version &> /dev/null && export PATH="${HOME}/bin/bin":$PATH
 export TERM=xterm-256color
 
@@ -22,12 +21,17 @@ if [ -f /etc/profile.d/rvm.sh ];then
   . /etc/profile.d/rvm.sh
 fi
 
-# Enable colors in less
-
-OCCURENCE=$(echo $LESS | grep -c "\-R")
-if [[ $OCCURENCE -eq 0 ]]; then
-    export LESS="${LESS} -R"
+if [ -f /etc/profile.d/modules.sh ];then
+  . /etc/profile.d/modules.sh
 fi
+
+
+if [ $(command -v module) ]; then
+  module use --append ${HOME}/.modules
+  module use --append ${HOME}/projects/daimler/stixel-cpu-opt/env-modules
+fi
+
+
 
 . ~/.bash_alias
 . ~/.bash_prompt
