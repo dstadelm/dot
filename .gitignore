@@ -1,0 +1,17 @@
+*
+
+!.bash_alias
+!.bash_login
+!.bash_prompt
+!.bashrc
+!.bash_ssh_agent
+!.emacs
+!.git
+!.gitconfig
+!.gitignore
+!.gitignore.swp
+!knowhow
+!.modules
+!.tmux.conf
+!.vimrc
+!.VIMRC_README.md
