@@ -7,6 +7,7 @@ alias ll='ls -la --color=auto'
 alias pull='git stash && git pull; git stash pop'
 alias push='git stash && git pull && git push; git stash pop'
 alias hg='history | grep'
+alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
 ###############################################################
 # Project Aliases
 ###############################################################

@@ -35,4 +35,4 @@ fi
 
 . ~/.bash_alias
 . ~/.bash_prompt
-#. ~/.bash_ssh_agent
+. ~/.bash_ssh_agent
