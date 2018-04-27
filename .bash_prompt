@@ -1,11 +1,11 @@
 export PROMPT_DIRTRIM=2
 eval $(dircolors)
 
-GREEN="\e[01;32m"
-RED="\e[01;31m"
-BLUE="\e[01;34m"
-OFF="\e[00m"
-YELLOW="\e[01;33m"
+GREEN="\[\e[01;32m\]"
+RED="\[\e[01;31m\]"
+BLUE="\[\e[01;34m\]"
+OFF="\[\e[00m\]"
+YELLOW="\[\e[01;33m\]"
 
 # export PS1="\$(if [[ \$? == 0 ]]; then echo \"${GREEN}\"; else echo \"${RED}\"; fi) $(echo '\u@\h') $(echo "${BLUE}\w \$${OFF}\")" 
 export PS1="\$(if [[ \$? == 0 ]]; then echo \"${GREEN}\"; else echo \"${RED}\"; fi)$(echo '\u@\h')$(echo ${BLUE})$(echo '\w')$(echo ${YELLOW})\$(__git_ps1 '(%s)')$(echo ${BLUE})$(echo ': ')$(echo ${OFF})"
