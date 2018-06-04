@@ -17,6 +17,10 @@ if [ -f /etc/bash_completion.d/git ];then
   . /etc/bash_completion.d/git
 fi
 
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+fi
+
 if [ -f /etc/profile.d/rvm.sh ];then
   . /etc/profile.d/rvm.sh
 fi
