@@ -33,10 +33,5 @@
 	main-window-geometry = 0x0+0+0
 	main-window-view = HistoryView
 	history-view-vpane-position = 493
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
 [color "interactive"]
 	prompt = yellow
