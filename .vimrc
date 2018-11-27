@@ -232,8 +232,10 @@ function Vhdl()
   imap <buffer> .. => 
   " emacs vhdl mode
   " warning: the following is dangerous, becase the file is written and then opened again, which means, the undo history is lost; if someting goes wrong, you may loose your file
-  command! EVMUpdateSensitivityList :w|:execute "!emacs --no-init-file --no-site-file -l ~/.vhdl/vhdl-mode.el -batch % --eval '(vhdl-update-sensitivity-list-buffer)' -f save-buffer" | :e
-  map <F12> :EVMUpdateSensitivityList<CR>
+  command! VhdlUpdateSensitivityList :w|:execute "!cp % %.bak; emacs --no-site-file -batch % -f vhdl-update-sensitivity-list-buffer -f save-buffer" | :e
+  map <F12> :VhdlUpdateSensitivityList<CR>
+  command! VhdlBeautify :w|:execute "!cp % %.bak; emacs --no-site-file -batch % -f vhdl-beautify-buffer -f save-buffer" | :e
+  map <F11> :VhdlBeautify<CR>
 endfunction
 
 " search pathes for a.vim
