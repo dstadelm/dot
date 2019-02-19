@@ -55,6 +55,11 @@ Plugin 'ag.vim'
 Plugin 'johnsyweb/vim-makeshift'
 "
 Plugin 'gitv'
+"
+Plugin 'Syntastic'
+"
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'prabirshrestha/async.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -119,6 +124,7 @@ set wildmode=list:longest,full
 set backspace=2
 set backspace=indent,eol,start
 set nu
+set encoding=utf-8
 runtime macros/matchit.vim        " use % to jump between start/end of methods
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -228,6 +234,7 @@ endif
 
 function Vhdl()
   setlocal errorformat=**\ Error:\ %f(%l):\ %m
+
   imap <buffer> ,, <= 
   imap <buffer> .. => 
   " emacs vhdl mode
@@ -244,3 +251,18 @@ let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,
 " remap for CtrlPTag
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <F5> :<C-U>MakeshiftBuild<CR>
+
+" syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_vhdl_checkers = ['vhdltool']
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" power line settings
+if !empty(glob("/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/"))
+  set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
+endif
+
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+" set t_Co=256
