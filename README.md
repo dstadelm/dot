@@ -8,7 +8,7 @@ There are three things to know!
 	*	alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
 2. Adding files
 	* dgit add -f .my-dot-file
-3. Cloning to new homw
+3. Cloning to new home
 	* git clone ssh://git@tools.scs.ch:2222/scsuserrepos/dstadelmann.git ~/.dotfiles
 	* alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
 	* dgit reset --hard
