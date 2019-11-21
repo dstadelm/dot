@@ -94,7 +94,7 @@
     (if (boundp 'highlight-changes-mode)
       (highlight-changes-remove-highlight (point-min) (point-max)))))
 
-(set-default-font "-*-courier-medium-r-*-*-12-*-*-*-*-*-*-15")
+(set-default-font "DejaVu Sans Mono-14")
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -106,3 +106,10 @@
  '(vhdl-font-lock-instance-face ((((class color) (background light)) (:foreground "#626262"))))
  '(vhdl-font-lock-signal--clr-face ((((class color) (background light)) (:foreground "#aa0000"))))
  '(vhdl-font-lock-signal--reset-face ((nil (:foreground "darkred")))))
+
+
+(add-to-list 'load-path "~/.emacs.d/evil")
+(add-to-list 'load-path "~/.emacs.d/emacs-powerline")
+(require 'evil)
+(require 'powerline)
+(evil-mode 1)

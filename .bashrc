@@ -9,8 +9,11 @@ fi
 ###############################################################
 # Exports
 ###############################################################
-export PATH="~/bin/":$PATH
-${HOME}/bin/bin/vim --version &> /dev/null && export PATH="${HOME}/bin/bin":$PATH
+BINPATH=${HOME}/bin/
+if ! [[ "$PATH" =~ "$BINPATH" ]]; then
+  export PATH="${HOME}/bin/":$PATH
+fi
+#${HOME}/bin/bin/vim --version &> /dev/null && export PATH="${HOME}/bin/bin":$PATH
 export TERM=xterm-256color
 
 if [ -f /etc/bash_completion.d/git ];then
@@ -32,10 +35,10 @@ fi
 
 if [ $(command -v module) ]; then
   module use --append ${HOME}/.modules
-  module use --append ${HOME}/projects/daimler/stixel-cpu-opt/env-modules
+#  module use --append ${HOME}/projects/daimler/stixel-cpu-opt/env-modules
 fi
 
-
+export NCURSES_NO_UTF8_ACS=1
 
 . ~/.bash_alias
 . ~/.bash_prompt

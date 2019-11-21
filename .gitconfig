@@ -35,3 +35,11 @@
 	history-view-vpane-position = 493
 [color "interactive"]
 	prompt = yellow
+[merge]
+	tool = meld
+[rerere]
+	enabled = true
+[web]
+	browser = chromium-browser
+[credential]
+	helper = cache

@@ -2,7 +2,6 @@
 " Vim MyHelp:
 " -----------
 " reload .vimrc 		:so %	
-" reload .vimrc			:so $MYVIMRC
 
 
 set nocompatible              " be iMproved, required
@@ -34,32 +33,36 @@ Plugin 'a.vim'
 
 """"""""""""""""""""""""""""""""""""""""
 " Provides git commands in vim
-Plugin 'fugitive.vim'
+Plugin 'tpope/vim-fugitive'
+""""""""""""""""""""""""""""""""""""""""
+" Required to use Gbrowse with bitbucket
+Plugin 'tommcdo/vim-fubitive'
+
+Plugin 'vim-latex/vim-latex'
 
 """"""""""""""""""""""""""""""""""""""""
-Plugin 'textobj-user'
+"Plugin 'textobj-user'
 " Text objects for entire buffers
-Plugin 'textobj-entire'
-
-" Text objects for ruby blocks
-Plugin 'textobj-rubyblock'
+"Plugin 'textobj-entire'
 
 " Revies the change history 
-Plugin 'Gundo'
+"Plugin 'Gundo'
 
-Plugin 'align'
+Plugin 'junegunn/vim-easy-align'
 
 " Silversearcher plugin
-Plugin 'ag.vim'
+Plugin 'mileszs/ack.vim'
 
-Plugin 'johnsyweb/vim-makeshift'
-"
-Plugin 'gitv'
-"
-Plugin 'Syntastic'
+"Plugin 'johnsyweb/vim-makeshift'
+Plugin 'neomake/neomake'
 "
 Plugin 'prabirshrestha/vim-lsp'
 Plugin 'prabirshrestha/async.vim'
+Plugin 'UltiSnips'
+Plugin 'junegunn/gv.vim'
+Plugin 'honza/vim-snippets'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'ervandew/supertab'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -74,10 +77,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" autocompletion 
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctrlp config
@@ -118,13 +117,18 @@ set scrolloff=2                   " minimum lines above/below cursor
 set laststatus=2                  " always show status bar
 "set list listchars=tab:»·,trail:· " show extra space characters
 set nofoldenable                  " disable code folding
+set foldmethod=syntax
 set clipboard=unnamed             " use the system clipboard
 set wildmenu                      " enable bash style tab completion
 set wildmode=list:longest,full
 set backspace=2
 set backspace=indent,eol,start
-set nu
+set number relativenumber
+set nu rnu
 set encoding=utf-8
+"set clipboard^=unnamed,unnamedplus " this does not help/work with putty
+set splitbelow splitright
+
 runtime macros/matchit.vim        " use % to jump between start/end of methods
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -132,7 +136,7 @@ runtime macros/matchit.vim        " use % to jump between start/end of methods
 colorscheme slate
 " hint to keep lines short
 if exists('+colorcolumn')
-  set colorcolumn=80
+  set colorcolumn=120
 endif
 autocmd ColorScheme * highlight ColorColumn   ctermbg=233
 autocmd ColorScheme * highlight ColorColumn   guibg=gray10
@@ -192,21 +196,16 @@ map <leader>W :args `git grep -lI .` \| argdo %s/\s\+$//gce \| w<cr>
 map <leader>m :!open -a Marked %<cr><cr>
 " map BufExploerer
 map <leader>b :CtrlPBuffer<cr>
-" map git commands
-map <leader>l :!clear && git log -p %<cr>
-map <leader>d :!clear && git diff %<cr>
 " map Q to q and W to w
 command! WQ wq
 command! Wq wq
 command! Q q
 command! W w
-" check code complexity
-map <leader>x :!clear && flog %<cr>
 " open relative to current folder
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <leader>s :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 " map Silver Searcher
-map <leader>a :Ag!<space>
+map <leader>a :Ack!<space>
 
 " Uncomment the following to have Vim jump to the last position when 
 " reopening a file
@@ -215,34 +214,35 @@ if has("autocmd")
     \| exe "normal! g'\"" | endif
 endif
 
-"The following will map <Tab> to either actually insert a <Tab> if
-"the current line is currently only whitespace, or start/continue a CTRL-N
-"completion operation: >
-function! CleverTab()
-  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "\<Tab>"
-  else
-    return "\<C-N>"
-  endif
-endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
-
 if has("autocmd")
   filetype on
   autocmd FileType vhdl call Vhdl()
 endif
 
 function Vhdl()
+  setlocal makeprg=myquesta\ %f
   setlocal errorformat=**\ Error:\ %f(%l):\ %m
-
+  if exists("+omnifunc")
+		setlocal omnifunc=syntaxcomplete#Complete
+	endif
+	let g:vhdl_indent_genportmap=0
   imap <buffer> ,, <= 
-  imap <buffer> .. => 
+  imap <buffer> .. =>
+  let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
+  " abbreviations
+	iabbr dt downto
+	iabbr toi to_integer
+	iabbr tos to_signed
+	iabbr tou to_unsigned
+	imap <buffer> I: I : in
+	imap <buffer> O: O : out
   " emacs vhdl mode
-  " warning: the following is dangerous, becase the file is written and then opened again, which means, the undo history is lost; if someting goes wrong, you may loose your file
+  " warning: the following is dangerous, because the file is written and then opened again, which means, the undo history is lost; if someting goes wrong, you may loose your file
   command! VhdlUpdateSensitivityList :w|:execute "!cp % %.bak; emacs --no-site-file -batch % -f vhdl-update-sensitivity-list-buffer -f save-buffer" | :e
   map <F12> :VhdlUpdateSensitivityList<CR>
   command! VhdlBeautify :w|:execute "!cp % %.bak; emacs --no-site-file -batch % -f vhdl-beautify-buffer -f save-buffer" | :e
   map <F11> :VhdlBeautify<CR>
+  autocmd! BufWritePost,BufEnter * NeomakeProject
 endfunction
 
 " search pathes for a.vim
@@ -251,13 +251,7 @@ let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,
 " remap for CtrlPTag
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <F5> :<C-U>MakeshiftBuild<CR>
-
-" syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_vhdl_checkers = ['vhdltool']
+map ü <C-]>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " power line settings
 if !empty(glob("/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/"))
@@ -266,3 +260,113 @@ endif
 
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 " set t_Co=256
+
+"Full config: when writing or reading a buffer, and on changes in insert and 
+" nomral mode (after 500ms; no delay when writing)
+call neomake#configure#automake('nrwi', 10)
+
+set tags=tags;/
+
+""" UltiSnips config
+"let g:UltiSnipsExpandTrigger="<c-k>"
+"let g:UltiSnipsJumpForwardTrigger="<c-k>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+:tnoremap <Esc> <C-\><C-N>
+
+let g:entity_end_regex = '\<end\>'
+function! VhdlCopyEntityInBuffer()
+  let l:start_line = search('entity\s\+\w*\s\+is', "bnWz")
+  let l:end_line = search(g:entity_end_regex, "nWz")
+  let l:entity_by_line = getline(start_line, end_line)
+  call VhdlCopyEntity(l:entity_by_line)
+endfunction
+
+
+function! VhdlCopyEntity(entity_by_line)
+
+  " remove comments 
+  call map(a:entity_by_line, {_, val -> substitute(val,'\s*--.*$','','g')})
+
+  let l:entity = join(a:entity_by_line)
+  let l:entity = substitute(entity,'\s\{2,}',' ','g') " replace multiple whitespaces by one whitespace
+  let l:entity = substitute(entity,'\s',' ','g') " replace singel whithespace character by actual ' '
+
+  let g:vhdl_entity = {}
+  let g:vhdl_entity['name'] = trim(substitute(entity,'.*entity\s\+\(\w*\)\s\+is.*', '\1', 'g'))
+
+  let l:generic = substitute(entity,  '.*generic\s*(\(.\{-}\))\s*;\s*port.*', '\1', 'g')
+  let s:generics = split(l:generic, ';')
+  call map(s:generics, {_, val -> split(val,":")->map({_,v -> trim(v," =")})})
+
+  let l:port = substitute(entity, '.*port\s*(\(.\{-}\))\s*;\s*' . g:entity_end_regex, '\1', 'g')
+  let l:port = substitute(port, '\s*\(in\|out\)\s*', ' ', 'g')
+  let s:ports = split(l:port, ';')
+  call map(s:ports, {_, val -> split(val,":")->map({_,v -> trim(v, " =")})})
+
+  "echomsg l:entity
+  "echomsg s:generics
+  "echomsg g:vhdl_entity['name']
+  "echomsg s:ports
+  echomsg "Copied entity " . g:vhdl_entity['name']
+endfunction
+
+function! VhdlPasteAsSignals()
+  if exists("g:vhdl_entity")
+    let format_string = "%-".printf("%ds", VhdlLenLongestStr(s:ports))
+    let l:signals = map(copy(s:ports), {_, val -> "signal " .  printf(format_string, val[0]) . " : " .  val[1] . ";"})
+    call append(line('.'),signals)
+  endif
+endfunction
+
+function! VhdlLenLongestStr(mylist)
+  let l:max_len = 0
+  for item in a:mylist 
+    if len(item[0]) > l:max_len 
+      let l:max_len = len(item[0])
+    endif
+  endfor
+  return l:max_len
+endfunction
+
+function! VhdlPasteAsInstance()
+  if exists("g:vhdl_entity")
+    let instantiation = ["i_" . g:vhdl_entity['name'] . " : entity work." .  g:vhdl_entity['name']] 
+    let format_string = "%-".printf("%ds", VhdlLenLongestStr(s:generics))
+    let generic_map = map(copy(s:generics), {_, val -> "    " .  printf(format_string, val[0]) . " => " . val[0] . "," })
+    if len(generic_map) > 0
+      let generic_map[-1] = trim(generic_map[-1],',') 
+      let generic_map = ["  generic map("] + generic_map + [");"] 
+    endif
+    let format_string = "%-".printf("%ds", VhdlLenLongestStr(s:ports))
+    let port_map = map(copy(s:ports), {_, val -> "    " . printf(format_string, val[0]) . " => " . val[0] . "," })
+    
+    if len(port_map) > 0
+      let port_map[-1] = trim(port_map[-1],',')
+      let port_map = ["  port map("] + port_map + [");"]
+    endif
+    let instance = instantiation + generic_map + port_map
+    call append(line('.'), instance)
+  endif
+endfunction
+
+function! VhdlInsertInstanceFromTag()
+  let tags = taglist()
+endfunction
+
+command! VhdlCopyEntity call VhdlCopyEntityInBuffer()
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+vnoremap <silent> <Enter> :EasyAlign<CR>
+
+let g:ctrlp_extensions = ['sample']
+command! CtrlPSample call ctrlp#init(ctrlp#sample#id())
