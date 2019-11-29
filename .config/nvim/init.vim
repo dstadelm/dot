@@ -16,7 +16,7 @@ call minpac#add('ayu-theme/ayu-vim')
 " plugins for git
 call minpac#add('junegunn/gv.vim')
 call minpac#add('tpope/vim-fugitive')
-
+call minpac#add('tpope/vim-dispatch')
 " plugins for linting and making
 call minpac#add('neomake/neomake')
 " plugins for completion
@@ -32,14 +32,25 @@ call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 
 call minpac#add('airblade/vim-rooter')
+"let g:rooter_silent_chdir = 1
+let g:rooter_manual_only = 1
+autocmd VimEnter * Rooter
+
+call minpac#add('airblade/vim-gitgutter')
+set updatetime=100
 
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
+
+call minpac#add('junegunn/vim-easy-align')
 
 call minpac#add('dstadelm/simple-vhdl.vim')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Define a better color scheme which works in the gui and on the console
 let g:airline_theme='onedark'
+let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 set termguicolors
 " colorscheme slate
 " colorscheme ayu
@@ -83,7 +94,8 @@ filetype plugin indent on
 set ts=2                          " set indent to 2 spaces
 set shiftwidth=2                  " set shift to 2 spaces (introduced by < and >)
 set expandtab                     " use spaces, not tab characters
-set number relativenumber         " line of cursor shows actual line number
+set number                        " shows numbers
+"set relativenumber               " shows relative numbers
 set showmatch                     " show bracket matches
 set smartcase                     " when searching using small case letters only the case is ignored
 set nowrap                        " don't wrap lines by default
@@ -144,10 +156,12 @@ function! FloatingFZF()
         \ 'height': height
         \ }
 
+  call nvim_buf_set_keymap(buf, 'i', '<esc>', ':close!<cr>', {'nowait': v:true})
+  call nvim_buf_set_keymap(buf, 'n', '<esc>', ':close!<cr>', {'nowait': v:true})
   call nvim_open_win(buf, v:true, opts)
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terminal mappings
 
-:tnoremap <Esc> <C-\><C-N>
+":tnoremap <Esc> <C-\><C-N>
