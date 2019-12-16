@@ -11,7 +11,8 @@ fi
 ###############################################################
 BINPATH=${HOME}/bin/
 if ! [[ "$PATH" =~ "$BINPATH" ]]; then
-  export PATH="${HOME}/bin/":$PATH
+  export PATH="${HOME}/.go/src/github.com/junegunn/fzf/bin/:${HOME}/bin/":$PATH
+  export GOPATH="${HOME}/.go"
 fi
 #${HOME}/bin/bin/vim --version &> /dev/null && export PATH="${HOME}/bin/bin":$PATH
 export TERM=xterm-256color
@@ -43,3 +44,5 @@ export NCURSES_NO_UTF8_ACS=1
 . ~/.bash_alias
 . ~/.bash_prompt
 . ~/.bash_ssh_agent
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
