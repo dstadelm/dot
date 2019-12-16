@@ -16,3 +16,7 @@ alias apt-get='sudo apt-get'
 alias disp='export $(tmux show-env | grep DISP)'
 alias git-head='git logk | head && echo'
 alias ncurses='export NCURSES_NO_UTF8_ACS=1'
+if [ $(command -v nvim) ]; then
+  alias vim="nvim"
+fi
+alias fkill="ps -ef | fzf | cut -f 2 -d ' ' | xargs kill -9"
