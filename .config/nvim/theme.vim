@@ -1,3 +1,5 @@
+" has to be set first as it does not have effect otherwise
+let g:airline_powerline_fonts = 1
 packadd vim-airline
 call minpac#add('vim-airline/vim-airline', {'type': 'opt'})
 packadd vim-airline-themes
@@ -7,7 +9,6 @@ call minpac#add('rakr/vim-one', {'type': 'opt'})
 packadd ayu-vim
 call minpac#add('ayu-theme/ayu-vim', {'type': 'opt'})
 let g:airline_theme='onedark'
-let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#buffer_nr_show = 1
 set termguicolors
