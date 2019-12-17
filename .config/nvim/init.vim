@@ -1,4 +1,3 @@
-" vim: fdm=marker
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM MyHelp:
 " -----------
@@ -7,8 +6,7 @@
 au FileType vim set foldenable
 
 function! s:source_local(relative_path)
-  let source_path = expand('%:p:h')
-  let full_path = source_path . '/' . a:relative_path
+  let full_path = stdpath('config') . '/' . a:relative_path
   exec 'source ' . full_path
 endfunction
 
@@ -27,4 +25,5 @@ call s:source_local("easy-align.vim")
 call s:source_local("projectionist.vim")
 call s:source_local("closetag.vim")
 call s:source_local("ack.vim")
+call s:source_local("undo.vim")
 call s:source_local("simple-vhdl.vim")
