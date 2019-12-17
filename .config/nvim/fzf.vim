@@ -29,3 +29,8 @@ function! FloatingFZF()
   call nvim_buf_set_keymap(buf, 'n', '<esc>', ':close!<cr>', {'nowait': v:true})
   call nvim_open_win(buf, v:true, opts)
 endfunction
+
+if has("nvim")
+  au TermOpen * tnoremap <Esc> <C-\><C-N>
+  au FileType fzf tunmap <Esc>
+endif

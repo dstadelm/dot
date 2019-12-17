@@ -19,7 +19,3 @@ cabbrev Wq wq
 " fuzzy finding
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Files<CR>
-if has("nvim")
-  au TermOpen * tnoremap <Esc> <C-\><C-N>
-  au FileType fzf tunmap <Esc>
-endif
