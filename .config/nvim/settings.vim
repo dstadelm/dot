@@ -1,3 +1,5 @@
+" vim: fdm=marker
+" settings  {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allows to switch between buffers without the need of saving the current one
 " other values are: confirm, autowrite, autowriteall
@@ -26,3 +28,11 @@ set splitbelow splitright
 " }}}
 " jump to the last position when reopening a file {{{
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" }}}
+" persistent undo {{{
+set undofile
+if isdirectory($HOME . "/.vimundo") == 0
+  call mkdir($HOME . "/.vimudo")
+endif
+set undodir=~/.vimundo
+" }}}
