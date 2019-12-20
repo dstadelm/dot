@@ -12,11 +12,11 @@ set ts=2                          " set indent to 2 spaces
 set shiftwidth=2                  " set shift to 2 spaces (introduced by < and >)
 set expandtab                     " use spaces, not tab characters
 set number                        " shows numbers
-"set relativenumber               " shows relative numbers
+set relativenumber               " shows relative numbers
 set showmatch                     " show bracket matches
 set smartcase                     " when searching using small case letters only the case is ignored
-set nowrap                        " don't wrap lines by default
 set incsearch                     " show search results as I type
+set nowrap                        " don't wrap lines by default
 set vb                            " enable visual bell (disable audio bell)
 set scrolloff=2                   " minimum lines above/below cursor
 set cursorline                    " highlight current line
