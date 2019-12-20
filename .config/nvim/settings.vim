@@ -22,7 +22,6 @@ set scrolloff=2                   " minimum lines above/below cursor
 set cursorline                    " highlight current line
 set nofoldenable                  " disable code folding
 set foldmethod=syntax
-set clipboard+=unnamedplus        " always use clipboard for all operations instead of interacting with + and/or * registers explicitly
 set wildmode=list:longest,full    
 set splitbelow splitright
 " }}}
