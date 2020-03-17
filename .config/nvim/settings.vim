@@ -24,6 +24,7 @@ set nofoldenable                  " disable code folding
 set foldmethod=syntax
 set wildmode=list:longest,full    
 set splitbelow splitright
+set inccommand=split
 " }}}
 " jump to the last position when reopening a file {{{
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -34,4 +35,7 @@ if isdirectory($HOME . "/.vimundo") == 0
   call mkdir($HOME . "/.vimudo")
 endif
 set undodir=~/.vimundo
+" }}}
+" automatically init.vim if  vim files change {{{
+autocmd BufWritePost *.vim :source %:p:h/init.vim
 " }}}

@@ -7,6 +7,7 @@ nnoremap <leader>s :vsplit <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap ü <C-]>
 nnoremap <leader>P :set paste <cr>
 nnoremap <leader>p :set nopaste <cr>
+nnoremap <leader>v :edit %:p:h/init.vim <cr>
 " delete all trailing whitespace in current file
 map <leader>w :%s/\s\+$//gce \| w<cr>
 " delete all trailing whitespace for each file in repo
@@ -19,3 +20,16 @@ cabbrev Wq wq
 " fuzzy finding
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Files<CR>
+
+inoremap <silent> & &<Esc>: call <SID>ampalign()<CR>a
+
+function! s:ampalign()
+  let p = '^\s*&\s.*\s&\s*$'
+  if exists(':EasyAlign') && getline('.') =~# '^\s*&' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    EasyAlign*&
+    normal! 0
+    call search(repeat('[^&]*&',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction

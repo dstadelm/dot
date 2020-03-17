@@ -8,12 +8,15 @@ packadd vim-one
 call minpac#add('rakr/vim-one', {'type': 'opt'})
 packadd ayu-vim
 call minpac#add('ayu-theme/ayu-vim', {'type': 'opt'})
+packadd onedark.vim
+call minpac#add('joshdick/onedark.vim',  {'type': 'opt'})
+
 let g:airline_theme='onedark'
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 set termguicolors
-"colorscheme ayu
-colorscheme one
+colorscheme onedark
+"colorscheme onedark
 " hint to keep lines short
 set colorcolumn=120
 set background=dark

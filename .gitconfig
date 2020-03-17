@@ -9,6 +9,8 @@
 [core]
 	editor = vim
   PreloadIndex = true
+[pull]
+	rebase = true
 [push]
   default = tracking
 [branch]
