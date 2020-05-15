@@ -1,0 +1,13 @@
+* [X] Things that belong in the document
+  * [X] Setting the number of chirps
+  * [X] Setting the number of range gate
+  * [X] Req1000 and Req2000 will not be met as the PS has to trigger the FuSa Cycle because ....
+
+* [X] Questions
+    * [X] Why is in the Document [FRGen 21 Checks for Functional Safety in PL](https://tools.scs.ch/issues/browse/ZFRFEEXT-122) the acquisition time once 25ms and once 19ms?
+    * [X] Point 7 on page 6 if [FRGen 21 Checks for Functional Safety in PL](https://tools.scs.ch/issues/browse/ZFRFEEXT-122)  
+    * [X] Do we realy want the address in the crc, if so, what address should be selected, do we calculate crc over address and data combined or separate?
+    * [X] If the internal dmas are active during FuSa we require a reset at the end of the FuSa Cycle
+    * [X] Size of emulation interface large enough? No
+
+  

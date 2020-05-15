@@ -1,0 +1,107 @@
+= git diff on steroids =
+
+
+== Summary ==
+
+The settings and scripts in this folder dramatically extend the functionality of
+`git diff`. It makes `git diff` usable for file formats like pdf, docx, xlsx
+and more.
+
+== Usage ==
+
+1. extend your personal `~/.gitconfig` file with the settings from `.gitconfig`
+2. add file `.gitattributes` at the top level of each git repository you want to
+   improve `git diff`
+3. add the script `unoconv-pdf-diff` somewhere in your PATH
+4. install all or a subset of the following programs depending on which diff
+   fitlers you want to use
+
+    - diffpdf (http://www.qtrac.eu/diffpdf.html)
+    - unoconv (http://dag.wieers.com/home-made/unoconv, needs libreoffice)
+    - xlsx2csv (https://github.com/dilshod/xlsx2csv)
+    - pandoc (http://pandoc.org)
+
+== Hint == 
+
+`git diff` supports highlighting changes on a word per word, instead of line by
+line basis. This is achived by the command `diff --word-diff=color
+--word-diff-regex='[A-z_]+|[^[:space:]]'`
+
+.gitattributes
+{{{
+# link to this file from top of each repository
+# otherwise these rules do not work
+
+*.bz2 diff=bz2
+*.gz diff=gzip
+*.xoj diff=gzip
+*.tar diff=tar
+*.tar.bz2 diff=tar-bz2
+*.zip diff=zip
+*.pdf diff=pdf
+#*.pdf diff=pdf-text
+*.sqlite3 diff=sqlite3
+#*.docx diff=pandoc-markdown
+*.docx diff=unoconv-pdf-diff
+#*.xlsx diff=unoconv-pdf-diff
+*.xlsx diff=xlsx
+*.vsd diff=unoconv-pdf-diff
+*.vsdx diff=unoconv-pdf-diff
+*.3gp diff=extract
+*.tex diff=latex
+*.org diff=latex
+.gnupg/pubring.gpg diff=gpg-public-keys
+.gnupg/trustdb.gpg diff=gpg-trustdb
+}}}
+
+.gitconfig
+
+{{{
+
+# git diff filters
+# from "man git"
+# ...
+#        GIT_EXTERNAL_DIFF is called with 7 parameters:
+#               path old-file old-hex old-mode new-file new-hex new-mode
+
+[diff "bz2"]
+	binary = true
+	textconv = /bin/bzcat
+[diff "gzip"]
+	binary = true
+	textconv = /bin/zcat
+[diff "tar"]
+	binary = true
+	textconv = tar --to-stdout -xf
+[diff "tar-bz2"]
+	binary = true
+	textconv = tar --to-stdout -xjf
+[diff "zip"]
+	textconv = unzip -p
+[diff "pdf"]
+	binary = true
+	command = /bin/sh -c 'diffpdf \"${1}\" \"${4}\"'
+[diff "pdf-text"]
+	binary = true
+	textconv = pdftotext
+[diff "sqlite3"]
+	binary = true
+	textconv = /bin/sh -c 'sqlite3 \"${1}\" .dump' rhr-sqlite3-diff-arg0
+[diff "gpg-public-keys"]
+	textconv = gpg --no-default-keyring --list-public-keys --keyring
+[diff "gpg-trustdb"]
+	textconv = gpg --export-ownertrust --trustdb-name
+[diff "xlsx"]
+	textconv = xlsx2csv --sheet=0 --delimiter=x59
+[diff "pandoc-markdown"]
+	textconv = pandoc --to=markdown
+[diff "extract"]
+	textconv = extract
+[diff "latex"]
+	wordregex = "\\\\[a-zA-Z]+|[{}]|\\\\.|[^\\{}[:space:],]+"
+[diff "unoconv-pdf-diff"]
+        binary = true
+	command = /bin/bash -c 'unoconv-pdf-diff \"${1}\" \"${4}\"'
+
+}}}
+

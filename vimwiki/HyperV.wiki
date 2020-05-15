@@ -1,0 +1,36 @@
+# HyperV setup for ZFRFE VM
+  1. Use the Quick Create from the Hyper-V Manager to create an Ubuntu 19.10 VM
+  2. Install nvim using nvim.app from their homepage in ~/bin
+    1. Clone the .config files
+    2. Install python3+ 
+    3. Install pip3+ 
+    4. Install cmake
+    5. ```pip3 install neovim```
+    6. ```pip3 install powerline-status```
+    7. logout/login
+    8. install nvim/minpac ```git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac```
+    9. vim -> :PackUpdate
+    10. go to ~/.config/nvim/pack/minpac/opt/YouCompleteMe and run ```python3 install.py```
+  3. Configure NAT network
+    1. Follow one of the instructions
+      * https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/setup-nat-network
+      * https://www.petri.com/using-nat-virtual-switch-hyper-v
+    2. Make sure not to use a network that interferes with an existing Network (Home-Network)
+    3. In ubuntu configure the wired network (top left icon -> wired connected -> wired settings -> cog wheel)
+      * IPv4 
+        * Address within your chosen network 
+        * Netmask (255.255.255.0)
+        * Gateway -> The address you gave the NAT Switch
+        * DNS 172.24.0.1, 172.18.0.100, 172.18.0.101
+        * Routes Automatic
+  4. Certificate For Docker
+    1. mkdir /usr/local/share/ca-certificates/scs
+    2. copy SCSRootCA.crt to /usr/local/share/ca-certificates/
+    3. make sure permissions are 755 for folder 644 for file 
+    4. sudo update-ca-certificates
+  5. Git
+    1. sudo apt install unoconv
+    2. sudo apt install extract
+    3. sudo apt install diffpdf
+    4. sudo apt install pandoc
+    5. [[git diff on steroids]]

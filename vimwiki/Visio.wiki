@@ -1,0 +1,5 @@
+Die Installation geht wie folgt
+ 
+* Den gezippten Ordner ‘Visio2019-std-64-eng’ auf einen beliebigen lokalen Ordner extrahieren.
+* Cmd (run as Administrator) in den entzippten Ordner wechseln und folgenden Befehl ausführen:\
+  setup.exe /configure Visio2019stdeng64-online.xml

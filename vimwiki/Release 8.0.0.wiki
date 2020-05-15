@@ -1,0 +1,5 @@
+# Optimization for release 8.0.0
+ * [ ] reduce number of dma
+ * [ ] split hil directives and (fft, radar cube) on differen dma channels (cache aware, no cache)
+ * [ ] clean up xml
+ * [ ] testbench csi_check hil integrieren

@@ -1,0 +1,73 @@
+= Day 1 =
+== Takeaways ==
+=== Effort estimation ===
+Effort estimation by at least 6 to 9 people
+Result within one standard deviation
+=== Critical path and floats ===
+ * Plan according to minimal float.
+ * Plan for minimal staffing that does not affect critical path.
+ * Graph can vary depending on the available staffing. (Only one developer, so one string of pearls)
+
+=== Staffing Distribution Chart ===
+lying amphora
+
+=== Project Efficiency ===
+Effort / (Elapsed time including vacation, weekends)
+
+=== Earned Value Planning ===
+
+= Questions =
+ * What about vacation
+   # No absolute clear answer, will try to figure it out if someone is away for long, then plan for it (honeymoon)
+ * Why 30 days -> margin in cost? Risk reduction? 
+   # Will give person months to then calculate the cost. 
+ * What about activities that do not require 100% resources PM, PO, CM(configuration manager responsible for CI, Builds, ...) (improve efficiency and satisfaction)
+   # take it into account within staffing
+   # also check that if resources that are more expensive this has to be accounted for in the cost calculation
+
+= Excel =
+ * solve for (get a value that if applied results in x)
+ * trendline to get a formula for the curve
+
+= Project Risk =
+ * opt for 50%
+ * don't go over 75%
+ * don't go under 30%
+ * risk is similar to richter scala or russian rulet
+
+= Ideas =
+ * Sort by start, total slack, duration(descending) for assigning the resources
+ * Layers of resistance https://education.biu.ac.il/sites/education/files/shared/layers-of-resistance.pdf
+ * Create a column with activity dependencies and copy the predecessors to that column, then the resource dependencies are documented automatically
+ * Assign all resources that are clear architect, test engineer
+ * Assign Dev1 to critical path
+ * Assign Dev2 with float
+ * Assign remaining developers
+ * After every step hide the assigned resources
+ * MS Project add-on project design
+ * For every solution (developers) start from scratch
+   # create a template from the ms project with the architects and test engineers etc. allocated   
+
+= Cocomo = 
+Estimation tool
+
+# spectral risk measurement
+
+= Books =
+  * Think fast and slow daniel kahneman
+  * The design of design 
+  * antifragile (nassim nicholas taleb)
+  * critical path metrices
+  * the 7 habits of highly effective people
+  * getting things done https://store.gettingthingsdone.com
+  * Never split differences negotiating depended
+  * applied software measurement analysis productivity
+  * estimating software cost bringing realism
+  * quantifying software global insustry perspectives ebook
+  
+
+= Presentation =
+  * check that you aren't using filler words
+  * don't say sorry say thank you (for your patience)
+
+max.zeier@idesign.com

@@ -1,0 +1,18 @@
+# Kill a process by name
+* Start power shell as adminstrator
+* Get-Process | Where {$_.ProcessName -Like "WScript*"} | Stop-Process
+
+# Force Disable Lock Screen
+
+idle.vbs
+```
+Dim objResult
+
+Set objShell = WScript.CreateObject("WScript.Shell")    
+
+Do While True
+  objResult = objShell.sendkeys("{NUMLOCK}{NUMLOCK}")
+  Wscript.Sleep (6000)
+Loop
+```
+
