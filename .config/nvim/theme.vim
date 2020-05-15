@@ -12,11 +12,10 @@ packadd onedark.vim
 call minpac#add('joshdick/onedark.vim',  {'type': 'opt'})
 
 let g:airline_theme='onedark'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 set termguicolors
 colorscheme onedark
-"colorscheme onedark
 " hint to keep lines short
 set colorcolumn=120
 set background=dark

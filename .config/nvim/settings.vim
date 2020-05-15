@@ -25,6 +25,7 @@ set foldmethod=syntax
 set wildmode=list:longest,full    
 set splitbelow splitright
 set inccommand=split
+"set iskeyword-=_
 " }}}
 " jump to the last position when reopening a file {{{
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -32,10 +33,11 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g
 " persistent undo {{{
 set undofile
 if isdirectory($HOME . "/.vimundo") == 0
-  call mkdir($HOME . "/.vimudo")
+  call mkdir($HOME . "/.vimundo")
 endif
 set undodir=~/.vimundo
 " }}}
 " automatically init.vim if  vim files change {{{
-autocmd BufWritePost *.vim :source %:p:h/init.vim
+autocmd BufWritePost *.vim :source %
 " }}}
+autocmd FileType tex setl suffixesadd+=tex

@@ -8,6 +8,7 @@ call minpac#add('junegunn/fzf.vim', {'type': 'opt'})
 au FileType fzf set nonu nornu
 let $FZF_DEFAULT_OPTS='--layout=reverse'
 let g:fzf_layout = { 'window': 'call g:FloatingFZF()' }
+let g:fzf_preview_window = ''
 
 function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)

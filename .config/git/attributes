@@ -1,0 +1,23 @@
+# link to this file from top of each repository
+# otherwise these rules do not work
+
+*.bz2 diff=bz2
+*.gz diff=gzip
+*.xoj diff=gzip
+*.tar diff=tar
+*.tar.bz2 diff=tar-bz2
+*.zip diff=zip
+*.pdf diff=pdf
+#*.pdf diff=pdf-text
+*.sqlite3 diff=sqlite3
+#*.docx diff=pandoc-markdown
+*.docx diff=unoconv-pdf-diff
+#*.xlsx diff=unoconv-pdf-diff
+*.xlsx diff=xlsx
+*.vsd diff=unoconv-pdf-diff
+*.vsdx diff=unoconv-pdf-diff
+*.3gp diff=extract
+*.tex diff=latex
+*.org diff=latex
+.gnupg/pubring.gpg diff=gpg-public-keys
+.gnupg/trustdb.gpg diff=gpg-trustdb
