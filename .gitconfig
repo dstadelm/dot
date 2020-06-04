@@ -27,9 +27,12 @@
   unpushed-tags = "!bash -c \"comm -23 <(git show-ref --tags | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort) <(git ls-remote --tags origin | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort)\""
   echo = "!bash -c \"comm -23 <(git show-ref --tags | awk '{print \\$2}' | sort) <(git ls-remote --tags origin | awk '{print \\$2}' | sort)\""
 [difftool.latex]
-          cmd = git-latexdiff "$LOCAL" "$REMOTE"
+  cmd = git-latexdiff "$LOCAL" "$REMOTE"
 [difftool]
-          prompt = false
+  prompt = false
+[difftool "select"]
+  cmd = difftool.sh "$LOCAL" "$REMOTE"
+  keepBackup = false
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 0x0+0+0
@@ -45,6 +48,7 @@
 	browser = chromium-browser
 [credential]
 	helper = cache
+
 # git diff filters
 # from "man git"
 # ...
@@ -86,6 +90,9 @@
 	textconv = extract
 [diff "latex"]
 	wordregex = "\\\\[a-zA-Z]+|[{}]|\\\\.|[^\\{}[:space:],]+"
-[diff "unoconv-pdf-diff"]
+[difftool.unoconv-pdf-diff]
   binary = true
 	command = /bin/bash -c 'unoconv-pdf-diff \"${1}\" \"${4}\"'
+
+[diff]
+	tool = select
