@@ -19,7 +19,11 @@
 				"priority": 50
 			},
 			{
-				"function": "powerline.segments.shell.cwd",
+				"function": "powerline.segments.common.env.cwd",
+        "args" : { 
+          "dir_shorten_len" : 2 , 
+          "dir_limit_depth" : 3
+        },
 				"priority": 10
 			},
 			{

@@ -1,6 +1,6 @@
 {
 	"common": {
-		"term_truecolor": false
+		"term_truecolor": true
 	},
 	"ext": {
 		"ipython": {
@@ -18,7 +18,7 @@
 		},
 		"shell": {
 			"colorscheme": "default",
-			"theme": "default_leftonly",
+			"theme": "default",
 			"local_themes": {
 				"continuation": "continuation",
 				"select": "select"
