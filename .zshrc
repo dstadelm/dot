@@ -3,20 +3,30 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/dstadelmann/.oh-my-zsh"
+export TERM=xterm-256color
+export XDG_CONFIG_HOME=${HOME}/.config
+#
 
+###############################################################################
+#
+# Theme -> moved to .zsh_prompt
+#
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="powerline"
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="agnoster"
-
+#
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+###############################################################################
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -44,7 +54,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -52,7 +62,7 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -71,8 +81,36 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+# colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
+###############################################################################
+# VIM editing mode on the command line 
+# for emacs style switch to -e
+#
+# https://dougblack.io/words/zsh-vi-mode.html
+# bindkey -v
+# 
+# bindkey '^P' up-history
+# bindkey '^N' down-history
+# bindkey '^?' backward-delete-char
+# bindkey '^h' backward-delete-char
+# bindkey '^w' backward-kill-word
+# bindkey '^r' history-incremental-search-backward
+# 
+# function zle-line-init zle-keymap-select {
+#     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+#     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+#     zle reset-prompt
+# }
+# 
+# zle -N zle-line-init
+# zle -N zle-keymap-select
+# export KEYTIMEOUT=1
+#
+###############################################################################
+bindkey -v
+export KEYTIMEOUT=1 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,7 +142,6 @@ if ! [[ "$PATH" =~ "$BINPATH" ]]; then
   export PATH="${HOME}/.go/src/github.com/junegunn/fzf/bin/:${HOME}/bin/":$PATH
   export GOPATH="${HOME}/.go"
 fi
-export TERM=xterm-256color
 
 
 if [ $(command -v module) ]; then
@@ -115,3 +152,7 @@ export NCURSES_NO_UTF8_ACS=1
 
 . ~/.bash_alias
 . ~/.bash_ssh_agent
+. ~/.zsh_prompt
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
