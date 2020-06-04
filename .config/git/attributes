@@ -16,6 +16,7 @@
 *.xlsx diff=xlsx
 *.vsd diff=unoconv-pdf-diff
 *.vsdx diff=unoconv-pdf-diff
+*.vsdm diff=unoconv-pdf-diff
 *.3gp diff=extract
 *.tex diff=latex
 *.org diff=latex
