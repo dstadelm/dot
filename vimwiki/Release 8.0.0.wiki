@@ -3,3 +3,6 @@
  * [ ] split hil directives and (fft, radar cube) on differen dma channels (cache aware, no cache)
  * [ ] clean up xml
  * [ ] testbench csi_check hil integrieren
+
+# ASIL stuff
+ * [ ] How do we / Xilinx ensure that the synthesised Bitstream is what we've defined in VHDL
