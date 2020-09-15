@@ -5,9 +5,22 @@
 
 * [X] Questions
     * [X] Why is in the Document [FRGen 21 Checks for Functional Safety in PL](https://tools.scs.ch/issues/browse/ZFRFEEXT-122) the acquisition time once 25ms and once 19ms?
-    * [X] Point 7 on page 6 if [FRGen 21 Checks for Functional Safety in PL](https://tools.scs.ch/issues/browse/ZFRFEEXT-122)  
+    * [X] Point 7 on page 6 if [FRGen 21 Checks for Functional Safety in PL](https://tools.scs.ch/issues/browse/ZFRFEEXT-122)
     * [X] Do we realy want the address in the crc, if so, what address should be selected, do we calculate crc over address and data combined or separate?
     * [X] If the internal dmas are active during FuSa we require a reset at the end of the FuSa Cycle
     * [X] Size of emulation interface large enough? No
 
-  
+= Proposals for register handling =
+  * [ ] adc offset compensation
+    * [ ] adc subtraction : a second set of values stored in the register space is used.
+    * [ ] adc accumulation : with every clast signal the 128 bit sum for that channel will be agregated to a 32 bit CRC as we have 512 cycles until the next value arrives the crc can be implemented quite cheap.
+  * [ ] how should we handle thresholds in [side lobe filter, detection level filter]
+  * [ ] Calibration compensation factors? static?
+  * [ ] We assume that all fft windowing factors are constant, right?
+  * [ ] DMA output address check that it writes continuously and the write amount -> can also be checked during functional data.
+  * [ ] CRC 32
+
+= Coverage Decisions =
+  * Coverage on design units instead of hierarchical merging
+  * Stay with wishbone and analyse what is actually needed and create according testbenches
+  * Rather remove options if they aren't used instead of adding tests

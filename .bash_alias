@@ -14,6 +14,7 @@ alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
 alias cdgit='cd $(git root)'
 alias apt-get='sudo apt-get'
 alias disp='export $(tmux show-env | grep DISP)'
+alias bat='batcat'
 alias git-head='git logk | head && echo'
 alias ncurses='export NCURSES_NO_UTF8_ACS=1'
 if [ $(command -v nvim) ]; then

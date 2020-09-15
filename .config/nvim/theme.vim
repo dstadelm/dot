@@ -10,12 +10,15 @@ packadd ayu-vim
 call minpac#add('ayu-theme/ayu-vim', {'type': 'opt'})
 packadd onedark.vim
 call minpac#add('joshdick/onedark.vim',  {'type': 'opt'})
+packadd night-owl.vim
+call minpac#add('haishanh/night-owl.vim', {'type': 'opt'})
 
 let g:airline_theme='onedark'
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#buffer_nr_show = 1
 set termguicolors
-colorscheme onedark
+" colorscheme onedark
+colorscheme night-owl
 " hint to keep lines short
 set colorcolumn=120
 set background=dark

@@ -20,6 +20,9 @@ export XDG_CONFIG_HOME=${HOME}/.config
 #ZSH_THEME="powerline"
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="agnoster"
+#ZSH_THEME="alanpeabody"
+ZSH_THEME="avit"
+#ZSH_THEME="gnzh"
 #
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -80,7 +83,19 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  autojump
+  colored-man-pages
+)
+
+# auto jump says to add these lines when calling the install.py script
+#        [[ -s /home/dstadelmann/.autojump/etc/profile.d/autojump.sh ]] && source /home/dstadelmann/.autojump/etc/profile.d/autojump.sh
+#
+#        autoload -U compinit && compinit -u
+
 # colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
@@ -137,9 +152,9 @@ export KEYTIMEOUT=1
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-BINPATH=${HOME}/bin/
+BINPATH="${HOME}/bin/:${HOME}/bin/rust_hdl/target/release:${HOME}/.cargo/bin"
 if ! [[ "$PATH" =~ "$BINPATH" ]]; then
-  export PATH="${HOME}/.go/src/github.com/junegunn/fzf/bin/:${HOME}/bin/":$PATH
+  export PATH="${HOME}/.go/src/github.com/junegunn/fzf/bin/:${BINPATH}/":$PATH
   export GOPATH="${HOME}/.go"
 fi
 
@@ -152,7 +167,7 @@ export NCURSES_NO_UTF8_ACS=1
 
 . ~/.bash_alias
 . ~/.bash_ssh_agent
-. ~/.zsh_prompt
+#. ~/.zsh_prompt
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold

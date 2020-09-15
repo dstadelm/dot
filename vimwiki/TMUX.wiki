@@ -1,0 +1,6 @@
+== Create a new session based on existing session ==
+tmux new-session -t <session id>
+
+typically
+tmux new-session -t 0
+
