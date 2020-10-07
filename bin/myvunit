@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DIR=$(realpath $(dirname $1))
+while [ ! -z "$DIR" ] && [ ! -f "$DIR/vunit/run.py" ]; do
+    DIR="${DIR%\/*}"
+done
+test_name=$(basename $1 ".vhd")
+echo ${test_name}
+vunit ${DIR}/vunit/run.py *${test_name}* | sed "s#/project#$(git root)#g"
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+MYGHDL_PID=($(pidof -x myghdl))
+
+if [ ${#MYGHDL_PID[@]} -eq 1 ]; then
+  DIR=$(realpath $(dirname $1))
+  while [ ! -z "$DIR" ] && [ ! -f "$DIR/vunit/run.py" ]; do
+    DIR="${DIR%\/*}"
+  done
+  vunit-ghdl ${DIR}/vunit/run.py --compile -o myghdl | sed "s#/project#$(git root)#g"
+fi

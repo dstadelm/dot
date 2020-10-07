@@ -38,6 +38,9 @@ call s:source_local("highlighted_yank.vim")
 call s:source_local("simple-vhdl.vim")
 call s:source_local("theme.vim")
 call s:source_local("scrolling.vim")
+call s:source_local("figlet.vim")
+call s:source_local("startify.vim")
+call s:source_local("dirvish.vim")
 highlight Comment cterm=italic gui=italic
 hi Search cterm=NONE ctermbg=magenta ctermfg=black
 hi IncSearch cterm=NONE ctermbg=magenta ctermfg=black

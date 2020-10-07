@@ -1,0 +1,11 @@
+#!/bin/bash
+
+FILE1=$(tempfile --suffix "$(basename "${1}").pdf") || exit
+trap "rm -f -- '${FILE1}'" EXIT
+FILE2=$(tempfile --suffix "$(basename "${2}").pdf") || exit
+trap "rm -f -- '${FILE1}' '${FILE2}'" EXIT
+
+unoconv --output "${FILE1}" -f pdf "${1}"
+unoconv --output "${FILE2}" -f pdf "${2}"
+
+diffpdf "${FILE1}" "${FILE2}"

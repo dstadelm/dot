@@ -20,15 +20,3 @@ cabbrev Wq wq
 " fuzzy finding
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Files<CR>
-"inoremap <F1> <Nop>
-"inoremap <F2> <Nop>
-"inoremap <F3> <Nop>
-"inoremap <F4> <Nop>
-"inoremap <F5> <Nop>
-"inoremap <F6> <Nop>
-"inoremap <F7> <Nop>
-"inoremap <F8> <Nop>
-"inoremap <F9> <Nop>
-"inoremap <F10> <Nop>
-"inoremap <F11> <Nop>
-"inoremap <F12> <Nop>
