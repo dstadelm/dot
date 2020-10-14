@@ -1,10 +1,7 @@
 [[HyperV]]
 [[ProjectDesign]]
 [[TODO]]
-[[FuSa]]
-[[Visio]]
-[[FftExponentParser]]
-[[Release 8.0.0]]
 [[Windows]]
 [[TMUX]]
+[[WSL2]]
 

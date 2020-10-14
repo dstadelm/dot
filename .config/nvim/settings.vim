@@ -46,3 +46,6 @@ autocmd FileType tex setl suffixesadd+=tex
 " folding for bash
 au FileType sh let g:sh_fold_enabled=3
 au FileType sh let g:is_bash=1
+
+set clipboard+=unnamedplus
+set mouse=a

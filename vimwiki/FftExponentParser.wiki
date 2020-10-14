@@ -1,3 +1,0 @@
-# Questions
-* [ ] Is the message sending for the counts pkg_tb_fft_exponent_parser.vhd:55 through an actor realy necessary?
-* [ ] 

@@ -1,4 +1,3 @@
-let mapleader = ","
 " opening files relative to the current file
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " opening files in vertical split relative to current file

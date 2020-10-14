@@ -4,8 +4,6 @@ packadd vim-airline
 call minpac#add('vim-airline/vim-airline', {'type': 'opt'})
 packadd vim-airline-themes
 call minpac#add('vim-airline/vim-airline-themes', {'type': 'opt'})
-packadd vim-one
-call minpac#add('rakr/vim-one', {'type': 'opt'})
 packadd ayu-vim
 call minpac#add('ayu-theme/ayu-vim', {'type': 'opt'})
 packadd onedark.vim
@@ -13,12 +11,18 @@ call minpac#add('joshdick/onedark.vim',  {'type': 'opt'})
 packadd night-owl.vim
 call minpac#add('haishanh/night-owl.vim', {'type': 'opt'})
 
-let g:airline_theme='onedark'
+let g:onedark_color_overrides = {
+      \  "black" : { "gui" : "#1e2127", "cterm" : 235, "cterm16" : 0 }
+      \}
+
+
+" settings for one dark (instead of one half dark)
+"let g:airline_theme='one'
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#buffer_nr_show = 1
 set termguicolors
-" colorscheme onedark
-colorscheme night-owl
+colorscheme onedark
+"colorscheme night-owl
 " hint to keep lines short
 set colorcolumn=120
 set background=dark

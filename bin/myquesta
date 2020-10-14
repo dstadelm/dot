@@ -1,17 +1,8 @@
 #!/bin/bash
-LOCKDIR=$HOME/.myquesta
-if mkdir $LOCKDIR
-then
-  DIR=$(realpath $(dirname $1))
-  while [ ! -z "$DIR" ] && [ ! -f "$DIR/vunit/run.py" ]; do
-      DIR="${DIR%\/*}"
-  done
-  vunit ${DIR}/vunit/run.py --compile -o myquesta | sed "s#/project#$(git root)#g"
+# search for then run.py script
+DIR=$(realpath $(dirname $1))
+while [ ! -z "$DIR" ] && [ ! -f "$DIR/vunit/run.py" ]; do
+    DIR="${DIR%\/*}"
+done
 
-  if rmdir $LOCKDIR
-  then
-    echo "Done"
-  else
-    echo "Error could not remove lock dir" >&2
-  fi
-fi
+vunit ${DIR}/vunit/run.py --compile -o myquesta | sed "s#/project#$(git root)#g"

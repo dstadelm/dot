@@ -3,7 +3,8 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/dstadelmann/.oh-my-zsh"
-export TERM=xterm-256color
+export TERM=screen-256color
+export EDITOR=nvim
 export XDG_CONFIG_HOME=${HOME}/.config
 #
 
@@ -21,8 +22,8 @@ export XDG_CONFIG_HOME=${HOME}/.config
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="agnoster"
 #ZSH_THEME="alanpeabody"
-ZSH_THEME="avit"
-#ZSH_THEME="gnzh"
+#ZSH_THEME="avit"
+ZSH_THEME="gnzh"
 #
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -152,7 +153,7 @@ export KEYTIMEOUT=1
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-BINPATH="${HOME}/bin/:${HOME}/bin/rust_hdl/target/release:${HOME}/.cargo/bin"
+BINPATH="${HOME}/bin/:${HOME}/bin/rust_hdl/target/release:${HOME}/.cargo/bin:${HOME}/.go/bin"
 if ! [[ "$PATH" =~ "$BINPATH" ]]; then
   export PATH="${HOME}/.go/src/github.com/junegunn/fzf/bin/:${BINPATH}/":$PATH
   export GOPATH="${HOME}/.go"
@@ -163,11 +164,18 @@ if [ $(command -v module) ]; then
   module use --append ${HOME}/.modules
 fi
 
-export NCURSES_NO_UTF8_ACS=1
+#export NCURSES_NO_UTF8_ACS=1
 
 . ~/.bash_alias
 . ~/.bash_ssh_agent
 #. ~/.zsh_prompt
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
+# WSL specific
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
+dbus_status=$(service dbus status)
+if [[ $dbus_status = *"is not running"* ]]; then
+  sudo service dbus --full-restart
+fi

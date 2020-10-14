@@ -10,10 +10,12 @@ function! s:source_local(relative_path)
   exec 'source ' . full_path
 endfunction
 
+let mapleader = ","
 call s:source_local("settings.vim")
-call s:source_local("keymaps.vim")
 call s:source_local("minpac.vim")
 call s:source_local("git.vim")
+call s:source_local("Ranger.vim")
+call s:source_local("keymaps.vim")
 "call s:source_local("dispatch.vim")
 call s:source_local("neomake.vim")
 call s:source_local("deoplete.vim")
@@ -30,19 +32,21 @@ call s:source_local("ack.vim")
 "call s:source_local("undo.vim")
 call s:source_local("goyo.vim")
 call s:source_local("surround.vim")
+call s:source_local("autopairs.vim")
 call s:source_local("eunuch.vim")
+call s:source_local("vinegar.vim")
 call s:source_local("vimwiki.vim")
 call s:source_local("markdown-preview.vim")
 call s:source_local("grammarous.vim")
 call s:source_local("highlighted_yank.vim")
-call s:source_local("simple-vhdl.vim")
 call s:source_local("theme.vim")
 call s:source_local("scrolling.vim")
 call s:source_local("figlet.vim")
 call s:source_local("startify.vim")
-call s:source_local("dirvish.vim")
+call s:source_local("simple-vhdl.vim")
+call s:source_local("incsearch-fuzzy.vim")
 highlight Comment cterm=italic gui=italic
-hi Search cterm=NONE ctermbg=magenta ctermfg=black
-hi IncSearch cterm=NONE ctermbg=magenta ctermfg=black
-hi Search gui=NONE guibg=magenta guifg=black
-hi IncSearch gui=NONE guibg=magenta guifg=black
+"hi Search cterm=NONE ctermbg=blue ctermfg=black
+"hi IncSearch cterm=NONE ctermbg=magenta ctermfg=black
+"hi Search gui=NONE guibg=blue guifg=black
+"hi IncSearch gui=NONE guibg=magenta guifg=black
