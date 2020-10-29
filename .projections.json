@@ -1,7 +1,8 @@
 {
     "**/hdl/*.vhd": {
       "type": "source",
-      "alternate": "{dirname}/tb/tb_{basename}.vhd"
+      "alternate": "{dirname}/tb/tb_{basename}.vhd",
+      "related" : "{dirname}/vunit/run.py"
     },
     "**/tb/tb_*.vhd": {
       "type": "tb",
@@ -9,7 +10,8 @@
         "{dirname}/tb/{basename}_tb_pkg.vhd",
         "{dirname}/tb/pkg_tb_{basename}.vhd",
         "{dirname}/hdl/{basename}.vhd"
-      ]
+      ],
+      "related" : "{dirname}/vunit/run.py"
     },
     "**/tb/pkg_tb_*.vhd": {
       "type": "tbpkg",
@@ -21,5 +23,12 @@
     "**/tb/harness_tb_*.vhd": {
       "type": "harness",
       "alternate": "{dirname}/hdl/{basename}.vhd"
+    },
+    "**/vunit/*.py": {
+      "type": "vunit"
+    },
+    "**/tb/wave_tb_*.tcl": {
+      "type": "wave",
+      "alternate": "{dirname}/tb/tb_{basename}.vhd"
     }
 }
