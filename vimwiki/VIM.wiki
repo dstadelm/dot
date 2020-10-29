@@ -1,0 +1,3 @@
+== Plugins ==
+* [ ] targets.vim
+* [ ] far.vim

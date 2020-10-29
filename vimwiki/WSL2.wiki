@@ -1,0 +1,50 @@
+== WSL2 ==
+
+=== zsh ===
+1. install zsh with packate manager (apt etc.)
+2. install oh-my-zsh according to https://github.com/ohmyzsh/ohmyzsh#basic-installation
+3. install plugins 
+   - git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+   - git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+=== X-Forwarding ===
+- Install XMing
+- Run XMing with following parameters
+  ```
+  "C:\Program Files\Xming\Xming.exe" -ac -clipboard -multimonitors -multiwindow -wgl
+  ```
+- Add following lines to the .bashrc or .zshrc
+  ```
+  export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+  export LIBGL_ALWAYS_INDIRECT=1
+  ```
+- Configure Window Firewall according to
+  https://github.com/cascadium/wsl-windows-toolbar-launcher#firewall-rules
+  
+=== fzf ===
+- install according to https://github.com/junegunn/fzf
+
+=== neovim ===
+1. place neovim.appimg in ~/bin
+2. chmod +x
+3. ln -s neovim.appimg nvim
+4. install nvim/minpac ```git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac```
+
+=== ranger ===
+dev icons for ranger through https://github.com/alexanderjeurissen/ranger_devicons
+
+=== Window Terminal ===
+Install Dejavu Sans Mono Nerd Font Complete Mono.ttf from https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts
+[[settings.json]]
+
+
+=== docker ===
+Install according to https://docs.docker.com/docker-for-windows/wsl/
+There is no need to install anything in ubuntu or what ever distro you are using as WSL2 provides the docker command.
+
+=== Xming ===
+Startup : "C:\Users\dstadelmann\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\Xming.exe.lnk"
+"C:\Program Files\Xming\Xming.exe" -ac -clipboard -noprimary -multimonitors -multiwindow -wgl
+
+=== VcXsrv ===
+"C:\Program Files\VcXsrv\vcxsrv.exe" -ac -multiwindow -clipboard -noprimary -wgl
+Make sure that public access is granted.
