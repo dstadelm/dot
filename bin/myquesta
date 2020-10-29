@@ -5,4 +5,4 @@ while [ ! -z "$DIR" ] && [ ! -f "$DIR/vunit/run.py" ]; do
     DIR="${DIR%\/*}"
 done
 
-vunit ${DIR}/vunit/run.py --compile -o myquesta | sed "s#/project#$(git root)#g"
+vunit ${DIR}/vunit/run.py --compile --no-color -o myquesta | sed "s#/project#$(git root)#g"
