@@ -4,17 +4,21 @@
 "call minpac#add('yamatsum/nvim-cursorline', {'type': 'opt'})
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"packadd vim-illuminate
-"
-"call minpac#add('RRethy/vim-illuminate', {'type': 'opt'})
-"au VimEnter * hi! link CursorWord CursorLine
-"let g:Illuminate_highlightUnderCursor = 0
+packadd vim-illuminate
 
-packadd vim_current_word
-call minpac#add('dominikduda/vim_current_word', {'type': 'opt'})
-au VimEnter * hi! link CurrentWordTwins CursorLine
-let g:vim_current_word#highlight_current_word = 0
+call minpac#add('RRethy/vim-illuminate', {'type': 'opt'})
+au VimEnter * hi! link illuminatedWord CursorLine
+let g:Illuminate_highlightUnderCursor = 1
+
+"packadd vim_current_word
+"
+"call minpac#add('dominikduda/vim_current_word', {'type': 'opt'})
+"au VimEnter * hi! link CurrentWordTwins CursorLine
+"let g:vim_current_word#highlight_current_word = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 packadd vim-searchlight
+
 call minpac#add('PeterRincker/vim-searchlight', {'type': 'opt'})
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
