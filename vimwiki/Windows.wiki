@@ -8,7 +8,7 @@ idle.vbs
 ```
 Dim objResult
 
-Set objShell = WScript.CreateObject("WScript.Shell")    
+Set objShell = WScript.CreateObject("WScript.Shell")
 
 Do While True
   objResult = objShell.sendkeys("{NUMLOCK}{NUMLOCK}")
@@ -16,3 +16,15 @@ Do While True
 Loop
 ```
 
+# Uninstall drivers
+In a cmd prompt or power shell with elevated rights
+
+To produce a list with drivers
+```
+pnputil.exe /enum_drivers
+```
+
+To delete a driver
+```
+pnputil.exe /delete-driver oem<number>.inf /uninstall
+```

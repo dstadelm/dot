@@ -46,3 +46,4 @@ export NCURSES_NO_UTF8_ACS=1
 . ~/.bash_ssh_agent
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source "$HOME/.cargo/env"

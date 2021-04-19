@@ -1,3 +1,5 @@
+let g:bclose_no_plugin_maps = 1
+let g:no_plugin_maps = 1
 packadd bclose.vim
 packadd ranger.vim
 call minpac#add('francoiscabrol/ranger.vim', {'type': 'opt'})

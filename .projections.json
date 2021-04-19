@@ -30,5 +30,13 @@
     "**/tb/wave_tb_*.tcl": {
       "type": "wave",
       "alternate": "{dirname}/tb/tb_{basename}.vhd"
+    },
+    "**/src/*.c": {
+      "type": "c",
+      "alternate": "{dirname}/inc/{basename}.h"
+    },
+    "**/inc/*.h": {
+      "type": "h",
+      "alternate": "{dirname}/src/{basename}.c"
     }
 }

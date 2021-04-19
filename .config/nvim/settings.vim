@@ -1,5 +1,4 @@
 " vim: fdm=marker
-" settings  {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allows to switch between buffers without the need of saving the current one
 " other values are: confirm, autowrite, autowriteall
@@ -20,32 +19,24 @@ set nowrap                        " don't wrap lines by default
 set vb                            " enable visual bell (disable audio bell)
 set scrolloff=2                   " minimum lines above/below cursor
 " set cursorline makes scrolling in putty very slow
-set cursorline                    " highlight current line
+" set cursorline                    " highlight current line
 set foldenable                    " code folding
 set foldmethod=syntax
-set wildmode=list:longest,full    
 set splitbelow splitright
 set inccommand=split
+set wildmenu
+set wildoptions=pum
+set pumblend=10
 set noshowmode                    " do not show in which mode we are, as this is shown by airline
-" }}}
-" jump to the last position when reopening a file {{{
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-" }}}
-" persistent undo {{{
+set clipboard+=unnamedplus
+set mouse=a
+
+" persistent undo
 set undofile
 if isdirectory($HOME . "/.vimundo") == 0
   call mkdir($HOME . "/.vimundo")
 endif
 set undodir=~/.vimundo
-" }}}
-" automatically init.vim if  vim files change {{{
-autocmd BufWritePost *.vim :source %
-" }}}
-autocmd FileType tex setl suffixesadd+=tex
 
-" folding for bash
-au FileType sh let g:sh_fold_enabled=3
-au FileType sh let g:is_bash=1
-
-set clipboard+=unnamedplus
-set mouse=a
+" enable embeded script highlighting for lua and python
+let g:vimsyn_embed = 'lP'

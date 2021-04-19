@@ -18,3 +18,5 @@ function! s:ampalign()
     call search(repeat('[^&]*&',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+let g:easy_align_delimiters = { '[' : { 'pattern': '[' }}

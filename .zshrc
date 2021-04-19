@@ -3,9 +3,11 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/dstadelmann/.oh-my-zsh"
-export TERM=xterm-256color
+export TERM=xterm-256color-italic
 export EDITOR=nvim
 export XDG_CONFIG_HOME=${HOME}/.config
+export FZF_DEFAULT_COMMAND='fdfind'
+unsetopt BEEP
 #
 
 ###############################################################################
@@ -17,13 +19,13 @@ export XDG_CONFIG_HOME=${HOME}/.config
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #
-#ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 #ZSH_THEME="powerline"
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="agnoster"
 #ZSH_THEME="alanpeabody"
 #ZSH_THEME="avit"
-ZSH_THEME="gnzh"
+#ZSH_THEME="gnzh"
 #
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -86,11 +88,12 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-autosuggestions
   autojump
   colored-man-pages
 )
+
 
 # auto jump says to add these lines when calling the install.py script
 #        [[ -s /home/dstadelmann/.autojump/etc/profile.d/autojump.sh ]] && source /home/dstadelmann/.autojump/etc/profile.d/autojump.sh
@@ -101,32 +104,32 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 ###############################################################################
-# VIM editing mode on the command line 
+# VIM editing mode on the command line
 # for emacs style switch to -e
 #
 # https://dougblack.io/words/zsh-vi-mode.html
 # bindkey -v
-# 
+#
 # bindkey '^P' up-history
 # bindkey '^N' down-history
 # bindkey '^?' backward-delete-char
 # bindkey '^h' backward-delete-char
 # bindkey '^w' backward-kill-word
 # bindkey '^r' history-incremental-search-backward
-# 
+#
 # function zle-line-init zle-keymap-select {
 #     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
 #     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
 #     zle reset-prompt
 # }
-# 
+#
 # zle -N zle-line-init
 # zle -N zle-keymap-select
 # export KEYTIMEOUT=1
 #
 ###############################################################################
 bindkey -v
-export KEYTIMEOUT=1 
+export KEYTIMEOUT=1
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -175,7 +178,9 @@ fi
 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0.0
 export LIBGL_ALWAYS_INDIRECT=1
 
-dbus_status=$(service dbus status)
-if [[ $dbus_status = *"is not running"* ]]; then
-  sudo service dbus --full-restart
-fi
+#dbus_status=$(service dbus status)
+#if [[ $dbus_status = *"is not running"* ]]; then
+#  sudo service dbus --full-restart
+#fi
+source ~/fzf-tab/fzf-tab.plugin.zsh
+zstyle ':fzf-tab:completion:*:cd:*' ignore true
