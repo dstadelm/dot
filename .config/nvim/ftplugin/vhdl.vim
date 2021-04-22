@@ -56,3 +56,6 @@ if exists(":Neomake")
         \ }
   let g:neomake_vhdl_enabled_makers = ['myquesta'] ", 'myghdl']
 endif
+
+set formatoptions+=ro
+set comments+=:--,b:--
