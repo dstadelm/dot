@@ -46,6 +46,10 @@ call s:source_local("startify.vim")
 call s:source_local("simple-vhdl.vim")
 call s:source_local("python.vim")
 call s:source_local("illuminate.vim")
+call s:source_local("anyjump.vim")
+call s:source_local("yoink.vim")
+call s:source_local("exchange.vim")
+
 
 highlight Comment cterm=italic gui=italic
 "hi! link CurrentWordTwins Visual
