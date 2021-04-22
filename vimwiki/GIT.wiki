@@ -1,0 +1,4 @@
+== fixup ==
+git commit --fixup=<sha of commit to fix>
+git rebase -i --auto-squash <base branch>
+
