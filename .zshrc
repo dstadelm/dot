@@ -3,7 +3,8 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/dstadelmann/.oh-my-zsh"
-export TERM=xterm-256color-italic
+#export TERM=xterm-256color-italic
+export TERM=xterm-256color
 export EDITOR=nvim
 export XDG_CONFIG_HOME=${HOME}/.config
 export FZF_DEFAULT_COMMAND='fdfind'
