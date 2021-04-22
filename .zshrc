@@ -176,8 +176,10 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # WSL specific
-export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0.0
-export LIBGL_ALWAYS_INDIRECT=1
+if [[ -v WSLENV ]] then
+  export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0.0
+  export LIBGL_ALWAYS_INDIRECT=1
+fi
 
 #dbus_status=$(service dbus status)
 #if [[ $dbus_status = *"is not running"* ]]; then
