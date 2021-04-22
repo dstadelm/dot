@@ -1,0 +1,13 @@
+# Ansibel
+- pyright
+- vim plugins
+- neovim
+- python3.8
+- pip3
+  - neovim
+  - GitPython
+- rust-hdl
+- npm
+  - vim-language-server
+- tmux
+

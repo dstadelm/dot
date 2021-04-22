@@ -6,4 +6,7 @@
 [[WSL2]]
 [[VIM]]
 [[GIT]]
+[[Ansibel]]
+[[ZSH]]
+
 
