@@ -12,3 +12,8 @@
   `:so $VIMRUNTIME/syntax/hitest.vim`
 * write doc for plugin
   `:set filetype=help`
+* Ctrl-R= (expression register) (use @<reg> or Ctrl-R" to reference register)
+* Ctrl-R" (insert last yank)
+
+34
+12

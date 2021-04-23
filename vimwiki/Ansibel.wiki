@@ -2,6 +2,7 @@
 - pyright
 - vim plugins
 - neovim
+  - minpac
 - python3.8
 - pip3
   - neovim
@@ -10,4 +11,16 @@
 - npm
   - vim-language-server
 - tmux
+- one-gnome-terminal
+  - https://github.com/denysdovhan/one-gnome-terminal
+  - execute in bash (not zsh)
+- font
+    - https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf
+- ranger
+  - ranger --copy-config=all
+  - https://github.com/alexanderjeurissen/ranger_devicons
+
+
+
+
 
