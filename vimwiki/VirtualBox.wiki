@@ -1,2 +1,4 @@
 == Samba Share ==
-https://bln364.com/advanced-virtualbox-shared-folder/
+1. enable icmp https://www.osradar.com/how-to-enable-and-disable-ping-icmp-in-windows-10-firewall/
+2. https://bln364.com/advanced-virtualbox-shared-folder/
+3. smb.conf that worked stored under ~/etc-files/smb.conf
