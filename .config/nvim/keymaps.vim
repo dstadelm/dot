@@ -1,7 +1,7 @@
-packadd Repeatable.vim
-packadd vim-repeat
 call minpac#add('tpope/vim-repeat', {'type': 'opt'})
 call minpac#add('kreskij/Repeatable.vim', {'type': 'opt'})
+packadd Repeatable.vim
+packadd vim-repeat
 call repeatable#Setup()
 " opening files relative to the current file
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
