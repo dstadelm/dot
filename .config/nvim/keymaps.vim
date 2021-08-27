@@ -26,8 +26,6 @@ cabbrev Wq wq
 nnoremap <leader>b :lua require'telescope.builtin'.buffers()<CR>
 nnoremap <leader>f :lua require'telescope.builtin'.find_files()<CR>
 nnoremap <leader>l :lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
-nnoremap <leader>1 :FloatermToggle<CR>
-tnoremap <leader>1 <C-\><C-N>:FloatermToggle<CR>
 nnoremap Y yg_
 Repeatable nnoremap <leader>dg :diffget<CR>
 Repeatable nnoremap <leader>dp :diffput<CR>
