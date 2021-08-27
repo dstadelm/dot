@@ -35,6 +35,9 @@ require'compe'.setup {
   nvim_lua = { priority = 500; };
   ultisnips = { priority = 500; };
   nvim_treesitter = { priority = 500; };
+  omni = { filetypes = {'tex'};
+           priority = 500;
+         };
   };
 
 }
