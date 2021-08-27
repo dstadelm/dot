@@ -30,3 +30,9 @@ call minpac#add('PeterRincker/vim-searchlight', {'type': 'opt'})
 au VimEnter * hi! Searchlight ctermfg=235 ctermbg=180 guifg=#1e2127 guibg=#E5C07B
 " setting the Search highlight group to that of IncSearc
 au VimEnter * hi! Search ctermfg=180 ctermbg=59 guifg=#E5C07B guibg=#5C6370
+
+
+call minpac#add('norcalli/nvim-colorizer.lua', {'type': 'opt'})
+packadd nvim-colorizer.lua
+
+lua require'colorizer'.setup()
