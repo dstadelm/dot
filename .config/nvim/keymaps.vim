@@ -65,5 +65,7 @@ nnoremap <leader>k :m .-2<CR>==
 " move around visually selected lines
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" make diff[get/put] shorter and repeatable
 Repeatable nnoremap <leader>dg :diffget<CR>
 Repeatable nnoremap <leader>dp :diffput<CR>
