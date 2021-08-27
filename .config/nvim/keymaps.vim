@@ -33,6 +33,37 @@ tnoremap <C-W>h <C-\><C-N><C-W>h
 tnoremap <C-W>l <C-\><C-N><C-W>l
 tnoremap <C-W>j <C-\><C-N><C-W>j
 tnoremap <C-W>k <C-\><C-N><C-W>k
+
+" Make Y behave as expected
 nnoremap Y yg_
+
+" Keep cursor at the position it is when concatenating lines
+nnoremap J mzJ'z
+
+" Jump to next, but leave the cursor line at the position it is
+" Additionally open the fold if there is one
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Insert undo  break points
+" Interferance with .. and ,, for vhdl?
+" inoremap , ,<C-g>u
+" inoremap . .<C-g>u
+" inoremap [ [<C-g>u
+" inoremap ( (<C-g>u
+" inoremap { {<C-g>u
+
+" add relative movements to the jumplist
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+
+" add mapping to be able to move around lines
+inoremap <C-j> <esc>:m .+1<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+" move around visually selected lines
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 Repeatable nnoremap <leader>dg :diffget<CR>
 Repeatable nnoremap <leader>dp :diffput<CR>
