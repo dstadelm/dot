@@ -26,6 +26,13 @@ cabbrev Wq wq
 nnoremap <leader>b :lua require'telescope.builtin'.buffers()<CR>
 nnoremap <leader>f :lua require'telescope.builtin'.find_files()<CR>
 nnoremap <leader>l :lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
+
+" only use this if you are using vim mode in the terminal otherwise you will
+" be missing ctrl-w for backstepping a word...
+tnoremap <C-W>h <C-\><C-N><C-W>h
+tnoremap <C-W>l <C-\><C-N><C-W>l
+tnoremap <C-W>j <C-\><C-N><C-W>j
+tnoremap <C-W>k <C-\><C-N><C-W>k
 nnoremap Y yg_
 Repeatable nnoremap <leader>dg :diffget<CR>
 Repeatable nnoremap <leader>dp :diffput<CR>
