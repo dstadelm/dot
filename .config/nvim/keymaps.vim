@@ -23,7 +23,7 @@ cabbrev W w
 cabbrev Wq wq
 " fuzzy finding
 " nnoremap <leader>b :lua require'telescope.builtin'.buffers()<CR>
-nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>b :lua require'telescope.builtin'.buffers()<CR>
 nnoremap <leader>f :lua require'telescope.builtin'.find_files()<CR>
 nnoremap <leader>l :lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
 nnoremap <leader>1 :FloatermToggle<CR>
