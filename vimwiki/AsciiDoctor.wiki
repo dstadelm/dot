@@ -1,0 +1,6 @@
+== Firefox Plugin ==
+1. Manage Extension -> Preferences -> Safe mode -> safe
+2. open new tab
+3. enter about:config
+4. in search box enter uniq
+5. switch value of privacy.file_unique_origin to false

@@ -1,0 +1,10 @@
+== GHDL ==
+
+=== Installation ===
+1. Download latest from https://github.com/ghdl/ghdl/releases/tag/nightly
+2. Install stow `sudo apt install stow`
+3. Extract downloaded to /usr/local/stow
+   {{{
+       tar -zxf ~/Downloads/ghdl-gha-ubuntu-20.04-mcode.tgz -C /usr/local/stow/ghdl
+   }}}
+4. Install using stow `cd /usr/local/stow; stow -d ghdl`

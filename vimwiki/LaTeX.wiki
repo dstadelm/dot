@@ -1,0 +1,21 @@
+== Integration with Neovim ==
+
+=== using vimtex ===
+lervag/vimtex
+
+=== viewer ===
+qpdfview
+
+=== backward search ===
+Edit -> Settings... -> Source editor: nvr --remote-silent +%2 %1
+
+== Environments ==
+
+=== definition list ===
+\begin{labeling}
+
+== LaTex and Python ==
+Combining LaTeX with Python https://www.tug.org/tug2019/slides/slides-ziegenhagen-python.pdf [[file:slides-ziegenhagen-python.pdf | Offline PDF]]
+
+[[https://www.12000.org/my_notes/python_in_latex/index.htm |A very simple introduction to using Python in Latex]]
+

@@ -1,0 +1,15 @@
+== Smart Lynq Cable ==
+IP: 192.168.44.120
+Name: smart-jtag-cable.scs-ad.scs.ch
+
+=== Initial Setup ===
+_Target Name_: SmartLynq
+_*optionally*_ _[x] set as default target_
+_Type:_ Hardware Server
+_Host:_ smart-jtag-cable.scs-ad.scs.ch
+_Port:_ 3121
+*[x] Use Symbol Server*
+
+== Change Setup ==
+Window -> Show View -> Other... -> Target Connections
+

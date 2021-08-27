@@ -1,0 +1,8 @@
+== Sphinx ==
+SCVersioning: sphinxcontrib-versioning
+Wavedrom: sphinxcontrib-wavedrom
+
+
+== Links ==
+https://github.com/yoloseem/awesome-sphinxdoc
+

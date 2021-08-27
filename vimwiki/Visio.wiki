@@ -1,5 +1,13 @@
-Die Installation geht wie folgt
- 
-* Den gezippten Ordner ‘Visio2019-std-64-eng’ auf einen beliebigen lokalen Ordner extrahieren.
-* Cmd (run as Administrator) in den entzippten Ordner wechseln und folgenden Befehl ausführen:\
-  setup.exe /configure Visio2019stdeng64-online.xml
+== VBA script to export as pdf on save ==
+[[./Visio-export-as-pdf-on-save.png | Screenshot]]
+{{{
+Private Sub Document_DocumentSaved(ByVal doc As IVDocument)
+    FileName = Left(ActiveDocument.FullName, InStrRev(ActiveDocument.FullName, ".") - 1) & ".pdf"
+    ActiveDocument.ExportAsFixedFormat visFixedFormatPDF, FileName, visDocExIntentPrint, visPrintAll
+End Sub
+
+Private Sub Document_DocumentSavedAs(ByVal doc As IVDocument)
+    FileName = Left(doc.FullName, InStrRev(doc.FullName, ".") - 1) & ".pdf"
+    ActiveDocument.ExportAsFixedFormat visFixedFormatPDF, FileName, visDocExIntentPrint, visPrintAll
+End Sub
+}}}

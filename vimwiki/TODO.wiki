@@ -1,5 +1,0 @@
-# [ ] Todos ZF
- - [ ] review and merge branches
- - [ ] plan for wp 8
- - [ ] plan for wp 9 HSM
- - [ ] plan for cr crc32

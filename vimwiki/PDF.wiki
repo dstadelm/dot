@@ -1,0 +1,2 @@
+pdftk file1.pdf file2.pdf file3.pdf cat output newfile.pdf
+pdftk A=one.pdf B=two.pdf cat A1-7 B1-5 A8 output combined.pdf

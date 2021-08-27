@@ -15,5 +15,26 @@
 * Ctrl-R= (expression register) (use @<reg> or Ctrl-R" to reference register)
 * Ctrl-R" (insert last yank)
 
-34
-12
+== Asynchornous make with LUA ==
+https://phelipetls.github.io/posts/async-make-in-nvim-with-lua/
+
+=== CTRL sequences that improve productivity ===
+https://danidiaz.medium.com/useful-vim-key-bindings-for-command-and-insert-modes-85e372a27b6
+
+== VimWiki Links for HTML ==
+https://www.rosipov.com/blog/custom-templates-in-vimwiki/
+
+== ToDo ==
+ - conceal
+    - https://gist.github.com/huytd/668fc018b019fbc49fa1c09101363397
+
+== Close all but current buffer ==
+:%bd|e#
+%bd closes all buffers
+e# opens last buffer
+
+== Search and replace in visual selection ==
+:'<,'>s/%V
+
+== Open unnamed buffer (scratch) ==
+:ene

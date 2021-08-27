@@ -1,0 +1,23 @@
+= ZSH =
+
+== Run last command with sudo ==
+sudo !!
+
+== New command with last arg ==
+newcmd !$
+
+== Open current line in $EDITOR ==
+  - emacs mode *"ctrl-x ctrl-e"*
+  - vim mode *"esc v"*
+requires following to be set in .zsh
+{{{
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+# Vi style:
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+}}}

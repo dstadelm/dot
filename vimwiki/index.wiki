@@ -1,6 +1,7 @@
 [[HyperV]]
 [[ProjectDesign]]
 [[TODO]]
+[[Linux]]
 [[Windows]]
 [[TMUX]]
 [[WSL2]]
@@ -9,5 +10,14 @@
 [[Ansibel]]
 [[VirtualBox]]
 [[ZSH]]
-
+[[Python]]
+[[GHDL]]
+[[SmartLynq]]
+[[AsciiDoctor]]
+[[Sphinx]]
+[[Sphinx vs. AsciiDoctor]]
+[[LaTeX]]
+[[PDF]]
+[[Diagrams]]
+[[Visio]]
 

@@ -1,0 +1,44 @@
+== Sphinx vs. AsciiDoctor ==
+
+Admonitions:: Both support admonitions. *Sphinx* has a custom admonition whereas *AsciiDoctor* requires some hacking for custom admonitions
+
+Includes:: Both support includes through their underlying language (RST, AsciiDoc), however *Sphinx* relative includes doe not always work and it is not clear due to what reason it sometime fails.
+
+Images:: Both require the images to be in a specific image directory (Oh why, oh why)
+
+Header Shift:: *AsciiDoctor* allows to shift the header when including a file, *Sphinx* does not support this.
+
+Tables:: *AsciiDoctor* has more sophisticated tables but *Sphinx* has reasonable support.
+
+Output::
+:: *AsciiDoctor* focuses on print output (pdf, docbook, ePub, man) and can also generate html output, but all is on one page which isn't such a nice experience to navigate. For a more sophisticated web experience *Antora* exists, however it requires Web-Developer knowledge to configure the look and feel.
+:: *Sphinx* / Docutils can create HTML, pdf via LaTeX, ePub, Texinfo, man pages.
+
+Linking between Documents::
+:: Works for both
+
+Search:: only *Sphinx* provides a search bar
+
+Wavedrom:: both support native wavedrom as input via extensions
+
+Repository Rendering::
+:: RST is rendered on GitHub, GitLab, Bitbucket Cloud, but not on Bitbucket Server
+:: AsciiDoc is rendered on GitHub and GitLab, possibly Bitbucket Cloud, but not on Bitbucket Server however there is a browser extension *AsciiDoctor*.js that allows to render the pages when switching to RAW and it handles includes correctly and renders wavedrom
+
+| Feature    | AsciiDoctor / AsciiDoc | Sphinx / RsT |
+|------------|------------------------|--------------|
+|Admonitions |           0            |      1       |
+|Includes    |           0            |      0       |
+|Images      |          -1            |     -1       |
+|Header Shift|           0            |     -1       |
+|Tables      |           1            |      0       |
+|Output      |           0            |      1       |
+|Linking     |           0            |      0       |
+|Search      |          -1            |      1       |
+|Wavedrom    |           0            |      0       |
+|Rendering   |           1            |      0       |
+
+== Conclusion ==
+My impression is AsciiDoc is the better backend than RsT but Sphinx is the better easier frontend than e.g. Antora
+
+
