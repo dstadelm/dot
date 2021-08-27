@@ -9,7 +9,7 @@ au FileType fzf set nonu nornu
 let $FZF_DEFAULT_OPTS='--layout=reverse'
 let g:fzf_preview_window = ''
 
-if has("nvim")
-  au TermOpen * tnoremap <Esc> <C-\><C-N>
-  au FileType fzf tunmap <Esc>
-endif
+" if has("nvim")
+"   au TermOpen * tnoremap <Esc> <C-\><C-N>
+"   au FileType fzf tunmap <Esc>
+" endif
