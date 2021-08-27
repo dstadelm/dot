@@ -9,6 +9,3 @@ nmap P <plug>(YoinkPaste_P)
 
 let g:yoinkSavePersistently = 1
 let g:yoinkIncludeDeleteOperations = 1
-
-call minpac#add('svermeulen/vim-cutlass', {'type': 'opt'})
-packadd vim-cutlass
