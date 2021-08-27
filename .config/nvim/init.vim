@@ -11,12 +11,13 @@ function! s:source_local(relative_path)
 endfunction
 
 let mapleader = ","
+let maplocalleader = " "
 call s:source_local("minpac.vim")
 call s:source_local("settings.vim")
+call s:source_local("keymaps.vim")
 call s:source_local("augroup.vim")
 call s:source_local("commentary.vim")
 call s:source_local("git.vim")
-call s:source_local("keymaps.vim")
 call s:source_local("neomake.vim")
 call s:source_local("completion.vim")
 call s:source_local("lsp.vim")
@@ -47,9 +48,11 @@ call s:source_local("simple-vhdl.vim")
 call s:source_local("python.vim")
 call s:source_local("illuminate.vim")
 call s:source_local("anyjump.vim")
-call s:source_local("yoink.vim")
+"call s:source_local("yoink.vim")
 call s:source_local("exchange.vim")
-
+call s:source_local("latex.vim")
+call s:source_local("ctags.vim")
+call s:source_local("cheat.vim")
 
 highlight Comment cterm=italic gui=italic
 "hi! link CurrentWordTwins Visual
@@ -60,9 +63,13 @@ highlight Comment cterm=italic gui=italic
 "hi IncSearch gui=NONE guibg=magenta guifg=black
 "
 "
-"call s:source_local("Ranger.vim")
+call s:source_local("Ranger.vim")
 "call s:source_local("dispatch.vim")
 "call s:source_local("you_complete_me.vim")
 "call s:source_local("closetag.vim")
 "call s:source_local("vim-closer.vim")
 "call s:source_local("vim-endwise.vim")
+
+" Things to try
+" https://github.com/mg979/vim-visual-multi
+" https://github.com/TaDaa/vimade
