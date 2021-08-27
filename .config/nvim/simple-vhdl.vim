@@ -1,5 +1,5 @@
-packadd simple-vhdl.vim
 call minpac#add('dstadelm/simple-vhdl.vim', {'type': 'opt'})
+packadd simple-vhdl.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key mappings
 nnoremap <leader>vi :VhdlInsertInstanceFromTag<CR>
