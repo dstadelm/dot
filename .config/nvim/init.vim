@@ -33,7 +33,7 @@ call s:source_local("ack.vim")
 call s:source_local("undo.vim")
 call s:source_local("goyo.vim")
 call s:source_local("surround.vim")
-call s:source_local("autopairs.vim")
+"call s:source_local("autopairs.vim")
 call s:source_local("eunuch.vim")
 call s:source_local("vinegar.vim")
 call s:source_local("vimwiki.vim")
@@ -47,12 +47,12 @@ call s:source_local("startify.vim")
 call s:source_local("simple-vhdl.vim")
 call s:source_local("python.vim")
 call s:source_local("illuminate.vim")
-call s:source_local("anyjump.vim")
 "call s:source_local("yoink.vim")
 call s:source_local("exchange.vim")
 call s:source_local("latex.vim")
 call s:source_local("ctags.vim")
 call s:source_local("cheat.vim")
+call s:source_local("dap.vim")
 
 highlight Comment cterm=italic gui=italic
 "hi! link CurrentWordTwins Visual
@@ -63,7 +63,7 @@ highlight Comment cterm=italic gui=italic
 "hi IncSearch gui=NONE guibg=magenta guifg=black
 "
 "
-call s:source_local("Ranger.vim")
+"call s:source_local("Ranger.vim")
 "call s:source_local("dispatch.vim")
 "call s:source_local("you_complete_me.vim")
 "call s:source_local("closetag.vim")

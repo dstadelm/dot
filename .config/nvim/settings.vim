@@ -19,7 +19,7 @@ set nowrap                          " don't wrap lines by default
 set vb                              " enable visual bell (disable audio bell)
 set scrolloff=2                     " minimum lines above/below cursor
 " set cursorline                    " highlight current line very slow in putty
-set foldenable                      " code folding
+set nofoldenable                      " code folding
 set foldmethod=syntax
 set splitbelow splitright
 set inccommand=split
@@ -29,6 +29,7 @@ set pumblend=10
 set noshowmode                      " do not show in which mode we are, as this is shown by airline
 set clipboard+=unnamedplus,unnamed  " unamedplus -> ctrl-v; unamed -> middle mouse click
 set mouse=a
+set diffopt=internal,filler,algorithm:histogram,iwhiteall,vertical
 
 " persistent undo
 set undofile
