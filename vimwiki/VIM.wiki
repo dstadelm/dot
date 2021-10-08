@@ -34,7 +34,7 @@ https://www.rosipov.com/blog/custom-templates-in-vimwiki/
 e# opens last buffer
 
 == Search and replace in visual selection ==
-:'<,'>s/%V
+  :'<,'>s/\%V
 
 == Open unnamed buffer (scratch) ==
 :ene

@@ -3,11 +3,11 @@
 {{{
 Private Sub Document_DocumentSaved(ByVal doc As IVDocument)
     FileName = Left(ActiveDocument.FullName, InStrRev(ActiveDocument.FullName, ".") - 1) & ".pdf"
-    ActiveDocument.ExportAsFixedFormat visFixedFormatPDF, FileName, visDocExIntentPrint, visPrintAll
+    ActiveDocument.ExportAsFixedFormat visFixedFormatPDF, FileName, visDocExIntentPrint, visPrintAll, IncludeStructureTags:=False
 End Sub
 
 Private Sub Document_DocumentSavedAs(ByVal doc As IVDocument)
     FileName = Left(doc.FullName, InStrRev(doc.FullName, ".") - 1) & ".pdf"
-    ActiveDocument.ExportAsFixedFormat visFixedFormatPDF, FileName, visDocExIntentPrint, visPrintAll
+    ActiveDocument.ExportAsFixedFormat visFixedFormatPDF, FileName, visDocExIntentPrint, visPrintAll, IncludeStructureTags:=False
 End Sub
 }}}

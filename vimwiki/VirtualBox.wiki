@@ -2,3 +2,10 @@
 1. enable icmp https://www.osradar.com/how-to-enable-and-disable-ping-icmp-in-windows-10-firewall/
 2. https://bln364.com/advanced-virtualbox-shared-folder/
 3. smb.conf that worked stored under ~/etc-files/smb.conf
+4. define hostname in /etc/hostname
+5. make sure avahi is running on the guest
+6. from windows open exporer
+   a) right click on Network (or This PC)and -> Map network drive ...
+   b) Enter _\\hostname.local\dstadelmann_
+   c) *Make sure to enter the user as .\dstadelmann* so that the domain isn't attached
+   d) enter the password
