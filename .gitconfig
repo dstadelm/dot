@@ -4,22 +4,23 @@
 [color]
   ui = always
   diff = always
+  status = always
 [color "diff"]
   meta = magenta
 [core]
 	editor = nvim
   PreloadIndex = true
-  pager = delta
-[interactive]
-  diffFilter = delta --color-only
-[delta]
-  features = side-by-side line-numbers decorations
-  whitespace-error-style = 22 reverse
-	side-by-side = false
-[delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-style = bold yellow ul
-  file-decoration-style = none
+#  pager = delta
+#[interactive]
+#  diffFilter = delta --color-only
+#[delta]
+#  features = side-by-side line-numbers decorations
+#  whitespace-error-style = 22 reverse
+#	side-by-side = true
+#[delta "decorations"]
+#  commit-decoration-style = bold yellow box ul
+#  file-style = bold yellow ul
+#  file-decoration-style = none
 [pull]
 	rebase = true
 [rebase]
@@ -40,6 +41,8 @@
   unpushed-tags = "!bash -c \"comm -23 <(git show-ref --tags | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort) <(git ls-remote --tags origin | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort)\""
   echo = "!bash -c \"comm -23 <(git show-ref --tags | awk '{print \\$2}' | sort) <(git ls-remote --tags origin | awk '{print \\$2}' | sort)\""
   fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf --reverse --border=rounded --height=50% | cut -c -7 | xargs -o git commit --fixup"
+  unpushed = log --branches --not --remotes --no-walk --decorate --oneline
+  head = "!git logk | head -n 40"
 [difftool.latex]
   cmd = git-latexdiff "$LOCAL" "$REMOTE"
 [difftool]
@@ -47,6 +50,8 @@
 [difftool "select"]
   cmd = difftool.sh "$LOCAL" "$REMOTE"
   keepBackup = false
+[diff]
+  colorMoved = default
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 0x0+0+0
@@ -115,3 +120,4 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+

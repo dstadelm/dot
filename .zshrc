@@ -8,6 +8,7 @@ export TERM=xterm-256color
 export EDITOR=nvim
 export XDG_CONFIG_HOME=${HOME}/.config
 export FZF_DEFAULT_COMMAND='fdfind'
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 unsetopt BEEP
 #
 
@@ -197,3 +198,17 @@ autoload -U edit-command-line
 # Vi style:
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+
+function root(){
+  $(git root)
+}
+# function nvim() {
+#   if test -z $NVIM_LISTEN_ADDRESS; then
+#     command nvim "$@"
+#   else
+#       nvr -s -l $argv
+#   fi
+# }
+# function vim() {
+#   nvim "$@"
+# }

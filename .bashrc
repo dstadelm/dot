@@ -47,3 +47,4 @@ export NCURSES_NO_UTF8_ACS=1
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
