@@ -13,6 +13,9 @@ nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+
+autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
+
 lua <<EOF
   -- nvim_lsb object
 
@@ -47,13 +50,17 @@ lua <<EOF
     }
   end
   lspconfig.vhdl_tool.setup{}
-  local servers = {'vimls', 'pylsp', 'clangd'}
+  local servers = {'vimls', 'clangd'}
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup{
     }
   end
-
-
+  lspconfig.pylsp.setup{
+    filetypes = {"python"},
+    settings = {
+      formatCommand = {"black"}
+      }
+  }
 
 EOF
 

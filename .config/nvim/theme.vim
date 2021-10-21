@@ -9,6 +9,7 @@ packadd neodark.vim
 packadd night-owl.vim
 "packadd onedark.nvim
 packadd lightline.vim
+
 packadd onedark.vim
 
 let g:neodark#background = '#1E2127'
@@ -17,7 +18,7 @@ let g:neodark#background = '#1E2127'
 set termguicolors
 let g:onedark_style='darker'
 " hint to keep lines short
-set colorcolumn=120
+"set colorcolumn=120
 set background=dark
 
 " settings for one dark (instead of one half dark)
@@ -25,6 +26,13 @@ let g:one_allow_italics = 1
 let g:onedark_terminal_italics = 1
 let g:lightline = {
   \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
   \}
 let g:onedark_color_overrides = {
   \  "background" : { "gui" : "#1e2127", "cterm" : 235, "cterm16" : 0 }

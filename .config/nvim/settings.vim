@@ -18,7 +18,7 @@ set incsearch                       " show search results as I type
 set nowrap                          " don't wrap lines by default
 set vb                              " enable visual bell (disable audio bell)
 set scrolloff=2                     " minimum lines above/below cursor
-" set cursorline                    " highlight current line very slow in putty
+set cursorline                      " highlight current line very slow in putty
 set nofoldenable                      " code folding
 set foldmethod=syntax
 set splitbelow splitright
