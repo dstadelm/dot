@@ -4,6 +4,8 @@
 3. smb.conf that worked stored under ~/etc-files/smb.conf
 4. define hostname in /etc/hostname
 5. make sure avahi is running on the guest
+  1. sudo apt install avahi-daemon
+  2. sudo systemctl start avahi-daemon
 6. from windows open exporer
    a) right click on Network (or This PC)and -> Map network drive ...
    b) Enter _\\hostname.local\dstadelmann_

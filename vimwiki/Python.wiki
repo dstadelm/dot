@@ -1,4 +1,9 @@
 == Python ==
+=== Tools ===
+pylint -> python-lsp-server should have this covered
+pylance -> microsoft made it so that it can only be used with vscode
+black -> make sure to use python-lsp-black and that yapf and autopep8 are not installed
+
 === Virtual Env ===
 1. create a virtual env with ``` pythonx.x -m venv pyenv ```
 2. enter env with ```source pyenv/bin/activate```
@@ -69,3 +74,29 @@ def visitor(arg_type):
 
     return decorator
 }}}
+
+=== Plugin Architectures ===
+* https://alysivji.github.io/simple-plugin-system.html
+* https://dev.to/charlesw001/plugin-architecture-in-python-jla
+
+=== Yaml ===
+[[YAML]]
+
+=== Python DATA CLASSES ===
+https://youtu.be/vRVVyl9uaZc
+
+=== Python Exception Handling ===
+https://youtu.be/ZsvftkbbrR0
+
+=== Cohesion and coupling ===
+https://youtu.be/eiDyK_ofPPM
+
+=== Strategy Pattern ===
+https://youtu.be/n2b_Cxh20Fw
+
+=== Code coverage ===
+https://youtu.be/jmP3fp_BhmE
+
+=== Code Smells ===
+https://youtu.be/LrtnLEkOwFE
+https://youtu.be/zmWf_cHyo8s

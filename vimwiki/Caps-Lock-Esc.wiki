@@ -1,0 +1,3 @@
+== Ubuntu ==
+sudo apt install gnome-tweaks
+gnome-tweaks: Keyboard & Mouse -> Additional Layout Options -> Caps Lock key behaviour

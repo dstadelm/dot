@@ -1,5 +1,5 @@
 - [ ] Meetings
 - [ ] Unforseen stuff (add 10%)
-- [ ] Upkeep of the project toolchain
+- [ ] Upkeep of the project toolchain (add 5%)
 - [ ] Tasks
 - [ ] Documentation

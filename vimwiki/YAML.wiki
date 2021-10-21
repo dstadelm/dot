@@ -1,0 +1,2 @@
+== Schemas ==
+https://developers.redhat.com/blog/2020/11/25/how-to-configure-yaml-schema-to-make-editing-files-easier

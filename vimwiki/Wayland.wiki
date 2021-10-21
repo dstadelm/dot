@@ -1,0 +1,3 @@
+== Docke and Wayland ==
+google sommelier
+https://unix.stackexchange.com/questions/330366/how-can-i-run-a-graphical-application-in-a-container-under-wayland
