@@ -1,0 +1,9 @@
+== Generator Tools ==
+MyGen https://m-labs.hk/migen/manual/index.html
+MyHdl
+
+== Testing Frameworks ==
+vunit
+
+== Style Guide Check ==
+https://github.com/jeremiah-c-leary/vhdl-style-guide

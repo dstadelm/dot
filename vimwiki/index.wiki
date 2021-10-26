@@ -1,5 +1,3 @@
-
-
 [[Ansibel]]
 [[AsciiDoctor]]
 [[Caps-Lock-Esc]]
@@ -10,6 +8,7 @@
 [[HyperV]]
 [[LaTeX]]
 [[Linux]]
+[[Patterns]]
 [[PDF]]
 [[ProjectDesign]]
 [[Python]]
@@ -22,6 +21,7 @@
 [[VIM]]
 [[VirtualBox]]
 [[Visio]]
+[[VHDL]]
 [[WSL2]]
 [[Wayland]]
 [[Windows]]

@@ -100,3 +100,8 @@ https://youtu.be/jmP3fp_BhmE
 === Code Smells ===
 https://youtu.be/LrtnLEkOwFE
 https://youtu.be/zmWf_cHyo8s
+
+== Overloading functions ==
+https://martinheinz.dev/blog/50
+* from multipledispatch import dispatch
+* from functools import singledispatchmethod
