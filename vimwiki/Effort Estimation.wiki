@@ -3,3 +3,6 @@
 - [ ] Upkeep of the project toolchain (add 5%)
 - [ ] Tasks
 - [ ] Documentation
+- [ ] Sales
+- [ ] Rabatt(5%)
+- [ ] Vorleistung (LaTeX)
