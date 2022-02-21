@@ -43,6 +43,7 @@
   fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf --reverse --border=rounded --height=50% | cut -c -7 | xargs -o git commit --fixup"
   unpushed = log --branches --not --remotes --no-walk --decorate --oneline
   head = "!git logk | head -n 40"
+  jira = "!BRANCH=$(git branch --show-current);echo ${BRANCH##*/} | xargs get_issue.py | glow"
 [difftool.latex]
   cmd = git-latexdiff "$LOCAL" "$REMOTE"
 [difftool]
