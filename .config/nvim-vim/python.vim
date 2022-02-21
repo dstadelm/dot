@@ -1,7 +1,7 @@
 call minpac#add('Yggdroot/indentLine', {'type': 'opt'})
 packadd indentLine
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_fileType = ['py']
+let g:indentLine_fileType = ['py', 'yaml']
 
 "call minpac#add('tell-k/vim-autopep8', {'type': 'opt'})
 "packadd vim-autopep8

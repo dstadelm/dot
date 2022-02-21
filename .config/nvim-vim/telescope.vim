@@ -1,5 +1,5 @@
-call minpac#add('nvim-lua/popup.nvim', {'type': 'opt'})
-call minpac#add('nvim-lua/plenary.nvim', {'type': 'opt'})
+call minpac#add('nvim-lua/popup.nvim'                     , {'type': 'opt'})
+call minpac#add('nvim-lua/plenary.nvim'                   , {'type': 'opt'})
 call minpac#add('nvim-telescope/telescope.nvim', {'type': 'opt'})
 call minpac#add('nvim-telescope/telescope-fzy-native.nvim', {'type': 'opt'})
 packadd popup.nvim

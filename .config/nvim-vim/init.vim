@@ -3,7 +3,6 @@
 " -----------
 " :so % 	reload .vimrc | .config/nvim/init.vim
 " :helptags ALL to generate documentation
-au FileType vim set foldenable
 
 function! s:source_local(relative_path)
   let full_path = stdpath('config') . '/' . a:relative_path
@@ -53,8 +52,11 @@ call s:source_local("latex.vim")
 call s:source_local("ctags.vim")
 call s:source_local("cheat.vim")
 call s:source_local("dap.vim")
+call s:source_local("testing.vim")
+call s:source_local("yaml.vim")
 
 highlight Comment cterm=italic gui=italic
+au FileType vim set foldenable
 "hi! link CurrentWordTwins Visual
 "hi! link CurrentWord Visual
 "hi Search cterm=NONE ctermbg=blue ctermfg=black

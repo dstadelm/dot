@@ -1,5 +1,4 @@
-call minpac#add('lervag/vimtex', {'type': 'opt'})
-packadd vimtex
+vim.cmd([[
 let g:vimtex_compiler_latexmk = {
         \ 'build_dir' : '',
         \ 'callback' : 1,
@@ -21,4 +20,5 @@ let g:vimtex_compiler_latexmk = {
 " let g:vimtex_view_general_options_latexmk = '--unique'
  let g:vimtex_view_general_viewer = 'okular'
  let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
- let g:vimtex_view_general_options_latexmk = '--unique'
+" let g:vimtex_view_general_options_latexmk = '--unique'
+]])

@@ -1,9 +1,9 @@
-call minpac#add('ayu-theme/ayu-vim', {'type': 'opt'})
+call minpac#add('ayu-theme/ayu-vim'        , {'type': 'opt'})
 call minpac#add('KeitaNakamura/neodark.vim',  {'type': 'opt'})
-call minpac#add('haishanh/night-owl.vim', {'type': 'opt'})
-call minpac#add('navarasu/onedark.nvim',  {'type': 'opt'})
-call minpac#add('itchyny/lightline.vim', {'type': 'opt'})
-call minpac#add('joshdick/onedark.vim',  {'type': 'opt'})
+call minpac#add('haishanh/night-owl.vim'   , {'type': 'opt'})
+call minpac#add('navarasu/onedark.nvim'    ,  {'type': 'opt'})
+call minpac#add('itchyny/lightline.vim'    , {'type': 'opt'})
+call minpac#add('joshdick/onedark.vim'     ,  {'type': 'opt'})
 packadd ayu-vim
 packadd neodark.vim
 packadd night-owl.vim

@@ -40,3 +40,6 @@ set undodir=~/.vimundo
 
 " enable embeded script highlighting for lua and python
 let g:vimsyn_embed = 'lP'
+let g:python3_host_prog = '/home/dstadelmann/regenor/.pyenv-nvim/bin/python'
+
+set shortmess+=c
