@@ -8,3 +8,4 @@
        tar -zxf ~/Downloads/ghdl-gha-ubuntu-20.04-mcode.tgz -C /usr/local/stow/ghdl
    }}}
 4. Install using stow `cd /usr/local/stow; stow -d ghdl`
+

@@ -3,6 +3,12 @@
 - [ ] Upkeep of the project toolchain (add 5%)
 - [ ] Tasks
 - [ ] Documentation
+- [ ]
+
+
+== WP10 specific ==
 - [ ] Sales
 - [ ] Rabatt(5%)
 - [ ] Vorleistung (LaTeX)
+- [ ] Scripting
+- [ ] Tooling adding review to Artifactory read from CI

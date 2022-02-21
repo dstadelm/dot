@@ -1,6 +1,10 @@
 == Plugins ==
-* [ ] targets.vim
-* [ ] far.vim
+* [✗] todos
+  - [✗] targets.vim
+  - [✗] far.vim
+  - [✗] nvim-git-fixer
+
+https://jdhao.github.io/2021/12/31/using_nvim_after_three_years/
 
 == Bookmarks ==
 [[https://oroques.dev/notes/neovim-init/|Neovim 0.5 features and the switch to init.lua]]
@@ -25,7 +29,6 @@ https://danidiaz.medium.com/useful-vim-key-bindings-for-command-and-insert-modes
 https://www.rosipov.com/blog/custom-templates-in-vimwiki/
 
 == ToDo ==
- - conceal
     - https://gist.github.com/huytd/668fc018b019fbc49fa1c09101363397
 
 == Close all but current buffer ==
@@ -38,3 +41,48 @@ e# opens last buffer
 
 == Open unnamed buffer (scratch) ==
 :ene
+
+== Increasing numbers ==
+1. Visual select region
+2. Ctrl-A
+       0 -> 1
+       0 -> 1
+       0 -> 1
+       0 -> 1
+1. Visual select region
+2. g Ctrl-A
+       0 -> 1
+       0 -> 2
+       0 -> 3
+       0 -> 4
+1. Visual select region
+2. 2g Ctrl-A
+       0 -> 2
+       0 -> 4
+       0 -> 6
+       0 -> 8
+
+
+== Vim Registers ==
+"<reg>p will print the content of the register to the buffer
+
+": the last command register
+"= the expression register
+
+== Visual selection ==
+o  -> switch corner of selection
+gv -> previous selection
+
+== Go to previous insert position ==
+g; -> go to previous insert position in normal mode
+gi -> go to previous insert position in insert mode
+
+== Lua Config ==
+Very good introduction: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
+
+== Packer ==
+1. packer.compile has to be executed, (:PackerCompile or :PackerSync)
+2. the "config = " in the sections for the plugins expects a function or string
+3. the "config = " does not get picked up if there are multiple plugins in one use = {} in that case you should use a "requires ="
+
+
