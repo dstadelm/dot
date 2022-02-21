@@ -21,13 +21,24 @@ unsetopt BEEP
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="bureau"
+#ZSH_THEME="amuse"
+ZSH_THEME="candy-kingdom"
+#ZSH_THEME="crcandy"
+#ZSH_THEME="emotty"
+#ZSH_THEME="fino"
+#ZSH_THEME="fino-time"
+#ZSH_THEME="gianu"
+#ZSH_THEME="half-life"
+#ZSH_THEME="itchy"
+#ZSH_THEME="jonathan"
+#ZSH_THEME="robbyrussell"
 #ZSH_THEME="powerline"
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="agnoster"
 #ZSH_THEME="alanpeabody"
 #ZSH_THEME="avit"
-#ZSH_THEME="gnzh"
+##ZSH_THEME="gnzh"
 #
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -212,3 +223,5 @@ function root(){
 # function vim() {
 #   nvim "$@"
 # }
+
+alias luamake=/home/dstadelmann/bin/lua-language-server/3rd/luamake/luamake
