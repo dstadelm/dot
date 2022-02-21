@@ -23,3 +23,4 @@ fi
 alias fkill="ps -ef | fzf | cut -f 2 -d ' ' | xargs kill -9"
 alias fd="fdfind"
 alias vu="python3.8 vunit/run.py"
+alias lic_use='/opt/mentor/questa/2019.2_2/questasim/linux_x86_64/lmstat -s $MGLS_LICENSE_FILE -S mgcld -A'
