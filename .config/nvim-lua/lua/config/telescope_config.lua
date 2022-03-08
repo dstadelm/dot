@@ -3,7 +3,8 @@ require('telescope').setup{
     layout_config = {
       prompt_position = "top"
       },
-    sorting_strategy = "ascending"
+    sorting_strategy = "ascending",
+    --path_display = "shorten",
   } ,
   pickers = {
     buffers = {

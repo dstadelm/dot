@@ -42,6 +42,10 @@ return require('packer').startup({function(use)
     config = get_config('lsp_config'),
   }
 
+  use { 'simrat39/symbols-outline.nvim' }
+
+  use { 'sindrets/diffview.nvim' }
+
   use {
     'hrsh7th/nvim-cmp',
     requires = {
@@ -87,7 +91,7 @@ return require('packer').startup({function(use)
 
   use {
     'beauwilliams/focus.nvim',
-    config = function() require("focus").setup() end
+    config = function() require("focus").setup({excluded_filetypes = {"DiffviewFiles"}}) end
   }
 
 
@@ -189,8 +193,8 @@ return require('packer').startup({function(use)
     config = get_config('indent')
   }
 
-  -- folding
-  --use { 'tmhedberg/SimpylFold', } -- TODO better folding (is there something with treesitter?)
+  -- folding: currently handled by treesitter see ./config/treesitter-cfg.lua
+  --use { 'tmhedberg/SimpylFold', }
   --use { 'pedrohdz/vim-yaml-folds' }
 
   -- All plugins I've tried so far make the cursor movement extremly laggy
@@ -225,8 +229,6 @@ return require('packer').startup({function(use)
       'nvim-lua/plenary.nvim'
     },
     config = get_config('gitsigns_config')
-      --'airblade/vim-gitgutter',
-      --  config = [[vim.g.updatetime=100]]
     }
 
   use { 'dbeniamine/cheat.sh-vim' }
@@ -243,53 +245,21 @@ return require('packer').startup({function(use)
   use { 'Julpikar/night-owl.nvim' }
   use { 'rafamadriz/neon' }
   use { 'Mofiqul/dracula.nvim' }
-  --use {
-  --  'ful1e5/onedark.nvim',
-  --  config = get_config('onedark_config'),
-  --}
-
-  --use {
-  --  'NTBBloodbath/doom-one.nvim',
-  --  config = function()
-  --    require('doom-one').setup {
-  --      cursor_coloring = false,
-  --      terminal_colors = false,
-  --      italic_comments = false,
-  --      enable_treesitter = true,
-  --      transparent_background = false,
-  --      pumblend = {
-  --        enable = true,
-  --        transparency_amount = 20,
-  --      },
-  --      plugins_integrations = {
-  --        neorg = true,
-  --        barbar = true,
-  --        bufferline = false,
-  --        gitgutter = false,
-  --        gitsigns = true,
-  --        telescope = false,
-  --        neogit = true,
-  --        nvim_tree = true,
-  --        dashboard = true,
-  --        startify = true,
-  --        whichkey = true,
-  --        indent_blankline = true,
-  --        vim_illuminate = true,
-  --        lspsaga = false,
-  --      },
-  --    }
-  --  end,
-  --}
+  use {
+    'marko-cerovac/material.nvim',
+    config = get_config('material_cfg')
+  }
 
   use {
     'navarasu/onedark.nvim',
-    config = function()-- Lua
+    config = function()
       require('onedark').setup {
         style = 'darker'
       }
       require('onedark').load()
     end
   }
+
   -- Lua
   use {
     "folke/trouble.nvim",
@@ -310,7 +280,7 @@ return require('packer').startup({function(use)
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'onedark',
+          theme = 'auto',
           component_separators = { left = '\\', right = '/'},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {},

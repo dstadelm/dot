@@ -97,8 +97,8 @@ snippet sig "signal <name> : <type> <:=initialization>"
 signal ${1} : ${2:std_logic} ${0::= '0'};
 endsnippet
 
-snippet pip "sig(sig'left downto sig'right+1) <= sig(sig'left-1 downto sig'right)"
-${1}($1'left downto $1'right+1) <= $1($1'left-1 downto $1'right);
+snippet pip "sig(sig'left-1 downto sig'right) <= sig(sig'left downto sig'right+1)"
+${1}($1'left-1 downto $1'right) <= $1($1'left downto $1'right+1);
 endsnippet
 
 snippet tb "testbench snippet"
@@ -239,7 +239,7 @@ snippet axim_read "VUnit AXI memory read slave"
     aclk => clk,
 
     arvalid => ${3:o_axi4_m2s}.arvalid,
-    arready => ${4:i_axi4_s2m}.arready, 
+    arready => ${4:i_axi4_s2m}.arready,
     arid    => $3.arid,
     araddr  => $3.araddr,
     arlen   => $3.arlen,

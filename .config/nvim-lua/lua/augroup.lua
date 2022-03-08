@@ -18,4 +18,9 @@ augroup highlight_yank
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
 augroup END
 
+augroup MyCommentary
+  autocmd!
+  autocmd FileType vhdl setlocal commentstring=--\ %s
+augroup END
+
 ]])

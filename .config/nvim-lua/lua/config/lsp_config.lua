@@ -86,7 +86,14 @@ if not configs.rust_hdl then
     };
   }
 end
-lspconfig.rust_hdl.setup{ on_attach = on_attach}
+
+lspconfig.rust_hdl.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 500,
+  }
+}
 
 
 local servers = {'vimls', 'clangd'}
@@ -133,11 +140,13 @@ require'lspconfig'.sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'}
+        globals = {'vim', 'describe', 'it', 'before_each', 'after_each'},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
       }
     }
   }
