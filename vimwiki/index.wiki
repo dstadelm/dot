@@ -3,6 +3,7 @@
 [[Caps-Lock-Esc]]
 [[Diagrams]]
 [[Effort Estimation]]
+[[Getting Things Done]]
 [[GHDL]]
 [[GIT]]
 [[HyperV]]
