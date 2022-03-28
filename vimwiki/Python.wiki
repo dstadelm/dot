@@ -3,6 +3,9 @@
 pylint -> python-lsp-server should have this covered
 pylance -> microsoft made it so that it can only be used with vscode
 black -> make sure to use python-lsp-black and that yapf and autopep8 are not installed
+pyflyby -> allows autoimport pip3 install pyflyby
+pylsp-rope -> enables code actions through lsp
+pyls-mypy
 
 === Virtual Env ===
 1. create a virtual env with ``` pythonx.x -m venv pyenv ```

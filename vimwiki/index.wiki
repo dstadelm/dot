@@ -19,6 +19,7 @@
 [[Sphinx]]
 [[TMUX]]
 [[TODO]]
+[[Ubuntu]]
 [[VIM]]
 [[VirtualBox]]
 [[Visio]]

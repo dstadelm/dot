@@ -1,0 +1,2 @@
+Set keyboard repeat rate
+Settings -> Universal Access -> Repeate Keys
