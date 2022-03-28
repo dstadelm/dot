@@ -1,5 +1,3 @@
-vim.cmd(" autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()")
-
 USER = vim.fn.expand('$USER')
 local sumneko_root_path = "/home/" .. USER .. "/bin/lua-language-server"
 local sumneko_binary = "/home/" .. USER .. "/bin/lua-language-server/bin/lua-language-server"
@@ -39,6 +37,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'x', '<space>ca','<Esc><Cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
 end
 vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(
@@ -110,19 +109,49 @@ lspconfig.yamlls.setup{
   settings = {
     yaml = {
       schemas = {
-        ["/home/dstadelmann/regenor-yaml/tmp.schema.json"] = "/home/dstadelmann/regenor-yaml/*"
+        ["/home/dstadelmann/regenor-yaml/newer.schema.json"] = "/home/dstadelmann/regenor-yaml/*"
       },
-      customTags = {"!include scalar"},
+      customTags =  {'!include'} ,
     },
   }
 }
 
+-- pylint -> python-lsp-server should have this covered
+-- black -> make sure to use python-lsp-black and that yapf and autopep8 are not installed
+-- pyflyby -> allows autoimport pip3 install pyflyby
+-- pylsp-rope -> enables code actions through lsp
+-- pyls-mypy -> for diagnostics on typing
+--
 lspconfig.pylsp.setup{
   on_attach = on_attach,
+  -- root_dir = function(fname)
+  --   local root_files = {
+  --     'pyproject.toml',
+  --     'setup.py',
+  --     'setup.cfg',
+  --     'requirements.txt',
+  --     'Pipfile',
+  --   }
+  --   local util = require'lspconfig.util'
+  --   return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+  -- end,
   capabilities = capabilities,
-  filetypes = {"python"},
   settings = {
-    formatCommand = {"black"}
+    formatCommand = {"black"},
+    pylsp = {
+      plugins = {
+        pyls_flake8 = { enabled = false },
+        pylint = { enabled = true,
+                   args = { '--rcfile','~/zf/zf_radar_front_end/pyproject.toml' }
+        },
+        black = { enabled = true },
+        isort = { enabled = true },
+        pyls_mypy = {
+          enabled = true,
+          --live_mode = true,
+        },
+      },
+    }
   }
 }
 

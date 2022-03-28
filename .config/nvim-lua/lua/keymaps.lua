@@ -22,6 +22,9 @@ nnoremap("<leader>p", ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>')
 nnoremap("<leader>w", ':%s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace in current file
 nnoremap("<leader>w", ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace for each file in repo
 
+nnoremap("<leader>d", ':FocusToggle<CR>:Gdiffsplit<CR>')
+nnoremap("<leader>f", ':FocusToggle<CR>')
+
 nnoremap("<leader>b", ":lua require'telescope.builtin'.buffers()<CR>")
 nnoremap("<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>")
 nnoremap("<leader>fu", ":lua require'telescope.builtin'.current_buffer_fuzzy_find()<CR>")
@@ -56,8 +59,8 @@ nnoremap("N", "Nzzzv")
 -- imap("{", "{<C-g>u")
 
 -- add mapping to be able to move around lines
-inoremap("<C-j>", "<esc>:m .+1<CR>==")
-inoremap("<C-k>", "<esc>:m .-2<CR>==")
+inoremap("<C-k>", "<esc>:m .-2<CR>==i")
+inoremap("<C-j>", "<esc>:m .+1<CR>==i")
 nnoremap("<leader>j", ":m .+1<CR>==")
 nnoremap("<leader>k", ":m .-2<CR>==")
 
@@ -78,5 +81,5 @@ vim.cmd("cabbrev Wq wq")
 --vim.cmd("Repeatable nnoremap <leader>dp :diffput<CR>")
 
 tnoremap(",,", "<C-\\><C-N>", {silent = false})
-nnoremap(";;", ":FloatermToggle<CR>")
-tnoremap(";;", "<C-\\><C-N>:FloatermToggle<CR>")
+nnoremap("<F1>", ":FloatermToggle<CR>")
+tnoremap("<F1>", "<C-\\><C-N>:FloatermToggle<CR>")

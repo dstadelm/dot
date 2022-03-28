@@ -41,6 +41,10 @@ return require('packer').startup({function(use)
     },
     config = get_config('lsp_config'),
   }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = get_config('null-ls_config'),
+  }
 
   use { 'simrat39/symbols-outline.nvim' }
 
@@ -84,10 +88,11 @@ return require('packer').startup({function(use)
     requires = {
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzy-native.nvim',
     },
     config = get_config('telescope_config'),
   }
+
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   use {
     'beauwilliams/focus.nvim',
@@ -116,7 +121,10 @@ return require('packer').startup({function(use)
 
   use {
     'voldikss/vim-floaterm',
-    config = [[vim.g.floaterm_gitcommit = 'vsplit']],
+    config = [[
+    vim.g.floaterm_gitcommit = 'vsplit'
+    vim.g.floaterm_wintype = 'split'
+    ]],
   }
 
   use {
@@ -176,7 +184,10 @@ return require('packer').startup({function(use)
 
   use { 'fadein/vim-FIGlet' }
 
-  use { 'mhinz/vim-startify' }
+  use {
+    'mhinz/vim-startify',
+    config = get_config('startify'),
+  }
 
   use {
     'dstadelm/simple-vhdl.vim',
@@ -249,14 +260,18 @@ return require('packer').startup({function(use)
     'marko-cerovac/material.nvim',
     config = get_config('material_cfg')
   }
-
+  use {
+    'olimorris/onedarkpro.nvim',
+    config = get_config('onedarkpro_cfg')
+  }
   use {
     'navarasu/onedark.nvim',
     config = function()
       require('onedark').setup {
-        style = 'darker'
+        style = 'darker',
+        term_colors = 'false'
       }
-      require('onedark').load()
+      --require('onedark').load()
     end
   }
 
@@ -308,6 +323,10 @@ return require('packer').startup({function(use)
     end
   }
 
+  use {
+      'glacambre/firenvim',
+      run = function() vim.fn['firenvim#install'](0) end
+  }
 
   -- has to be after the themes
   use {
