@@ -1,0 +1,219 @@
+@document.meta
+title: arch linux installation
+description: Describes the installation of arch linux with btrfs luks and swapfile for hibernation on the thinkpad-p14s
+authors: dstadelmann
+categories:
+created: 2022-04-11
+version: 0.0.1
+@end
+
+= ToC Table of Contents
+
+
+* Instalation setup
+
+** Partitioning
+   - create a EFI System partition 512M /dev/nvme0n1p1
+   - create a root partition for the rest 999G /dev/nvme0n1p2
+* Encryption
+** create a luks1 encrypted partition
+   @code
+       cryptsetup luksFormat --type luks1 /dev/nvme0n1p2
+   @end
+** open the encrypted partition
+   @code
+       cryptsetup open /dev/nvme0n1p2 root
+   @end
+** create file system
+   @code
+       mkfs.btrfs -L btrfs_root /dev/mapper/root
+   @end
+** mount mapped fs
+   @code
+       mount /dev/mapper/root mnt
+   @end
+* create and mount subvolumes
+  @code
+       cd /mnt
+       btrfs subvolume create @
+       btrfs subvolume create @home
+       btrfs subvolume create @var_tmp
+       btrfs subvolume create @var_log
+       btrfs subvolume create @var_abs
+       btrfs subvolume create @var_pkg
+       btrfs subvolume create @srv
+       btrfs subvolume create @swap
+       btrfs subvolume create @snapshots
+  @end
+** umount mapped fs
+   @code
+       umount /mnt
+   @end
+** mount subvolumes
+   @code
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@          /mnt
+
+       mkdir -p /mnt/home
+       mkdir -p /mnt/var/tmp
+       mkdir -p /mnt/var/log
+       mkdir -p /mnt/var/abs
+       mkdir -p /mnt/var/cache/pacman/pkg
+       mkdir -p /srv
+       mkdir -p /.snapshots
+       mkdir -p /efi
+
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@home      /mnt/home
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_tmp   /mnt/var/tmp
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_log   /mnt/var/log
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_abs   /mnt/var/abs
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_pkg   /mnt/var/cache/pacman/pkg
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@srv       /srv
+       mount -o compress=no,autodefrag,subvolume=@swap                /swap
+       mount -o compress-force=zstd:1,autodefrag,subvolume=@snapshots /.snapshots
+       mount /dev/nvme0n1p1 /mnt/efi
+   @end
+* Finalize base installation
+** pacstrap
+   @code
+       pacstrap /mnt base linux linux-firmware amd-ucode btrfs-progs vim networkmanager grub grub-btrfs
+   @end
+** create fstab
+   @code
+       genfstab -U /mnt >> /mnt/etc/fstab
+   @end
+** chroot to system
+   @code
+       arch-chroot /mnt
+   @end
+** setup timezone
+   @code
+     ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+     hwclock --systohc
+   @end
+** pick locales in /etc/locale.gen then run
+   @code
+     locale-gen
+   @end
+** set lang
+   @code
+     echo LANG=en_US.UTF-8 >> /etc/locale.conf
+   @end
+** set hostname
+   @code
+     echo "thinkpad-p14s" >> /etc/hostname
+   @end
+** create keyfile
+   @code
+     dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
+     chmod 600 /crypto_keyfile.bin
+     chmod 600 /boot/initramfs-linux*
+     exit
+     cryptsetup luksAdd /dev/nvme0n1p2 /mnt/crypto_keyfile.bin
+   @end
+** configure mkinitcpio
+   @code
+     MODULES=(amdgpu nvme ushid xhci_hcd vmd)
+     BINARIES=(btrfs)
+     FILES=(/crypto_keyfile.bin)
+     HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt filesystems keyboard resume fsck)
+   @end
+
+** configure grub
+*** find the blkid of the root device
+    @code
+     blkid
+    @end
+    find /dev/nvme0n1p2 and copy the uuid
+
+*** setup grub cmdline linux /etc/default/grub
+    @code
+      GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet cryptdevice=UUID=<the uuid>:root crypto=::::"
+      GRUB_ENABLE_CRYPTODISK=y
+    @end
+*** install grub
+    @code
+    grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+    grub-mkconfig -o /boot/grub/grub.cfg
+    @end
+
+** set root passwd
+   @code
+       passwd
+   @end
+
+** reboot
+   @code
+       exit
+       umount -R /mnt
+       cryptsetup close root
+       reboot
+   @end
+
+** create regular user
+   @code
+       useradd -m -G wheel dstadelm
+   @end
+   for some unknown reason no home was created with the mkhomedir_helper
+   @code
+       mkhomedir_helper dstadelm
+   @end
+
+* Create a swapfile for hibernation
+  following this guide https://confluence.jaytaala.com/display/TKB/Use+a+swap+file+and+enable+hibernation+on+Arch+Linux+-+including+on+a+LUKS+root+partition
+** check no swap is on
+      @code
+           sudo swapon -s
+           sudo swapoff -a
+      @end
+** create a swap file
+  @code
+       truncate -s 0 /swap/swapfile
+       chattr +C /swap/swapfile
+       btrfs property set /swap/swapfile compression none
+       dd if=/dev/zero of=/swap/swapfile bs=1M count=16384
+       mkswap /swap/swapfile
+       chmod 600 /swap/swapfile
+       swapon /swap/swapfile
+  @end
+** add entry in /etc/fstab
+  @code
+       cp /etc/fstab /etc/fstab.backup
+       echo '/swap/swapfile none swap defaults 0 0' >> /etc/fstab
+  @end
+** check mount works
+  @code
+       mount -a
+  @end
+** reboot
+** enable hibernation
+   @code
+     sudo pacman -S hibernator
+     sudo hibernator
+   @end
+
+* modify grub to use swapfile
+** find blkid
+   @code
+     blkid
+   @end
+   it should be /dev/mapper/root
+** calculate offset (according to https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate)
+   - download file btrfs_map_physical.c from https://github.com/osandov/osandov-linux/blob/master/scripts/btrfs_map_physical.c
+   - compile it
+   @code
+       gcc -O2 -o btrfs_map_physical btrfs_map_physical.c
+   @end
+   - run it
+   @code
+       sudo ./btrfs_map_physical /swapfile
+   @end
+   - extrat "PHYSICAL OFFSET" from first line and devide with the value from
+   @code
+       getconfg PAGESIZE
+   @end
+   usually 4096
+** update /etc/default/grub
+   create entry
+   @code
+       GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=.... resume=/dev/mapper/root resume_offset=<calculated_value_from_above>"
+   @end
