@@ -1,0 +1,9 @@
+duckduckgo (Yahoo based)
+startpage.com (based on google)
+qwant (based on bing)
+WolframAlpha
+SwissCows
+MetaGer
+Mojeek
+Gibiru
+YaCy (decentralized search engine has to be download)

@@ -88,4 +88,8 @@ Very good introduction: https://vonheikemen.github.io/devlog/tools/configuring-n
 2. the "config = " in the sections for the plugins expects a function or string
 3. the "config = " does not get picked up if there are multiple plugins in one use = {} in that case you should use a "requires ="
 
+== Highlight Groups ==
+outputting all highlight groups
+:so $VIMRUNTIME/syntax/hitest.vim
 
+https://www.nerdfonts.com/cheat-sheet
