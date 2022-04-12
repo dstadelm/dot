@@ -24,7 +24,7 @@ return require('packer').startup({function(use)
     {'tpope/vim-eunuch'},
     {'tpope/vim-vinegar'},
   }
-  --
+
   use {
     'neomake/neomake',
     config = get_config('neomake'),
@@ -32,7 +32,6 @@ return require('packer').startup({function(use)
 
   use { 'mbbill/undotree' }
 
-  --
   use {
     'neovim/nvim-lspconfig',
     requires = {
@@ -41,10 +40,17 @@ return require('packer').startup({function(use)
     },
     config = get_config('lsp_config'),
   }
+
+  use {
+      'williamboman/nvim-lsp-installer',
+  }
+
   use {
     'jose-elias-alvarez/null-ls.nvim',
     config = get_config('null-ls_config'),
   }
+
+  use { 'caenrique/nvim-maximize-window-toggle' }
 
   use { 'simrat39/symbols-outline.nvim' }
 
@@ -71,7 +77,7 @@ return require('packer').startup({function(use)
 
     config = get_config('completion'),
   }
-  --
+
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
@@ -114,6 +120,22 @@ return require('packer').startup({function(use)
   }
 
   use {
+    'mfussenegger/nvim-dap',
+    config = get_config('dap_config')
+
+  }
+  use {
+    'mfussenegger/nvim-dap-python',
+    requires = {"mfussenegger/nvim-dap"},
+    config = get_config('dap_python_config')
+  }
+  use {
+    "rcarriga/nvim-dap-ui",
+    requires = {"mfussenegger/nvim-dap"},
+    config = get_config('dap_ui_config')
+  }
+
+  use {
     'junegunn/fzf',
     requires = {'junegunn/fzf.vim',},
     config = get_config('fzf'),
@@ -146,23 +168,7 @@ return require('packer').startup({function(use)
 
   use {
     "nvim-neorg/neorg",
-    config = function()
-      require('neorg').setup {
-        load = {
-          ["core.defaults"] = {},
-          ["core.norg.dirman"] = {
-            config = {
-              workspaces = {
-                work = "~/notes/work",
-                home = "~/notes/home",
-              }
-            }
-          },
-          ["core.norg.concealer"] = {},
-          ["core.norg.qol.toc"] = { config = {default_split_mode = "split"}}
-        }
-      }
-    end,
+    config = get_config("neorg_config"),
     requires = "nvim-lua/plenary.nvim"
   }
 
@@ -174,11 +180,6 @@ return require('packer').startup({function(use)
 
   use { 'rhysd/vim-grammarous' }
 
-  -- replaced by augroup cmd
-  -- use {
-  --   'machakann/vim-highlightedyank',
-  --   config = [[vim.g.highlightedyank_highlight_duration = 1000]],
-  -- }
   -- scrolling
   use { 'yuttie/comfortable-motion.vim' }
 
@@ -203,17 +204,6 @@ return require('packer').startup({function(use)
     'lukas-reineke/indent-blankline.nvim',
     config = get_config('indent')
   }
-
-  -- folding: currently handled by treesitter see ./config/treesitter-cfg.lua
-  --use { 'tmhedberg/SimpylFold', }
-  --use { 'pedrohdz/vim-yaml-folds' }
-
-  -- All plugins I've tried so far make the cursor movement extremly laggy
-  -- highlight the words under the cursor
-  --  use {
-  --    'RRethy/vim-illuminate',
-  --    config = get_config('illuminate'),
-  --  }
 
   use { 'tommcdo/vim-exchange' }
 
@@ -280,11 +270,7 @@ return require('packer').startup({function(use)
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require("trouble").setup{}
     end
   }
 
@@ -295,7 +281,7 @@ return require('packer').startup({function(use)
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'auto',
+          theme = 'onedarkpro',
           component_separators = { left = '\\', right = '/'},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {},
@@ -321,11 +307,6 @@ return require('packer').startup({function(use)
         extensions = {}
       }
     end
-  }
-
-  use {
-      'glacambre/firenvim',
-      run = function() vim.fn['firenvim#install'](0) end
   }
 
   -- has to be after the themes

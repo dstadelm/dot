@@ -95,7 +95,7 @@ lspconfig.rust_hdl.setup{
 }
 
 
-local servers = {'vimls', 'clangd'}
+local servers = {'vimls', 'clangd', 'lemminx'}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup{
     on_attach = on_attach,
@@ -116,43 +116,9 @@ lspconfig.yamlls.setup{
   }
 }
 
--- pylint -> python-lsp-server should have this covered
--- black -> make sure to use python-lsp-black and that yapf and autopep8 are not installed
--- pyflyby -> allows autoimport pip3 install pyflyby
--- pylsp-rope -> enables code actions through lsp
--- pyls-mypy -> for diagnostics on typing
---
-lspconfig.pylsp.setup{
+require'lspconfig'.pyright.setup{
   on_attach = on_attach,
-  -- root_dir = function(fname)
-  --   local root_files = {
-  --     'pyproject.toml',
-  --     'setup.py',
-  --     'setup.cfg',
-  --     'requirements.txt',
-  --     'Pipfile',
-  --   }
-  --   local util = require'lspconfig.util'
-  --   return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-  -- end,
   capabilities = capabilities,
-  settings = {
-    formatCommand = {"black"},
-    pylsp = {
-      plugins = {
-        pyls_flake8 = { enabled = false },
-        pylint = { enabled = true,
-                   args = { '--rcfile','~/zf/zf_radar_front_end/pyproject.toml' }
-        },
-        black = { enabled = true },
-        isort = { enabled = true },
-        pyls_mypy = {
-          enabled = true,
-          --live_mode = true,
-        },
-      },
-    }
-  }
 }
 
 require'lspconfig'.sumneko_lua.setup {

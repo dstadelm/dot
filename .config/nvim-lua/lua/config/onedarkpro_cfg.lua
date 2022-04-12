@@ -13,12 +13,25 @@ onedarkpro.setup({
       bg = "#1e2127"
     }
   }, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
-  -- hlgroups = {}, -- Override default highlight groups
+  hlgroups = {
+           DiagnosticVirtualTextError = { fg = "#8b3434", bg = "#2a252b", style = "italic" },
+           DiagnosticVirtualTextWarn = { fg = "#835d1a", bg = "#292928", style = "italic" },
+           DiagnosticVirtualTextInfo = { fg = "#48b0bd", bg = "#25252b",  style = "italic" },
+           DiagnosticVirtualTextHint = { fg = "#7e3992", bg = "#292534", style = "italic" },
+           -- lualine_b_inactive = { fg="#888888" },
+           -- lualine_c_inactive = { fg="#888888" },
+           -- VertSplit = {fg="#FFF"},
+           -- NonText = {fg="#FFF"},
+           -- FloatBorder = {fg="#FFF"}
+
+  },
+  -- }, -- Override default highlight groups
   -- filetype_hlgroups = {}, -- Override default highlight groups for specific filetypes
   -- plugins = { -- Override which plugins highlight groups are loaded
   --     native_lsp = true,
   --     polygot = true,
   --     treesitter = true,
+  --     nvim_dap_ui = false,
   --     -- NOTE: Other plugins have been omitted for brevity
   -- },
   styles = {
@@ -35,8 +48,8 @@ onedarkpro.setup({
       undercurl = false, -- Use the themes opinionated undercurl styles?
       cursorline = true, -- Use cursorline highlighting?
       transparency = false, -- Use a transparent background?
-      terminal_colors = false, -- Use the theme's colors for Neovim's :terminal?
-      window_unfocussed_color = true, -- When the window is out of focus, change the normal background?
+      terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
+      window_unfocussed_color = false, -- When the window is out of focus, change the normal background?
   }
 })
 onedarkpro.load()

@@ -26,9 +26,10 @@ parser_config.vhdl = {
 }
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
+  ensure_installed = "maintained",
   highlight = {
       enable = true,
+      disable = { "help" }
   },
   incremental_selection = {
     enable = true,
@@ -38,8 +39,12 @@ require'nvim-treesitter.configs'.setup {
       scope_incremental = "<leader>gs",
       node_decremental = "<leader>gd",
     },
+    disable = { "help" }
   },
-  indent = {enable = true, disable = {"yaml"}},
+  indent = {
+    enable = true,
+    disable = {"yaml", "help"}
+  },
 
 }
 

@@ -24,6 +24,7 @@ nnoremap("<leader>w", ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr
 
 nnoremap("<leader>d", ':FocusToggle<CR>:Gdiffsplit<CR>')
 nnoremap("<leader>f", ':FocusToggle<CR>')
+nnoremap("<leader>z", ':ToggleOnly<CR>')
 
 nnoremap("<leader>b", ":lua require'telescope.builtin'.buffers()<CR>")
 nnoremap("<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>")
@@ -83,3 +84,18 @@ vim.cmd("cabbrev Wq wq")
 tnoremap(",,", "<C-\\><C-N>", {silent = false})
 nnoremap("<F1>", ":FloatermToggle<CR>")
 tnoremap("<F1>", "<C-\\><C-N>:FloatermToggle<CR>")
+vim.cmd[[
+if has('balloon_eval')
+    nnoremap <F12>           : setl beval!<CR>
+    set bexpr=InspectSynHL()
+endif
+fun! InspectSynHL()
+    let l:synNames = []
+    let l:idx = 0
+    for id in synstack(v:beval_lnum, v:beval_col)
+        call add(l:synNames, printf('%s%s', repeat(' ', idx), synIDattr(id, 'name')))
+        let l:idx+=1
+    endfor
+    return join(l:synNames, "\n")
+endfun
+]]
