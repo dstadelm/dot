@@ -93,3 +93,6 @@ outputting all highlight groups
 :so $VIMRUNTIME/syntax/hitest.vim
 
 https://www.nerdfonts.com/cheat-sheet
+
+== Center Text ==
+:'<,'>center 80
