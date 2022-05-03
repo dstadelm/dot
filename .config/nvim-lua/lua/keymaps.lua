@@ -28,7 +28,7 @@ nnoremap("<leader>z", ':ToggleOnly<CR>')
 
 nnoremap("<leader>b", ":lua require'telescope.builtin'.buffers()<CR>")
 nnoremap("<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>")
-nnoremap("<leader>fu", ":lua require'telescope.builtin'.current_buffer_fuzzy_find()<CR>")
+nnoremap("<leader>fl", ":lua require'telescope.builtin'.current_buffer_fuzzy_find()<CR>")
 nnoremap("<leader>fg", ":lua require'telescope.builtin'.live_grep()<CR>")
 nnoremap("<leader>fh", ":lua require'telescope.builtin'.help_tags()<CR>")
 nnoremap("<leader>fr", ":lua require'telescope.builtin'.lsp_references()<CR>")
@@ -40,8 +40,6 @@ tmap("<C-W>l", "<C-\\><C-N><C-W>l")
 tmap("<C-W>j", "<C-\\><C-N><C-W>j")
 tmap("<C-W>k", "<C-\\><C-N><C-W>k")
 
--- Make Y behave as expected
-nnoremap("Y", "yg_")
 
 -- Keep cursor at the position it is when concatenating lines
 -- nnoremap("J", "mzJ'z")

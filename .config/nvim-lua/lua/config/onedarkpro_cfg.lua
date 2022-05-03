@@ -1,4 +1,12 @@
 local onedarkpro = require("onedarkpro")
+-- blabl
+
+-- sdf = asdf
+
+-- sdf: aAsdf = ;;
+
+-- asdf == asdfasdf
+
 onedarkpro.setup({
   -- Theme can be overwritten with 'onedark' or 'onelight' as a string
   theme = function()
@@ -18,12 +26,6 @@ onedarkpro.setup({
            DiagnosticVirtualTextWarn = { fg = "#835d1a", bg = "#292928", style = "italic" },
            DiagnosticVirtualTextInfo = { fg = "#48b0bd", bg = "#25252b",  style = "italic" },
            DiagnosticVirtualTextHint = { fg = "#7e3992", bg = "#292534", style = "italic" },
-           -- lualine_b_inactive = { fg="#888888" },
-           -- lualine_c_inactive = { fg="#888888" },
-           -- VertSplit = {fg="#FFF"},
-           -- NonText = {fg="#FFF"},
-           -- FloatBorder = {fg="#FFF"}
-
   },
   -- }, -- Override default highlight groups
   -- filetype_hlgroups = {}, -- Override default highlight groups for specific filetypes
@@ -49,7 +51,7 @@ onedarkpro.setup({
       cursorline = true, -- Use cursorline highlighting?
       transparency = false, -- Use a transparent background?
       terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
-      window_unfocussed_color = false, -- When the window is out of focus, change the normal background?
+      window_unfocussed_color = true, -- When the window is out of focus, change the normal background?
   }
 })
 onedarkpro.load()

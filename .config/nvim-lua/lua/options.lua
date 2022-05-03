@@ -27,6 +27,7 @@ vim.o.clipboard = vim.o.clipboard .. 'unnamedplus,unnamed'-- unamedplus -> ctrl-
 vim.o.mouse = 'a'
 vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical'
 vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.redrawtime = 10000
 
 vim.o.undofile = true
 vim.cmd([[

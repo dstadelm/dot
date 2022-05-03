@@ -39,6 +39,13 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'x', '<space>ca','<Esc><Cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
 end
+
+local pylsp_onattach = function(client, bufnr)
+  on_attach(client, bufnr)
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+end
+
 vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(
   vim.lsp.handlers.hover,
@@ -81,17 +88,18 @@ if not configs.rust_hdl then
         -- return lspconfig.util.root_pattern('vhdl_ls.toml')(fname)
       end;
       autostart = true,
-      settings = {};
-    };
+      settings = {},
+      flags = {
+        allow_incremental_sync = true,
+        debounce_text_changes = 5000,
+      },
+    },
   }
 end
 
 lspconfig.rust_hdl.setup{
   on_attach = on_attach,
   capabilities = capabilities,
-  flags = {
-    debounce_text_changes = 500,
-  }
 }
 
 
@@ -121,6 +129,23 @@ require'lspconfig'.pyright.setup{
   capabilities = capabilities,
 }
 
+-- require'lspconfig'.pylsp.setup{
+--   on_attach = pylsp_onattach,
+--   -- on_attach = on_attach,
+--   capabilities = capabilities,
+--   settings = {
+--     pylsp = {
+--       plugins = {
+--         pyls_flake8 = {enabled = false},
+--         pylint = { enabled = false,
+--           args = {'--rcfile', '~/zf/zf_radar_front_end/pyproject.toml' }
+--         },
+--         isort = {enabled = false},
+--         pyls_mypy = {enabled = false}
+--       }
+--     }
+--   }
+-- }
 require'lspconfig'.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -202,4 +227,4 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 -- recommended:
-require'lsp_signature'.setup(cfg) -- no need to specify bufnr if you don't use toggle_key
+require'lsp_signature'.setup() -- no need to specify bufnr if you don't use toggle_key

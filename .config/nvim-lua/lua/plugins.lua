@@ -58,6 +58,7 @@ return require('packer').startup({function(use)
 
   use {
     'hrsh7th/nvim-cmp',
+    --commit = 'dbc72290295cfc63075dab9ea635260d2b72f2e5',
     requires = {
       {
         'SirVer/ultisnips',
@@ -73,6 +74,7 @@ return require('packer').startup({function(use)
       'hrsh7th/cmp-cmdline',
       'quangnguyen30192/cmp-nvim-ultisnips',
       'onsails/lspkind-nvim',
+      --'hrsh7th/cmp-nvim-lsp-signature-help',
     },
 
     config = get_config('completion'),
@@ -87,6 +89,13 @@ return require('packer').startup({function(use)
     },
     run = ':TSUpdate',
     config = get_config('treesitter-cfg'),
+  }
+
+  use {
+    'mizlan/iswap.nvim',
+    requires = {
+      'nvim-treesitter/nvim-treesitter'
+    }
   }
 
   use {
@@ -151,8 +160,12 @@ return require('packer').startup({function(use)
 
   use {
     'airblade/vim-rooter',
-    config = [[ vim.g.rooter_manual_only = 1 ]],
+    config = [[
+      vim.g.rooter_patterns = { '.git' }
+    ]]
   }
+
+  use { 'mg979/vim-visual-multi' }
 
   use {
     'junegunn/vim-easy-align',
@@ -169,7 +182,11 @@ return require('packer').startup({function(use)
   use {
     "nvim-neorg/neorg",
     config = get_config("neorg_config"),
-    requires = "nvim-lua/plenary.nvim"
+    requires = {
+    'nvim-lua/plenary.nvim',
+    'folke/zen-mode.nvim',
+    }
+
   }
 
   use {
@@ -240,7 +257,6 @@ return require('packer').startup({function(use)
       'vim-test/vim-test'
     }
   }
-
   -- Themes
   use { 'Shatur/neovim-ayu' }
   use { 'Julpikar/night-owl.nvim' }
@@ -253,6 +269,10 @@ return require('packer').startup({function(use)
   use {
     'olimorris/onedarkpro.nvim',
     config = get_config('onedarkpro_cfg')
+  }
+  use {
+    'Mofiqul/vscode.nvim',
+    config = get_config('vscode_cfg')
   }
   use {
     'navarasu/onedark.nvim',
@@ -281,7 +301,7 @@ return require('packer').startup({function(use)
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'onedarkpro',
+          theme = 'auto',
           component_separators = { left = '\\', right = '/'},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {},

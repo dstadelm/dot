@@ -158,6 +158,11 @@ _G.packer_plugins = {
     path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["iswap.nvim"] = {
+    loaded = true,
+    path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/iswap.nvim",
+    url = "https://github.com/mizlan/iswap.nvim"
+  },
   ["lsp_signature.nvim"] = {
     loaded = true,
     path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
@@ -174,7 +179,7 @@ _G.packer_plugins = {
     url = "https://github.com/glepnir/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
-    config = { "\27LJ\2\n�\4\0\0\5\0\31\0/6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\t\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0034\4\0\0=\4\b\3=\3\n\0025\3\f\0005\4\v\0=\4\r\0035\4\14\0=\4\15\0035\4\16\0=\4\17\0035\4\18\0=\4\19\0035\4\20\0=\4\21\0035\4\22\0=\4\23\3=\3\24\0025\3\25\0004\4\0\0=\4\r\0034\4\0\0=\4\15\0035\4\26\0=\4\17\0035\4\27\0=\4\19\0034\4\0\0=\4\21\0034\4\0\0=\4\23\3=\3\28\0024\3\0\0=\3\29\0024\3\0\0=\3\30\2B\0\2\1K\0\1\0\15extensions\ftabline\22inactive_sections\1\2\0\0\rlocation\1\2\0\0\rfilename\1\0\0\rsections\14lualine_z\1\2\0\0\rlocation\14lualine_y\1\2\0\0\rprogress\14lualine_x\1\4\0\0\rencoding\15fileformat\rfiletype\14lualine_c\1\2\0\0\rfilename\14lualine_b\1\4\0\0\vbranch\tdiff\16diagnostics\14lualine_a\1\0\0\1\2\0\0\tmode\foptions\1\0\0\23disabled_filetypes\23section_separators\1\0\2\tleft\b\nright\b\25component_separators\1\0\2\tleft\6\\\nright\6/\1\0\3\25always_divide_middle\2\ntheme\15onedarkpro\18icons_enabled\2\nsetup\flualine\frequire\0" },
+    config = { "\27LJ\2\n�\4\0\0\5\0\31\0/6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\t\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0034\4\0\0=\4\b\3=\3\n\0025\3\f\0005\4\v\0=\4\r\0035\4\14\0=\4\15\0035\4\16\0=\4\17\0035\4\18\0=\4\19\0035\4\20\0=\4\21\0035\4\22\0=\4\23\3=\3\24\0025\3\25\0004\4\0\0=\4\r\0034\4\0\0=\4\15\0035\4\26\0=\4\17\0035\4\27\0=\4\19\0034\4\0\0=\4\21\0034\4\0\0=\4\23\3=\3\28\0024\3\0\0=\3\29\0024\3\0\0=\3\30\2B\0\2\1K\0\1\0\15extensions\ftabline\22inactive_sections\1\2\0\0\rlocation\1\2\0\0\rfilename\1\0\0\rsections\14lualine_z\1\2\0\0\rlocation\14lualine_y\1\2\0\0\rprogress\14lualine_x\1\4\0\0\rencoding\15fileformat\rfiletype\14lualine_c\1\2\0\0\rfilename\14lualine_b\1\4\0\0\vbranch\tdiff\16diagnostics\14lualine_a\1\0\0\1\2\0\0\tmode\foptions\1\0\0\23disabled_filetypes\23section_separators\1\0\2\nright\b\tleft\b\25component_separators\1\0\2\nright\6/\tleft\6\\\1\0\3\25always_divide_middle\2\ntheme\tauto\18icons_enabled\2\nsetup\flualine\frequire\0" },
     loaded = true,
     path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
@@ -422,7 +427,7 @@ _G.packer_plugins = {
     url = "https://github.com/tpope/vim-projectionist"
   },
   ["vim-rooter"] = {
-    config = { " vim.g.rooter_manual_only = 1 " },
+    config = { "      vim.g.rooter_patterns = { '.git' }\n    " },
     loaded = true,
     path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/vim-rooter",
     url = "https://github.com/airblade/vim-rooter"
@@ -464,6 +469,11 @@ _G.packer_plugins = {
     path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/vim-vinegar",
     url = "https://github.com/tpope/vim-vinegar"
   },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
+  },
   ["vim-vunit"] = {
     config = { "require('config/vunit')" },
     loaded = true,
@@ -481,132 +491,148 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/vimwiki",
     url = "https://github.com/vimwiki/vimwiki"
+  },
+  ["vscode.nvim"] = {
+    config = { "require('config/vscode_cfg')" },
+    loaded = true,
+    path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/vscode.nvim",
+    url = "https://github.com/Mofiqul/vscode.nvim"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/home/dstadelmann/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: simple-vhdl.vim
-time([[Config for simple-vhdl.vim]], true)
-require('config/simple-vhdl')
-time([[Config for simple-vhdl.vim]], false)
--- Config for: vim-easy-align
-time([[Config for vim-easy-align]], true)
-require('config/easy-align')
-time([[Config for vim-easy-align]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require('config/treesitter-cfg')
-time([[Config for nvim-treesitter]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\2\n�\4\0\0\5\0\31\0/6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\t\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0034\4\0\0=\4\b\3=\3\n\0025\3\f\0005\4\v\0=\4\r\0035\4\14\0=\4\15\0035\4\16\0=\4\17\0035\4\18\0=\4\19\0035\4\20\0=\4\21\0035\4\22\0=\4\23\3=\3\24\0025\3\25\0004\4\0\0=\4\r\0034\4\0\0=\4\15\0035\4\26\0=\4\17\0035\4\27\0=\4\19\0034\4\0\0=\4\21\0034\4\0\0=\4\23\3=\3\28\0024\3\0\0=\3\29\0024\3\0\0=\3\30\2B\0\2\1K\0\1\0\15extensions\ftabline\22inactive_sections\1\2\0\0\rlocation\1\2\0\0\rfilename\1\0\0\rsections\14lualine_z\1\2\0\0\rlocation\14lualine_y\1\2\0\0\rprogress\14lualine_x\1\4\0\0\rencoding\15fileformat\rfiletype\14lualine_c\1\2\0\0\rfilename\14lualine_b\1\4\0\0\vbranch\tdiff\16diagnostics\14lualine_a\1\0\0\1\2\0\0\tmode\foptions\1\0\0\23disabled_filetypes\23section_separators\1\0\2\nright\b\tleft\b\25component_separators\1\0\2\nright\6/\tleft\6\\\1\0\3\25always_divide_middle\2\ntheme\tauto\18icons_enabled\2\nsetup\flualine\frequire\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require('config/completion')
+time([[Config for nvim-cmp]], false)
+-- Config for: focus.nvim
+time([[Config for focus.nvim]], true)
+try_loadstring("\27LJ\2\ng\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\23excluded_filetypes\1\0\0\1\2\0\0\18DiffviewFiles\nsetup\nfocus\frequire\0", "config", "focus.nvim")
+time([[Config for focus.nvim]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 require('config/gitsigns_config')
 time([[Config for gitsigns.nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\n�\4\0\0\5\0\31\0/6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\t\0005\3\3\0005\4\4\0=\4\5\0035\4\6\0=\4\a\0034\4\0\0=\4\b\3=\3\n\0025\3\f\0005\4\v\0=\4\r\0035\4\14\0=\4\15\0035\4\16\0=\4\17\0035\4\18\0=\4\19\0035\4\20\0=\4\21\0035\4\22\0=\4\23\3=\3\24\0025\3\25\0004\4\0\0=\4\r\0034\4\0\0=\4\15\0035\4\26\0=\4\17\0035\4\27\0=\4\19\0034\4\0\0=\4\21\0034\4\0\0=\4\23\3=\3\28\0024\3\0\0=\3\29\0024\3\0\0=\3\30\2B\0\2\1K\0\1\0\15extensions\ftabline\22inactive_sections\1\2\0\0\rlocation\1\2\0\0\rfilename\1\0\0\rsections\14lualine_z\1\2\0\0\rlocation\14lualine_y\1\2\0\0\rprogress\14lualine_x\1\4\0\0\rencoding\15fileformat\rfiletype\14lualine_c\1\2\0\0\rfilename\14lualine_b\1\4\0\0\vbranch\tdiff\16diagnostics\14lualine_a\1\0\0\1\2\0\0\tmode\foptions\1\0\0\23disabled_filetypes\23section_separators\1\0\2\tleft\b\nright\b\25component_separators\1\0\2\tleft\6\\\nright\6/\1\0\3\25always_divide_middle\2\ntheme\15onedarkpro\18icons_enabled\2\nsetup\flualine\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require('config/colorizer_config')
-time([[Config for nvim-colorizer.lua]], false)
--- Config for: nvim-dap-ui
-time([[Config for nvim-dap-ui]], true)
-require('config/dap_ui_config')
-time([[Config for nvim-dap-ui]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-require('config/null-ls_config')
-time([[Config for null-ls.nvim]], false)
--- Config for: vim-startify
-time([[Config for vim-startify]], true)
-require('config/startify')
-time([[Config for vim-startify]], false)
 -- Config for: vim-floaterm
 time([[Config for vim-floaterm]], true)
     vim.g.floaterm_gitcommit = 'vsplit'
     vim.g.floaterm_wintype = 'split'
     
 time([[Config for vim-floaterm]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require('config/completion')
-time([[Config for nvim-cmp]], false)
--- Config for: vimwiki
-time([[Config for vimwiki]], true)
-try_loadstring("\27LJ\2\nN\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0/let g:vimwiki_listsyms = '✗○◐●✓'\bcmd\bvim\0", "config", "vimwiki")
-time([[Config for vimwiki]], false)
--- Config for: focus.nvim
-time([[Config for focus.nvim]], true)
-try_loadstring("\27LJ\2\ng\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\23excluded_filetypes\1\0\0\1\2\0\0\18DiffviewFiles\nsetup\nfocus\frequire\0", "config", "focus.nvim")
-time([[Config for focus.nvim]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require('config/telescope_config')
-time([[Config for telescope.nvim]], false)
 -- Config for: onedark.nvim
 time([[Config for onedark.nvim]], true)
 try_loadstring("\27LJ\2\n[\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\nstyle\vdarker\16term_colors\nfalse\nsetup\fonedark\frequire\0", "config", "onedark.nvim")
 time([[Config for onedark.nvim]], false)
--- Config for: vimtex
-time([[Config for vimtex]], true)
-require('config/latex')
-time([[Config for vimtex]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require('config/colorizer_config')
+time([[Config for nvim-colorizer.lua]], false)
 -- Config for: nvim-dap
 time([[Config for nvim-dap]], true)
 require('config/dap_config')
 time([[Config for nvim-dap]], false)
--- Config for: onedarkpro.nvim
-time([[Config for onedarkpro.nvim]], true)
-require('config/onedarkpro_cfg')
-time([[Config for onedarkpro.nvim]], false)
--- Config for: nvim-dap-python
-time([[Config for nvim-dap-python]], true)
-require('config/dap_python_config')
-time([[Config for nvim-dap-python]], false)
--- Config for: ultisnips
-time([[Config for ultisnips]], true)
-require('config/snippets')
-time([[Config for ultisnips]], false)
--- Config for: vim-rooter
-time([[Config for vim-rooter]], true)
- vim.g.rooter_manual_only = 1 
-time([[Config for vim-rooter]], false)
--- Config for: material.nvim
-time([[Config for material.nvim]], true)
-require('config/material_cfg')
-time([[Config for material.nvim]], false)
--- Config for: vim-vunit
-time([[Config for vim-vunit]], true)
-require('config/vunit')
-time([[Config for vim-vunit]], false)
--- Config for: vim-searchlight
-time([[Config for vim-searchlight]], true)
-require('config/searchlight')
-time([[Config for vim-searchlight]], false)
 -- Config for: fzf
 time([[Config for fzf]], true)
 require('config/fzf')
 time([[Config for fzf]], false)
--- Config for: neomake
-time([[Config for neomake]], true)
-require('config/neomake')
-time([[Config for neomake]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-require('config/indent')
-time([[Config for indent-blankline.nvim]], false)
+-- Config for: onedarkpro.nvim
+time([[Config for onedarkpro.nvim]], true)
+require('config/onedarkpro_cfg')
+time([[Config for onedarkpro.nvim]], false)
+-- Config for: material.nvim
+time([[Config for material.nvim]], true)
+require('config/material_cfg')
+time([[Config for material.nvim]], false)
+-- Config for: ultisnips
+time([[Config for ultisnips]], true)
+require('config/snippets')
+time([[Config for ultisnips]], false)
+-- Config for: vscode.nvim
+time([[Config for vscode.nvim]], true)
+require('config/vscode_cfg')
+time([[Config for vscode.nvim]], false)
+-- Config for: nvim-dap-ui
+time([[Config for nvim-dap-ui]], true)
+require('config/dap_ui_config')
+time([[Config for nvim-dap-ui]], false)
+-- Config for: vimtex
+time([[Config for vimtex]], true)
+require('config/latex')
+time([[Config for vimtex]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 require('config/lsp_config')
 time([[Config for nvim-lspconfig]], false)
+-- Config for: vim-rooter
+time([[Config for vim-rooter]], true)
+      vim.g.rooter_patterns = { '.git' }
+    
+time([[Config for vim-rooter]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+require('config/indent')
+time([[Config for indent-blankline.nvim]], false)
 -- Config for: neorg
 time([[Config for neorg]], true)
 require('config/neorg_config')
 time([[Config for neorg]], false)
+-- Config for: vim-searchlight
+time([[Config for vim-searchlight]], true)
+require('config/searchlight')
+time([[Config for vim-searchlight]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require('config/treesitter-cfg')
+time([[Config for nvim-treesitter]], false)
+-- Config for: simple-vhdl.vim
+time([[Config for simple-vhdl.vim]], true)
+require('config/simple-vhdl')
+time([[Config for simple-vhdl.vim]], false)
+-- Config for: vimwiki
+time([[Config for vimwiki]], true)
+try_loadstring("\27LJ\2\nN\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0/let g:vimwiki_listsyms = '✗○◐●✓'\bcmd\bvim\0", "config", "vimwiki")
+time([[Config for vimwiki]], false)
+-- Config for: vim-easy-align
+time([[Config for vim-easy-align]], true)
+require('config/easy-align')
+time([[Config for vim-easy-align]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require('config/telescope_config')
+time([[Config for telescope.nvim]], false)
+-- Config for: vim-startify
+time([[Config for vim-startify]], true)
+require('config/startify')
+time([[Config for vim-startify]], false)
+-- Config for: neomake
+time([[Config for neomake]], true)
+require('config/neomake')
+time([[Config for neomake]], false)
+-- Config for: nvim-dap-python
+time([[Config for nvim-dap-python]], true)
+require('config/dap_python_config')
+time([[Config for nvim-dap-python]], false)
+-- Config for: vim-vunit
+time([[Config for vim-vunit]], true)
+require('config/vunit')
+time([[Config for vim-vunit]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: null-ls.nvim
+time([[Config for null-ls.nvim]], true)
+require('config/null-ls_config')
+time([[Config for null-ls.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
