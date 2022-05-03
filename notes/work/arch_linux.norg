@@ -14,15 +14,17 @@ version: 0.0.1
 
 ** Partitioning
    - create a EFI System partition 512M /dev/nvme0n1p1
+   - create a boot partiotion (booting with grub from a encrypted boot partition is very slow and not an attack vector for me)
    - create a root partition for the rest 999G /dev/nvme0n1p2
 * Encryption
-** create a luks1 encrypted partition
+** create a luks2 encrypted partition
+   as we will not be encrypting /boot luks2 can be used
    @code
-       cryptsetup luksFormat --type luks1 /dev/nvme0n1p2
+       cryptsetup luksFormat --type luks2 /dev/nvme0n1p3
    @end
 ** open the encrypted partition
    @code
-       cryptsetup open /dev/nvme0n1p2 root
+       cryptsetup open /dev/nvme0n1p3 root
    @end
 ** create file system
    @code
@@ -51,31 +53,33 @@ version: 0.0.1
    @end
 ** mount subvolumes
    @code
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@          /mnt
+       mount -o compress-force=zstd,autodefrag,subvol=@          /dev/mapper/root /mnt
 
        mkdir -p /mnt/home
        mkdir -p /mnt/var/tmp
        mkdir -p /mnt/var/log
        mkdir -p /mnt/var/abs
        mkdir -p /mnt/var/cache/pacman/pkg
-       mkdir -p /srv
-       mkdir -p /.snapshots
-       mkdir -p /efi
+       mkdir -p /mnt/srv
+       mkdir -p /mnt/.snapshots
+       mkdir -p /mnt/swap
+       mkdir -p /mnt/efi
+       mkdir -p /mnt/boot
 
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@home      /mnt/home
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_tmp   /mnt/var/tmp
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_log   /mnt/var/log
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_abs   /mnt/var/abs
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@var_pkg   /mnt/var/cache/pacman/pkg
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@srv       /srv
-       mount -o compress=no,autodefrag,subvolume=@swap                /swap
-       mount -o compress-force=zstd:1,autodefrag,subvolume=@snapshots /.snapshots
+       mount -o compress-force=zstd,autodefrag,subvol=@home      /dev/mapper/root /mnt/home
+       mount -o compress-force=zstd,autodefrag,subvol=@var_tmp   /dev/mapper/root /mnt/var/tmp
+       mount -o compress-force=zstd,autodefrag,subvol=@var_log   /dev/mapper/root /mnt/var/log
+       mount -o compress-force=zstd,autodefrag,subvol=@var_abs   /dev/mapper/root /mnt/var/abs
+       mount -o compress-force=zstd,autodefrag,subvol=@var_pkg   /dev/mapper/root /mnt/var/cache/pacman/pkg
+       mount -o compress-force=zstd,autodefrag,subvol=@srv       /dev/mapper/root /srv
+       mount -o compress=no,autodefrag,subvol=@swap              /dev/mapper/root /swap
+       mount -o compress-force=zstd,autodefrag,subvol=@snapshots /.snapshots
        mount /dev/nvme0n1p1 /mnt/efi
    @end
 * Finalize base installation
 ** pacstrap
    @code
-       pacstrap /mnt base linux linux-firmware amd-ucode btrfs-progs vim networkmanager grub grub-btrfs
+       pacstrap /mnt base linux linux-firmware amd-ucode btrfs-progs vim networkmanager grub grub-btrfs e2fsprogs efitools efibootmgr
    @end
 ** create fstab
    @code
@@ -102,21 +106,22 @@ version: 0.0.1
    @code
      echo "thinkpad-p14s" >> /etc/hostname
    @end
-** create keyfile
-   @code
-     dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
-     chmod 600 /crypto_keyfile.bin
-     chmod 600 /boot/initramfs-linux*
-     exit
-     cryptsetup luksAdd /dev/nvme0n1p2 /mnt/crypto_keyfile.bin
-   @end
+ * create keyfile (not to be done if boot is not encrypted)
+    @code
+      dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
+      chmod 600 /crypto_keyfile.bin
+      chmod 600 /boot/initramfs-linux*
+      exit
+      cryptsetup luksAdd /dev/nvme0n1p2 /mnt/crypto_keyfile.bin
+    @end
 ** configure mkinitcpio
    @code
-     MODULES=(amdgpu nvme ushid xhci_hcd vmd)
+     MODULES=(amdgpu nvme usbhid xhci_hcd vmd)
      BINARIES=(btrfs)
-     FILES=(/crypto_keyfile.bin)
+     #FILES=(/crypto_keyfile.bin)
      HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt filesystems keyboard resume fsck)
    @end
+   mkinitcpio -P
 
 ** configure grub
 *** find the blkid of the root device
@@ -190,6 +195,13 @@ version: 0.0.1
      sudo pacman -S hibernator
      sudo hibernator
    @end
+** modify sleep.conf
+    /etc/systemd/sleep.conf
+   @code
+     [Sleep]
+     AllowHibernation=yes
+     HibernateMode=shutdown
+   @end
 
 * modify grub to use swapfile
 ** find blkid
@@ -217,3 +229,42 @@ version: 0.0.1
    @code
        GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=.... resume=/dev/mapper/root resume_offset=<calculated_value_from_above>"
    @end
+
+* Setup snapper
+  ~ remove / from fstab
+    `UUID=..... / btrfs rw,noatime,compress-force=-zstd:3,ssd,space_cache=v2,autodefrag,subolid=256,subvol=/@ 0 0`
+  ~ umount /.snapshots
+    `umount /.snapshots`
+  ~ remove /.snapshots directory
+    `rmdir /.snapshots`
+  ~ install snapper and tools
+    `pacman -S snapper grub-btrfs`
+  ~ create snapshot volume with snapper
+    `snapper -c root create-config /`
+    this creates a new subvolume .snapshots which has to be deleted
+  ~ delete subvolume created by sapper
+    `btrfs sub del /.snapshots/`
+  ~ recreate the directory
+    `mkdir  /.snapshots`
+  ~ mount snapshots
+    `mount /.snapshots`
+  ~ enable snapshots to show in grub
+    `systemctl enable grub-btrfs.path`
+  ~ in /etc/default/grub set option
+    `GRUB_DISABLE_RECOVERY=false`
+  ~ recreate grub config
+    `update-grub`
+    or
+    `grup-mkconfig -o /boot/grub/grub.cfg`
+  ~ enable snapshots for pacman
+    `pacman -S snap-pac`
+  ~ enable boot snapshots
+    `systemctl enable snapper-boot.timer`
+
+
+* installing yay
+  sudo pacman -S --needed base-devel git
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  git config --global url."https://".insteadOf git://
