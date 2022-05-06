@@ -58,7 +58,6 @@ return require('packer').startup({function(use)
 
   use {
     'hrsh7th/nvim-cmp',
-    --commit = 'dbc72290295cfc63075dab9ea635260d2b72f2e5',
     requires = {
       {
         'SirVer/ultisnips',
@@ -74,7 +73,7 @@ return require('packer').startup({function(use)
       'hrsh7th/cmp-cmdline',
       'quangnguyen30192/cmp-nvim-ultisnips',
       'onsails/lspkind-nvim',
-      --'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
     },
 
     config = get_config('completion'),

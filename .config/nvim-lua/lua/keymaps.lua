@@ -33,6 +33,8 @@ nnoremap("<leader>fg", ":lua require'telescope.builtin'.live_grep()<CR>")
 nnoremap("<leader>fh", ":lua require'telescope.builtin'.help_tags()<CR>")
 nnoremap("<leader>fr", ":lua require'telescope.builtin'.lsp_references()<CR>")
 
+nnoremap("<leader>+", ':exe "resize " . (winheight(0) * 6/5)<CR>')
+nnoremap("<leader>-", ':exe "resize " . (winheight(0) * 4/5)<CR>')
 -- only use this if you are using vim mode in the terminal otherwise you will
 -- be missing ctrl-w for backstepping a word...
 tmap("<C-W>h", "<C-\\><C-N><C-W>h")
