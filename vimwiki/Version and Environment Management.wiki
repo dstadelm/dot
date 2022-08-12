@@ -1,0 +1,8 @@
+== Extendable Version Manager ==
+https://github.com/asdf-vm/asdf
+
+
+== Directory specific environment Variables ==
+https://direnv.net/
+
+
