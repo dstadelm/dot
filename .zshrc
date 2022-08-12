@@ -23,7 +23,7 @@ unsetopt BEEP
 #
 #ZSH_THEME="bureau"
 #ZSH_THEME="amuse"
-ZSH_THEME="candy-kingdom"
+#ZSH_THEME="candy-kingdom"
 #ZSH_THEME="crcandy"
 #ZSH_THEME="emotty"
 #ZSH_THEME="fino"
@@ -46,7 +46,10 @@ ZSH_THEME="candy-kingdom"
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 ###############################################################################
-
+#eval "$(starship init zsh)"
+fpath+=$HOME/.oh-my-zsh/custom/plugins/pure
+autoload -U promptinit; promptinit
+prompt pure
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -168,10 +171,16 @@ export KEYTIMEOUT=1
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+BINPATH=""
+BINPATH="${BINPATH}:${HOME}/bin/"
+BINPATH="${BINPATH}:${HOME}/bin/rust_hdl/target/release"
+BINPATH="${BINPATH}:${HOME}/.cargo/bin/"
+BINPATH="${BINPATH}:${HOME}/.go/bin/"
+BINPATH="${BINPATH}:${HOME}/.go/src/github.com/junegunn/fzf/bin/"
+BINPATH="${BINPATH}:${HOME}/.local/share/nvim/lsp_servers/latex/"
 
-BINPATH="${HOME}/bin/:${HOME}/bin/rust_hdl/target/release:${HOME}/.cargo/bin:${HOME}/.go/bin"
 if ! [[ "$PATH" =~ "$BINPATH" ]]; then
-  export PATH="${HOME}/.go/src/github.com/junegunn/fzf/bin/:${BINPATH}/":$PATH
+  export PATH="${BINPATH}:${PATH}"
   export GOPATH="${HOME}/.go"
 fi
 
@@ -225,3 +234,7 @@ function root(){
 # }
 
 alias luamake=/home/dstadelmann/bin/lua-language-server/3rd/luamake/luamake
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
