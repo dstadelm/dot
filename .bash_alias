@@ -2,8 +2,8 @@
 # Alias
 ###############################################################
 alias e='emacs -nw -l ~/.emacs-nobackup'
-alias ls='ls --color=auto'
-alias ll='ls -la --color=auto'
+alias ls='exa'
+alias ll='exa -la'
 alias pull='git stash && git pull; git stash pop'
 alias push='git stash && git pull && git push; git stash pop'
 alias hg='history | grep'
