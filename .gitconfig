@@ -10,9 +10,9 @@
 [core]
 	editor = nvim
   PreloadIndex = true
-  pager = delta
+#  pager = delta
 [interactive]
-  diffFilter = delta --color-only
+#  diffFilter = delta --color-only
 [delta]
   features = side-by-side line-numbers decorations
   whitespace-error-style = 22 reverse
@@ -32,10 +32,13 @@
 [gui]
   spellingdictionary = none
 [alias]
-  logk = log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %C(yellow)%d%C(white)%x1b[0m%x20%s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=local
+  logk = log --graph --all --decorate --abbrev-commit --pretty=oneline --date=local
+  #logk = log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %C(yellow)%d%C(white)%x1b[0m%x20%s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=local
   logb = log --graph --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %C(yellow)%d%C(white)%x1b[0m%x20%s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=local
+  graph = "!git-graph --format \"%h %d %s - %an\" -s round "
+  igraph = "!git-igitt"
   root = !pwd
-  lg = log --graph --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short
+  lg = log --graph --pretty=oneline --decorate --abbrev-commit --date=short
   hist = log --graph --full-history --all --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short
   ldiff = difftool -t latex
   unpushed-tags = "!bash -c \"comm -23 <(git show-ref --tags | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort) <(git ls-remote --tags origin | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort)\""
