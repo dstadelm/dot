@@ -1,3 +1,4 @@
+local nnoremap = require("utils").nnoremap
 vim.cmd([[
 let blacklist = ['gitcommit']
 augroup MyAugroup
@@ -22,3 +23,9 @@ augroup MyCommentary
 augroup END
 
 ]])
+
+local auto_source_group = vim.api.nvim_create_augroup("AutoSourceGroup", {clear = true})
+local python_run_keymap = function()
+  nnoremap("<leader>x", ":sp<CR> :term python3 %<CR> :startinsert<CR>")
+end
+vim.api.nvim_create_autocmd("FileType", {pattern="python", group = auto_source_group, callback = python_run_keymap})

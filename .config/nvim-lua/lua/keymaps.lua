@@ -32,6 +32,7 @@ nnoremap("<leader>fl", ":lua require'telescope.builtin'.current_buffer_fuzzy_fin
 nnoremap("<leader>fg", ":lua require'telescope.builtin'.live_grep()<CR>")
 nnoremap("<leader>fh", ":lua require'telescope.builtin'.help_tags()<CR>")
 nnoremap("<leader>fr", ":lua require'telescope.builtin'.lsp_references()<CR>")
+nnoremap("<leader>fc", ":lua require'config.telescope_config'.find_nvim_config()<CR>")
 
 nnoremap("<leader>+", ':exe "resize " . (winheight(0) * 6/5)<CR>')
 nnoremap("<leader>-", ':exe "resize " . (winheight(0) * 4/5)<CR>')

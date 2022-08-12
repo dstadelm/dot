@@ -12,9 +12,13 @@ cmp.setup({
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
     })
   },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
   completion = {
     completeopt = 'menu,menuone,noselect',
-  --  autocomplete = true,
+    --autocomplete = true,
   },
   snippet = {
     -- REQUIRED - you must specify a snippet engine

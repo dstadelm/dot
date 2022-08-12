@@ -20,9 +20,17 @@ return require('packer').startup({function(use)
   use {
     {'tpope/vim-commentary'},
     {'tpope/vim-projectionist'},
-    {'tpope/vim-surround'},
     {'tpope/vim-eunuch'},
     {'tpope/vim-vinegar'},
+  }
+
+  use {
+    'tpope/vim-surround',
+    config = function()
+      -- add a mapping c to make command surrounds
+      -- usage ysiwc textit<CR>
+      vim.cmd([[let g:surround_{char2nr('c')} = "\\\1command\1{\r}"]])
+    end
   }
 
   use {
@@ -42,7 +50,7 @@ return require('packer').startup({function(use)
   }
 
   use {
-      'williamboman/nvim-lsp-installer',
+    'williamboman/nvim-lsp-installer',
   }
 
   use {
@@ -108,10 +116,10 @@ return require('packer').startup({function(use)
 
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-  use {
-    'beauwilliams/focus.nvim',
-    config = function() require("focus").setup({excluded_filetypes = {"DiffviewFiles"}}) end
-  }
+  -- use {
+  --   'beauwilliams/focus.nvim',
+  --   config = function() require("focus").setup({excluded_filetypes = {"DiffviewFiles"}}) end
+  -- }
 
 
   use {
@@ -182,8 +190,8 @@ return require('packer').startup({function(use)
     "nvim-neorg/neorg",
     config = get_config("neorg_config"),
     requires = {
-    'nvim-lua/plenary.nvim',
-    'folke/zen-mode.nvim',
+      'nvim-lua/plenary.nvim',
+      'folke/zen-mode.nvim',
     }
 
   }
@@ -211,10 +219,10 @@ return require('packer').startup({function(use)
     config = get_config('simple-vhdl'),
   }
 
-   use {
-     'dstadelm/vim-vunit',
-     config = get_config('vunit'),
-   }
+  use {
+    'dstadelm/vim-vunit',
+    config = get_config('vunit'),
+  }
   -- python
   use {
     'lukas-reineke/indent-blankline.nvim',
@@ -235,10 +243,14 @@ return require('packer').startup({function(use)
 
 
   -- Git Integration
-  use {
-    {'junegunn/gv.vim'},
-    {'tpope/vim-fugitive'},
-  }
+  use {'tpope/vim-fugitive'}
+  use {'powerman/vim-plugin-AnsiEsc'}
+  use {'rbong/vim-flog'}
+  -- {'skywind3000/vim-quickui'},
+  -- {'TamaMcGlinn/flog-menu'},
+  -- use {
+  --   'TamaMcGlinn/flog-forest',
+  -- }
 
   use {
     'lewis6991/gitsigns.nvim',
@@ -246,14 +258,16 @@ return require('packer').startup({function(use)
       'nvim-lua/plenary.nvim'
     },
     config = get_config('gitsigns_config')
-    }
+  }
 
   use { 'dbeniamine/cheat.sh-vim' }
   -- testing
   use {
-    'rcarriga/vim-ultest',
+    "nvim-neotest/neotest",
     requires = {
-      'vim-test/vim-test'
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim"
     }
   }
   -- Themes
@@ -269,6 +283,7 @@ return require('packer').startup({function(use)
     'olimorris/onedarkpro.nvim',
     config = get_config('onedarkpro_cfg')
   }
+  use { 'RRethy/nvim-base16' }
   use {
     'Mofiqul/vscode.nvim',
     config = get_config('vscode_cfg')
@@ -340,13 +355,17 @@ return require('packer').startup({function(use)
     require('packer').sync()
   end
 end,
-config = {
-  display = {
-    open_fn = function()
-      return require('packer.util').float({ border = 'single' })
-    end
+  config = {
+    display = {
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end
+    },
+    profile = {
+      enable = true,
+      threshold = 1 -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    }
   }
-}
 }
 )
 

@@ -1,4 +1,4 @@
---vim.cmd("autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()")
+-- vim.cmd("autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()")
 vim.cmd[[
 function! s:PyPostSave()
     execute "silent !tidy-imports --black --quiet --replace-star-imports --action REPLACE " . bufname("%")

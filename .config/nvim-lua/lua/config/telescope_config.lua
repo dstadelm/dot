@@ -4,7 +4,7 @@ require('telescope').setup{
       prompt_position = "top"
     },
     sorting_strategy = "ascending",
-    path_display = {"smart"},
+    path_display = {"truncate"},
   } ,
   pickers = {
     buffers = {
@@ -26,3 +26,15 @@ require('telescope').setup{
 require'telescope'.load_extension('repo')
 require'telescope'.load_extension('file_browser')
 require('telescope').load_extension('fzf')
+
+local M = {}
+
+function M.find_nvim_config()
+  local opts = {}
+  opts.search_dirs = {'~/.config/nvim/'}
+  opts.prompt_title = 'Neovim Config Files'
+  opts.prompt_prefix = ''
+  require'telescope.builtin'.find_files(opts)
+end
+
+return M

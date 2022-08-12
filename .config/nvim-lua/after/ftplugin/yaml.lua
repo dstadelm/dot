@@ -8,3 +8,6 @@ cmp.setup.buffer{
     })
 }
 
+vim.cmd[[
+set suffixesadd=.yaml
+]]

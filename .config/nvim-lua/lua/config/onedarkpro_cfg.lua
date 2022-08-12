@@ -1,12 +1,6 @@
 local onedarkpro = require("onedarkpro")
--- blabl
-
--- sdf = asdf
-
--- sdf: aAsdf = ;;
-
--- asdf == asdfasdf
-
+local utils = require("onedarkpro.utils")
+local nicerBG = "#1e2127"
 onedarkpro.setup({
   -- Theme can be overwritten with 'onedark' or 'onelight' as a string
   theme = function()
@@ -18,7 +12,7 @@ onedarkpro.setup({
   end,
   colors = {
     onedark = {
-      bg = "#1e2127"
+      bg = nicerBG
     }
   }, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
   hlgroups = {
@@ -26,16 +20,14 @@ onedarkpro.setup({
            DiagnosticVirtualTextWarn = { fg = "#835d1a", bg = "#292928", style = "italic" },
            DiagnosticVirtualTextInfo = { fg = "#48b0bd", bg = "#25252b",  style = "italic" },
            DiagnosticVirtualTextHint = { fg = "#7e3992", bg = "#292534", style = "italic" },
+           -- Pmenu = {bg = "#0F1013"},
+           -- PmenuSel = {bg = "#334477"},
+           Pmenu = {bg = utils.darken(nicerBG, 0.4)},
+           PmenuSel = {bg = utils.lighten(nicerBG, 0.8)},
+           -- PmenuSbar = {bg = "#00FF00"},
+           -- PmenuThumb = {bg = utils.darken(nicerBG, 0.4)},
+           NormalFloat = {bg = utils.darken(nicerBG, 0.4)},
   },
-  -- }, -- Override default highlight groups
-  -- filetype_hlgroups = {}, -- Override default highlight groups for specific filetypes
-  -- plugins = { -- Override which plugins highlight groups are loaded
-  --     native_lsp = true,
-  --     polygot = true,
-  --     treesitter = true,
-  --     nvim_dap_ui = false,
-  --     -- NOTE: Other plugins have been omitted for brevity
-  -- },
   styles = {
       strings = "NONE", -- Style that is applied to strings
       comments = "italic", -- Style that is applied to comments
