@@ -167,29 +167,13 @@ require'lspconfig'.texlab.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 }
+local luadev = require("lua-dev").setup({
+  -- add any options here, or leave empty to use the default settings
+  lspconfig = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+  },
+})
 
-require'lspconfig'.sumneko_lua.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = vim.split(package.path, ';')
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim', 'describe', 'it', 'before_each', 'after_each'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
-      }
-    }
-  }
-}
+require'lspconfig'.sumneko_lua.setup(luadev)

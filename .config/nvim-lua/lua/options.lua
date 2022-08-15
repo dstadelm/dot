@@ -25,6 +25,7 @@ vim.o.pumblend = 10
 vim.o.showmode = false -- do not show in which mode we are, as this is shown by airline
 vim.o.clipboard = 'unnamedplus,unnamed'-- unamedplus -> ctrl-v; unamed -> middle mouse click
 
+
 vim.o.mouse = 'a'
 vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical'
 vim.o.shortmess = vim.o.shortmess .. 'c'
@@ -43,3 +44,4 @@ vim.cmd([[
 set title
 set titlestring=%{hostname()}\ \ %F\ \ %{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}
 ]])
+

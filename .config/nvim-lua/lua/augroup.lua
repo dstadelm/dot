@@ -24,8 +24,32 @@ augroup END
 
 ]])
 
+--------------------------------------------------------------------------------
+-- Create a mapping by a autocmd for executing the current python file
 local auto_source_group = vim.api.nvim_create_augroup("AutoSourceGroup", {clear = true})
 local python_run_keymap = function()
   nnoremap("<leader>x", ":sp<CR> :term python3 %<CR> :startinsert<CR>")
 end
 vim.api.nvim_create_autocmd("FileType", {pattern="python", group = auto_source_group, callback = python_run_keymap})
+
+--------------------------------------------------------------------------------
+-- Modify the suffixesadd an the path when in .config directory to be able to
+-- jump directly to config files from plugin.lua
+local set_config_path_group = vim.api.nvim_create_augroup("ConfigPathGroup", {clear = true})
+local set_config_path = function()
+  vim.bo.suffixesadd = ".lua"
+  vim.o.path = vim.o.path .. './config,'
+end
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {pattern=vim.env.XDG_CONFIG_HOME .. '/**', group = set_config_path_group, callback = set_config_path, once = true})
+
+
+--------------------------------------------------------------------------------
+-- Create a winbar which change the bg color according to the mode
+--
+-- local set_winbar_color_group = vim.api.nvim_create_augroup("SetWinbarColorGroup", {clear = true})
+-- local set_winbar_color = function()
+--   vim.o.winbar = "%{%v:lua.require'usr.winbar'.eval()%}"
+--   vim.o.laststatus = 3
+-- end
+
+-- vim.api.nvim_create_autocmd({"ModeChanged"}, {pattern='*', group = set_winbar_color_group, callback = set_winbar_color})

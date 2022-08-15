@@ -44,11 +44,10 @@ return require('packer').startup({function(use)
     'neovim/nvim-lspconfig',
     requires = {
       'glepnir/lspsaga.nvim',
-      'ray-x/lsp_signature.nvim',
     },
     config = get_config('lsp_config'),
   }
-
+  use { 'folke/lua-dev.nvim' }
   use {
     'williamboman/nvim-lsp-installer',
   }
@@ -91,7 +90,7 @@ return require('packer').startup({function(use)
     'nvim-treesitter/nvim-treesitter',
     requires = {
       'nvim-treesitter/nvim-treesitter-refactor',
-      'RRethy/nvim-treesitter-textsubjects',
+      'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/playground',
     },
     run = ':TSUpdate',
@@ -166,11 +165,14 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'airblade/vim-rooter',
-    config = [[
-      vim.g.rooter_patterns = { '.git' }
-    ]]
+    'notjedi/nvim-rooter.lua',
+    config = function() require'nvim-rooter'.setup() end
   }
+
+  -- use {
+  --   "ahmedkhalf/project.nvim",
+  --   config = get_config('project_config')
+  -- }
 
   use { 'mg979/vim-visual-multi' }
 
@@ -216,7 +218,6 @@ return require('packer').startup({function(use)
 
   use {
     'dstadelm/simple-vhdl.vim',
-    config = get_config('simple-vhdl'),
   }
 
   use {
@@ -311,36 +312,7 @@ return require('packer').startup({function(use)
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons'},
-    config = function()
-      require('lualine').setup {
-        options = {
-          icons_enabled = true,
-          theme = 'auto',
-          component_separators = { left = '\\', right = '/'},
-          section_separators = { left = '', right = ''},
-          disabled_filetypes = {},
-          always_divide_middle = true,
-        },
-        sections = {
-          lualine_a = {'mode'},
-          lualine_b = {'branch', 'diff', 'diagnostics'},
-          lualine_c = {'filename'},
-          lualine_x = {'encoding', 'fileformat', 'filetype'},
-          lualine_y = {'progress'},
-          lualine_z = {'location'}
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {'filename'},
-          lualine_x = {'location'},
-          lualine_y = {},
-          lualine_z = {}
-        },
-        tabline = {},
-        extensions = {}
-      }
-    end
+    config = get_config('lualine_config')
   }
 
   -- has to be after the themes
