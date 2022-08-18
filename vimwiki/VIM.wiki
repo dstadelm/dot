@@ -5,6 +5,8 @@
   - [✗] nvim-autopairs
   - [✗] far.vim
   - [✗] nvim-git-fixer
+  - [✗] nvim-navic
+  - [✗] quickfix-reflector
 
 https://jdhao.github.io/2021/12/31/using_nvim_after_three_years/
 vim-adept : https://thevaluable.dev/vim-adept/
@@ -15,8 +17,6 @@ vim-adept : https://thevaluable.dev/vim-adept/
 == Tricks ==
 * redirect output of command in normal mode to buffer
   `:silent put =execute(hi Search)`
-* print all highlight groups
-  `:so $VIMRUNTIME/syntax/hitest.vim`
 * write doc for plugin
   `:set filetype=help`
 * Ctrl-R= (expression register) (use @<reg> or Ctrl-R" to reference register)
