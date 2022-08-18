@@ -40,10 +40,10 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'x', '<space>ca','<Esc><Cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
 end
 
-local pylsp_onattach = function(client, bufnr)
-  on_attach(client, bufnr)
+local py_on_attach = function(client, bufnr)
   client.server_capabilities.document_formatting = false
   client.server_capabilities.document_range_formatting = false
+  on_attach(client, bufnr)
 end
 
 vim.lsp.handlers["textDocument/hover"] =
@@ -65,7 +65,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = false,
-    virtual_text = true,
+    virtual_text = false,
+    virtual_lines = true,
     signs = true,
     update_in_insert = false,
   }
@@ -124,44 +125,46 @@ lspconfig.yamlls.setup{
   }
 }
 
--- require'lspconfig'.pyright.setup{
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
-
-local util = require 'lspconfig.util'
-require'lspconfig'.pylsp.setup{
-  on_attach = pylsp_onattach,
+require'lspconfig'.pyright.setup{
+  on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = function(fname)
-    local root_files = {
-      'pyproject.toml',
-      'setup.py',
-      'setup.cfg',
-      'requirements.txt',
-      'Pipfile',
-    }
-    return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-  end,
-  single_file_support = true,
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {enabled = false},
-        autopep8 = {enabled = false},
-        flake8 = {enabled = false},
-        pyflakes = {enabled = false},
-        yapf = {enaboed = false},
-        pylint = {
-          enabled = true,
-          args = {'--rcfile', 'pyproject.toml' },
-        },
-        isort = {enabled = false},
-        pyls_mypy = {enabled = false},
-      }
-    }
-  }
 }
+
+-- local util = require 'lspconfig.util'
+-- require'lspconfig'.pylsp.setup{
+--   on_attach = py_on_attach,
+--   capabilities = capabilities,
+--   root_dir = function(fname)
+--     local root_files = {
+--       'pyproject.toml',
+--       'setup.py',
+--       'setup.cfg',
+--       'requirements.txt',
+--       'Pipfile',
+--     }
+--     return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+--   end,
+--   single_file_support = true,
+--   settings = {
+--     pylsp = {
+--       plugins = {
+--         -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
+--         pycodestyle = {enabled = false},
+--         pydocstyle = {enabled = false},
+--         autopep8 = {enabled = false},
+--         flake8 = {enabled = false},
+--         pyflakes = {enabled = false},
+--         yapf = {enaboed = false},
+--         pylint = {
+--           enabled = false,
+--           args = {'--rcfile', 'pyproject.toml' },
+--         },
+--         isort = {enabled = false},
+--         pyls_mypy = {enabled = false},
+--       }
+--     }
+--   }
+-- }
 
 require'lspconfig'.texlab.setup{
   on_attach = on_attach,

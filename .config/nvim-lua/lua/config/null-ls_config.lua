@@ -12,14 +12,14 @@ diagnostics.chktex,
 diagnostics.gitlint,
 formatting.latexindent,
 formatting.isort,
-formatting.black,
+formatting.black, -- .with({ extra_args = {"--line-length", "120"}}),
 }
 
 null_ls.setup({
 	sources = sources,
 	on_attach = function(client)
 		if client.server_capabilities.document_formatting then
-			vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+			vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format()")
 		end
 	end,
 })

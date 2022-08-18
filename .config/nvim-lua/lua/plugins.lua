@@ -315,6 +315,10 @@ return require('packer').startup({function(use)
     config = get_config('lualine_config')
   }
 
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = get_config('lsp_lines_config'),
+  })
   -- has to be after the themes
   use {
     'norcalli/nvim-colorizer.lua',
