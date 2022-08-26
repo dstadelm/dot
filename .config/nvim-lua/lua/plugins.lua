@@ -94,7 +94,7 @@ return require('packer').startup({function(use)
       'nvim-treesitter/playground',
     },
     run = ':TSUpdate',
-    config = get_config('treesitter-cfg'),
+    config = get_config('treesitter_config'),
   }
 
   use {
@@ -169,10 +169,10 @@ return require('packer').startup({function(use)
     config = function() require'nvim-rooter'.setup() end
   }
 
-  -- use {
-  --   "ahmedkhalf/project.nvim",
-  --   config = get_config('project_config')
-  -- }
+  use {
+    "ahmedkhalf/project.nvim",
+    config = get_config('project_config')
+  }
 
   use { 'mg979/vim-visual-multi' }
 
@@ -278,26 +278,17 @@ return require('packer').startup({function(use)
   use { 'Mofiqul/dracula.nvim' }
   use {
     'marko-cerovac/material.nvim',
-    config = get_config('material_cfg')
+    config = get_config('material_config')
   }
   use {
     'olimorris/onedarkpro.nvim',
-    config = get_config('onedarkpro_cfg')
+    config = get_config('onedarkpro_config')
   }
+  use { 'EdenEast/nightfox.nvim' }
   use { 'RRethy/nvim-base16' }
   use {
     'Mofiqul/vscode.nvim',
-    config = get_config('vscode_cfg')
-  }
-  use {
-    'navarasu/onedark.nvim',
-    config = function()
-      require('onedark').setup {
-        style = 'darker',
-        term_colors = 'false'
-      }
-      --require('onedark').load()
-    end
+    config = get_config('vscode_config')
   }
 
   -- Lua
@@ -310,6 +301,13 @@ return require('packer').startup({function(use)
   }
 
   use {
+    "folke/which-key.nvim",
+    config = get_config('which-key_config'),
+  }
+
+  use { 'gabrielpoca/replacer.nvim' }
+
+  use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons'},
     config = get_config('lualine_config')
@@ -319,6 +317,7 @@ return require('packer').startup({function(use)
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = get_config('lsp_lines_config'),
   })
+
   -- has to be after the themes
   use {
     'norcalli/nvim-colorizer.lua',

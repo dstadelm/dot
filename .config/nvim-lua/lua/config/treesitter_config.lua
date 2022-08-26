@@ -1,5 +1,4 @@
-local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-
+local parser_configs = require "nvim-treesitter.parsers".get_parser_configs()
 -- These two are optional and provide syntax highlighting
 -- for Neorg tables and the @document.meta tag
 parser_configs.norg_meta = {

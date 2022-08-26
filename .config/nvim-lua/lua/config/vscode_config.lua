@@ -1,4 +1,4 @@
--- Lua:
+require('vscode')
 -- For dark theme
 vim.g.vscode_style = "dark"
 -- For light theme

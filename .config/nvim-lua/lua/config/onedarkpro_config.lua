@@ -12,10 +12,10 @@ onedarkpro.setup({
   end,
   colors = {
     onedark = {
-      bg = nicerBG
+      bg = "#1e2127"
     }
   }, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
-  hlgroups = {
+  highlights = {
            DiagnosticVirtualTextError = { fg = "#8b3434", bg = "#2a252b", style = "italic" },
            DiagnosticVirtualTextWarn = { fg = "#835d1a", bg = "#292928", style = "italic" },
            DiagnosticVirtualTextInfo = { fg = "#48b0bd", bg = "#25252b",  style = "italic" },
@@ -43,7 +43,7 @@ onedarkpro.setup({
       cursorline = true, -- Use cursorline highlighting?
       transparency = false, -- Use a transparent background?
       terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
-      window_unfocussed_color = true, -- When the window is out of focus, change the normal background?
+      window_unfocused_color = true, -- When the window is out of focus, change the normal background?
   }
 })
 onedarkpro.load()
