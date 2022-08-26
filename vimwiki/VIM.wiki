@@ -1,4 +1,3 @@
-== Plugins ==
 * [✗] todos
   - [✗] targets.vim
   - [✗] symbols-outline.nvim
@@ -13,6 +12,8 @@ vim-adept : https://thevaluable.dev/vim-adept/
 
 == Bookmarks ==
 [[https://oroques.dev/notes/neovim-init/|Neovim 0.5 features and the switch to init.lua]]
+[[https://alpha2phi.medium.com/neovim-for-beginners-lua-apis-65eb392b14fa|Learn the basics of Neovim Lua APIs]]
+[[|Learn the basics of Neovim Lua APIs]]
 
 == Tricks ==
 * redirect output of command in normal mode to buffer
