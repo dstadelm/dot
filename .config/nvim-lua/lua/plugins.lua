@@ -189,6 +189,11 @@ return require('packer').startup({function(use)
   }
 
   use {
+    'lukas-reineke/headlines.nvim',
+    config = get_config("headlines_config")
+  }
+
+  use {
     "nvim-neorg/neorg",
     config = get_config("neorg_config"),
     requires = {

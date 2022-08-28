@@ -12,10 +12,14 @@ onedarkpro.setup({
   end,
   colors = {
     onedark = {
-      bg = "#1e2127"
+      bg = nicerBG
     }
   }, -- Override default colors by specifying colors for 'onelight' or 'onedark' themes
   highlights = {
+           -- SpellBad = { fg = "#8b3434", bg = "#2a252b", style = "italic" },
+           -- SpellCap = { fg = "#835d1a", bg = "#292928", style = "italic" },
+           -- SpellRare = { fg = "#48b0bd", bg = "#25252b",  style = "italic" },
+           -- SpellLocal = { fg = "#7e3992", bg = "#292534", style = "italic" },
            DiagnosticVirtualTextError = { fg = "#8b3434", bg = "#2a252b", style = "italic" },
            DiagnosticVirtualTextWarn = { fg = "#835d1a", bg = "#292928", style = "italic" },
            DiagnosticVirtualTextInfo = { fg = "#48b0bd", bg = "#25252b",  style = "italic" },
