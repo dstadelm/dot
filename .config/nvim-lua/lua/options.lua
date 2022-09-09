@@ -1,5 +1,6 @@
 vim.cmd('filetype plugin indent on')
 
+--vim.o.shell = 'bash'
 vim.o.hidden = true
 vim.o.ts = 2
 vim.o.shiftwidth = 2
@@ -24,6 +25,11 @@ vim.o.wildoptions = 'pum'
 vim.o.pumblend = 10
 vim.o.showmode = false -- do not show in which mode we are, as this is shown by airline
 vim.o.clipboard = 'unnamedplus,unnamed'-- unamedplus -> ctrl-v; unamed -> middle mouse click
+vim.wo.breakindent = true
+vim.bo.autoindent = true
+vim.bo.smartindent = true
+vim.opt.path = "**"
+
 
 
 vim.o.mouse = 'a'

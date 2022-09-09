@@ -37,7 +37,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'x', '<space>ca','<Esc><Cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'x', '<space>ca','<Esc><Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 end
 
 local py_on_attach = function(client, bufnr)
@@ -65,14 +65,16 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = false,
-    virtual_text = false,
-    virtual_lines = true,
+    virtual_text = true,
+    virtual_lines = false,
     signs = true,
     update_in_insert = false,
   }
 )
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+
 
 local lspconfig = require'lspconfig'
 local configs = require'lspconfig.configs'
@@ -132,7 +134,7 @@ require'lspconfig'.pyright.setup{
 
 -- local util = require 'lspconfig.util'
 -- require'lspconfig'.pylsp.setup{
---   on_attach = py_on_attach,
+--   on_attach = on_attach,
 --   capabilities = capabilities,
 --   root_dir = function(fname)
 --     local root_files = {
@@ -156,7 +158,7 @@ require'lspconfig'.pyright.setup{
 --         pyflakes = {enabled = false},
 --         yapf = {enaboed = false},
 --         pylint = {
---           enabled = false,
+--           enabled = true,
 --           args = {'--rcfile', 'pyproject.toml' },
 --         },
 --         isort = {enabled = false},

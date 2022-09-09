@@ -18,7 +18,8 @@ cmp.setup({
   },
   completion = {
     completeopt = 'menu,menuone,noselect',
-    --autocomplete = true,
+    -- keyword_length = 4,
+    -- autocomplete = false,
   },
   snippet = {
     -- REQUIRED - you must specify a snippet engine

@@ -22,17 +22,23 @@ nnoremap("<leader>p", ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>')
 nnoremap("<leader>w", ':%s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace in current file
 nnoremap("<leader>w", ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace for each file in repo
 
-nnoremap("<leader>d", ':FocusToggle<CR>:Gdiffsplit<CR>')
-nnoremap("<leader>f", ':FocusToggle<CR>')
 nnoremap("<leader>z", ':ToggleOnly<CR>')
 
-nnoremap("<leader>b", ":lua require'telescope.builtin'.buffers()<CR>")
-nnoremap("<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>")
-nnoremap("<leader>fl", ":lua require'telescope.builtin'.current_buffer_fuzzy_find()<CR>")
-nnoremap("<leader>fg", ":lua require'telescope.builtin'.live_grep()<CR>")
-nnoremap("<leader>fh", ":lua require'telescope.builtin'.help_tags()<CR>")
-nnoremap("<leader>fr", ":lua require'telescope.builtin'.lsp_references()<CR>")
-nnoremap("<leader>fc", ":lua require'config.telescope_config'.find_nvim_config()<CR>")
+-- nnoremap("<leader>b", ":lua require'telescope.builtin'.buffers()<CR>")
+-- nnoremap("<leader>ff", ":lua require'telescope.builtin'.find_files()<CR>")
+-- nnoremap("<leader>fl", ":lua require'telescope.builtin'.current_buffer_fuzzy_find()<CR>")
+-- nnoremap("<leader>fg", ":lua require'telescope.builtin'.live_grep()<CR>")
+-- nnoremap("<leader>fh", ":lua require'telescope.builtin'.help_tags()<CR>")
+-- nnoremap("<leader>fr", ":lua require'telescope.builtin'.lsp_references()<CR>")
+-- nnoremap("<leader>fc", ":lua require'config.telescope_config'.find_nvim_config()<CR>")
+
+
+-- only use this if you are using vim mode in the terminal otherwise you will
+-- be missing ctrl-w for backstepping a word...
+-- tmap("<C-W>h", "<C-\\><C-N><C-W>h")
+-- tmap("<C-W>l", "<C-\\><C-N><C-W>l")
+-- tmap("<C-W>j", "<C-\\><C-N><C-W>j")
+-- tmap("<C-W>k", "<C-\\><C-N><C-W>k")
 
 
 -- Keep cursor at the position it is when concatenating lines
@@ -40,8 +46,8 @@ nnoremap("<leader>fc", ":lua require'config.telescope_config'.find_nvim_config()
 
 -- Jump to next, but leave the cursor line at the position it is
 -- Additionally open the fold if there is one
-nnoremap("n", "nzzzv")
-nnoremap("N", "Nzzzv")
+-- nnoremap("n", "nzzzv")
+-- nnoremap("N", "Nzzzv")
 
 -- Insert undo  break points
 -- Interferance with .. and ,, for vhdl?
@@ -73,9 +79,9 @@ vim.cmd("cabbrev Wq wq")
 --vim.cmd("Repeatable nnoremap <leader>dg :diffget<CR>")
 --vim.cmd("Repeatable nnoremap <leader>dp :diffput<CR>")
 
-tnoremap(",,", "<C-\\><C-N>", {silent = false})
-nnoremap("<F1>", ":FloatermToggle<CR>")
-tnoremap("<F1>", "<C-\\><C-N>:FloatermToggle<CR>")
+-- tnoremap(",,", "<C-\\><C-N>", {silent = false})
+nnoremap("<F10>", ":FloatermToggle<CR>")
+tnoremap("<F10>", "<C-\\><C-N>:FloatermToggle<CR>")
 vim.cmd[[
 if has('balloon_eval')
     nnoremap <F12>           : setl beval!<CR>

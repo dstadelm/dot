@@ -18,19 +18,25 @@ return require('packer').startup({function(use)
 
   -- tpope plugins
   use {
-    {'tpope/vim-commentary'},
+    -- {'tpope/vim-commentary'},
     {'tpope/vim-projectionist'},
     {'tpope/vim-eunuch'},
     {'tpope/vim-vinegar'},
   }
 
   use {
-    'tpope/vim-surround',
-    config = function()
-      -- add a mapping c to make command surrounds
-      -- usage ysiwc textit<CR>
-      vim.cmd([[let g:surround_{char2nr('c')} = "\\\1command\1{\r}"]])
-    end
+    'kylechui/nvim-surround',
+    config = get_config('nvim-surround')
+  }
+
+  use {
+    'numToStr/Comment.nvim',
+    config = get_config('comment')
+  }
+
+  use {
+    "windwp/nvim-autopairs",
+    config = get_config("nvim-autopairs")
   }
 
   use {
@@ -89,12 +95,22 @@ return require('packer').startup({function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
-      'nvim-treesitter/nvim-treesitter-refactor',
       'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/playground',
     },
     run = ':TSUpdate',
     config = get_config('treesitter_config'),
+  }
+  use {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      {"nvim-lua/plenary.nvim"},
+      {"nvim-treesitter/nvim-treesitter"}
+    },
+    config = get_config('refactoring')
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter-context'
   }
 
   use {
@@ -114,12 +130,6 @@ return require('packer').startup({function(use)
   }
 
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
-  -- use {
-  --   'beauwilliams/focus.nvim',
-  --   config = function() require("focus").setup({excluded_filetypes = {"DiffviewFiles"}}) end
-  -- }
-
 
   use {
     'cljoly/telescope-repo.nvim',
@@ -174,8 +184,6 @@ return require('packer').startup({function(use)
     config = get_config('project_config')
   }
 
-  use { 'mg979/vim-visual-multi' }
-
   use {
     'junegunn/vim-easy-align',
     config = get_config('easy-align'),
@@ -188,10 +196,6 @@ return require('packer').startup({function(use)
     end
   }
 
-  use {
-    'lukas-reineke/headlines.nvim',
-    config = get_config("headlines_config")
-  }
 
   use {
     "nvim-neorg/neorg",
@@ -213,8 +217,6 @@ return require('packer').startup({function(use)
 
   -- scrolling
   use { 'yuttie/comfortable-motion.vim' }
-
-  use { 'fadein/vim-FIGlet' }
 
   use {
     'mhinz/vim-startify',
@@ -242,12 +244,6 @@ return require('packer').startup({function(use)
     config = get_config('latex'),
   }
 
-  use {
-    'PeterRincker/vim-searchlight',
-    config = get_config('searchlight')
-  }
-
-
   -- Git Integration
   use {'tpope/vim-fugitive'}
   use {'powerman/vim-plugin-AnsiEsc'}
@@ -273,29 +269,11 @@ return require('packer').startup({function(use)
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim"
-    }
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
+    },
+    config = get_config("neotest_config"),
   }
-  -- Themes
-  use { 'Shatur/neovim-ayu' }
-  use { 'Julpikar/night-owl.nvim' }
-  use { 'rafamadriz/neon' }
-  use { 'Mofiqul/dracula.nvim' }
-  use {
-    'marko-cerovac/material.nvim',
-    config = get_config('material_config')
-  }
-  use {
-    'olimorris/onedarkpro.nvim',
-    config = get_config('onedarkpro_config')
-  }
-  use { 'EdenEast/nightfox.nvim' }
-  use { 'RRethy/nvim-base16' }
-  use {
-    'Mofiqul/vscode.nvim',
-    config = get_config('vscode_config')
-  }
-
   -- Lua
   use {
     "folke/trouble.nvim",
@@ -310,7 +288,31 @@ return require('packer').startup({function(use)
     config = get_config('which-key_config'),
   }
 
-  use { 'gabrielpoca/replacer.nvim' }
+  -- use { 'gabrielpoca/replacer.nvim' }
+  -- Themes
+  use { 'rebelot/kanagawa.nvim' }
+  use { 'Shatur/neovim-ayu' }
+  use { 'Julpikar/night-owl.nvim' }
+  use { 'rafamadriz/neon' }
+  use { 'Mofiqul/dracula.nvim' }
+  use {
+    'marko-cerovac/material.nvim',
+    config = get_config('material_config')
+  }
+  use {
+    'olimorris/onedarkpro.nvim',
+    config = get_config('onedarkpro_config')
+  }
+  use {
+    'sainnhe/sonokai',
+  }
+  use { 'EdenEast/nightfox.nvim' }
+  use { 'RRethy/nvim-base16' }
+  use {
+    'Mofiqul/vscode.nvim',
+    config = get_config('vscode_config')
+  }
+
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -318,11 +320,20 @@ return require('packer').startup({function(use)
     config = get_config('lualine_config')
   }
 
-  use({
+  use {
+    'NTBBloodbath/doom-one.nvim',
+    config = get_config('doom-one_config')
+  }
+
+  use{
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = get_config('lsp_lines_config'),
-  })
+  }
 
+  use {
+    'lukas-reineke/headlines.nvim',
+    config = get_config("headlines_config")
+  }
   -- has to be after the themes
   use {
     'norcalli/nvim-colorizer.lua',
