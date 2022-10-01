@@ -193,6 +193,7 @@ return require('packer').startup({function(use)
     'vimwiki/vimwiki',
     config = function()
       vim.cmd([[let g:vimwiki_listsyms = '✗○◐●✓']])
+      vim.cmd([[let g:vimwiki_ext2syntax = {'.wiki': 'media'}]])
     end
   }
 
@@ -210,7 +211,9 @@ return require('packer').startup({function(use)
   use {
     'iamcco/markdown-preview.nvim',
     run = 'cd app && yarn install',
-    cmd = 'MarkdownPreview'
+    cmd = 'MarkdownPreview',
+    setup = function() vim.g.mkdp_filetypes = {"markdown"} end,
+    ft = {'markdown'}
   }
 
   use { 'rhysd/vim-grammarous' }
@@ -290,6 +293,7 @@ return require('packer').startup({function(use)
 
   -- use { 'gabrielpoca/replacer.nvim' }
   -- Themes
+  use {'B4mbus/oxocarbon-lua.nvim'}
   use { 'rebelot/kanagawa.nvim' }
   use { 'Shatur/neovim-ayu' }
   use { 'Julpikar/night-owl.nvim' }

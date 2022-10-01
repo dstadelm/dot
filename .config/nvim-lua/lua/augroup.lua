@@ -32,6 +32,13 @@ local python_run_keymap = function()
 end
 vim.api.nvim_create_autocmd("FileType", {pattern="python", group = auto_source_group, callback = python_run_keymap})
 
+local auto_format_group = vim.api.nvim_create_augroup("AutoFormatGroup", {clear = true})
+vim.api.nvim_create_autocmd("BufWritePre",
+                            { pattern="*.py",
+                              group = auto_format_group,
+                              command="lua vim.lsp.buf.format{ filter = function(client) return client.name ~= 'pylsp' end }"
+                            }
+                          )
 --------------------------------------------------------------------------------
 -- Modify the suffixesadd an the path when in .config directory to be able to
 -- jump directly to config files from plugin.lua
@@ -59,6 +66,6 @@ vim.api.nvim_create_autocmd("TermOpen", {pattern="*", group = neovim_terminal_gr
 
 --------------------------------------------------------------------------------
 -- Set the cursor line to the middle of the screen
--- local cursor_line_group = vim.api.nvim_create_augroup("CursorLine", {clear = true})
--- vim.api.nvim_create_autocmd({"BufEnter", "WinEnter", "VimResized", "WinNew"}, {pattern="*,*.*", group = cursor_line_group, command="let &scrolloff=winheight(win_getid())/2"})
+local cursor_line_group = vim.api.nvim_create_augroup("CursorLine", {clear = true})
+vim.api.nvim_create_autocmd({"BufEnter", "WinEnter", "VimResized", "WinNew"}, {pattern="*,*.*", group = cursor_line_group, command="let &scrolloff=winheight(win_getid())/2"})
 

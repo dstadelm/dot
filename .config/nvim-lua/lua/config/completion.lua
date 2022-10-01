@@ -13,12 +13,12 @@ cmp.setup({
     })
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
   },
   completion = {
     completeopt = 'menu,menuone,noselect',
-    -- keyword_length = 4,
+    keyword_length = 1,
     -- autocomplete = false,
   },
   snippet = {

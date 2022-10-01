@@ -11,16 +11,16 @@ local tnoremap = require("utils").tnoremap
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
-nnoremap("<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>', {silent = false})
-nnoremap("<leader>s", ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', {silent = false})
-nnoremap("<leader>r", ':read <C-R>=expand("%:p:h") . "/" <CR>', {silent = false})
+-- nnoremap("<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>', {silent = false})
+-- nnoremap("<leader>s", ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', {silent = false})
+-- nnoremap("<leader>r", ':read <C-R>=expand("%:p:h") . "/" <CR>', {silent = false})
 --nnoremap("<leader>P", ':set paste')
 --nnoremap("<leader>p", ':set nopaste')
-nnoremap("<leader>v", ':edit $MYVIMRC<CR>')
-nnoremap("<leader>p", ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>')
+-- nnoremap("<leader>v", ':edit $MYVIMRC<CR>')
+-- nnoremap("<leader>p", ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>')
 
-nnoremap("<leader>w", ':%s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace in current file
-nnoremap("<leader>w", ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace for each file in repo
+-- nnoremap("<leader>w", ':%s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace in current file
+-- nnoremap("<leader>w", ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>') -- delete all trailing whitespace for each file in repo
 
 nnoremap("<leader>z", ':ToggleOnly<CR>')
 
@@ -33,8 +33,8 @@ nnoremap("<leader>z", ':ToggleOnly<CR>')
 -- nnoremap("<leader>fc", ":lua require'config.telescope_config'.find_nvim_config()<CR>")
 
 
--- only use this if you are using vim mode in the terminal otherwise you will
 -- be missing ctrl-w for backstepping a word...
+-- only use this if you are using vim mode in the terminal otherwise you will
 -- tmap("<C-W>h", "<C-\\><C-N><C-W>h")
 -- tmap("<C-W>l", "<C-\\><C-N><C-W>l")
 -- tmap("<C-W>j", "<C-\\><C-N><C-W>j")
@@ -82,18 +82,3 @@ vim.cmd("cabbrev Wq wq")
 -- tnoremap(",,", "<C-\\><C-N>", {silent = false})
 nnoremap("<F10>", ":FloatermToggle<CR>")
 tnoremap("<F10>", "<C-\\><C-N>:FloatermToggle<CR>")
-vim.cmd[[
-if has('balloon_eval')
-    nnoremap <F12>           : setl beval!<CR>
-    set bexpr=InspectSynHL()
-endif
-fun! InspectSynHL()
-    let l:synNames = []
-    let l:idx = 0
-    for id in synstack(v:beval_lnum, v:beval_col)
-        call add(l:synNames, printf('%s%s', repeat(' ', idx), synIDattr(id, 'name')))
-        let l:idx+=1
-    endfor
-    return join(l:synNames, "\n")
-endfun
-]]

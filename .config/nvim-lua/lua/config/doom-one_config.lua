@@ -27,4 +27,16 @@ vim.g.doom_one_plugin_whichkey = true
 vim.g.doom_one_plugin_indent_blankline = true
 vim.g.doom_one_plugin_vim_illuminate = true
 vim.g.doom_one_plugin_lspsaga = false
+
+local doom_one = require("doom-one")
+doom_one.setup(
+  {
+    colors = {
+      dark = {
+        bg = "#1e2127",
+        bg_alt = "#282c34",
+      }
+    }
+  }
+)
 vim.cmd("colorscheme doom-one")

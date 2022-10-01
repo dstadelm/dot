@@ -1,4 +1,7 @@
 local wk = require('which-key')
+_G.dstadelm = {
+  mappings = {},
+}
 wk.setup{
   -- your configuration comes here
   -- or leave it empty to use the default settings
@@ -13,12 +16,103 @@ wk.register{
     -- ["<C-F>"] = {"<C-F>zzzv", "Scroll half page down"},
     -- ["<C-B>"] = {"<C-B>zzzv", "Scroll half page up"},
 }
+
+wk.register(
+  {
+    e = { ':e <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
+    s = { ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
+    r = { ':read <C-R>=expand("%:p:h") . "/" <CR>', "Read content of file to this file"}
+  },
+  {
+    prefix= '<leader>',
+    mode  = 'n',
+    silent = false,
+  }
+)
+
+wk.register(
+  {
+    v = { ':e $MYVIMRC <CR>', "Open init.lua"},
+    p = { ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>', "Open plugins.lua"},
+    w = { ':%s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace in current file"},
+    a = {
+      name = "All files in repo",
+      w = { ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace for each file in repo"}
+    }
+  },
+  {
+    prefix= '<leader>',
+    mode  = 'n',
+  }
+)
+--------------------------------------------------------------------------------
+-- Initial idea from here http://www.kevinli.co/posts/2017-01-19-multiple-cursors-in-500-bytes-of-vimscript/
+-- Mappings from here https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/Oli/core/mappings.lua
+-- Discussion on the mappings https://github.com/akinsho/dotfiles/issues/9
+
+
+-- Functions for multiple cursors
+local mc = vim.api.nvim_replace_termcodes([[y/\V<C-r>=escape(@", '/')<CR><CR>]], true, true, true)
+
+function dstadelm.mappings.setup_mc()
+  vim.keymap.set(
+    "n",
+    "<Enter>",
+    [[:nnoremap <lt>Enter> n@z<CR>q:<C-u>let @z=strpart(@z,0,strlen(@z)-1)<CR>n@z]],
+    { remap = true, silent = true }
+  )
+  return ""
+end
+
+-- Word Mode
+-- ==========
+-- 1. Position in the cursor anywhere in the word you wish to change;
+-- 2. Or, visually make a selection;
+-- 3. Hit cn, type the new word, then go back to Normal mode;
+-- 4. Hit `.` n-1 times, where n is the number of replacements.
+--
+-- Macro Mode
+-- ==========
+-- 1. Position the cursor over a word; alternatively, make a selection.
+-- 2. Hit cq to start recording the macro.
+-- 3. Once you are done with the macro, go back to normal mode.
+-- 4. Hit Enter to repeat the macro over search matches.
+wk.register(
+  {
+    c = {
+      name = "multi cursor",
+      n = {"*``cgn", "Multicursor change next occurance"}, -- equivalent to *Ncgn
+      N = {"*``cgN", "Multicursor change previous occurance"}, -- equivalent to *NcgN
+      q = {":<C-u>lua dstadelm.mappings.setup_mc()<CR>*``qz", "Multicursor change with macro"},
+    }
+  },
+  {
+    prefix= '<leader>',
+    mode  = 'n',
+  }
+)
+
+wk.register(
+  {
+    c = {
+      name = "multi cursor",
+      n = {mc .. "``cgn", "Multicursor change next occurance"}, -- instead of ``cgn one could use Ncgn
+      N = {mc .. "``cgN", "Multicursor change previous occurance"}, -- instead of ``cgN one could use NcgN
+      q = {":<C-u>call v:lua.dstadelm.mappings.setup_mc()<CR>gv" .. mc .. "``qz", "Multicursor change with macro"},
+    }
+  },
+  {
+    prefix= '<leader>',
+    mode  = 'x',
+  }
+)
 --------------------------------------------------------------------------------
 -- Telescope <find>
 wk.register(
   {
     f = {
       name = "find",
+      b = {":lua require'telescope.builtin'.buffers()<CR>", "Find Buffers"},
       c = {":lua require'config.telescope_config'.find_nvim_config()<CR>", "Find Neovim Config"},
       f = {":lua require'telescope.builtin'.find_files()<CR>", "Find Files"},
       g = {":lua require'telescope.builtin'.live_grep()<CR>", "Grep in Project"},
@@ -27,7 +121,6 @@ wk.register(
       r = {":lua require'telescope.builtin'.lsp_references()<CR>", "Find Reference"},
       o = {":lua require'telescope.builtin'.oldfiles()<CR>", "Find old files"},
     },
-    b = {":lua require'telescope.builtin'.buffers()<CR>", "Find Buffers"},
   },
   {
     prefix = '<leader>',
@@ -130,6 +223,7 @@ local augroup_vhdl_buflocal_keymaps = vim.api.nvim_create_augroup("vhdl_buflocal
 
 local vhdl_buflocal_keymaps = function()
   local curr_buf = vim.api.nvim_get_current_buf()
+  print("HELLO VHDL")
   wk.register(
     {
       v = {
@@ -137,8 +231,8 @@ local vhdl_buflocal_keymaps = function()
         i = { '<cmd>VhdlInsertInstanceFromTag<cr>' , "Insert an instance from tags"},
         c = { '<cmd>VhdlUpdateCtags<cr>' , "Update vhdl ctags"},
         p = { '<cmd>VhdlPasteSignals<cr>' , "Paste signals from copied instance"},
-        s = { '<cmd>VhdlUpdateSensitivityList<cr>' , "Update sensitivity list"},
-        b = { '<cmd>VhdlBeautify<cr>' , "Format buffer"},
+        s = { '<cmd>VhdlUpdateSensitivityList<cr><cr>' , "Update sensitivity list"},
+        b = { '<cmd>VhdlBeautify<cr><cr>' , "Format buffer"},
       }
     },
     {
@@ -146,9 +240,26 @@ local vhdl_buflocal_keymaps = function()
       buffer = curr_buf,
     }
   )
-
 end
 
 
-vim.api.nvim_create_autocmd({"BufNew"}, {pattern="*.vhd", group=augroup_vhdl_buflocal_keymaps, callback = vhdl_buflocal_keymaps})
+vim.api.nvim_create_autocmd({"BufNew", "BufRead"}, {pattern="*.vhd", group=augroup_vhdl_buflocal_keymaps, callback = vhdl_buflocal_keymaps})
 
+--------------------------------------------------------------------------------
+-- Norg mappings
+--
+local augroup_norg_buflocal_keymaps = vim.api.nvim_create_augroup("ag_norg_buflocal_keymaps", {clear = true})
+local norg_buflocal_keymaps = function()
+  local curr_buf = vim.api.nvim_get_current_buf()
+  wk.register(
+    {
+        ["p"] = { '<cmd>Neorg presenter start<cr><cmd>set nonumber norelativenumber conceallevel=3<cr>' , "Start presenter mode"},
+    },
+    {
+      prefix = '<localleader>',
+      buffer = curr_buf,
+    }
+  )
+end
+
+vim.api.nvim_create_autocmd({"BufNew", "BufRead"}, {pattern="*.norg", group=augroup_norg_buflocal_keymaps, callback = norg_buflocal_keymaps})

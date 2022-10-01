@@ -29,8 +29,7 @@ vim.wo.breakindent = true
 vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.opt.path = "**"
-
-
+vim.o.cmdheight=0
 
 vim.o.mouse = 'a'
 vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical'
@@ -45,7 +44,7 @@ set undodir=~/.vimundo
 
 -- enable embeded script highlighting for lua and python
 vim.g.vimsyn_embed   = 'lP'
--- vim.g.python3_host_prog = '/home/dstadelmann/regenor/.pyenv-nvim/bin/python'
+vim.g.python3_host_prog = '/home/dstadelmann/.nvim-python/bin/python'
 vim.cmd([[
 set title
 set titlestring=%{hostname()}\ \ %F\ \ %{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}
