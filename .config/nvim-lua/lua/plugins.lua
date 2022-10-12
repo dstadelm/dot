@@ -200,12 +200,12 @@ return require('packer').startup({function(use)
 
   use {
     "nvim-neorg/neorg",
+    run = ":Neorg sync-parsers",
     config = get_config("neorg_config"),
     requires = {
       'nvim-lua/plenary.nvim',
       'folke/zen-mode.nvim',
     }
-
   }
 
   use {
@@ -291,7 +291,7 @@ return require('packer').startup({function(use)
     config = get_config('which-key_config'),
   }
 
-  -- use { 'gabrielpoca/replacer.nvim' }
+  use { 'stefandtw/quickfix-reflector.vim' }
   -- Themes
   use {'B4mbus/oxocarbon-lua.nvim'}
   use { 'rebelot/kanagawa.nvim' }
@@ -338,6 +338,7 @@ return require('packer').startup({function(use)
     'lukas-reineke/headlines.nvim',
     config = get_config("headlines_config")
   }
+
   -- has to be after the themes
   use {
     'norcalli/nvim-colorizer.lua',

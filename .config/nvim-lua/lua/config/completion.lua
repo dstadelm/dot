@@ -28,34 +28,35 @@ cmp.setup({
     end,
   },
 
-    mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      ["<C-k>"] = cmp.mapping(
-        function(fallback)
-          cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-        end,
-        { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-      ),
-      ["<C-j>"] = cmp.mapping(
-        function(fallback)
-          cmp_ultisnips_mappings.jump_backwards(fallback)
-        end,
-        { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-      ),
-    }),
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ["<C-k>"] = cmp.mapping(
+      function(fallback)
+        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+      end,
+      { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+    ),
+    ["<C-j>"] = cmp.mapping(
+      function(fallback)
+        cmp_ultisnips_mappings.jump_backwards(fallback)
+      end,
+      { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+    ),
+  }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'ultisnips'}, -- For ultisnips users.
   }, {
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'calc' },
-    { name = 'nvim_lsp_signature_help' },
-  })
+      { name = 'buffer' },
+      { name = 'path' },
+      { name = 'calc' },
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'neorg'},
+    })
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

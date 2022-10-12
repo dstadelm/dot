@@ -1,5 +1,5 @@
 local onedarkpro = require("onedarkpro")
-local utils = require("onedarkpro.utils")
+local utils = require("onedarkpro.lib.color")
 local nicerBG = "#1e2127"
 onedarkpro.setup({
   -- Theme can be overwritten with 'onedark' or 'onelight' as a string
@@ -26,11 +26,11 @@ onedarkpro.setup({
            DiagnosticVirtualTextHint = { fg = "#7e3992", bg = "#292534", style = "italic" },
            -- Pmenu = {bg = "#0F1013"},
            -- PmenuSel = {bg = "#334477"},
-           Pmenu = {bg = utils.darken(nicerBG, 0.4)},
-           PmenuSel = {bg = utils.lighten(nicerBG, 0.8)},
+           Pmenu = {bg = utils.darken(nicerBG, 0.4, "#000000")},
+           PmenuSel = {bg = utils.lighten(nicerBG, 0.8, "#FFFFFF")},
            -- PmenuSbar = {bg = "#00FF00"},
            -- PmenuThumb = {bg = utils.darken(nicerBG, 0.4)},
-           NormalFloat = {bg = utils.darken(nicerBG, 0.4)},
+           NormalFloat = {bg = utils.darken(nicerBG, 0.4, "#000000")},
   },
   styles = {
       strings = "NONE", -- Style that is applied to strings

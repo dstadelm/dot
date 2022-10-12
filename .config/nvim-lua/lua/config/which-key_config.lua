@@ -223,7 +223,6 @@ local augroup_vhdl_buflocal_keymaps = vim.api.nvim_create_augroup("vhdl_buflocal
 
 local vhdl_buflocal_keymaps = function()
   local curr_buf = vim.api.nvim_get_current_buf()
-  print("HELLO VHDL")
   wk.register(
     {
       v = {
