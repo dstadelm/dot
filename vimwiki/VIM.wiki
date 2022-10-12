@@ -66,7 +66,12 @@ e# opens last buffer
        0 -> 6
        0 -> 8
 
-
+== Repeat ==
+:@       ->                       repeat last ex command
+&        ->                       repeat last substitution (only on current line without flags)
+:&&      ->                       repeat keeping flags
+g&       -> synonym for :%//~/&  (repeat last substitute wit last search pattern on all lines with the same flags)
+:'<,'>&& ->                       repeat last substitute on range
 == Vim Registers ==
 "<reg>p will print the content of the register to the buffer
 
@@ -76,6 +81,7 @@ e# opens last buffer
 == Visual selection ==
 o  -> switch corner of selection
 gv -> previous selection
+gn -> go to next search and visually select it
 
 == Go to previous insert position ==
 g; -> go to previous insert position in normal mode
