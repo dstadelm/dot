@@ -162,10 +162,11 @@
 
     "custom/arch-updates": {
       "format": " {}",
-      "interval": "900",
+      "interval": "60",
       "exec": "checkupdates | wc -l",
-      "on-click": "alacritty --class floating_update -e yay --devel -Syu",
+      "on-click": "alacritty --class floating_update -e yay --devel -Syu; pkill -SIGRTMIN+8 waybar",
       "on-click-right": "checkupdates | wc -l",
+      "signal": 8,
       "tooltip": false
     },
     "custom/media": {

@@ -117,6 +117,7 @@ input "type:keyboard" {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+x exec wlogout -p layer-shell
     # pick a color
     bindsym $mod+Shift+p exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy -p
     # volume control
@@ -202,6 +203,7 @@ set $workspace10 10
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
+    bindsym $mod+Shift+w layout default
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
