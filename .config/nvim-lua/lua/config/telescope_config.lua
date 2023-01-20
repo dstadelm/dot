@@ -4,7 +4,7 @@ require('telescope').setup{
       prompt_position = "top"
     },
     sorting_strategy = "ascending",
-    path_display = {"truncate"},
+    path_display = {shorten = 3}, -- hidden, tail, absolute, smart, shorten, truncate
   } ,
   pickers = {
     buffers = {

@@ -1,6 +1,18 @@
-USER = vim.fn.expand('$USER')
-local sumneko_root_path = "/home/" .. USER .. "/bin/lua-language-server"
-local sumneko_binary = "/home/" .. USER .. "/bin/lua-language-server/bin/lua-language-server"
+require("nvim-lsp-installer").setup({
+    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
+})
+
+-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+require("neodev").setup({
+  -- add any options here, or leave empty to use the default settings
+})
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
@@ -72,9 +84,33 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 
+
+-- example to setup sumneko and enable call snippets
+require'lspconfig'.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
 
 local lspconfig = require'lspconfig'
 local configs = require'lspconfig.configs'
@@ -92,10 +128,10 @@ if not configs.rust_hdl then
       end;
       autostart = true,
       settings = {},
-      flags = {
-        allow_incremental_sync = true,
-        debounce_text_changes = 5000,
-      },
+      -- flags = {
+      --   allow_incremental_sync = true,
+      --   debounce_text_changes = 5000,
+      -- },
     },
   }
 end
@@ -130,6 +166,19 @@ lspconfig.yamlls.setup{
 require'lspconfig'.pyright.setup{
   on_attach = on_attach,
   capabilities = capabilities,
+  settings = {
+    pyright = {
+      disableOrganizeImports = true,
+      openFilesOnly = true,
+    },
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'openFilesOnly',
+      },
+    },
+  }
 }
 
 -- local util = require 'lspconfig.util'
@@ -172,13 +221,4 @@ require'lspconfig'.texlab.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 }
-local luadev = require("lua-dev").setup({
-  -- add any options here, or leave empty to use the default settings
-  lspconfig = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-  },
-})
 
-require'lspconfig'.sumneko_lua.setup(luadev)

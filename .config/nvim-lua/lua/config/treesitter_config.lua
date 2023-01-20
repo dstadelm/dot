@@ -27,9 +27,10 @@ parser_config.vhdl = {
 
 require 'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
+  ignore_install = {"vhdl"},
   highlight = {
     enable = true,
-    disable = { "help" }
+    disable = { "help" , "vhdl"}
   },
   incremental_selection = {
     enable = true,

@@ -24,15 +24,16 @@ vim.o.wildmenu = true
 vim.o.wildoptions = 'pum'
 vim.o.pumblend = 10
 vim.o.showmode = false -- do not show in which mode we are, as this is shown by airline
-vim.o.clipboard = 'unnamedplus,unnamed'-- unamedplus -> ctrl-v; unamed -> middle mouse click
+vim.o.clipboard = 'unnamedplus,unnamed' -- unamedplus -> ctrl-v; unamed -> middle mouse click
 vim.wo.breakindent = true
 vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.opt.path = "**"
-vim.o.cmdheight=0
+--vim.o.cmdheight=0
+vim.o.laststatus = 3
 
 vim.o.mouse = 'a'
-vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical'
+vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical,linematch:60'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.redrawtime = 10000
 
@@ -43,10 +44,9 @@ set undodir=~/.vimundo
 
 
 -- enable embeded script highlighting for lua and python
-vim.g.vimsyn_embed   = 'lP'
+vim.g.vimsyn_embed      = 'lP'
 vim.g.python3_host_prog = '/home/dstadelmann/.nvim-python/bin/python'
 vim.cmd([[
 set title
 set titlestring=%{hostname()}\ \ %F\ \ %{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}
 ]])
-

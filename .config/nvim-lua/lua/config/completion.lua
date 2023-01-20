@@ -7,8 +7,9 @@ local cmp = require'cmp'
 local types = require('cmp.types')
 cmp.setup({
   formatting = {
+    fields = { "abbr", "kind", "menu"},
     format = lspkind.cmp_format({
-      mode = 'symbol', -- show only symbol annotations
+      mode = 'symbol', -- text, text_symbol, symbol_text, symbol
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
     })
   },
@@ -47,16 +48,21 @@ cmp.setup({
       { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
     ),
   }),
-  sources = cmp.config.sources({
+  sources = cmp.config.sources{
     { name = 'nvim_lsp' },
     { name = 'ultisnips'}, -- For ultisnips users.
-  }, {
-      { name = 'buffer' },
-      { name = 'path' },
-      { name = 'calc' },
-      { name = 'nvim_lsp_signature_help' },
-      { name = 'neorg'},
-    })
+    { name = 'buffer' ,
+      -- option = {
+      --   get_bufnrs = function()
+      --     return vim.api.nvim_list_bufs()
+      --   end
+      -- }
+    },
+    { name = 'path' },
+    { name = 'calc' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'neorg'},
+    }
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

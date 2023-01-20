@@ -2,6 +2,10 @@ local function get_config(cfg)
   return string.format("require('config/%s')",cfg)
 end
 
+local function get_setup(cfg)
+  return string.format("require('setup/%s')",cfg)
+end
+
 --------------------------------------------------------------------------------
 -- This section has to be before the startup function
 local fn = vim.fn
@@ -15,7 +19,7 @@ end
 return require('packer').startup({function(use)
   -- Packer can manage it self
   use 'wbthomason/packer.nvim'
-
+ --
   -- tpope plugins
   use {
     -- {'tpope/vim-commentary'},
@@ -30,6 +34,10 @@ return require('packer').startup({function(use)
   }
 
   use {
+    'gabrielpoca/replacer.nvim'
+  }
+
+  use {
     'numToStr/Comment.nvim',
     config = get_config('comment')
   }
@@ -39,23 +47,27 @@ return require('packer').startup({function(use)
     config = get_config("nvim-autopairs")
   }
 
-  use {
-    'neomake/neomake',
-    config = get_config('neomake'),
-  }
+  -- use {
+  --   'neomake/neomake',
+  --   config = get_config('neomake'),
+  -- }
 
   use { 'mbbill/undotree' }
 
+   use {
+     'folke/neodev.nvim',
+   }
+  -- nvim lsp installer has to be set up prior to any server are set up
+  use {
+    'williamboman/nvim-lsp-installer',
+    -- the config is in lsp-config as it has to be ensured that it is called before any server configuration
+  }
   use {
     'neovim/nvim-lspconfig',
     requires = {
       'glepnir/lspsaga.nvim',
     },
     config = get_config('lsp_config'),
-  }
-  use { 'folke/lua-dev.nvim' }
-  use {
-    'williamboman/nvim-lsp-installer',
   }
 
   use {
@@ -92,33 +104,33 @@ return require('packer').startup({function(use)
     config = get_config('completion'),
   }
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    requires = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/playground',
-    },
-    run = ':TSUpdate',
-    config = get_config('treesitter_config'),
-  }
-  use {
-    "ThePrimeagen/refactoring.nvim",
-    requires = {
-      {"nvim-lua/plenary.nvim"},
-      {"nvim-treesitter/nvim-treesitter"}
-    },
-    config = get_config('refactoring')
-  }
-  use {
-    'nvim-treesitter/nvim-treesitter-context'
-  }
+ use {
+   'nvim-treesitter/nvim-treesitter',
+   requires = {
+     'nvim-treesitter/nvim-treesitter-textobjects',
+     'nvim-treesitter/playground',
+   },
+   run = ':TSUpdate',
+   config = get_config('treesitter_config'),
+ }
+ use {
+   "ThePrimeagen/refactoring.nvim",
+   requires = {
+     {"nvim-lua/plenary.nvim"},
+     {"nvim-treesitter/nvim-treesitter"}
+   },
+   config = get_config('refactoring')
+ }
+ use {
+   'nvim-treesitter/nvim-treesitter-context'
+ }
 
-  use {
-    'mizlan/iswap.nvim',
-    requires = {
-      'nvim-treesitter/nvim-treesitter'
-    }
-  }
+ use {
+   'mizlan/iswap.nvim',
+   requires = {
+     'nvim-treesitter/nvim-treesitter'
+   }
+ }
 
   use {
     'nvim-telescope/telescope.nvim',
@@ -197,7 +209,9 @@ return require('packer').startup({function(use)
     end
   }
 
-
+  use { 'm00qek/baleia.nvim', tag = 'v1.2.0',
+    config = get_config('baleia_config')
+  }
   use {
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers",
@@ -219,7 +233,7 @@ return require('packer').startup({function(use)
   use { 'rhysd/vim-grammarous' }
 
   -- scrolling
-  use { 'yuttie/comfortable-motion.vim' }
+  -- use { 'yuttie/comfortable-motion.vim' }
 
   use {
     'mhinz/vim-startify',
@@ -240,6 +254,12 @@ return require('packer').startup({function(use)
     config = get_config('indent')
   }
 
+  -- -- cursor word highlight
+  -- use {
+  --   'nyngwang/murmur.lua',
+  --   config = get_config('murmur')
+  -- }
+
   use { 'tommcdo/vim-exchange' }
 
   use {
@@ -252,10 +272,8 @@ return require('packer').startup({function(use)
   use {'powerman/vim-plugin-AnsiEsc'}
   use {'rbong/vim-flog'}
   -- {'skywind3000/vim-quickui'},
-  -- {'TamaMcGlinn/flog-menu'},
-  -- use {
-  --   'TamaMcGlinn/flog-forest',
-  -- }
+  use {'TamaMcGlinn/flog-menu'}
+  use {'TamaMcGlinn/flog-forest'}
 
   use {
     'lewis6991/gitsigns.nvim',
@@ -291,7 +309,7 @@ return require('packer').startup({function(use)
     config = get_config('which-key_config'),
   }
 
-  use { 'stefandtw/quickfix-reflector.vim' }
+ --  use { 'stefandtw/quickfix-reflector.vim' }
   -- Themes
   use {'B4mbus/oxocarbon-lua.nvim'}
   use { 'rebelot/kanagawa.nvim' }
@@ -325,10 +343,12 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'NTBBloodbath/doom-one.nvim',
+    'dstadelm/doom-one.nvim',
     config = get_config('doom-one_config')
   }
-
+  use {
+    'catppuccin/nvim',
+  }
   use{
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = get_config('lsp_lines_config'),

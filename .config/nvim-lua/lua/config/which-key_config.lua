@@ -21,7 +21,13 @@ wk.register(
   {
     e = { ':e <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
     s = { ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
-    r = { ':read <C-R>=expand("%:p:h") . "/" <CR>', "Read content of file to this file"}
+    p = {
+      f = {':read <C-R>=expand("%:p:h") . "/" <CR>', "Read content of file to this file"},
+      w = {'ciw<C-R>0<ESC>', "Delete word and replace with current yank"},
+    },
+    c = {
+      d = { ':cd %:p:h<CR>', "Change working directory to directory of current file"}
+    }
   },
   {
     prefix= '<leader>',
@@ -33,7 +39,7 @@ wk.register(
 wk.register(
   {
     v = { ':e $MYVIMRC <CR>', "Open init.lua"},
-    p = { ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>', "Open plugins.lua"},
+    o = { ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>', "Open plugins.lua"},
     w = { ':%s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace in current file"},
     a = {
       name = "All files in repo",
@@ -68,13 +74,13 @@ end
 -- ==========
 -- 1. Position in the cursor anywhere in the word you wish to change;
 -- 2. Or, visually make a selection;
--- 3. Hit cn, type the new word, then go back to Normal mode;
+-- 3. Hit <leader>cn, type the new word, then go back to Normal mode;
 -- 4. Hit `.` n-1 times, where n is the number of replacements.
 --
 -- Macro Mode
 -- ==========
 -- 1. Position the cursor over a word; alternatively, make a selection.
--- 2. Hit cq to start recording the macro.
+-- 2. Hit <leader>cq to start recording the macro.
 -- 3. Once you are done with the macro, go back to normal mode.
 -- 4. Hit Enter to repeat the macro over search matches.
 wk.register(
@@ -153,16 +159,16 @@ wk.register({
 --------------------------------------------------------------------------------
 -- Window mappings
 -- ---------------
-wk.register(
-  {
-    ["<C-W>"] = {
-      H = { ':exe "vert resize " . (winwidth(0) * 4/5)<CR>', "Decrease vertical window size by 4/5"},
-      K = { ':exe "resize " . (winheight(0) * 6/5)<CR>', "Increase horizontal window size by 6/5"},
-      J = { ':exe "resize " . (winheight(0) * 4/5)<CR>', "Decrease horizontal window size by 4/5"},
-      L = { ':exe "vert resize " . (winwidth(0) * 6/5)<CR>', "Increase vertical widnow size by 6/5"},
-    }
-  }
-)
+-- wk.register(
+--   {
+--     ["<C-W>"] = {
+--       H = { ':exe "vert resize " . (winwidth(0) * 4/5)<CR>', "Decrease vertical window size by 4/5"},
+--       K = { ':exe "resize " . (winheight(0) * 6/5)<CR>', "Increase horizontal window size by 6/5"},
+--       J = { ':exe "resize " . (winheight(0) * 4/5)<CR>', "Decrease horizontal window size by 4/5"},
+--       L = { ':exe "vert resize " . (winwidth(0) * 6/5)<CR>', "Increase vertical widnow size by 6/5"},
+--     }
+--   }
+-- )
 --------------------------------------------------------------------------------
 -- Terminal mode mappings
 -- ----------------------
@@ -243,6 +249,21 @@ end
 
 
 vim.api.nvim_create_autocmd({"BufNew", "BufRead"}, {pattern="*.vhd", group=augroup_vhdl_buflocal_keymaps, callback = vhdl_buflocal_keymaps})
+-------------------------------------------------------------------------------
+-- Flog open commit folded
+local flog_group = vim.api.nvim_create_augroup("FlogGroup", {clear = true})
+local open_flog_folded = function()
+  local curr_buf = vim.api.nvim_get_current_buf()
+  wk.register(
+    {
+      ["<CR>"] = {":<C-U>call flog#run_tmp_command('vertical belowright Git show %h')<CR> <C-W>l :set foldmethod=syntax<CR>za", "Open commit under cursor"},
+    },
+    {
+      buffer = curr_buf,
+    }
+  )
+end
+vim.api.nvim_create_autocmd("FileType", {pattern="floggraph", group=flog_group, callback=open_flog_folded})
 
 --------------------------------------------------------------------------------
 -- Norg mappings
