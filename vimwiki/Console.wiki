@@ -1,0 +1,21 @@
+= Console Tools =
+
+== Limit console string length ==
+- fold
+- pr
+
+== Useful commands ==
+- fmt
+- uniq
+- tr
+- join
+- paste
+- nl     : show numbers of lines
+
+== Help pages ==
+- whatis : gibt kopf der man page
+- apropos: sucht nach strings in der whatis db
+- info   : alternative to man
+
+= Find with shell invocation =
+[[Find]]
