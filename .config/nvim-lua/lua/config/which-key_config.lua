@@ -249,21 +249,6 @@ end
 
 
 vim.api.nvim_create_autocmd({"BufNew", "BufRead"}, {pattern="*.vhd", group=augroup_vhdl_buflocal_keymaps, callback = vhdl_buflocal_keymaps})
--------------------------------------------------------------------------------
--- Flog open commit folded
-local flog_group = vim.api.nvim_create_augroup("FlogGroup", {clear = true})
-local open_flog_folded = function()
-  local curr_buf = vim.api.nvim_get_current_buf()
-  wk.register(
-    {
-      ["<CR>"] = {":<C-U>call flog#run_tmp_command('vertical belowright Git show %h')<CR> <C-W>l :set foldmethod=syntax<CR>za", "Open commit under cursor"},
-    },
-    {
-      buffer = curr_buf,
-    }
-  )
-end
-vim.api.nvim_create_autocmd("FileType", {pattern="floggraph", group=flog_group, callback=open_flog_folded})
 
 --------------------------------------------------------------------------------
 -- Norg mappings

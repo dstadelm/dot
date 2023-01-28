@@ -272,8 +272,28 @@ return require('packer').startup({function(use)
   use {'powerman/vim-plugin-AnsiEsc'}
   use {'rbong/vim-flog'}
   -- {'skywind3000/vim-quickui'},
-  use {'TamaMcGlinn/flog-menu'}
-  use {'TamaMcGlinn/flog-forest'}
+  -- use {'TamaMcGlinn/flog-menu'}
+  -- use {'TamaMcGlinn/flog-forest'}
+
+  use {'rcarriga/nvim-notify',
+    config = get_config('notify_config')
+  }
+  -- use({
+  --   "folke/noice.nvim",
+  --   config = function()
+  --     require("noice").setup({
+  --       -- add any options here
+  --     })
+  --   end,
+  --   requires = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- })
 
   use {
     'lewis6991/gitsigns.nvim',
@@ -325,6 +345,7 @@ return require('packer').startup({function(use)
     'olimorris/onedarkpro.nvim',
     config = get_config('onedarkpro_config')
   }
+  use {'JoosepAlviste/palenightfall.nvim'}
   use {
     'sainnhe/sonokai',
   }
