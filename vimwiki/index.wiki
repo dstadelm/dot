@@ -12,6 +12,7 @@
 [[HyperV]]
 [[LaTeX]]
 [[Linux]]
+[[Neovim Lua Plugins]]
 [[Patterns]]
 [[PDF]]
 [[ProjectDesign]]
