@@ -10,10 +10,11 @@
 [core]
 	editor = nvim
   PreloadIndex = true
-#  pager = delta
+  pager = delta
 [interactive]
-#  diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
+  navigate = true
   features = side-by-side line-numbers decorations
   whitespace-error-style = 22 reverse
 	side-by-side = true
@@ -32,8 +33,8 @@
 [gui]
   spellingdictionary = none
 [alias]
-  logk = log --graph --all --decorate --abbrev-commit --pretty=oneline --date=local
-  #logk = log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %C(yellow)%d%C(white)%x1b[0m%x20%s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=local
+  #logk = log --graph --all --decorate --abbrev-commit --pretty=oneline --date=local
+  logk = log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %C(yellow)%d%C(white)%x1b[0m%x20%s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=local
   logb = log --graph --color --pretty=format:'%x1b[31m%h%x09%x1b[32m %C(white)- %C(yellow)%d%C(white)%x1b[0m%x20%s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=local
   graph = "!git-graph --format \"%h %d %s - %an\" -s round "
   igraph = "!git-igitt"
@@ -44,6 +45,8 @@
   unpushed-tags = "!bash -c \"comm -23 <(git show-ref --tags | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort) <(git ls-remote --tags origin | sed -r 's/\\s+/ /g' | cut -d ' ' -f 2 | sort)\""
   echo = "!bash -c \"comm -23 <(git show-ref --tags | awk '{print \\$2}' | sort) <(git ls-remote --tags origin | awk '{print \\$2}' | sort)\""
   fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf --reverse --border=rounded --height=50% | cut -c -7 | xargs -o git commit --fixup"
+  fixer = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf-tmux -p --reverse --border=rounded --height=50% | tr -s ' ' | cut -c -7 | xargs -o git fix"
+  fix = "!fix() { git commit --fixup $1 && GIT_SEQUENCE_EDITOR=: git rebase --interactive --autosquash --autostash $1~1; }; fix"
   unpushed = log --branches --not --remotes --no-walk --decorate --oneline
   head = "!git logk | head -n 40"
   jira = "!BRANCH=$(git branch --show-current);echo ${BRANCH##*/} | xargs get_issue.py | glow"
