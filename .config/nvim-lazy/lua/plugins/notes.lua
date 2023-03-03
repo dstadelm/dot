@@ -14,6 +14,18 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
+        'lukas-reineke/headlines.nvim',
+        dependencies = {
+          'treesitter'
+        },
+        opts = {
+          norg = {
+            headline_highlights = { "Headline1", "Headline2", "Headline3", "Headline4", "Headline5", "Headline6" },
+            codeblock_highlight = { "NeorgCodeBlock" },
+          }
+        },
+      },
+      {
         'folke/zen-mode.nvim' },
       opts = {
         -- your configuration comes here
@@ -53,17 +65,29 @@ return {
             }
           }
         },
-        ["core.norg.completion"] = {
-          config = {
-            engine = "nvim-cmp"
-          }
-        },
+        -- ["core.norg.completion"] = {
+        --   config = {
+        --     engine = "nvim-cmp"
+        --   }
+        -- },
         ["core.norg.concealer"] = {},
         ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
         ["core.norg.qol.toc"] = { config = { default_split_mode = "split" } }
       }
     },
-    config = true,
+    config = function(_, opts)
+      local ok, _ = pcall(require, 'cmp')
+      if ok then
+        vim.tbl_extend("keep", opts.load, {
+            ["core.norg.completion"] = {
+              config = {
+                engine = "nvim-cmp"
+              }
+          }
+        })
+      end
+      require('neorg').setup(opts)
+    end
 
   },
   {

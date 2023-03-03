@@ -32,4 +32,13 @@ return {
     'dstadelm/simple-vhdl.vim',
     enabled = pc.simple_vhdl,
   },
+  {
+    'trmckay/based.nvim',
+    enabled = pc.based,
+    keys = {
+      {"<leader>B<space>", function() require('based').convert() end, desc = "Convert value between hex/dec, detect automatically"},
+      {"<leader>Bh", function() require('based').convert("hex") end, desc = "Convert value from hex to dec"},
+      {"<leader>Bd", function() require('based').convert("dec") end, desc = "Convert value from dec to hex"}
+    }
+  }
 }

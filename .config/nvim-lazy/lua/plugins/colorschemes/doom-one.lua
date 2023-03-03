@@ -2,6 +2,8 @@ local pc = require('plugin_configuration')
 return {
   'dstadelm/doom-one.nvim',
   enabled = pc.doom,
+  priority = 1000,
+  lazy = false,
   init = function()
     -- Add color to cursor
     vim.g.doom_one_cursor_coloring = true
@@ -33,7 +35,6 @@ return {
     vim.g.doom_one_plugin_vim_illuminate = true
 
   end,
-  priority = 1000,
   opts =
     {
       colors = {

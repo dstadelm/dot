@@ -23,6 +23,7 @@ config = {
   -- vhdl
   vunit = true,
   simple_vhdl = true,
+  based = true,
   -- notes
   vimwiki = true,
   neorg = true,
@@ -34,6 +35,7 @@ config = {
   easy_align = true,
   indent_blankline = true,
   exchange = true,
+  yanky = true,
   -- codeing
   projectionist = true,
   surround = true,

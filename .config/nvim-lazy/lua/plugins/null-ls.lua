@@ -1,6 +1,6 @@
-local pc = require('plugin_configuration')
+local pc = require("plugin_configuration")
 return {
-  'jose-elias-alvarez/null-ls.nvim',
+  "jose-elias-alvarez/null-ls.nvim",
   enabled = pc.null_ls,
   config = function()
     local null_ls = require("null-ls")
@@ -9,7 +9,6 @@ return {
     local code_actions = null_ls.builtins.code_actions
     local formatting = null_ls.builtins.formatting
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 
     local sources = {
       code_actions.shellcheck,
@@ -20,12 +19,13 @@ return {
       formatting.latexindent,
       formatting.isort,
       formatting.black, -- .with({ extra_args = {"--line-length", "120"}}),
+      -- formatting.stylua,
     }
 
     null_ls.setup({
       sources = sources,
       on_attach = function(client, bufnr)
-        if client.name == 'pylsp' or client.name == 'pyright' then
+        if client.name == "pylsp" or client.name == "pyright" then
           client.resolved_capabilities.document_formatting = false
         end
 
@@ -35,10 +35,10 @@ return {
             group = augroup,
             callback = function()
               vim.lsp.buf.format()
-            end
+            end,
           })
         end
       end,
     })
-  end
+  end,
 }

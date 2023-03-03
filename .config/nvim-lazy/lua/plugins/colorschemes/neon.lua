@@ -1,9 +1,9 @@
-local pc = require('plugin_configuration')
+local pc = require("plugin_configuration")
 return {
-  'rafamadriz/neon',
+  "rafamadriz/neon",
   enabled = pc.neon,
-  config = function()
-    -- vim.g.neon_style = "doom"
-    vim.g.neon_transparent = true
-  end
+  init = function()
+    vim.g.neon_style = "dark"
+    vim.g.neon_transparent = false
+  end,
 }

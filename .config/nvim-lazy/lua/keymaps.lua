@@ -26,3 +26,5 @@ vim.cmd("cabbrev Wq wq")
 
 nnoremap("<F10>", ":FloatermToggle<CR>")
 tnoremap("<F10>", "<C-\\><C-N>:FloatermToggle<CR>")
+
+vim.api.nvim_set_keymap("n", "<leader>e",  ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc =  "Open file relative to current file"})

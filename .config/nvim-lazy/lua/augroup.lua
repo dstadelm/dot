@@ -61,10 +61,10 @@ vim.api.nvim_create_autocmd("TermOpen",
 
 --------------------------------------------------------------------------------
 -- Disable relative numbers in command mode
-local command_group = vim.api.nvim_create_augroup("CommandGroup", { clear = true })
-
-vim.api.nvim_create_autocmd("CmdlineEnter", { group = command_group, command = "set norelativenumber" })
-vim.api.nvim_create_autocmd("CmdlineLeave", { group = command_group, command = "set relativenumber" })
+-- local command_group = vim.api.nvim_create_augroup("CommandGroup", { clear = true })
+--
+-- vim.api.nvim_create_autocmd("CmdlineEnter", { group = command_group, command = "set norelativenumber" })
+-- vim.api.nvim_create_autocmd("CmdlineLeave", { group = command_group, command = "set relativenumber" })
 -- vim.api.nvim_create_autocmd("CmdlineEnter", { group = command_group, command = "set hls" })
 -- vim.api.nvim_create_autocmd("CmdlineLeave", { group = command_group, command = "set nohls" })
 --------------------------------------------------------------------------------

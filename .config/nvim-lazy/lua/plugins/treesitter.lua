@@ -1,6 +1,7 @@
 local pc = require('plugin_configuration')
 return {
   'nvim-treesitter/nvim-treesitter',
+  name = 'treesitter',
   enabled = pc.treesitter,
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',

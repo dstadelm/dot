@@ -1,7 +1,10 @@
-local pc = require('plugin_configuration')
+local pc = require("plugin_configuration")
 return {
-  'marko-cerovac/material.nvim',
+  "marko-cerovac/material.nvim",
   enabled = pc.material,
+  init = function()
+    vim.g.material_style = "palenight"
+  end,
   opts = {
     contrast = {
       terminal = false, -- Enable contrast for the built-in terminal
@@ -45,14 +48,14 @@ return {
     disable = {
       colored_cursor = false, -- Disable the colored cursor
       borders = false, -- Disable borders between verticaly split windows
-      background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+      background = false, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
       term_colors = false, -- Prevent the theme from setting terminal colors
-      eob_lines = false -- Hide the end-of-buffer lines
+      eob_lines = false, -- Hide the end-of-buffer lines
     },
 
     high_visibility = {
       lighter = false, -- Enable higher contrast text for lighter style
-      darker = false -- Enable higher contrast text for darker style
+      darker = false, -- Enable higher contrast text for darker style
     },
 
     lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
@@ -61,6 +64,10 @@ return {
 
     custom_colors = nil, -- If you want to everride the default colors, set this to a function
 
-    custom_highlights = {}, -- Overwrite highlights with your own
+    custom_highlights = {
+      CurSearch = { bg = "#5b5f40" },
+      Search = { bg = "#3b3f40" },
+      IncSearch = { bg = "#3b3f40" },
+    }, -- Overwrite highlights with your own
   },
 }

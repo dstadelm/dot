@@ -24,7 +24,7 @@ return {
 
     wk.register(
       {
-        e = { ':e <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
+        -- e = { ':e <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
         s = { ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
         p = {
           f = {':read <C-R>=expand("%:p:h") . "/" <CR>', "Read content of file to this file"},
@@ -43,13 +43,13 @@ return {
 
     wk.register(
       {
-        v = { ':e $MYVIMRC <CR>', "Open init.lua"},
-        o = { ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>', "Open plugins.lua"},
+        -- v = { ':e $MYVIMRC <CR>', "Open init.lua"},
+        -- o = { ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>', "Open plugins.lua"},
         w = { ':%s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace in current file"},
-        a = {
-          name = "All files in repo",
-          w = { ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace for each file in repo"}
-        }
+        -- a = {
+        --   name = "All files in repo",
+        --   w = { ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace for each file in repo"}
+        -- }
       },
       {
         prefix= '<leader>',
@@ -119,34 +119,7 @@ return {
     )
     --------------------------------------------------------------------------------
     -- Telescope <find>
-    wk.register(
-      {
-        f = {
-          name = "find",
-          b = {":lua require'telescope.builtin'.buffers()<CR>", "Find Buffers"},
-          c = {":lua require'functions.telescope'.find_nvim_config()<CR>", "Find Neovim Config"},
-          f = {":lua require'telescope.builtin'.find_files()<CR>", "Find Files"},
-          g = {":lua require'telescope.builtin'.live_grep()<CR>", "Grep in Project"},
-          h = {":lua require'telescope.builtin'.help_tags()<CR>", "Find Help"},
-          l = {":lua require'telescope.builtin'.current_buffer_fuzzy_find()<CR>", "Find in Buffer"},
-          r = {":lua require'telescope.builtin'.lsp_references()<CR>", "Find Reference"},
-          o = {":lua require'telescope.builtin'.oldfiles()<CR>", "Find old files"},
-          t = {":lua require('telescope.builtin').colorscheme({enable_preview=true}) <CR>", "Find colorscheme"},
-        },
-        ["/"] = {
-          function()
-            require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-              winblend = 10,
-              previewer = false,
-            })
-          end,
-          "Fuzzy search in current buffer"
-        }
-      },
-      {
-        prefix = '<leader>',
-      }
-    )
+    wk.register({f = {name = "find"}}, { prefix = '<leader>'})
 
 
     --------------------------------------------------------------------------------
@@ -256,7 +229,7 @@ return {
           }
         },
         {
-          prefix = '<localleader>',
+          prefix = '<leader>',
           buffer = curr_buf,
         }
       )
