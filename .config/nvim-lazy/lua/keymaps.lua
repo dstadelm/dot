@@ -1,30 +1,40 @@
-local map = require("utils").map
-local nmap = require("utils").nmap
-local imap = require("utils").imap
-local vmap = require("utils").vmap
-local tmap = require("utils").tmap
-local nnoremap = require("utils").nnoremap
-local inoremap = require("utils").inoremap
-local vnoremap = require("utils").vnoremap
-local tnoremap = require("utils").tnoremap
+vim.api.nvim_set_keymap("n", "<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current file" })
+vim.api.nvim_set_keymap("n", "<leader>s", ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current in split" })
+vim.api.nvim_set_keymap("n", "<leader>z", ':ToggleOnly<CR>', { desc = "Maximize / Restore Window" })
+vim.api.nvim_set_keymap("n", "<leader>w", 'ciw<C-R>0<ESC>', { desc = "Delete word and replace with current yank (dot repeatable)" })
+vim.api.nvim_set_keymap("n", "<leader>r", ':read <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Read content of file to this file" })
+vim.api.nvim_set_keymap("n", "<leader>cd", ':cd %:p:h<CR>', { desc = "Change directory to directory of current file" })
+vim.api.nvim_set_keymap("n", "<leader>ds", ':%s/\\s\\+$//gce \\| w<cr>', { desc = "Delete all trailing whitespace in current file" })
 
-nnoremap("<leader>z", ':ToggleOnly<CR>')
+vim.api.nvim_set_keymap("n", "<leader>diw", '"_diw', { desc = "Delete in word to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>daw", '"_daw', { desc = "Delete around word to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>dw", '"_dw', { desc = "Delete word to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>dip", '"_dip', { desc = "Delete in paragraph to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>dap", '"_dap', { desc = "Delete around paragraph to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>dis", '"_dis', { desc = "Delete in sentence to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>das", '"_das', { desc = "Delete around sentece to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>ciw", '"_ciw', { desc = "Change in word to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>caw", '"_caw', { desc = "Change around word to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>cw", '"_cw', { desc = "Change word to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>cip", '"_cip', { desc = "Change in paragraph to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>cap", '"_cap', { desc = "Change around paragraph to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>cis", '"_cis', { desc = "Change in sentence to black hole register" })
+vim.api.nvim_set_keymap("n", "<leader>cas", '"_cas', { desc = "Change around sentece to black hole register" })
 
--- add mapping to be able to move around lines
-inoremap("<C-k>", "<esc>:m .-2<CR>==i")
-inoremap("<C-j>", "<esc>:m .+1<CR>==i")
-nnoremap("<leader>j", ":m .+1<CR>==")
-nnoremap("<leader>k", ":m .-2<CR>==")
+vim.api.nvim_set_keymap("v", ".", ":norm .<CR>", { desc = "Execute last operation on visual selection" })
 
--- move around visually selected lines
-vnoremap("J", ":m '>+1<CR>gv=gv")
-vnoremap("K", ":m '<-2<CR>gv=gv")
+vim.api.nvim_set_keymap("i", "<A-k>", '<esc>:m .-2<CR>==i', { desc = "Move current line one up" })
+vim.api.nvim_set_keymap("i", "<A-j>", '<esc>:m .+1<CR>==i', { desc = "Move current line one down" })
+vim.api.nvim_set_keymap("n", "<A-k>", ':m .-2<CR>==', { desc = "Move current line one up" })
+vim.api.nvim_set_keymap("n", "<A-j>", ':m .+1<CR>==', { desc = "Move current line one down" })
+vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move current line one up" })
+vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move current line one down" })
 
-vim.cmd("cabbrev Q q")
-vim.cmd("cabbrev W w")
-vim.cmd("cabbrev Wq wq")
+vim.api.nvim_set_keymap("n", "<F10>", ":FloatermToggle<CR>", { desc = "Toggle Terminal" })
+vim.api.nvim_set_keymap("t", "<F10>", "<C-\\><C-N>:FloatermToggle<CR>", { desc = "Toggle Terminal" })
 
-nnoremap("<F10>", ":FloatermToggle<CR>")
-tnoremap("<F10>", "<C-\\><C-N>:FloatermToggle<CR>")
+vim.api.nvim_set_keymap("n", "n", "nzzzv", { desc = "Go to next search occurance and center" })
+vim.api.nvim_set_keymap("n", "N", "Nzzzv", { desc = "Go to previous search occurance and center" })
 
-vim.api.nvim_set_keymap("n", "<leader>e",  ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc =  "Open file relative to current file"})
+vim.api.nvim_set_keymap("n", "<C-w>>", "<C-w>10>", { desc = "Increase current window width"})
+vim.api.nvim_set_keymap("n", "<C-w><", "<C-w>10<", { desc = "Decrease current window width"})

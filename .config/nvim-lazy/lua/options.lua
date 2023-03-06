@@ -34,6 +34,8 @@ vim.opt.path = "**"
 --vim.o.cmdheight=0
 vim.o.laststatus = 3
 vim.o.termguicolors = true
+vim.o.formatoptions = "jcroqlnt"
+vim.o.conceallevel = 3
 
 vim.o.mouse = 'a'
 vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical,linematch:60'

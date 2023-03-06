@@ -13,49 +13,8 @@ return {
       -- refer to the configuration section below
     }
 
-    wk.register{
-      n = {"nzzzv", "Go to next search occurance"},
-      N = {"Nzzzv", "Go to previous search occurance"},
-      -- ["<C-D>"] = {"<C-D>zzzv", "Scroll half page down"},
-      -- ["<C-U>"] = {"<C-U>zzzv", "Scroll half page up"},
-      -- ["<C-F>"] = {"<C-F>zzzv", "Scroll half page down"},
-      -- ["<C-B>"] = {"<C-B>zzzv", "Scroll half page up"},
-    }
 
-    wk.register(
-      {
-        -- e = { ':e <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
-        s = { ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', "Open file relative to current file"},
-        p = {
-          f = {':read <C-R>=expand("%:p:h") . "/" <CR>', "Read content of file to this file"},
-          w = {'ciw<C-R>0<ESC>', "Delete word and replace with current yank"},
-        },
-        c = {
-          d = { ':cd %:p:h<CR>', "Change working directory to directory of current file"}
-        }
-      },
-      {
-        prefix= '<leader>',
-        mode  = 'n',
-        silent = false,
-      }
-    )
 
-    wk.register(
-      {
-        -- v = { ':e $MYVIMRC <CR>', "Open init.lua"},
-        -- o = { ':edit $XDG_CONFIG_HOME/nvim/lua/plugins.lua<CR>', "Open plugins.lua"},
-        w = { ':%s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace in current file"},
-        -- a = {
-        --   name = "All files in repo",
-        --   w = { ':args `git grep -lI .` \\| argdo %s/\\s\\+$//gce \\| w<cr>', "Delete all trailing whitespace for each file in repo"}
-        -- }
-      },
-      {
-        prefix= '<leader>',
-        mode  = 'n',
-      }
-    )
     --------------------------------------------------------------------------------
     -- Initial idea from here http://www.kevinli.co/posts/2017-01-19-multiple-cursors-in-500-bytes-of-vimscript/
     -- Mappings from here https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/Oli/core/mappings.lua
