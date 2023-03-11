@@ -1,23 +1,10 @@
 local pc = require('plugin_configuration')
 return {
   {
-    'sindrets/diffview.nvim',
-    enabled = pc.diffview,
-  },
-  {
-    'tpope/vim-fugitive',
-    enabled = pc.fugitiv
-  },
-  {
-    'rbong/vim-flog',
-    enabled = pc.flog,
-    config = function()
-      vim.cmd ([[let g:flog_default_opts = { 'max_count': 400} ]])
-    end,
-  },
-  {
     'lewis6991/gitsigns.nvim',
     enabled = pc.gitsigns,
+    lazy = true,
+    event = "BufEnter",
     dependencies = {
       'nvim-lua/plenary.nvim',
     },

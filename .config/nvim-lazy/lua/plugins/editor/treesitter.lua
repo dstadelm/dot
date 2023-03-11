@@ -3,6 +3,8 @@ return {
   'nvim-treesitter/nvim-treesitter',
   name = 'treesitter',
   enabled = pc.treesitter,
+  lazy = true,
+  event = "BufRead",
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',

@@ -20,13 +20,12 @@ return {
       vim.g.VunitInvocationCmd = 'vunit'
       vim.g.VunitGuiPreCmd = 'export $(tmux show-env | grep disp);'
     end,
-    config= function()
-      local nnoremap = require("utils").nnoremap
-      nnoremap("<leader>vr", ":VunitRunTestWithFzf<cr>")
-      nnoremap("<leader>vg", ":VunitRunTestWithFzfInGui<cr>")
-      nnoremap("<leader>vl", ":VunitUpdateTestList<cr>")
-      nnoremap("<leader>rr", ":VunitReRunSelectedTests<cr>")
-    end
+    keys = {
+      { "<leader>vr", ":VunitRunTestWithFzf<cr>",       desc = "Run vunit tests with FZF" },
+      { "<leader>vg", ":VunitRunTestWithFzfInGui<cr>",  desc = "Run vunit tests in GUI with FZF" },
+      { "<leader>vl", ":VunitUpdateTestList<cr>",       desc = "Update test list" },
+      { "<leader>rr", ":VunitReRunSelectedTests<cr>",   desc = "ReRun previous selected Tests" },
+    }
   },
   {
     'dstadelm/simple-vhdl.vim',

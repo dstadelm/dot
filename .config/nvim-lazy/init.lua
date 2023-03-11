@@ -4,8 +4,9 @@ vim.g.maplocalleader = " "
 require("options")
 require("bootstrap")
 require("lazy").setup({
-  { import = "plugins" },
+  { import = "plugins.coding" },
   { import = "plugins.editor" },
+  { import = "plugins.editor.git" },
   { import = "plugins.ui" },
   { import = "plugins.colorschemes" },
 })

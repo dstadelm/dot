@@ -5,20 +5,13 @@ return {
     enabled = pc.maximize_window_toggle,
   },
   {
-    'voldikss/vim-floaterm',
-    enabled = pc.floaterm,
-    config = function()
-      vim.g.floaterm_gitcommit = 'vsplit'
-      vim.g.floaterm_wintype = 'split'
-    end,
-  },
-  {
     'yuttie/comfortable-motion.vim',
     enabled = pc.floaterm,
   },
   {
     'rcarriga/nvim-notify',
     enabled = pc.notify,
+    lazy = false,
     opts = {
      background_colour = "#1e2127",
     },

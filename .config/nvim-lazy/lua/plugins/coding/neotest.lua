@@ -1,40 +1,10 @@
 local pc = require('plugin_configuration')
 return {
-  {
-    'tpope/vim-projectionist',
-    enabled = pc.projectionist,
-  },
-  {
-    'kylechui/nvim-surround',
-    enabled = pc.surround,
-    config = true,
-  },
-  {
-    'numToStr/Comment.nvim',
-    enabled = pc.comment,
-    config = true,
-  },
-
-  {
-    "windwp/nvim-autopairs",
-    enabled = pc.autopairs,
-    config = true,
-  },
-  {
-    'mizlan/iswap.nvim',
-    enabled = pc.iswap and pc.treesitter,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter'
-    }
-  },
-  {
-    'dbeniamine/cheat.sh-vim',
-    enabled = pc.cheat_sh,
-  },
   -- testing
   {
     'nvim-neotest/neotest',
     enabled = pc.neotest and pc.treesitter,
+    lazy = true,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
@@ -64,5 +34,17 @@ return {
         },
       })
     end,
+    keys = {
+    --------------------------------------------------------------------------------
+    -- Neotest
+    --
+    {"<leader>ta", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", desc =  "Run all tests in file"},
+    {"<leader>tn",":lua require('neotest').run.run()<CR>", desc = "Run nearest tests in file"},
+    {"<leader>ts",":lua require('neotest').summary.toggle()<CR>", desc = "Toggle test summary"},
+    {"<leader>to",":lua require('neotest').output.open({enter=true})<CR>", desc = "Inspect output"},
+
+    {"]n", ':lua require("neotest").jump.next({ status = "failed" })<CR>', desc = "Jump to next failed test"},
+    {"[n", ':lua require("neotest").jump.prev({ status = "failed" })<CR>', desc = "Jump to previous failed test"},
+    }
   }
 }

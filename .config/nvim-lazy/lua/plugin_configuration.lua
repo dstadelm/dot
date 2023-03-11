@@ -36,6 +36,7 @@ config = {
   indent_blankline = true,
   exchange = true,
   yanky = true,
+  dial = true,
   -- codeing
   projectionist = true,
   surround = true,
@@ -67,7 +68,7 @@ config = {
   palenightfall = true,
   -- ui/utilities
   maximize_window_toggle = true,
-  floaterm = true,
+  toggleterm = true,
   notify = true,
   noice = false,
   alpha = true,
@@ -75,6 +76,7 @@ config = {
   lualine = true,
   telescope = true,
   which_key = true,
+  dressing = true
 }
 
 return config

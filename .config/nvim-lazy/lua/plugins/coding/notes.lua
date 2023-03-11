@@ -11,6 +11,9 @@ return {
   {
     "nvim-neorg/neorg",
     enabled = pc.neorg,
+    lazy = true,
+    ft = {"norg"},
+    cmd = {"Neorg"},
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
@@ -65,11 +68,6 @@ return {
             }
           }
         },
-        -- ["core.norg.completion"] = {
-        --   config = {
-        --     engine = "nvim-cmp"
-        --   }
-        -- },
         ["core.norg.concealer"] = {},
         ["core.presenter"] = { config = { zen_mode = "zen-mode" } },
         ["core.norg.qol.toc"] = { config = { default_split_mode = "split" } }

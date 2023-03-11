@@ -1,4 +1,3 @@
-local nnoremap = require("utils").nnoremap
 vim.cmd([[
 let blacklist = ['gitcommit']
 augroup MyAugroup
@@ -28,7 +27,7 @@ augroup END
 -- Create a mapping by a autocmd for executing the current python file
 local auto_source_group = vim.api.nvim_create_augroup("AutoSourceGroup", { clear = true })
 local python_run_keymap = function()
-  nnoremap("<leader>x", ":sp | term docker_latex python3 %<CR> :startinsert<CR>")
+  vim.api.nvim_set_keymap("n", "<leader>x", ":sp | term docker_latex python3 %<CR> :startinsert<CR>", {desc = "execute current file"})
 end
 vim.api.nvim_create_autocmd("FileType", { pattern = "python", group = auto_source_group, callback = python_run_keymap })
 
