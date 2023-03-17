@@ -19,26 +19,23 @@ return {
         "folke/neodev.nvim",
         enabled = pc.neodef,
         opts = { experimental = { pathStrict = true } },
-        config = true ,
-      },
-      { "williamboman/mason.nvim",
         config = true,
+      },
+      {
+        config = true,
+        "williamboman/mason.nvim",
         enabled = pc.mason,
-        lazy = false,
+        lazy = true,
+        cmd = "Mason",
         dependencies = {
           "williamboman/mason-lspconfig.nvim",
         }
       },
       {
-        "hrsh7th/cmp-nvim-lsp",
-        enabled = pc.nvim_cmp,
-      },
-      {
-        'j-hui/fidget.nvim',
+        'j-hui/fidget.nvim', -- progress animation of lsp server
         enabled = pc.fidget,
         opts = {}
-
-      }
+      },
     },
     config = function()
       local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -64,7 +61,7 @@ return {
           if desc then
             desc = 'LSP: ' .. desc
           end
-          vim.keymap.set('n', keys, func, {buffer = bufnr, desc = desc})
+          vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
         end
         -- Enable completion triggered by <c-x><c-o>
         -- Mappings.
@@ -76,7 +73,7 @@ return {
         nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
         nmap('<space>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
         nmap('<space>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-        nmap('<space>wl', function ()
+        nmap('<space>wl', function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, '[W]orkspace [L]ist Folders')
         nmap('<space>D', vim.lsp.buf.type_definition, 'Type [Definition]')
@@ -109,12 +106,12 @@ return {
       -- Enable diagnostics
       vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = false,
-        virtual_text = true,
-        virtual_lines = false,
-        signs = true,
-        update_in_insert = false,
-      }
+          underline = false,
+          virtual_text = true,
+          virtual_lines = false,
+          signs = true,
+          update_in_insert = false,
+        }
       )
       -- Setup lspconfig.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -154,8 +151,8 @@ return {
       local servers = {
         vimls = {},
         clangd = {},
-        lemminx= {},
-        texlab={} ,
+        lemminx = {},
+        texlab = {},
         lua_ls = {
           Lua = {
             runtime = {
@@ -210,7 +207,7 @@ return {
             capablities = capabilities,
             on_attach = on_attach,
             settings = servers[server_name]
-            })
+          })
         end
       })
 
@@ -249,13 +246,6 @@ return {
       --     }
       --   }
       -- }
-
     end
   },
-  {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    enabled = pc.trouble,
-    config = true,
-  }
 }

@@ -1,14 +1,6 @@
 local pc = require('plugin_configuration')
 return {
   {
-    'vimwiki/vimwiki',
-    enabled = pc.vimwiki,
-    config = function()
-      vim.cmd([[let g:vimwiki_listsyms = '✗○◐●✓']])
-      vim.cmd([[let g:vimwiki_ext2syntax = {'.wiki': 'media'}]])
-    end
-  },
-  {
     "nvim-neorg/neorg",
     enabled = pc.neorg,
     lazy = true,
@@ -16,18 +8,6 @@ return {
     cmd = {"Neorg"},
     dependencies = {
       'nvim-lua/plenary.nvim',
-      {
-        'lukas-reineke/headlines.nvim',
-        dependencies = {
-          'treesitter'
-        },
-        opts = {
-          norg = {
-            headline_highlights = { "Headline1", "Headline2", "Headline3", "Headline4", "Headline5", "Headline6" },
-            codeblock_highlight = { "NeorgCodeBlock" },
-          }
-        },
-      },
       {
         'folke/zen-mode.nvim' },
       opts = {
@@ -88,12 +68,4 @@ return {
     end
 
   },
-  {
-    'iamcco/markdown-preview.nvim',
-    enabled = pc.markdown_preview,
-    build = 'cd app && yarn install',
-    cmd = 'MarkdownPreview',
-    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
-    ft = { 'markdown' }
-  }
 }

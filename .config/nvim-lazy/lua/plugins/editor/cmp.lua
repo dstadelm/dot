@@ -6,6 +6,15 @@ return {
     'hrsh7th/nvim-cmp',
     enabled = pc.nvim_cmp,
     name = 'nvim-cmp',
+    lazy = true,
+    event = {"InsertEnter", "CmdlineEnter"},
+    -- keys = {
+    --   { "<C-p>",     mode = "i" },
+    --   { "<C-n>",     mode = "i" },
+    --   { "<C-p>",     mode = "c" },
+    --   { "<C-n>",     mode = "c" },
+    --   { "<C-Space>", mode = "i" },
+    -- },
     dependencies = {
       {
         'SirVer/ultisnips',
@@ -41,7 +50,7 @@ return {
           fields = { "abbr", "kind", "menu" },
           format = lspkind.cmp_format({
             mode = 'symbol', -- text, text_symbol, symbol_text, symbol
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
           })
         },
         window = {
@@ -60,10 +69,12 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<C-k>"] = cmp.mapping(
             function(fallback)
@@ -81,13 +92,7 @@ return {
         sources = cmp.config.sources {
           { name = 'nvim_lsp' },
           { name = 'ultisnips' }, -- For ultisnips users.
-          { name = 'buffer',
-            option = {
-              -- get_bufnrs = function()
-              --   return vim.api.nvim_get_current_()
-              -- end
-            }
-          },
+          { name = 'buffer' },
           { name = 'path' },
           { name = 'calc' },
           { name = 'nvim_lsp_signature_help' },
@@ -114,41 +119,4 @@ return {
       })
     end,
   },
-  {
-    'abecodes/tabout.nvim',
-    enabled = pc.tabout and pc.treesitter,
-    name = 'tabout',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'ultisnips', -- ultisnips has to be configured first otherwise there is a conflict due to ultisnips grabbing the tab
-      'nvim-cmp',
-    },
-    config = function()
-      vim.g.UltiSnipsExpandTrigger = '<C-k>'
-      vim.g.UltiSnipsJumpForwardTrigger = '<C-k>'
-      vim.g.UltiSnipsJumpBackwardTrigger = '<C-j>'
-      require('tabout').setup(
-        {
-          tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
-          backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-          act_as_tab = true, -- shift content if tab out is not possible
-          act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-          default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-          default_shift_tab = '<C-d>', -- reverse shift default action,
-          enable_backwards = true, -- well ...
-          completion = true, -- if the tabkey is used in a completion pum
-          tabouts = {
-            { open = "'", close = "'" },
-            { open = '"', close = '"' },
-            { open = '`', close = '`' },
-            { open = '(', close = ')' },
-            { open = '[', close = ']' },
-            { open = '{', close = '}' }
-          },
-          ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-          exclude = {} -- tabout will ignore these filetypes
-        }
-      )
-    end,
-  }
 }

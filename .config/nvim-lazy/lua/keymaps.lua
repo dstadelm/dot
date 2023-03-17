@@ -1,7 +1,8 @@
 local map = vim.api.nvim_set_keymap
-map("n", "<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current file" })
-map("n", "<leader>r", ':read <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Read content of file to this file" })
-map("n", "<leader>s", ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current in split" })
+map("n", "<leader>ef", ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current file" })
+map("n", "<leader>rf", ':read <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Read content of file to this file" })
+map("n", "<leader>sf", ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current in split" })
+map("n", "<leader>fs", ":lua require('utilities.stack_overflow').stack_overflow()<CR>", { desc = "Search stack overflow" })
 map("n", "<leader>w", 'ciw<C-R>0<ESC>', { desc = "Delete word and replace with current yank (dot repeatable)" })
 map("n", "<leader>z", ':ToggleOnly<CR>', { desc = "Maximize / Restore Window" })
 
@@ -65,7 +66,7 @@ map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move current line one down" })
 
 map("v", ".", ":norm .<CR>", { desc = "Execute last operation on visual selection" })
 
-map("n", "<F10>", ":ToggleTerm<CR>", { desc = "Toggle Terminal" })
+map("n", "<F10>", ":ToggleTerm direction=float<CR>", { desc = "Toggle Terminal" })
 map("t", "<F10>", "<C-\\><C-N>:ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 map("n", "n", "nzzzv", { desc = "Go to next search occurance and center" })

@@ -2,6 +2,8 @@ local pc = require("plugin_configuration")
 return {
   "jose-elias-alvarez/null-ls.nvim",
   enabled = pc.null_ls,
+  lazy = true,
+  event = "VeryLazy",
   config = function()
     local null_ls = require("null-ls")
     -- register any number of sources simultaneously

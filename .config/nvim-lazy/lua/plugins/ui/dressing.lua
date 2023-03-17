@@ -2,6 +2,8 @@ local pc = require('plugin_configuration')
 return {
   "stevearc/dressing.nvim",
   enabled = pc.dressing,
+  lazy = true,
+  event = "VeryLazy",
   opts = {
     input = {
       -- Set to false to disable the vim.ui.input implementation

@@ -1,7 +1,26 @@
 local pc = require('plugin_configuration')
+
+local function window_number()
+  local win = vim.api.nvim_get_current_win()
+  return vim.api.nvim_win_get_number(win)
+end
+
+local function file_type_condition()
+  return function()
+    for _, value in pairs({"floggraph", "git"}) do
+      if string.find(vim.bo.filetype, value) then
+        return false
+      end
+    end
+  return true
+  end
+end
+
 return {
   'nvim-lualine/lualine.nvim',
   enabled = pc.lualine,
+  lazy = true,
+  event = "VeryLazy",
   dependencies = {
     'kyazdani42/nvim-web-devicons'
   },
@@ -22,12 +41,12 @@ return {
           "dapui_breakpoints",
           "dapui_scopes",
         },
-        startify = {},
+        'alpha',
+        -- 'floggraph',
       },
       always_divide_middle = true,
       globalstatus = true,
     },
-
     sections = {
       lualine_a = { 'mode', },
       lualine_b = { 'branch' },
@@ -49,20 +68,34 @@ return {
     tabline = {},
     inactive_winbar = {
       lualine_a = {},
-      lualine_b = { { 'filetype', icon_only = true, separator = { right = '', left = '' } }, { 'filename', path = 0, separator = { right = '', left = '' } } },
+      lualine_b = {
+        { 'filetype', icon_only = true, separator = { right = '', left = '' } },
+        {
+          'filename',
+          path = 0,
+          separator = { right = '', left = '' },
+          cond = file_type_condition(),
+        } },
       lualine_c = {},
       lualine_y = {},
       lualine_x = {},
-      lualine_z = {}
+      lualine_z = { window_number }
     },
     winbar = {
       lualine_a = {},
-      lualine_b = { { 'filetype', icon_only = true, separator = { right = '', left = '' } }, { 'filename', path = 0, separator = { right = '', left = '' } } },
+      lualine_b = {
+        { 'filetype', icon_only = true, separator = { right = '', left = '' } },
+        {
+          'filename',
+          path = 0,
+          separator = { right = '', left = '' },
+          cond = file_type_condition(),
+        } },
       lualine_c = { 'diff' },
       lualine_x = {},
       -- lualine_c = { {'%=', 'diff', 'diagnostics', separator = {left = '/', right = '/'}}},
       lualine_y = { 'diagnostics' },
-      lualine_z = {},
+      lualine_z = { window_number },
     },
     extensions = { 'quickfix', 'nvim-dap-ui' }
   }

@@ -37,6 +37,7 @@ config = {
   exchange = true,
   yanky = true,
   dial = true,
+  hydra = true,
   -- codeing
   projectionist = true,
   surround = true,
