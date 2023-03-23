@@ -19,3 +19,5 @@ Combining LaTeX with Python https://www.tug.org/tug2019/slides/slides-ziegenhage
 
 [[https://www.12000.org/my_notes/python_in_latex/index.htm |A very simple introduction to using Python in Latex]]
 
+== Vim und LaTeX ==
+https://www.ejmastnak.com/tutorials/vim-latex/intro/

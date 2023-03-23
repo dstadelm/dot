@@ -109,7 +109,9 @@ https://www.nerdfonts.com/cheat-sheet
 :lua vim.diagnostics.reset()
 
 == Performance measurements ==
-
 nvim --startuptime startup.log -c exit && tail -5 startup.log
 hyperfine "nvim --headless +qa" --warmup 5
 hyperfine "nvim --headless +qa" --warmup 5 > hyperfine-packer.out
+
+== Vim und LaTeX ==
+https://www.ejmastnak.com/tutorials/vim-latex/intro/
