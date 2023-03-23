@@ -17,6 +17,10 @@ alias disp='export $(tmux show-env | grep DISP)'
 alias bat='batcat'
 alias git-head='git logk | head -n 40 && echo'
 alias ncurses='export NCURSES_NO_UTF8_ACS=1'
+# if [ $(command -v nvr) ]; then
+#   alias vim="v"
+#   alias nvim="v"
+# fi
 if [ $(command -v nvim) ]; then
   alias vim="nvim"
 fi

@@ -144,8 +144,10 @@ source $ZSH/oh-my-zsh.sh
 # export KEYTIMEOUT=1
 #
 ###############################################################################
-bindkey -v
-export KEYTIMEOUT=1
+
+# bindkey -v
+# export KEYTIMEOUT=1
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -191,7 +193,6 @@ fi
 
 #export NCURSES_NO_UTF8_ACS=1
 
-. ~/.bash_alias
 . ~/.bash_ssh_agent
 #. ~/.zsh_prompt
 
@@ -222,19 +223,19 @@ bindkey -M vicmd v edit-command-line
 function root(){
   $(git root)
 }
-# function nvim() {
-#   if test -z $NVIM_LISTEN_ADDRESS; then
-#     command nvim "$@"
-#   else
-#       nvr -s -l $argv
-#   fi
-# }
-# function vim() {
-#   nvim "$@"
-# }
 
-alias luamake=/home/dstadelmann/bin/lua-language-server/3rd/luamake/luamake
+function v(){
+  if [[ -S $NVIM_LISTEN_ADDRESS ]]; then
+    nvr -c "tab drop $argv | set bufhidden=delete"
+  else
+    nvr -s $argv
+  fi
+}
+
+# alias luamake=/home/dstadelmann/bin/lua-language-server/3rd/luamake/luamake
 
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+. ~/.bash_alias
