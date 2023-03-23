@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     "briones-gabriel/darcula-solid.nvim",
-    enabled = pc.darcula,
+    enabled = require('config').is_enabled("darcula"),
     dependencies = { "rktjmp/lush.nvim" }
   }
 }

@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     'dstadelm/vim-vunit',
-    enabled = pc.vunit,
+    enabled = require('config').is_enabled("vunit"),
     dependencies = {
       'junegunn/fzf.vim',
       dependencies = {
@@ -24,16 +23,16 @@ return {
       { "<leader>vr", ":VunitRunTestWithFzf<cr>",       desc = "Run vunit tests with FZF" },
       { "<leader>vg", ":VunitRunTestWithFzfInGui<cr>",  desc = "Run vunit tests in GUI with FZF" },
       { "<leader>vl", ":VunitUpdateTestList<cr>",       desc = "Update test list" },
-      { "<leader>rr", ":VunitReRunSelectedTests<cr>",   desc = "ReRun previous selected Tests" },
+      { "<leader>rr", ":VunitReRunSelectedTests<cr>",   desc = "ReRun previous selected Tests" }
     }
   },
   {
     'dstadelm/simple-vhdl.vim',
-    enabled = pc.simple_vhdl,
+    enabled = require('config').is_enabled("simple_vhdl"),
   },
   {
     'trmckay/based.nvim',
-    enabled = pc.based,
+    enabled = require('config').is_enabled("based"),
     keys = {
       {"<leader>B<space>", function() require('based').convert() end, desc = "Convert value between hex/dec, detect automatically"},
       {"<leader>Bh", function() require('based').convert("hex") end, desc = "Convert value from hex to dec"},

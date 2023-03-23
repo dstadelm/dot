@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   {
     'tpope/vim-fugitive',
-    enabled = pc.fugitiv
+    enabled = require('config').is_enabled("fugitiv")
   },
 }

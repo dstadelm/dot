@@ -1,7 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   'gbprod/yanky.nvim',
-  enabled = pc.yanky,
+  enabled = require('config').is_enabled("yanky"),
+  lazy = true,
   keys = {
     {"p", "<Plug>(YankyPutAfter)", mode = {'n', 'x'}, desc = "Yank put after"},
     {"P", "<Plug>(YankyPutBefore)", mode = {'n', 'x'}, desc = "Yank put before"},

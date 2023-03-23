@@ -1,7 +1,6 @@
-local pc = require("plugin_configuration")
 return {
   "marko-cerovac/material.nvim",
-  enabled = pc.material,
+  enabled = require('config').is_enabled("material"),
   init = function()
     vim.g.material_style = "palenight"
   end,

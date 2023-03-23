@@ -1,16 +1,15 @@
-local pc = require('plugin_configuration')
 return {
   {
     'caenrique/nvim-maximize-window-toggle',
-    enabled = pc.maximize_window_toggle,
+    enabled = require('config').is_enabled("maximize_window_toggle"),
   },
   {
     'yuttie/comfortable-motion.vim',
-    enabled = pc.floaterm,
+    enabled = require('config').is_enabled("floaterm"),
   },
   {
     'rcarriga/nvim-notify',
-    enabled = pc.notify,
+    enabled = require('config').is_enabled("notify"),
     lazy = true,
     event = "VeryLazy",
     opts = {
@@ -20,7 +19,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    enabled = pc.noice,
+    enabled = require('config').is_enabled("noice"),
     config = function()
       require("noice").setup({
         -- add any options here
@@ -38,7 +37,7 @@ return {
   {
     'goolord/alpha-nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons' },
-    enabled = pc.alpha,
+    enabled = require('config').is_enabled("alpha"),
     config = function()
       require 'alpha'.setup(require 'alpha.themes.startify'.config)
     end

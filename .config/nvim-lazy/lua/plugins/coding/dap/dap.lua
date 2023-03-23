@@ -1,9 +1,8 @@
-local pc = require('plugin_configuration')
 return {
   {
     'mfussenegger/nvim-dap',
     name = 'nvim-dap',
-    enabled = pc.nvim_dap,
+    enabled = require('config').is_enabled("nvim_dap"),
     lazy = true,
     event = "VeryLazy",
     dependencies = {
@@ -19,7 +18,7 @@ return {
       },
       {
         'williamboman/mason.nvim',
-        enabled = pc.mason,
+        enabled = require('config').is_enabled("mason"),
         dependencies = {
           'jay-babu/mason-nvim-dap.nvim',
         }

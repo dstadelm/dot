@@ -1,14 +1,14 @@
-local pc = require('plugin_configuration')
 return {
   {
     'lewis6991/gitsigns.nvim',
-    enabled = pc.gitsigns,
+    enabled = require('config').is_enabled("gitsigns"),
     lazy = true,
     event = "BufEnter",
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
     opts = {
+      sign_priority = 100,
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 

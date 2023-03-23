@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     "nvim-neorg/neorg",
-    enabled = pc.neorg,
+    enabled = require('config').is_enabled("neorg"),
     lazy = true,
     ft = {"norg"},
     cmd = {"Neorg"},

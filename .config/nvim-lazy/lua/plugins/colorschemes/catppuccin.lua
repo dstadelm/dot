@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'catppuccin/nvim',
-  enabled = pc.catppuccin,
+  enabled = require('config').is_enabled("catppuccin"),
   config = function()
     require("catppuccin").setup({
       flavour = "mocha", -- latte, frappe, macchiato, mocha

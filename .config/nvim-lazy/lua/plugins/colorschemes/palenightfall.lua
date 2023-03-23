@@ -1,7 +1,6 @@
-local pc = require("plugin_configuration")
 return {
   "JoosepAlviste/palenightfall.nvim",
-  enabled = pc.palenightfall,
+  enabled = require('config').is_enabled("palenightfall"),
   lazy = false,
   priority = 1000,
   opts = {

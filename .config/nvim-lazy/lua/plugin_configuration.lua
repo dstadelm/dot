@@ -1,9 +1,5 @@
 local config = {}
-
 config = {
-  -- dap
-  nvim_dap = true,
-  nvim_dap_python = true,
   -- git
   diffview = true,
   fugitiv = true,
@@ -11,15 +7,6 @@ config = {
   gitsigns = true,
   -- project
   replacer = true,
-  -- lsp
-  lspconfig = true,
-  lspsaga = true,
-  neoconf = true,
-  noedev = true,
-  mason = true,
-  trouble = true,
-  null_ls = true,
-  fidget = true, -- standalone ui for nvim-lsp progress
   -- vhdl
   vunit = true,
   simple_vhdl = true,
@@ -46,6 +33,18 @@ config = {
   iswap = true,
   cheat_sh = true,
   neotest = true,
+  -- dap
+  nvim_dap = true,
+  nvim_dap_python = true,
+  -- lsp
+  lspconfig = true,
+  lspsaga = true,
+  neoconf = true,
+  neodev = true,
+  mason = true,
+  trouble = true,
+  null_ls = true,
+  fidget = true, -- standalone ui for nvim-lsp progress
   -- completion
   tabout = true,
   nvim_cmp = true,

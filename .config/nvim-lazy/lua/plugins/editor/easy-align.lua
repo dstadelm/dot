@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     'junegunn/vim-easy-align',
-    enabled = pc.easy_align,
+    enabled = require('config').is_enabled("easy_align"),
     config = function()
       vim.api.nvim_set_keymap("n", "ga", '<Plug>(EasyAlign)', { desc = "Easy Align"})
       vim.api.nvim_set_keymap("x", "ga", '<Plug>(EasyAlign)', { desc = "Easy Align"})

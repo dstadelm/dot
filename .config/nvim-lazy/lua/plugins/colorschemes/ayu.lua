@@ -1,5 +1,4 @@
-local pc = require('plugin_configuration')
 return {
   'Shatur/neovim-ayu',
-  enabled = pc.ayu,
+  enabled = require('config').is_enabled("ayu"),
 }

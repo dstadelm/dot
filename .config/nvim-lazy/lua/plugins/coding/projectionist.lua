@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   {
     'tpope/vim-projectionist',
-    enabled = pc.projectionist,
+    enabled = require('config').is_enabled("projectionist"),
   },
 }

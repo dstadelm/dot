@@ -1,9 +1,8 @@
-local pc = require('plugin_configuration')
 return {
   -- testing
   {
     'nvim-neotest/neotest',
-    enabled = pc.neotest and pc.treesitter,
+    enabled = require('config').is_enabled("neotest"),
     lazy = true,
     dependencies = {
       'nvim-lua/plenary.nvim',

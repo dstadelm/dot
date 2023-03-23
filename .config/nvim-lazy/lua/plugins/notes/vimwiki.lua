@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'vimwiki/vimwiki',
-  enabled = pc.vimwiki,
+  enabled = require('config').is_enabled("vimwiki"),
   lazy = true,
   ft = "vimwiki",
   keys = {

@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   {
     'dbeniamine/cheat.sh-vim',
-    enabled = pc.cheat_sh,
+    enabled = require('config').is_enabled("cheat_sh"),
   },
 }

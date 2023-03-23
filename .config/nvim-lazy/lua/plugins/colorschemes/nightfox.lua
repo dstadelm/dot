@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'EdenEast/nightfox.nvim',
-  enabled = pc.nightfox,
+  enabled = require('config').is_enabled("nightfox"),
   opts = {
     options = {
       -- Compiled file's destination location

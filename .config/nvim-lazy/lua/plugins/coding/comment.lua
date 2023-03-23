@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     'numToStr/Comment.nvim',
-    enabled = pc.comment,
+    enabled = require('config').is_enabled("comment"),
     lazy = true,
     config = true,
     keys = {

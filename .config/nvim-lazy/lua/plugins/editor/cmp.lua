@@ -1,10 +1,9 @@
-local pc = require('plugin_configuration')
 return {
 
   -- Ultisnips Interferes with tab keymap
   {
     'hrsh7th/nvim-cmp',
-    enabled = pc.nvim_cmp,
+    enabled = require('config').is_enabled("nvim_cmp"),
     name = 'nvim-cmp',
     lazy = true,
     event = {"InsertEnter", "CmdlineEnter"},

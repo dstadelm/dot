@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'Mofiqul/vscode.nvim',
-  enabled = pc.vscode,
+  enabled = require('config').is_enabled("vscode"),
   config = function ()
     vim.g.vscode_style = "dark"
     -- For light theme

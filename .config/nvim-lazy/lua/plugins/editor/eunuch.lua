@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   {
     'tpope/vim-eunuch',
-    enabled = pc.eunuch,
+    enabled = require('config').is_enabled("eunuch"),
   }, -- :Rename, :Delete, :Move
 }

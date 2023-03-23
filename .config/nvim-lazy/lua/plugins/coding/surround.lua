@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     'kylechui/nvim-surround',
-    enabled = pc.surround,
+    enabled = require('config').is_enabled("surround"),
     config = true,
   },
 }

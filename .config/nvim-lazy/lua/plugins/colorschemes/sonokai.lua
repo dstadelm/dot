@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'sainnhe/sonokai',
-  enabled = pc.sonokai,
+  enabled = require('config').is_enabled("sonokai"),
   init = function()
     vim.g.sonokai_transparent_background = 0
   end

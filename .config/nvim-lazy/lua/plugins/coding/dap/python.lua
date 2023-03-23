@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'mfussenegger/nvim-dap-python',
-  enabled = pc.nvim_dap_python and pc.nvim_dap,
+  enabled = require('config').is_enabled("nvim_dap_python"),
   lazy = true,
   ft = "python",
   dependencies = {

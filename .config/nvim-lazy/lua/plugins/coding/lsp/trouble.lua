@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    enabled = pc.trouble,
+    enabled = require('config').is_enabled("trouble"),
     lazy = true,
     cmd = "Trouble",
     config = true,

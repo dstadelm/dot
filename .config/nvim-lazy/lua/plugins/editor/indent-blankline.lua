@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     'lukas-reineke/indent-blankline.nvim',
-    enabled = pc.indent_blankline,
+    enabled = require('config').is_enabled("indent_blankline"),
     config = function()
       vim.cmd([[
                 let g:indent_blankline_filetype = ['py',  'yaml']
@@ -12,6 +11,6 @@ return {
   },
   {
     'tommcdo/vim-exchange',
-    enabled = pc.exchange,
+    enabled = require('config').is_enabled("exchange"),
   },
 }

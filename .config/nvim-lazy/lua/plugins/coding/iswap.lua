@@ -1,12 +1,11 @@
-local pc = require('plugin_configuration')
 return {
-  {
-    'mizlan/iswap.nvim',
-    enabled = pc.iswap and pc.treesitter,
-    lazy = true,
-    event = "VeryLazy",
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter'
-    }
-  },
+	{
+		"mizlan/iswap.nvim",
+		enabled = require("config").is_enabled("iswap"),
+		lazy = true,
+		cmd = "ISwap",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
 }

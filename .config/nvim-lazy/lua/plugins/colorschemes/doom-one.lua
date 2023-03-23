@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'dstadelm/doom-one.nvim',
-  enabled = pc.doom,
+  enabled = require('config').is_enabled("doom"),
   priority = 1000,
   lazy = false,
   init = function()

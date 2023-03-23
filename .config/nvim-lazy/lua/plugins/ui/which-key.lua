@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   "folke/which-key.nvim",
-  enabled = pc.which_key,
+  enabled = require('config').is_enabled("which_key"),
   config = function()
     local wk = require('which-key')
     _G.dstadelm = {

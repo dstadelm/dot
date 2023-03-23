@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'abecodes/tabout.nvim',
-  enabled = pc.tabout and pc.treesitter,
+  enabled = require('config').is_enabled("tabout"),
   lazy = true,
   keys = {
     {"<Tab>", mode = "i"}

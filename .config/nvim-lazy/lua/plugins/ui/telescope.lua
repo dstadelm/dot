@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'nvim-telescope/telescope.nvim',
-  enabled = pc.telescope,
+  enabled = require('config').is_enabled("telescope"),
   dependencies = {
     'nvim-lua/popup.nvim',
     'nvim-lua/plenary.nvim',

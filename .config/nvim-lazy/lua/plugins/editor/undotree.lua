@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   {
     'mbbill/undotree',
-    enabled = pc.undotree,
+    enabled = require('config').is_enabled("undotree"),
   },
 }

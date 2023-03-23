@@ -1,9 +1,8 @@
-local pc = require("plugin_configuration")
 return {
   "jose-elias-alvarez/null-ls.nvim",
-  enabled = pc.null_ls,
-  lazy = true,
-  event = "VeryLazy",
+  enabled = require("config").is_enabled("null_ls"),
+  lazy = false,
+  -- event = "VeryLazy",
   config = function()
     local null_ls = require("null-ls")
     -- register any number of sources simultaneously
@@ -21,26 +20,31 @@ return {
       formatting.latexindent,
       formatting.isort,
       formatting.black, -- .with({ extra_args = {"--line-length", "120"}}),
-      -- formatting.stylua,
+      formatting.stylua,
     }
 
     null_ls.setup({
       sources = sources,
-      on_attach = function(client, bufnr)
-        if client.name == "pylsp" or client.name == "pyright" then
-          client.resolved_capabilities.document_formatting = false
-        end
-
-        if client.supports_method("textDocument/formatting") then
-          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            callback = function()
-              vim.lsp.buf.format()
-            end,
-          })
-        end
-      end,
+      -- on_attach = function(client, bufnr)
+      --   print("Hello null_ls " .. client.name)
+      --   if client.name == "pylsp" or client.name == "pyright" then
+      --     client.resolved_capabilities.document_formatting = false
+      --   end
+      --   if client.name == "lua_ls" then
+      --     print("Hello null_ls " .. client.name)
+      --     client.resolved_capabilities.document_formatting = false
+      --   end
+      --
+      --   if client.supports_method("textDocument/formatting") then
+      --     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      --     vim.api.nvim_create_autocmd("BufWritePre", {
+      --       group = augroup,
+      --       callback = function()
+      --         vim.lsp.buf.format()
+      --       end,
+      --     })
+      --   end
+      -- end,
     })
   end,
 }

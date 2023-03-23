@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   'nvim-treesitter/nvim-treesitter',
   name = 'treesitter',
-  enabled = pc.treesitter,
+  enabled = require('config').is_enabled("treesitter"),
   lazy = true,
   event = "BufRead",
   dependencies = {

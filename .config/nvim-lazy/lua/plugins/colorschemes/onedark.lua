@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'olimorris/onedarkpro.nvim',
-  enabled = pc.onedark,
+  enabled = require('config').is_enabled("onedark"),
   config =  function ()
     local utils = require("onedarkpro.helpers")
     local onedarkpro = require("onedarkpro")

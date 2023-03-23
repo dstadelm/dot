@@ -1,11 +1,20 @@
 local map = vim.api.nvim_set_keymap
+local toggle_diagnostics = function()
+  local bufnr =vim.api.nvim_get_current_buf()
+  if vim.diagnostic.is_disabled() then
+    vim.diagnostic.enable(bufnr)
+  else
+    vim.diagnostic.disable(bufnr)
+  end
+end
+vim.api.nvim_create_user_command("ToggleDiagnostics", toggle_diagnostics, {})
 map("n", "<leader>ef", ':e <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current file" })
 map("n", "<leader>rf", ':read <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Read content of file to this file" })
 map("n", "<leader>sf", ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', { desc = "Open file relative to current in split" })
 map("n", "<leader>fs", ":lua require('utilities.stack_overflow').stack_overflow()<CR>", { desc = "Search stack overflow" })
 map("n", "<leader>w", 'ciw<C-R>0<ESC>', { desc = "Delete word and replace with current yank (dot repeatable)" })
 map("n", "<leader>z", ':ToggleOnly<CR>', { desc = "Maximize / Restore Window" })
-
+map("n", "<leader>gd", ':ToggleDiagnostics<CR>', {desc = "Toggle Diagnostics"})
 map("n", "<leader>dap", '"_dap', { desc = "Delete around paragraph to black hole register" })
 map("n", "<leader>das", '"_das', { desc = "Delete around sentece to black hole register" })
 map("n", "<leader>daw", '"_daw', { desc = "Delete around word to black hole register" })

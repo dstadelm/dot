@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   "stevearc/dressing.nvim",
-  enabled = pc.dressing,
+  enabled = require('config').is_enabled("dressing"),
   lazy = true,
   event = "VeryLazy",
   opts = {

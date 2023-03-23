@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return {
   'rebelot/kanagawa.nvim',
-  enabled = pc.kanagawa,
+  enabled = require('config').is_enabled("kanagawa"),
   -- opts = {
   --   undercurl = true, -- enable undercurls
   --   commentStyle = { italic = true },

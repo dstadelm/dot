@@ -1,4 +1,3 @@
-local pc = require('plugin_configuration')
 local function gitsigns_menu()
   local gitsigns = require "gitsigns"
 
@@ -149,7 +148,7 @@ return {
   {
     "anuvyklack/hydra.nvim",
     event = "VeryLazy",
-    enabled = pc.hydra,
+    enabled = require('config').is_enabled("hydra"),
     config = function(_, _)
       local Hydra = require "hydra"
       if package.loaded.gitsigns then

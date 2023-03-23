@@ -1,7 +1,6 @@
-local pc = require('plugin_configuration')
 return{
   'monaqa/dial.nvim',
-  enabled = pc.dial,
+  enabled = require('config').is_enabled("dial"),
   keys = { "<C-a>", "<C-x>", { "<C-a>", "v" }, { "<C-x>", "v" }, { "g<C-a>", "v" }, { "g<C-x>", "v" } },
     -- stylua: ignore
     init = function()

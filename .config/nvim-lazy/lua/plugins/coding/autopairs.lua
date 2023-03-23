@@ -1,8 +1,7 @@
-local pc = require('plugin_configuration')
 return {
   {
     "windwp/nvim-autopairs",
-    enabled = pc.autopairs,
+    enabled = require('config').is_enabled("autopairs"),
     config = true,
   },
 }

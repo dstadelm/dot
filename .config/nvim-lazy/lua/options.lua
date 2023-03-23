@@ -8,7 +8,7 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 vim.o.number = true
 vim.o.relativenumber = true -- shows relative numbers
-vim.wo.signcolumn = 'yes:3'
+vim.wo.signcolumn = 'auto:4'
 vim.o.showmatch = true -- show bracket matches
 vim.o.ignorecase = true -- has to be enabled to make smartcase work, as smartcase overrides this option
 vim.o.smartcase = true -- when searching using small case letters only the case is ignored
@@ -38,7 +38,7 @@ vim.o.formatoptions = "jcroqlnt"
 vim.o.conceallevel = 3
 
 vim.o.mouse = 'a'
-vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical,linematch:60'
+vim.o.diffopt = 'internal,filler,algorithm:histogram,iwhiteall,vertical,linematch:200'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.redrawtime = 10000
 

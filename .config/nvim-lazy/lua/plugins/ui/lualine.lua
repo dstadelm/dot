@@ -1,4 +1,3 @@
-local pc = require('plugin_configuration')
 
 local function window_number()
   local win = vim.api.nvim_get_current_win()
@@ -18,7 +17,7 @@ end
 
 return {
   'nvim-lualine/lualine.nvim',
-  enabled = pc.lualine,
+  enabled = require('config').is_enabled("lualine"),
   lazy = true,
   event = "VeryLazy",
   dependencies = {
