@@ -24,7 +24,7 @@ map(
 	"n",
 	"<leader>ef",
 	':e <C-R>=expand("%:p:h") . "/" <CR>',
-	{ noremap = true, silent = true, desc = "Open file relative to current file" }
+	{ noremap = true, silent = false, desc = "Open file relative to current file" }
 )
 map(
 	"n",
