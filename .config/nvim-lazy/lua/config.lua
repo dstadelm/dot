@@ -3,6 +3,16 @@ local M = {}
 M.colorscheme = "kanagawa"
 
 local nvim = {
+	notes = {
+		enabled = true,
+		plugins = {
+			markdown_preview = true,
+			peek = true,
+			neorg = true,
+			vimwiki = true,
+			headlines = true,
+		},
+	},
 	editor = {
 		enabled = true,
 		plugins = {
@@ -17,6 +27,8 @@ local nvim = {
 			hydra = true,
 			colorizer = true,
 			treesitter = true,
+			treesj = true,
+			replacer = true,
 		},
 		completion = {
 			enabled = true,
@@ -142,7 +154,10 @@ end
 
 function M.is_enabled(plugin)
 	flatten_table()
-	return flat_table[plugin]
+	if flat_table[plugin] == true then
+		return true
+	end
+	return false
 end
 
 function M.get_colorscheme_priority(plugin)
@@ -156,7 +171,7 @@ function M.get_colorscheme_lazy(plugin)
 	if plugin == M.colorscheme then
 		return false
 	end
-	return false
+	return true
 end
 
 return M

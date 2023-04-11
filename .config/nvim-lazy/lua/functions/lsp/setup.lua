@@ -5,7 +5,13 @@ local function format(_)
 	local bufnr = vim.api.nvim_get_current_buf()
 	vim.lsp.buf.format({
 		filter = function(client)
-			return client.name ~= "lua_ls" and client.name ~= "pyright" and client.name ~= "pylsp"
+			if client.supports_method("textDocument/formatting") then
+				if client.name ~= "lua_ls" and client.name ~= "pyright" and client.name ~= "pylsp" then
+					vim.notify("Formatting with client = " .. client.name)
+					return true
+				end
+			end
+			return false
 		end,
 		bufnr = bufnr,
 	})
@@ -19,6 +25,11 @@ end
 
 local function toggle_autoformat()
 	M.autoformat = not M.autoformat
+	if M.autoformat then
+		vim.notify("Enabled autoformat", vim.log.levels.INFO)
+	else
+		vim.notify("Disabled autoformat", vim.log.levels.INFO)
+	end
 end
 
 local function toggle_diagnostics()
@@ -43,16 +54,14 @@ end
 
 local function create_autocmd(client, bufnr)
 	local augroup = vim.api.nvim_create_augroup("LspFormatting", {}) -- do not clear as for each buffer / client we add a autocmd
-	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
-			buffer = bufnr,
-			callback = function()
-				auto_format()
-			end,
-		})
-	end
+	vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = augroup,
+		buffer = bufnr,
+		callback = function()
+			auto_format()
+		end,
+	})
 end
 
 local function define_signs()
@@ -146,7 +155,7 @@ local function setup_rust_hdl()
 
 	lspconfig.rust_hdl.setup({
 		on_attach = on_attach,
-		capabilities = capabilities,
+		capabilities = capabilities(),
 	})
 end
 
@@ -230,7 +239,7 @@ function M.setup()
 	mason_lspconfig.setup_handlers({
 		function(server_name)
 			require("lspconfig")[server_name].setup({
-				capablities = capabilities,
+				capablities = capabilities(),
 				on_attach = on_attach,
 				settings = servers[server_name],
 			})
