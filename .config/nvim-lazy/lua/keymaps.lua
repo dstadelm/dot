@@ -20,18 +20,63 @@ local toggle_term = function()
 	vim.cmd([[startinsert]])
 end
 
-map("n", "<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>', { noremap = true, silent = false, desc = "Open file relative to current file" })
-map("n", "<leader>rf", ':read <C-R>=expand("%:p:h") . "/" <CR>', { noremap = true, silent = true, desc = "Read content of file to this file" })
-map("n", "<leader>sf", ':vsplit <C-R>=expand("%:p:h") . "/" <CR>', { noremap = true, silent = true, desc = "Open file relative to current in split" })
-map("n", "<leader>fs", ":lua require('utilities.stack_overflow').stack_overflow()<CR>", { noremap = true, silent = true, desc = "Search stack overflow" })
-map("n", "<leader>w", "ciw<C-R>0<ESC>", { noremap = true, silent = true, desc = "Delete word and replace with current yank (dot repeatable)" })
+map(
+	"n",
+	"<leader>e",
+	':e <C-R>=expand("%:p:h") . "/" <CR>',
+	{ noremap = true, silent = false, desc = "Open file relative to current file" }
+)
+map(
+	"n",
+	"<leader>rf",
+	':read <C-R>=expand("%:p:h") . "/" <CR>',
+	{ noremap = true, silent = true, desc = "Read content of file to this file" }
+)
+map(
+	"n",
+	"<leader>sf",
+	':vsplit <C-R>=expand("%:p:h") . "/" <CR>',
+	{ noremap = true, silent = false, desc = "Open file relative to current in split" }
+)
+map(
+	"n",
+	"<leader>fs",
+	":lua require('utilities.stack_overflow').stack_overflow()<CR>",
+	{ noremap = true, silent = true, desc = "Search stack overflow" }
+)
+map(
+	"n",
+	"<leader>w",
+	"ciw<C-R>0<ESC>",
+	{ noremap = true, silent = true, desc = "Delete word and replace with current yank (dot repeatable)" }
+)
 map("n", "<leader>z", ":ToggleOnly<CR>", { noremap = true, silent = true, desc = "Maximize / Restore Window" })
-map("n", "<leader>dap", '"_dap', { noremap = true, silent = true, desc = "Delete around paragraph to black hole register" })
-map("n", "<leader>das", '"_das', { noremap = true, silent = true, desc = "Delete around sentece to black hole register" })
+map(
+	"n",
+	"<leader>dap",
+	'"_dap',
+	{ noremap = true, silent = true, desc = "Delete around paragraph to black hole register" }
+)
+map(
+	"n",
+	"<leader>das",
+	'"_das',
+	{ noremap = true, silent = true, desc = "Delete around sentece to black hole register" }
+)
 map("n", "db", '"_d', { noremap = true, silent = true, desc = "Delete to black hole register" })
-map("n", "<leader>ds", ":%s/\\s\\+$//gce \\| w<cr>", { noremap = true, silent = true, desc = "Delete all trailing whitespace in current file" })
+map(
+	"n",
+	"<leader>ds",
+	":%s/\\s\\+$//gce \\| w<cr>",
+	{ noremap = true, silent = true, desc = "Delete all trailing whitespace in current file" }
+)
 map("n", "cb", '"_c', { noremap = true, silent = true, desc = "Change around paragraph to black hole register" })
-map("n", "<leader>cd", ":cd %:p:h<CR>", { noremap = true, silent = true, desc = "Change directory to directory of current file" })
+map(
+	"n",
+	"<leader>cd",
+	":cd %:p:h<CR>",
+	{ noremap = true, silent = true, desc = "Change directory to directory of current file" }
+)
 --------------------------------------------------------------------------------
 -- Initial idea from here http://www.kevinli.co/posts/2017-01-19-multiple-cursors-in-500-bytes-of-vimscript/
 -- Mappings from here https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/Oli/core/mappings.lua
@@ -53,11 +98,21 @@ map("n", "<leader>cd", ":cd %:p:h<CR>", { noremap = true, silent = true, desc = 
 local mc = vim.api.nvim_replace_termcodes([[y/\V<C-r>=escape(@", '/')<CR><CR>]], true, true, true)
 map("n", "<leader>cn", "*``cgn", { noremap = true, silent = true, desc = "Multicurser change next occurance" })
 map("n", "<leader>cN", "*``cgN", { noremap = true, silent = true, desc = "Multicurser change previous occurance" })
-map("n", "<leader>cq", ":<C-u>lua require('functions.multicursor').setup()<CR>*``qz", { noremap = true, silent = true, desc = "Multicurser change using macro" })
+map(
+	"n",
+	"<leader>cq",
+	":<C-u>lua require('functions.multicursor').setup()<CR>*``qz",
+	{ noremap = true, silent = true, desc = "Multicurser change using macro" }
+)
 
 map("x", "<leader>cn", mc .. "``cgn", { noremap = true, silent = true, desc = "Multicurser change next occurance" })
 map("x", "<leader>cN", mc .. "``cgN", { noremap = true, silent = true, desc = "Multicurser change previous occurance" })
-map("x", "<leader>cq", ":<C-u>lua require('functions.multicursor').setup()<CR>gv" .. mc .. "``qz", { noremap = true, silent = true, desc = "Multicurser change using macro" })
+map(
+	"x",
+	"<leader>cq",
+	":<C-u>lua require('functions.multicursor').setup()<CR>gv" .. mc .. "``qz",
+	{ noremap = true, silent = true, desc = "Multicurser change using macro" }
+)
 --
 --------------------------------------------------------------------------------
 
@@ -74,9 +129,24 @@ map("v", ".", ":norm .<CR>", { noremap = true, silent = true, desc = "Execute la
 
 map("t", "<leader>tt", "<C-\\><C-N>:ToggleTerm<CR>", { noremap = true, silent = true, desc = "[T]oggle [T]erminal" })
 map("n", "<leader>tt", "", { callback = toggle_term, noremap = true, silent = true, desc = "[T]oggle [T]erminal" })
-map("n", "<leader>tf", "", { callback = toggle_term_float, noremap = true, silent = true, desc = "[T]oggle terminal [F]loat" })
-map("n", "<leader>th", "", { callback = toggle_term_horz, noremap = true, silent = true, desc = "[T]oggle terminal [H]orizontal" })
-map("n", "<leader>tv", "", { callback = toggle_term_vert, noremap = true, silent = true, desc = "[T]oggle terminal [V]ertical" })
+map(
+	"n",
+	"<leader>tf",
+	"",
+	{ callback = toggle_term_float, noremap = true, silent = true, desc = "[T]oggle terminal [F]loat" }
+)
+map(
+	"n",
+	"<leader>th",
+	"",
+	{ callback = toggle_term_horz, noremap = true, silent = true, desc = "[T]oggle terminal [H]orizontal" }
+)
+map(
+	"n",
+	"<leader>tv",
+	"",
+	{ callback = toggle_term_vert, noremap = true, silent = true, desc = "[T]oggle terminal [V]ertical" }
+)
 
 map("n", "n", "nzzzv", { noremap = true, silent = true, desc = "Go to next search occurance and center" })
 map("n", "N", "Nzzzv", { noremap = true, silent = true, desc = "Go to previous search occurance and center" })
@@ -93,10 +163,30 @@ map("v", "<", "<gv", { noremap = true, silent = true, desc = "Indent to left and
 --------------------------------------------------------------------------------
 -- window mappings
 --
-map("n", "<C-W>>", ':exe "vert resize " . (winwidth(0) * 6/5)<CR>', { noremap = true, silent = true, desc = "Increase vertical widnow size by 6/5" })
-map("n", "<C-W><", ':exe "vert resize " . (winwidth(0) * 4/5)<CR>', { noremap = true, silent = true, desc = "Decrease vertical window size by 4/5" })
-map("n", "<C-W>+", ':exe "resize " . (winheight(0) * 6/5)<CR>', { noremap = true, silent = true, desc = "Increase horizontal window size by 6/5" })
-map("n", "<C-W>-", ':exe "resize " . (winheight(0) * 4/5)<CR>', { noremap = true, silent = true, desc = "Decrease horizontal window size by 4/5" })
+map(
+	"n",
+	"<C-W>>",
+	':exe "vert resize " . (winwidth(0) * 6/5)<CR>',
+	{ noremap = true, silent = true, desc = "Increase vertical widnow size by 6/5" }
+)
+map(
+	"n",
+	"<C-W><",
+	':exe "vert resize " . (winwidth(0) * 4/5)<CR>',
+	{ noremap = true, silent = true, desc = "Decrease vertical window size by 4/5" }
+)
+map(
+	"n",
+	"<C-W>+",
+	':exe "resize " . (winheight(0) * 6/5)<CR>',
+	{ noremap = true, silent = true, desc = "Increase horizontal window size by 6/5" }
+)
+map(
+	"n",
+	"<C-W>-",
+	':exe "resize " . (winheight(0) * 4/5)<CR>',
+	{ noremap = true, silent = true, desc = "Decrease horizontal window size by 4/5" }
+)
 
 --------------------------------------------------------------------------------
 -- Terminal mode mappings

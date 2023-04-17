@@ -1,6 +1,7 @@
+local is_enabled = require("config").is_enabled
 return {
 	"Wansmer/treesj",
-	enabled = require("config").is_enabled("treesj"),
+	enabled = is_enabled("treesj") and is_enabled("treesitter"),
 	keys = {
 		{
 			"<space>m",

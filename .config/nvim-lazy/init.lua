@@ -15,6 +15,7 @@ require("lazy").setup({
 	{ import = "plugins.colorschemes" },
 })
 require("keymaps")
+require("abbreviations")
 require("augroup")
 require("functions/center_cursorline")
 vim.cmd.colorscheme(require("config").colorscheme)
