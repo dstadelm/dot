@@ -1,0 +1,293 @@
+@document.meta
+title: arch linux installation
+description: Describes the installation of arch linux with btrfs luks and swapfile for hibernation on the thinkpad-p14s
+authors: dstadelmann
+categories:
+created: 2022-04-11
+version: 0.0.1
+@end
+
+= ToC Table of Contents
+
+
+* Instalation setup
+
+** Partitioning
+   - create a EFI System partition 512M /dev/nvme0n1p1
+   - create a boot partiotion (booting with grub from a encrypted boot partition is very slow and not an attack vector for me)
+   - create a root partition for the rest 999G /dev/nvme0n1p2
+* Encryption
+** create a luks2 encrypted partition
+   as we will not be encrypting /boot luks2 can be used
+   @code bash
+       cryptsetup luksFormat --type luks2 /dev/nvme0n1p3
+   @end
+
+** open the encrypted partition
+   @code bash
+       cryptsetup open /dev/nvme0n1p3 root
+   @end
+
+** create file system
+   @code bash
+       mkfs.btrfs -L btrfs_root /dev/mapper/root
+   @end
+
+** mount mapped fs
+   @code bash
+       mount /dev/mapper/root mnt
+   @end
+
+* create and mount subvolumes
+  @code bash
+       cd /mnt
+       btrfs subvolume create @
+       btrfs subvolume create @home
+       btrfs subvolume create @var_tmp
+       btrfs subvolume create @var_log
+       btrfs subvolume create @var_abs
+       btrfs subvolume create @var_pkg
+       btrfs subvolume create @srv
+       btrfs subvolume create @swap
+       btrfs subvolume create @snapshots
+  @end
+
+** umount mapped fs
+   @code bash
+       umount /mnt
+   @end
+
+** mount subvolumes
+   @code bash
+       mount -o compress-force=zstd,autodefrag,subvol=@          /dev/mapper/root /mnt
+
+       mkdir -p /mnt/home
+       mkdir -p /mnt/var/tmp
+       mkdir -p /mnt/var/log
+       mkdir -p /mnt/var/abs
+       mkdir -p /mnt/var/cache/pacman/pkg
+       mkdir -p /mnt/srv
+       mkdir -p /mnt/.snapshots
+       mkdir -p /mnt/swap
+       mkdir -p /mnt/efi
+       mkdir -p /mnt/boot
+
+       mount -o compress-force=zstd,autodefrag,subvol=@home      /dev/mapper/root /mnt/home
+       mount -o compress-force=zstd,autodefrag,subvol=@var_tmp   /dev/mapper/root /mnt/var/tmp
+       mount -o compress-force=zstd,autodefrag,subvol=@var_log   /dev/mapper/root /mnt/var/log
+       mount -o compress-force=zstd,autodefrag,subvol=@var_abs   /dev/mapper/root /mnt/var/abs
+       mount -o compress-force=zstd,autodefrag,subvol=@var_pkg   /dev/mapper/root /mnt/var/cache/pacman/pkg
+       mount -o compress-force=zstd,autodefrag,subvol=@srv       /dev/mapper/root /srv
+       mount -o compress=no,autodefrag,subvol=@swap              /dev/mapper/root /swap
+       mount -o compress-force=zstd,autodefrag,subvol=@snapshots /.snapshots
+       mount /dev/nvme0n1p1 /mnt/efi
+   @end
+
+* Finalize base installation
+** pacstrap
+   @code bash
+       pacstrap /mnt base linux linux-firmware amd-ucode btrfs-progs vim networkmanager grub grub-btrfs e2fsprogs efitools efibootmgr
+   @end
+
+** create fstab
+   @code bash
+       genfstab -U /mnt >> /mnt/etc/fstab
+   @end
+
+** chroot to system
+   @code bash
+       arch-chroot /mnt
+   @end
+
+** setup timezone
+   @code bash
+     ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+     hwclock --systohc
+   @end
+
+** pick locales in /etc/locale.gen then run
+   @code bash
+     locale-gen
+   @end
+
+** set lang
+   @code bash
+     echo LANG=en_US.UTF-8 >> /etc/locale.conf
+   @end
+
+** set hostname
+   @code bash
+     echo "thinkpad-p14s" >> /etc/hostname
+   @end
+
+ * create keyfile (not to be done if boot is not encrypted)
+   @code bash
+      dd bs=512 count=4 if=/dev/random of=/crypto_keyfile.bin iflag=fullblock
+      chmod 600 /crypto_keyfile.bin
+      chmod 600 /boot/initramfs-linux*
+      exit
+      cryptsetup luksAdd /dev/nvme0n1p2 /mnt/crypto_keyfile.bin
+    @end
+
+** configure mkinitcpio
+   @code bash
+     MODULES=(amdgpu nvme usbhid xhci_hcd vmd)
+     BINARIES=(btrfs)
+     #FILES=(/crypto_keyfile.bin)
+     HOOKS=(base udev autodetect keyboard keymap consolefont modconf block encrypt filesystems keyboard resume fsck)
+   @end
+   mkinitcpio -P
+
+** configure grub
+*** find the blkid of the root device
+    @code bash
+     blkid
+    @end
+    find /dev/nvme0n1p2 and copy the uuid
+
+*** setup grub cmdline linux /etc/default/grub
+    @code bash
+      GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet cryptdevice=UUID=<the uuid>:root crypto=::::"
+      GRUB_ENABLE_CRYPTODISK=y
+    @end
+
+*** install grub
+    @code bash
+    grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+    grub-mkconfig -o /boot/grub/grub.cfg
+    @end
+
+** set root passwd
+   @code bash
+       passwd
+   @end
+
+** reboot
+   @code bash
+       exit
+       umount -R /mnt
+       cryptsetup close root
+       reboot
+   @end
+
+** create regular user
+   @code bash
+       useradd -m -G wheel dstadelm
+   @end
+   for some unknown reason no home was created with the mkhomedir_helper
+   @code bash
+       mkhomedir_helper dstadelm
+   @end
+
+* Create a swapfile for hibernation
+  following this guide https://confluence.jaytaala.com/display/TKB/Use+a+swap+file+and+enable+hibernation+on+Arch+Linux+-+including+on+a+LUKS+root+partition
+** check no swap is on
+   @code bash
+           sudo swapon -s
+           sudo swapoff -a
+      @end
+
+
+** create a swap file
+   @code bash
+       truncate -s 0 /swap/swapfile
+       chattr +C /swap/swapfile
+       btrfs property set /swap/swapfile compression none
+       dd if=/dev/zero of=/swap/swapfile bs=1M count=16384
+       mkswap /swap/swapfile
+       chmod 600 /swap/swapfile
+       swapon /swap/swapfile
+   @end
+
+
+** add entry in /etc/fstab
+   @code bash
+       cp /etc/fstab /etc/fstab.backup
+       echo '/swap/swapfile none swap defaults 0 0' >> /etc/fstab
+  @end
+
+** check mount works
+   @code bash
+       mount -a
+  @end
+
+** reboot
+** enable hibernation
+   @code bash
+     sudo pacman -S hibernator
+     sudo hibernator
+   @end
+
+** modify sleep.conf
+    /etc/systemd/sleep.conf
+   @code bash
+     [Sleep]
+     AllowHibernation=yes
+     HibernateMode=shutdown
+   @end
+
+* modify grub to use swapfile
+** find blkid
+   @code bash
+     blkid
+   @end
+   it should be /dev/mapper/root
+** calculate offset (according to https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate)
+   - download file btrfs_map_physical.c from https://github.com/osandov/osandov-linux/blob/master/scripts/btrfs_map_physical.c
+   - compile it
+   @code bash
+       gcc -O2 -o btrfs_map_physical btrfs_map_physical.c
+   @end
+   - run it
+   @code bash
+       sudo ./btrfs_map_physical /swapfile
+   @end
+   - extrat "PHYSICAL OFFSET" from first line and devide with the value from
+   @code bash
+       getconfg PAGESIZE
+   @end
+   usually 4096
+** update /etc/default/grub
+   create entry
+   @code bash
+       GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=.... resume=/dev/mapper/root resume_offset=<calculated_value_from_above>"
+   @end
+
+* Setup snapper
+  ~ remove / from fstab
+    `UUID=..... / btrfs rw,noatime,compress-force=-zstd:3,ssd,space_cache=v2,autodefrag,subolid=256,subvol=/@ 0 0`
+  ~ umount /.snapshots
+    `umount /.snapshots`
+  ~ remove /.snapshots directory
+    `rmdir /.snapshots`
+  ~ install snapper and tools
+    `pacman -S snapper grub-btrfs`
+  ~ create snapshot volume with snapper
+    `snapper -c root create-config /`
+    this creates a new subvolume .snapshots which has to be deleted
+  ~ delete subvolume created by sapper
+    `btrfs sub del /.snapshots/`
+  ~ recreate the directory
+    `mkdir  /.snapshots`
+  ~ mount snapshots
+    `mount /.snapshots`
+  ~ enable snapshots to show in grub
+    `systemctl enable grub-btrfs.path`
+  ~ in /etc/default/grub set option
+    `GRUB_DISABLE_RECOVERY=false`
+  ~ recreate grub config
+    `update-grub`
+    or
+    `grup-mkconfig -o /boot/grub/grub.cfg`
+  ~ enable snapshots for pacman
+    `pacman -S snap-pac`
+  ~ enable boot snapshots
+    `systemctl enable snapper-boot.timer`
+
+
+* installing yay
+  sudo pacman -S --needed base-devel git
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  git config --global url."https://".insteadOf git://
