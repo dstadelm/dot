@@ -17,4 +17,5 @@ return {
 			codeblock_highlight = { "CodeBlock" },
 		},
 	},
+	-- config = true,
 }

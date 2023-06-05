@@ -271,7 +271,7 @@ function M.setup()
 	--         autopep8 = {enabled = false},
 	--         flake8 = {enabled = false},
 	--         pyflakes = {enabled = false},
-	--         yapf = {enaboed = false},
+	--         yapf = {enabled = false},
 	--         pylint = {
 	--           enabled = true,
 	--           args = {'--rcfile', 'pyproject.toml' },
