@@ -30,7 +30,7 @@ local python_run_keymap = function()
 	vim.api.nvim_set_keymap(
 		"n",
 		"<leader>x",
-		":sp | term docker_latex python3 %<CR> :startinsert<CR>",
+		":sp | term python3 %<CR> :startinsert<CR>",
 		{ desc = "execute current file" }
 	)
 end

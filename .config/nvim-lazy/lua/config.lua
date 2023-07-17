@@ -174,4 +174,11 @@ function M.get_colorscheme_lazy(plugin)
 	return true
 end
 
+function M.is_default_colorscheme(plugin)
+	if plugin == M.colorscheme then
+		return true
+	end
+	return false
+end
+
 return M

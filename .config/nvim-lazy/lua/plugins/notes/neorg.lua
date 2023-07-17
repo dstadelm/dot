@@ -50,6 +50,7 @@ return {
 						workspaces = {
 							work = "~/notes/work",
 							home = "~/notes/home",
+							zf = "~/notes/zf",
 						},
 					},
 				},

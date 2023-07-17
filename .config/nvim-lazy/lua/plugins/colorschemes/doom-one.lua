@@ -43,5 +43,9 @@ return {
 			},
 		},
 	},
-	config = true,
+	config = function()
+		if config.is_default_colorscheme("doom-one") then
+			vim.cmd.colorscheme("doom-one")
+		end
+	end,
 }

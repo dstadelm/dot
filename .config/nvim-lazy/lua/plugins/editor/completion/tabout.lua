@@ -14,7 +14,7 @@ return {
 	},
 	config = function()
 		vim.g.UltiSnipsExpandTrigger = "<C-k>"
-		vim.g.UltiSnipsJumpForwardTrigger = "<C-k>"
+		vim.g.UltiSnipsJumpForwardTrigger = "<C-i>"
 		vim.g.UltiSnipsJumpBackwardTrigger = "<C-j>"
 		require("tabout").setup({
 			tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable

@@ -21,30 +21,11 @@ return {
 			formatting.isort,
 			formatting.black, -- .with({ extra_args = {"--line-length", "120"}}),
 			formatting.stylua,
+			formatting.yamlfmt,
 		}
 
 		null_ls.setup({
 			sources = sources,
-			-- on_attach = function(client, bufnr)
-			--   print("Hello null_ls " .. client.name)
-			--   if client.name == "pylsp" or client.name == "pyright" then
-			--     client.resolved_capabilities.document_formatting = false
-			--   end
-			--   if client.name == "lua_ls" then
-			--     print("Hello null_ls " .. client.name)
-			--     client.resolved_capabilities.document_formatting = false
-			--   end
-			--
-			--   if client.supports_method("textDocument/formatting") then
-			--     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			--     vim.api.nvim_create_autocmd("BufWritePre", {
-			--       group = augroup,
-			--       callback = function()
-			--         vim.lsp.buf.format()
-			--       end,
-			--     })
-			--   end
-			-- end,
 		})
 	end,
 }

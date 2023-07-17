@@ -23,5 +23,9 @@ return {
 	-- 	overrides = {},
 	-- 	theme = "default", -- Load "default" theme or the experimental "light" theme
 	-- },
-	config = true,
+	config = function()
+        if config.is_default_colorscheme("kanagawa") then
+          vim.cmd.colorscheme("kanagawa")
+        end
+    end,
 }

@@ -73,4 +73,9 @@ return {
 			IncSearch = { bg = "#3b3f40" },
 		}, -- Overwrite highlights with your own
 	},
+	config = function()
+		if config.is_default_colorscheme("material") then
+			vim.cmd.colorscheme("material")
+		end
+	end,
 }

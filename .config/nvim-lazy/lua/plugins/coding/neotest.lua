@@ -43,6 +43,11 @@ return {
 				desc = "Run all tests in file",
 			},
 			{ "<leader>tn", ":lua require('neotest').run.run()<CR>", desc = "Run nearest tests in file" },
+			{
+				"<leader>td",
+				":lua require('neotest').run.run({strategy = 'dap'})<CR>",
+				desc = "Run nearest tests in file",
+			},
 			{ "<leader>ts", ":lua require('neotest').summary.toggle()<CR>", desc = "Toggle test summary" },
 			{ "<leader>to", ":lua require('neotest').output.open({enter=true})<CR>", desc = "Inspect output" },
 

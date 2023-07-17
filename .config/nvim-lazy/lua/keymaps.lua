@@ -51,26 +51,26 @@ map(
 	{ noremap = true, silent = true, desc = "Delete word and replace with current yank (dot repeatable)" }
 )
 map("n", "<leader>z", ":ToggleOnly<CR>", { noremap = true, silent = true, desc = "Maximize / Restore Window" })
-map(
-	"n",
-	"<leader>dap",
-	'"_dap',
-	{ noremap = true, silent = true, desc = "Delete around paragraph to black hole register" }
-)
-map(
-	"n",
-	"<leader>das",
-	'"_das',
-	{ noremap = true, silent = true, desc = "Delete around sentece to black hole register" }
-)
-map("n", "db", '"_d', { noremap = true, silent = true, desc = "Delete to black hole register" })
-map(
-	"n",
-	"<leader>ds",
-	":%s/\\s\\+$//gce \\| w<cr>",
-	{ noremap = true, silent = true, desc = "Delete all trailing whitespace in current file" }
-)
-map("n", "cb", '"_c', { noremap = true, silent = true, desc = "Change around paragraph to black hole register" })
+-- map(
+-- 	"n",
+-- 	"<leader>dap",
+-- 	'"_dap',
+-- 	{ noremap = true, silent = true, desc = "Delete around paragraph to black hole register" }
+-- )
+-- map(
+-- 	"n",
+-- 	"<leader>das",
+-- 	'"_das',
+-- 	{ noremap = true, silent = true, desc = "Delete around sentece to black hole register" }
+-- )
+-- map("n", "db", '"_d', { noremap = true, silent = true, desc = "Delete to black hole register" })
+-- map(
+-- 	"n",
+-- 	"<leader>ds",
+-- 	":%s/\\s\\+$//gce \\| w<cr>",
+-- 	{ noremap = true, silent = true, desc = "Delete all trailing whitespace in current file" }
+-- )
+-- map("n", "cb", '"_c', { noremap = true, silent = true, desc = "Change around paragraph to black hole register" })
 map(
 	"n",
 	"<leader>cd",

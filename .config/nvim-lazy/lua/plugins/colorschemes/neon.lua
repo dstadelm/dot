@@ -9,4 +9,9 @@ return {
 		vim.g.neon_style = "default"
 		vim.g.neon_transparent = false
 	end,
+	config = function()
+		if config.is_default_colorscheme("neon") then
+			vim.cmd.colorscheme("neon")
+		end
+	end,
 }

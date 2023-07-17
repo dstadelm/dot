@@ -7,5 +7,8 @@ return {
 	event = "VeryLazy",
 	config = function()
 		vim.g.oxocarbon_lua_transparent = true
+		if config.is_default_colorscheme("oxocarbon") then
+			vim.cmd.colorscheme("oxocarbon")
+		end
 	end,
 }

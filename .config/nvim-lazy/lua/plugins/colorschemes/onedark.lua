@@ -50,5 +50,8 @@ return {
 				window_unfocused_color = false, -- When the window is out of focus, change the normal background?
 			},
 		})
+		if config.is_default_colorscheme("onedark") then
+			vim.cmd.colorscheme("onedark")
+		end
 	end,
 }

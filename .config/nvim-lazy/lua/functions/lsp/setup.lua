@@ -117,15 +117,15 @@ local function on_attach(client, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+	vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 end
 
 local function capabilities()
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	local _capabilities = vim.lsp.protocol.make_client_capabilities()
 	if package.loaded["cmp_nvim_lsp"] then
-		capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+		_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 	end
-	return capabilities
+	return _capabilities
 end
 
 local function setup_rust_hdl()
@@ -212,9 +212,8 @@ function M.setup()
 		yamlls = {
 			yaml = {
 				schemas = {
-					["/home/dstadelmann/regenor-yaml/newer.schema.json"] = "/home/dstadelmann/regenor-yaml/*",
+					["/home/dstadelmann/regenor-yaml/all.json"] = "/home/dstadelmann/regenor-yaml/*",
 				},
-				customTags = { "!include" },
 			},
 		},
 		pyright = {

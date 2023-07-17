@@ -15,5 +15,8 @@ return {
 		vim.g.vscode_italic_comment = 1
 		-- Disable nvim-tree background color
 		-- vim.g.vscode_disable_nvimtree_bg = false
+		if config.is_default_colorscheme("vscode") then
+			vim.cmd.colorscheme("vscode")
+		end
 	end,
 }

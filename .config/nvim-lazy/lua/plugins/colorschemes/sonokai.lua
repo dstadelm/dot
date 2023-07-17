@@ -8,4 +8,9 @@ return {
 	init = function()
 		vim.g.sonokai_transparent_background = 0
 	end,
+	config = function()
+		if config.is_default_colorscheme("sonokai") then
+			vim.cmd.colorscheme("sonokai")
+		end
+	end,
 }

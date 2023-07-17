@@ -48,5 +48,8 @@ return {
 				-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 			},
 		})
+		if config.is_default_colorscheme("catppuccin") then
+			vim.cmd.colorscheme("catppuccin")
+		end
 	end,
 }
