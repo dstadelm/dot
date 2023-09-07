@@ -1,7 +1,7 @@
 local function gitsigns_menu()
-  local gitsigns = require "gitsigns"
+	local gitsigns = require("gitsigns")
 
-  local hint = [[
+	local hint = [[
  _n_: Next hunk   _s_: Stage Hunk        _d_: Show Deleted   _b_: Blame Line
  _N_: Prev hunk   _u_: Undo Last Stage   _p_: Preview Hunk   _B_: Blame Show Full
  ^ ^              _S_: Stage Buffer      ^ ^                 _/_: Show Base File
@@ -9,88 +9,88 @@ local function gitsigns_menu()
  ^ ^              _q_: Exit
 ]]
 
-  return {
-    name = "Git",
-    hint = hint,
-    config = {
-      color = "pink",
-      invoke_on_body = true,
-      hint = {
-        border = "rounded",
-        position = "bottom",
-      },
-      on_enter = function()
-        vim.cmd "mkview"
-        vim.cmd "silent! %foldopen!"
-        vim.bo.modifiable = false
-        gitsigns.toggle_signs(true)
-        gitsigns.toggle_linehl(true)
-      end,
-      on_exit = function()
-        local cursor_pos = vim.api.nvim_win_get_cursor(0)
-        vim.cmd "loadview"
-        vim.api.nvim_win_set_cursor(0, cursor_pos)
-        vim.cmd "normal zv"
-        gitsigns.toggle_signs(false)
-        gitsigns.toggle_linehl(false)
-        gitsigns.toggle_deleted(false)
-      end,
-    },
-    body = "<A-g>",
-    heads = {
-      {
-        "n",
-        function()
-          if vim.wo.diff then
-            return "]c"
-          end
-          vim.schedule(function()
-            gitsigns.next_hunk()
-          end)
-          return "<Ignore>"
-        end,
-        { expr = true, desc = "Next Hunk" },
-      },
-      {
-        "N",
-        function()
-          if vim.wo.diff then
-            return "[c"
-          end
-          vim.schedule(function()
-            gitsigns.prev_hunk()
-          end)
-          return "<Ignore>"
-        end,
-        { expr = true, desc = "Prev Hunk" },
-      },
-      { "s", ":Gitsigns stage_hunk<CR>", { silent = true, desc = "Stage Hunk" } },
-      { "u", gitsigns.undo_stage_hunk, { desc = "Undo Last Stage" } },
-      { "S", gitsigns.stage_buffer, { desc = "Stage Buffer" } },
-      { "p", gitsigns.preview_hunk, { desc = "Preview Hunk" } },
-      { "r", gitsigns.reset_hunk, { desc = "Reset Hunk" } },
-      { "d", gitsigns.toggle_deleted, { nowait = true, desc = "Toggle Deleted" } },
-      { "b", gitsigns.blame_line, { desc = "Blame" } },
-      {
-        "B",
-        function()
-          gitsigns.blame_line { full = true }
-        end,
-        { desc = "Blame Show Full" },
-      },
-      { "/", gitsigns.show, { exit = true, desc = "Show Base File" } }, -- show the base of the file
-      -- { "<Enter>", "<Cmd>Neogit<CR>", { exit = true, desc = "Neogit" } },
-      { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
-    },
-  }
+	return {
+		name = "Git",
+		hint = hint,
+		config = {
+			color = "pink",
+			invoke_on_body = true,
+			hint = {
+				border = "rounded",
+				position = "bottom",
+			},
+			on_enter = function()
+				vim.cmd("mkview")
+				vim.cmd("silent! %foldopen!")
+				vim.bo.modifiable = false
+				gitsigns.toggle_signs(true)
+				gitsigns.toggle_linehl(true)
+			end,
+			on_exit = function()
+				local cursor_pos = vim.api.nvim_win_get_cursor(0)
+				vim.cmd("loadview")
+				vim.api.nvim_win_set_cursor(0, cursor_pos)
+				vim.cmd("normal zv")
+				gitsigns.toggle_signs(false)
+				gitsigns.toggle_linehl(false)
+				gitsigns.toggle_deleted(false)
+			end,
+		},
+		body = "<A-g>",
+		heads = {
+			{
+				"n",
+				function()
+					if vim.wo.diff then
+						return "]c"
+					end
+					vim.schedule(function()
+						gitsigns.next_hunk()
+					end)
+					return "<Ignore>"
+				end,
+				{ expr = true, desc = "Next Hunk" },
+			},
+			{
+				"N",
+				function()
+					if vim.wo.diff then
+						return "[c"
+					end
+					vim.schedule(function()
+						gitsigns.prev_hunk()
+					end)
+					return "<Ignore>"
+				end,
+				{ expr = true, desc = "Prev Hunk" },
+			},
+			{ "s", ":Gitsigns stage_hunk<CR>", { silent = true, desc = "Stage Hunk" } },
+			{ "u", gitsigns.undo_stage_hunk, { desc = "Undo Last Stage" } },
+			{ "S", gitsigns.stage_buffer, { desc = "Stage Buffer" } },
+			{ "p", gitsigns.preview_hunk, { desc = "Preview Hunk" } },
+			{ "r", gitsigns.reset_hunk, { desc = "Reset Hunk" } },
+			{ "d", gitsigns.toggle_deleted, { nowait = true, desc = "Toggle Deleted" } },
+			{ "b", gitsigns.blame_line, { desc = "Blame" } },
+			{
+				"B",
+				function()
+					gitsigns.blame_line({ full = true })
+				end,
+				{ desc = "Blame Show Full" },
+			},
+			{ "/", gitsigns.show, { exit = true, desc = "Show Base File" } }, -- show the base of the file
+			-- { "<Enter>", "<Cmd>Neogit<CR>", { exit = true, desc = "Neogit" } },
+			{ "q", nil, { exit = true, nowait = true, desc = "Exit" } },
+		},
+	}
 end
 
 local function dap_menu()
-  local dap = require "dap"
-  local dapui = require "dapui"
-  local dap_widgets = require "dap.ui.widgets"
+	local dap = require("dap")
+	local dapui = require("dapui")
+	local dap_widgets = require("dap.ui.widgets")
 
-  local hint = [[
+	local hint = [[
  _t_: Toggle Breakpoint             _R_: Run to Cursor
  _s_: Start                         _E_: Evaluate Input
  _c_: Continue                      _C_: Conditional Breakpoint
@@ -104,19 +104,19 @@ local function dap_menu()
  ^ ^               _q_: Quit
 ]]
 
-  return {
-    name = "Debug",
-    hint = hint,
-    config = {
-      color = "pink",
-      invoke_on_body = true,
-      hint = {
-        border = "rounded",
-        position = "middle-right",
-      },
-    },
-    mode = "n",
-    body = "<A-d>",
+	return {
+		name = "Debug",
+		hint = hint,
+		config = {
+			color = "pink",
+			invoke_on_body = true,
+			hint = {
+				border = "rounded",
+				position = "middle-right",
+			},
+		},
+		mode = "n",
+		body = "<A-d>",
     -- stylua: ignore
     heads = {
       { "C", function() dap.set_breakpoint(vim.fn.input "[Condition] > ") end, desc = "Conditional Breakpoint", },
@@ -141,22 +141,131 @@ local function dap_menu()
       { "x", function() dap.terminate() end, desc = "Terminate", },
       { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },
-  }
+	}
+end
+
+local function window_menu()
+	local hint = [[
+ _l_: move window to right
+ _h_: move window to left
+ _k_: move window up
+ _j_: move window down
+ _r_: rotate window vertically
+ _>_: grow horizontally
+ _<_: shrink horizontally
+ _+_: grow vertically
+ _-_: shrink vertically
+ ^ ^               _q_: Quit
+]]
+	return {
+		name = "Window Manipulation",
+		hint = hint,
+		config = {
+			color = "pink",
+			invoke_on_body = true,
+			hint = {
+				border = "rounded",
+				position = "bottom-right",
+			},
+		},
+		mode = "n",
+		body = "<A-w>",
+		heads = {
+			{
+				"l",
+				function()
+					vim.cmd.wincmd("l")
+				end,
+				desc = "Move to window to the right",
+			},
+			{
+				"h",
+				function()
+					vim.cmd.wincmd("h")
+				end,
+				desc = "Move to window to the left",
+			},
+			{
+				"k",
+				function()
+					vim.cmd.wincmd("h")
+				end,
+				desc = "Move to window above",
+			},
+			{
+				"j",
+				function()
+					vim.cmd.wincmd("h")
+				end,
+				desc = "Move to window below",
+			},
+			{
+				"r",
+				function()
+					vim.cmd.wincmd("r")
+				end,
+				desc = "Rotate windows vertically",
+			},
+			{
+				">",
+				function()
+					local window = vim.api.nvim_get_current_win()
+					local win_width = vim.api.nvim_win_get_width(window)
+					local new_width = math.floor(win_width * 6 / 5)
+					vim.api.nvim_win_set_width(window, new_width)
+				end,
+				desc = "Increase window width",
+			},
+			{
+				"<",
+				function()
+					local window = vim.api.nvim_get_current_win()
+					local win_width = vim.api.nvim_win_get_width(window)
+					local new_width = math.floor(win_width * 4 / 5)
+					vim.api.nvim_win_set_width(window, new_width)
+				end,
+				desc = "Decrease window width",
+			},
+			{
+				"+",
+				function()
+					local window = vim.api.nvim_get_current_win()
+					local win_height = vim.api.nvim_win_get_height(window)
+					local new_height = math.floor(win_height * 6 / 5)
+					vim.api.nvim_win_set_height(window, new_height)
+				end,
+				desc = "Increase window height",
+			},
+			{
+				"-",
+				function()
+					local window = vim.api.nvim_get_current_win()
+					local win_height = vim.api.nvim_win_get_height(window)
+					local new_height = math.floor(win_height * 4 / 5)
+					vim.api.nvim_win_set_height(window, new_height)
+				end,
+				desc = "Decrease window height",
+			},
+			{ "q", nil, { exit = true, nowait = true, desc = "Exit" } },
+		},
+	}
 end
 
 return {
-  {
-    "anuvyklack/hydra.nvim",
-    event = "VeryLazy",
-    enabled = require('config').is_enabled("hydra"),
-    config = function(_, _)
-      local Hydra = require "hydra"
-      if package.loaded.gitsigns then
-        Hydra(gitsigns_menu())
-      end
-      if package.loaded.dap then
-        Hydra(dap_menu())
-      end
-    end,
-  },
+	{
+		"anuvyklack/hydra.nvim",
+		event = "VeryLazy",
+		enabled = require("config").is_enabled("hydra"),
+    dependencies = {"mfussenegger/nvim-dap"},
+		config = function(_, _)
+			local Hydra = require("hydra")
+			if package.loaded.gitsigns then
+				Hydra(gitsigns_menu())
+			end
+			if package.loaded.dap then
+				Hydra(dap_menu())
+			end
+			Hydra(window_menu())
+		end,
+	},
 }

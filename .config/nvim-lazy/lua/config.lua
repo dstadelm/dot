@@ -1,6 +1,6 @@
 local M = {}
 
-M.colorscheme = "kanagawa"
+M.colorscheme = "sonokai"
 
 local nvim = {
 	notes = {
@@ -44,6 +44,7 @@ local nvim = {
 				fugitiv = true,
 				flog = true,
 				gitsigns = true,
+				git_worktree = true,
 			},
 		},
 	},
@@ -59,6 +60,7 @@ local nvim = {
 			neotest = true,
 			vunit = true,
 			simple_vhdl = true,
+			treepin = true,
 			based = true,
 		},
 		lsp = {

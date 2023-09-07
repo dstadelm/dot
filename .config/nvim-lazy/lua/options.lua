@@ -32,6 +32,7 @@ vim.o.clipboard = "unnamedplus,unnamed" -- unamedplus -> ctrl-v; unamed -> middl
 vim.wo.breakindent = true -- Every wrapped line will continue visually indented (same amout of space as the beginnign of that line), thus preserving horizontal blocks
 vim.bo.autoindent = true
 vim.bo.smartindent = true
+vim.o.shiftround = true
 vim.opt.path = "**"
 --vim.o.cmdheight=0
 vim.o.laststatus = 3

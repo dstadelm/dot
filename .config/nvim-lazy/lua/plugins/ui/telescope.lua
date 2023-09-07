@@ -1,52 +1,61 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	enabled = require("config").is_enabled("telescope"),
-  lazy = false,
+	lazy = false,
 	dependencies = {
 		"nvim-lua/popup.nvim",
 		"nvim-lua/plenary.nvim",
+		"rcarriga/nvim-notify",
 		"cljoly/telescope-repo.nvim",
 		"nvim-telescope/telescope-file-browser.nvim",
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
 			build = "make",
 		},
-	},
-	opts = {
-		defaults = {
-			layout_config = {
-				prompt_position = "top",
-			},
-			sorting_strategy = "ascending",
-			path_display = { shorten = 3 }, -- hidden, tail, absolute, smart, shorten, truncate
-		},
-		-- mappings = {
-		--    n = {
-		--     ['<C-d>'] = require('telescope.actions').delete_buffer
-		--   },
-		-- },
-		pickers = {
-			buffers = {
-				ignore_current_buffer = true,
-				sort_lastused = true,
-			},
-		},
-		extensions = {
-			fzf = {
-				fuzzy = true, -- false will only do exact matching
-				override_generic_sorter = true, -- override the generic sorter
-				override_file_sorter = true, -- override the file sorter
-				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-				-- the default case_mode is "smart_case"
-			},
+		{
+			"ThePrimeagen/git-worktree.nvim",
+			config = true,
 		},
 	},
-
-	config = function(_, opts)
-		require("telescope").setup(opts)
+	config = function(_, _)
+		local actions = require("telescope.actions")
+		require("telescope").setup({
+			defaults = {
+				layout_config = {
+					prompt_position = "top",
+				},
+				sorting_strategy = "ascending",
+				path_display = { shorten = 3 }, -- hidden, tail, absolute, smart, shorten, truncate
+			},
+			pickers = {
+				buffers = {
+					ignore_current_buffer = true,
+					sort_lastused = true,
+					mappings = {
+						n = {
+							["dd"] = actions.delete_buffer + actions.move_to_top,
+						},
+						i = {
+							["<C-d>"] = actions.delete_buffer + actions.move_to_top,
+						},
+					},
+				},
+			},
+			extensions = {
+				fzf = {
+					fuzzy = true, -- false will only do exact matching
+					override_generic_sorter = true, -- override the generic sorter
+					override_file_sorter = true, -- override the file sorter
+					case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+					-- the default case_mode is "smart_case"
+				},
+			},
+		})
 		require("telescope").load_extension("repo")
 		require("telescope").load_extension("file_browser")
 		require("telescope").load_extension("fzf")
+		require("telescope").load_extension("git_worktree")
+		require("telescope").load_extension("notify")
 	end,
 	keys = {
 		{
@@ -106,11 +115,11 @@ return {
 			desc = "Find in Buffer",
 		},
 		{
-			"<leader>fm",
+			"<leader>fn",
 			function()
-        require('telescope').extensions.notify.notify()
+				require("telescope").extensions.notify.notify()
 			end,
-			desc = "Find in Buffer",
+			desc = "Find notifications",
 		},
 		{
 			"<leader>fo",
@@ -125,6 +134,22 @@ return {
 				require("functions.telescope").live_grep_in_glob()
 			end,
 			desc = "Grep in files using a glob pattern",
+		},
+		{
+			"<leader>fw",
+			function()
+				-- require("functions.telescope").worktree_picker()
+				require("telescope").extensions.git_worktree.git_worktrees()
+			end,
+			desc = "Change to different worktree",
+		},
+		{
+			"<leader>wc",
+			function()
+				-- require("functions.telescope").worktree_picker()
+				require("telescope").extensions.git_worktree.create_git_worktree()
+			end,
+			desc = "Change to different worktree",
 		},
 		{
 			"<leader>fr",

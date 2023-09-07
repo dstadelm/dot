@@ -118,6 +118,10 @@ local function on_attach(client, bufnr)
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+
+	if client.server_capabilities.inlayHintProvider then
+		vim.lsp.buf.inlay_hint(bufnr, true)
+	end
 end
 
 local function capabilities()
@@ -172,7 +176,6 @@ function M.setup()
 		})
 	end
 
-	setup_rust_hdl()
 	-- Enable diagnostics
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 		underline = false,
@@ -182,7 +185,40 @@ function M.setup()
 		update_in_insert = false,
 	})
 
+	require("lspconfig")["pyright"].setup({
+		capablities = capabilities(),
+		on_attach = on_attach,
+		settings = {
+			pyright = {
+				pyright = {
+					disableOrganizeImports = true,
+					openFilesOnly = true,
+				},
+				python = {
+					analysis = {
+						autoSearchPaths = true,
+						useLibraryCodeForTypes = true,
+						diagnosticMode = "openFilesOnly",
+					},
+				},
+			},
+		},
+	})
+
 	local servers = {
+		-- pyright = {
+		-- 	pyright = {
+		-- 		disableOrganizeImports = true,
+		-- 		openFilesOnly = true,
+		-- 	},
+		-- 	python = {
+		-- 		analysis = {
+		-- 			autoSearchPaths = true,
+		-- 			useLibraryCodeForTypes = true,
+		-- 			diagnosticMode = "openFilesOnly",
+		-- 		},
+		-- 	},
+		-- },
 		vimls = {},
 		clangd = {},
 		lemminx = {},
@@ -216,19 +252,6 @@ function M.setup()
 				},
 			},
 		},
-		pyright = {
-			pyright = {
-				disableOrganizeImports = true,
-				openFilesOnly = true,
-			},
-			python = {
-				analysis = {
-					autoSearchPaths = true,
-					useLibraryCodeForTypes = true,
-					diagnosticMode = "openFilesOnly",
-				},
-			},
-		},
 	}
 
 	local mason_lspconfig = require("mason-lspconfig")
@@ -245,6 +268,8 @@ function M.setup()
 			})
 		end,
 	})
+
+	setup_rust_hdl()
 
 	-- local util = require 'lspconfig.util'
 	-- require'lspconfig'.pylsp.setup{

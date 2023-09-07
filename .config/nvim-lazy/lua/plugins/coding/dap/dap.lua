@@ -71,21 +71,21 @@ return {
 				function()
 					require("dap").continue()
 				end,
-				desc = "Toggle Breakpoint",
+				desc = "Continue",
 			},
 			{
 				"<leader>ds",
 				function()
 					require("dap").step_over()
 				end,
-				desc = "Toggle Breakpoint",
+				desc = "Step Over",
 			},
 			{
 				"<leader>di",
 				function()
 					require("dap").step_into()
 				end,
-				desc = "Toggle Breakpoint",
+				desc = "Step Into",
 			},
 		},
 	},

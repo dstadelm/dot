@@ -44,33 +44,13 @@ map(
 	":lua require('utilities.stack_overflow').stack_overflow()<CR>",
 	{ noremap = true, silent = true, desc = "Search stack overflow" }
 )
-map(
-	"n",
-	"<leader>w",
-	"ciw<C-R>0<ESC>",
-	{ noremap = true, silent = true, desc = "Delete word and replace with current yank (dot repeatable)" }
-)
+-- map(
+-- 	"n",
+-- 	"<leader>w",
+-- 	"ciw<C-R>0<ESC>",
+-- 	{ noremap = true, silent = true, desc = "Delete word and replace with current yank (dot repeatable)" }
+-- )
 map("n", "<leader>z", ":ToggleOnly<CR>", { noremap = true, silent = true, desc = "Maximize / Restore Window" })
--- map(
--- 	"n",
--- 	"<leader>dap",
--- 	'"_dap',
--- 	{ noremap = true, silent = true, desc = "Delete around paragraph to black hole register" }
--- )
--- map(
--- 	"n",
--- 	"<leader>das",
--- 	'"_das',
--- 	{ noremap = true, silent = true, desc = "Delete around sentece to black hole register" }
--- )
--- map("n", "db", '"_d', { noremap = true, silent = true, desc = "Delete to black hole register" })
--- map(
--- 	"n",
--- 	"<leader>ds",
--- 	":%s/\\s\\+$//gce \\| w<cr>",
--- 	{ noremap = true, silent = true, desc = "Delete all trailing whitespace in current file" }
--- )
--- map("n", "cb", '"_c', { noremap = true, silent = true, desc = "Change around paragraph to black hole register" })
 map(
 	"n",
 	"<leader>cd",
@@ -163,31 +143,54 @@ map("v", "<", "<gv", { noremap = true, silent = true, desc = "Indent to left and
 --------------------------------------------------------------------------------
 -- window mappings
 --
-map(
-	"n",
-	"<C-W>>",
-	':exe "vert resize " . (winwidth(0) * 6/5)<CR>',
-	{ noremap = true, silent = true, desc = "Increase vertical widnow size by 6/5" }
-)
-map(
-	"n",
-	"<C-W><",
-	':exe "vert resize " . (winwidth(0) * 4/5)<CR>',
-	{ noremap = true, silent = true, desc = "Decrease vertical window size by 4/5" }
-)
-map(
-	"n",
-	"<C-W>+",
-	':exe "resize " . (winheight(0) * 6/5)<CR>',
-	{ noremap = true, silent = true, desc = "Increase horizontal window size by 6/5" }
-)
-map(
-	"n",
-	"<C-W>-",
-	':exe "resize " . (winheight(0) * 4/5)<CR>',
-	{ noremap = true, silent = true, desc = "Decrease horizontal window size by 4/5" }
-)
-
+local change_window_width = function(fraction)
+	return function()
+		local window = vim.api.nvim_get_current_win()
+		local win_width = vim.api.nvim_win_get_width(window)
+		local new_width = math.floor(win_width * fraction)
+		vim.api.nvim_win_set_width(window, new_width)
+	end
+end
+map("n", "<C-W>>", "", {
+	callback = change_window_width(6 / 5),
+	noremap = true,
+	silent = true,
+	desc = "Increase vertical widnow size by 6/5",
+})
+map("n", "<C-W><", "", {
+	callback = change_window_width(4 / 5),
+	noremap = true,
+	silent = true,
+	desc = "Decrease vertical window size by 4/5",
+})
+local change_window_height = function(fraction)
+	return function()
+		local window = vim.api.nvim_get_current_win()
+		local win_height = vim.api.nvim_win_get_height(window)
+		local new_height = math.floor(win_height * fraction)
+		vim.api.nvim_win_set_height(window, new_height)
+	end
+end
+map("n", "<C-W>+", "", {
+	callback = change_window_height(6 / 5),
+	noremap = true,
+	silent = true,
+	desc = "Increase horizontal window size by 6/5",
+})
+map("n", "<C-W>-", "", {
+	callback = change_window_height(4 / 5),
+	noremap = true,
+	silent = true,
+	desc = "Decrease horizontal window size by 4/5",
+})
+for i = 1, 9 do
+	map(
+		"n",
+		"<leader>" .. i,
+		":" .. i .. "wincmd w <CR>",
+		{ noremap = true, silent = true, desc = "Jump to window " .. i }
+	)
+end
 --------------------------------------------------------------------------------
 -- Terminal mode mappings
 -- ----------------------

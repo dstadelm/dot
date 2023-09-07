@@ -4,10 +4,10 @@ return {
 	-- lazy = true,
 	-- event = "VeryLazy",
 	opts = {
-		background_colour = "#1e2127",
+		top_down = true,
 	},
-	config = function()
-    require('notify').setup({})
-    vim.notify = require('notify')
-  end
+	config = function(_, opts)
+		require("notify").setup(opts)
+		vim.notify = require("notify")
+	end,
 }
