@@ -2,9 +2,9 @@
   name = David Stadelmann
   email = david.stadelmann@scs.ch
 [color]
-  ui = always
-  diff = always
-  status = always
+  ui = never
+  diff = never
+  status = never
 [color "diff"]
   meta = magenta
 [core]
