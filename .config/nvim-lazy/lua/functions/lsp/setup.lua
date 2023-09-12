@@ -51,9 +51,18 @@ local function create_user_commands(bufnr)
 		{ desc = "Toggle Diagnostics" }
 	)
 end
+local _augroups = {}
+local get_augroup = function(client)
+	if not _augroups[client.id] then
+		local group_name = "LspFormatting-" .. client.name
+		local augroup = vim.api.nvim_create_augroup(group_name, { clear = true })
+		_augroups[client.id] = augroup
+	end
+	return _augroups[client.id]
+end
 
 local function create_autocmd(client, bufnr)
-	local augroup = vim.api.nvim_create_augroup("LspFormatting", {}) -- do not clear as for each buffer / client we add a autocmd
+	local augroup = get_augroup(client)
 	vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		group = augroup,

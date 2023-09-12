@@ -6,7 +6,7 @@ return {
 	lazy = config.get_colorscheme_lazy("sonokai"),
 	event = "VeryLazy",
 	init = function()
-		vim.g.sonokai_transparent_background = 0
+		vim.g.sonokai_transparent_background = 1
 	end,
 	config = function()
 		if config.is_default_colorscheme("sonokai") then
