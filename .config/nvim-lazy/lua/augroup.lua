@@ -40,30 +40,20 @@ local runner = function(prg)
 		vim.cmd("sp")
 		local term = "term " .. prg .. " %"
 		vim.cmd(term)
-		vim.cmd("startinsert")
+		-- vim.cmd("startinsert")
 		term_output_buffer = vim.api.nvim_get_current_buf()
 	end
 end
-local python_run_keymap = function()
-	vim.api.nvim_set_keymap(
-		"n",
-		"<leader>x",
-		-- ":sp | term python3 %<CR> :startinsert<CR>",
-		"",
-		{ desc = "execute current file", callback = runner("python3") }
-	)
+local runner_keymap = function(prg)
+	return function()
+		vim.api.nvim_set_keymap("n", "<leader>x", "", { desc = "execute current file", callback = runner(prg) })
+	end
 end
-vim.api.nvim_create_autocmd("FileType", { pattern = "python", group = auto_source_group, callback = python_run_keymap })
-
-local bash_run_keymap = function()
-	vim.api.nvim_set_keymap(
-		"n",
-		"<leader>x",
-		":sp | term bash %<CR> :startinsert<CR>",
-		{ desc = "execute current file" }
-	)
-end
-vim.api.nvim_create_autocmd("FileType", { pattern = "sh", group = auto_source_group, callback = bash_run_keymap })
+vim.api.nvim_create_autocmd(
+	"FileType",
+	{ pattern = "python", group = auto_source_group, callback = runner_keymap("python3") }
+)
+vim.api.nvim_create_autocmd("FileType", { pattern = "sh", group = auto_source_group, callback = runner_keymap("bash") })
 
 -- -- moved this code to null_ls config
 -- local auto_format_group = vim.api.nvim_create_augroup("AutoFormatGroup", { clear = true })
