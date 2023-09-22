@@ -1,6 +1,6 @@
 local M = {}
 
-M.colorscheme = "sonokai"
+M.colorscheme = "material"
 
 local nvim = {
 	notes = {
@@ -99,6 +99,7 @@ local nvim = {
 			nightfox = true,
 			oxocarbon = true,
 			catppuccin = true,
+			tokyonight = true,
 		},
 	},
 	ui = {

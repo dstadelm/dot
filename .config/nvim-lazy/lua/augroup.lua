@@ -25,16 +25,45 @@ augroup END
 
 --------------------------------------------------------------------------------
 -- Create a mapping by a autocmd for executing the current python file
+local term_output_buffer = nil
 local auto_source_group = vim.api.nvim_create_augroup("AutoSourceGroup", { clear = true })
+local runner = function(prg)
+	return function()
+		if term_output_buffer then
+			if vim.api.nvim_buf_is_valid(term_output_buffer) then
+				vim.notify("Termbuf exists")
+				vim.api.nvim_buf_delete(term_output_buffer, { force = true })
+			end
+		else
+			vim.notify("Termbuf does not exist")
+		end
+		vim.cmd("sp")
+		local term = "term " .. prg .. " %"
+		vim.cmd(term)
+		vim.cmd("startinsert")
+		term_output_buffer = vim.api.nvim_get_current_buf()
+	end
+end
 local python_run_keymap = function()
 	vim.api.nvim_set_keymap(
 		"n",
 		"<leader>x",
-		":sp | term python3 %<CR> :startinsert<CR>",
-		{ desc = "execute current file" }
+		-- ":sp | term python3 %<CR> :startinsert<CR>",
+		"",
+		{ desc = "execute current file", callback = runner("python3") }
 	)
 end
 vim.api.nvim_create_autocmd("FileType", { pattern = "python", group = auto_source_group, callback = python_run_keymap })
+
+local bash_run_keymap = function()
+	vim.api.nvim_set_keymap(
+		"n",
+		"<leader>x",
+		":sp | term bash %<CR> :startinsert<CR>",
+		{ desc = "execute current file" }
+	)
+end
+vim.api.nvim_create_autocmd("FileType", { pattern = "sh", group = auto_source_group, callback = bash_run_keymap })
 
 -- -- moved this code to null_ls config
 -- local auto_format_group = vim.api.nvim_create_augroup("AutoFormatGroup", { clear = true })
