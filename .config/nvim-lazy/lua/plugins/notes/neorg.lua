@@ -43,6 +43,11 @@ return {
 		opts = {
 			load = {
 				["core.defaults"] = {},
+				["core.clipboard.code-blocks"] = {},
+				["core.esupport.hop"] = {},
+				["core.ui"] = {},
+				["core.itero"] = {},
+				["core.journal"] = {},
 				["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
 				["core.integrations.nvim-cmp"] = {},
 				["core.dirman"] = {
@@ -54,12 +59,18 @@ return {
 						},
 					},
 				},
+				["core.dirman.utils"] = {},
 				["core.autocommands"] = {},
 				["core.integrations.treesitter"] = {},
 				["core.concealer"] = { config = { folds = true, icon_preset = "basic" } },
 				["core.export"] = {},
 				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
 				["core.qol.toc"] = { config = { default_split_mode = "split" } },
+				["core.qol.todo_items"] = {},
+				["core.ui.calendar"] = {},
+				["core.pivot"] = {},
+				["core.tangle"] = {},
+				["core.upgrade"] = {},
 			},
 		},
 		config = function(_, opts)

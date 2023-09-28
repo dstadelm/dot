@@ -16,6 +16,7 @@ local nvim = {
 	editor = {
 		enabled = true,
 		plugins = {
+			stcursorword = false,
 			undotree = true,
 			eunuch = true,
 			vinegar = true,
