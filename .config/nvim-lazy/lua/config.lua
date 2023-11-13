@@ -30,6 +30,7 @@ local nvim = {
 			treesitter = true,
 			treesj = true,
 			replacer = true,
+			todo = true,
 		},
 		completion = {
 			enabled = true,
