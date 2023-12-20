@@ -17,4 +17,6 @@ require("lazy").setup({
 require("keymaps")
 require("abbreviations")
 require("augroup")
+require("utilities/formatting")
+require("utilities/diagnostics")
 require("functions/center_cursorline")

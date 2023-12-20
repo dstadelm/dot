@@ -22,6 +22,7 @@ return {
 				["core.clipboard.code-blocks"] = {},
 				["core.ui"] = {},
 				["core.itero"] = {},
+				["core.summary"] = {},
 				["core.journal"] = {},
 				["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
 				["core.integrations.nvim-cmp"] = {},

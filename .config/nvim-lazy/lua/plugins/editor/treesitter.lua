@@ -11,6 +11,7 @@ return {
 	},
 	build = ":TSUpdate",
 	config = function()
+	    require("nvim-treesitter.install").prefer_git = true
 		local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 		-- These two are optional and provide syntax highlighting
 		-- for Neorg tables and the @document.meta tag

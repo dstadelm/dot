@@ -1,86 +1,6 @@
 local M = {}
 M.autoformat = true
 
-local function format(_)
-	local bufnr = vim.api.nvim_get_current_buf()
-	vim.lsp.buf.format({
-		filter = function(client)
-			if client.supports_method("textDocument/formatting") then
-				if client.name ~= "lua_ls" and client.name ~= "pyright" and client.name ~= "pylsp" then
-					vim.notify("Formatting with client = " .. client.name)
-					return true
-				end
-			end
-			return false
-		end,
-		bufnr = bufnr,
-	})
-end
-
-local function auto_format()
-	if M.autoformat then
-		format()
-	end
-end
-
-local function toggle_autoformat()
-	M.autoformat = not M.autoformat
-	if M.autoformat then
-		vim.notify("Enabled autoformat", vim.log.levels.INFO)
-	else
-		vim.notify("Disabled autoformat", vim.log.levels.INFO)
-	end
-end
-
-local function toggle_diagnostics()
-	local bufnr = vim.api.nvim_get_current_buf()
-	if vim.diagnostic.is_disabled() then
-		vim.diagnostic.enable(bufnr)
-	else
-		vim.diagnostic.disable(bufnr)
-	end
-end
-
-local function create_user_commands(bufnr)
-	vim.api.nvim_buf_create_user_command(bufnr, "ToggleAutoformat", toggle_autoformat, { desc = "Toggle Autoformat" })
-	vim.api.nvim_buf_create_user_command(bufnr, "Format", format, { desc = "Format current buffer with LSP" })
-	vim.api.nvim_buf_create_user_command(
-		bufnr,
-		"ToggleDiagnostics",
-		toggle_diagnostics,
-		{ desc = "Toggle Diagnostics" }
-	)
-end
-local _augroups = {}
-local get_augroup = function(client)
-	if not _augroups[client.id] then
-		local group_name = "LspFormatting-" .. client.name
-		local augroup = vim.api.nvim_create_augroup(group_name, { clear = true })
-		_augroups[client.id] = augroup
-	end
-	return _augroups[client.id]
-end
-
-local function create_autocmd(client, bufnr)
-	local augroup = get_augroup(client)
-	vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = augroup,
-		buffer = bufnr,
-		callback = function()
-			auto_format()
-		end,
-	})
-end
-
-local function define_signs()
-	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-	end
-end
-
 local function lsp_keymaps(bufnr)
 	local nmap = function(keys, func, desc)
 		if desc then
@@ -111,17 +31,12 @@ local function lsp_keymaps(bufnr)
 	nmap("<space>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 	nmap("<space>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 	nmap("gr", vim.lsp.buf.references, "[G]oto [R]eferences")
-
-	nmap("<leader>D", toggle_diagnostics, "Toggle [D]iagnostics")
-	nmap("<leader>F", toggle_autoformat, "Toggle auto [F]ormating")
 end
 
 local function on_attach(client, bufnr)
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
 	lsp_keymaps(bufnr)
-	create_user_commands(bufnr)
-	create_autocmd(client, bufnr)
 
 	-- Enable completion triggered by <c-x><c-o>
 	-- Mappings.
@@ -173,8 +88,6 @@ local function setup_rust_hdl()
 end
 
 function M.setup()
-	define_signs()
-
 	if not package.loaded["noice"] then
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",
@@ -215,19 +128,7 @@ function M.setup()
 	})
 
 	local servers = {
-		-- pyright = {
-		-- 	pyright = {
-		-- 		disableOrganizeImports = true,
-		-- 		openFilesOnly = true,
-		-- 	},
-		-- 	python = {
-		-- 		analysis = {
-		-- 			autoSearchPaths = true,
-		-- 			useLibraryCodeForTypes = true,
-		-- 			diagnosticMode = "openFilesOnly",
-		-- 		},
-		-- 	},
-		-- },
+		ruff_lsp = {},
 		vimls = {},
 		clangd = {},
 		lemminx = {},

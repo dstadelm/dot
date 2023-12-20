@@ -51,7 +51,7 @@ return {
 				},
 				completion = {
 					completeopt = "menu,menuone,noselect",
-					keyword_length = 1,
+					keyword_length = 3,
 					-- autocomplete = false,
 				},
 				snippet = {
@@ -102,9 +102,13 @@ return {
 
 			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 			cmp.setup.cmdline(":", {
+				-- completion = {
+				-- 	autocomplete = false,
+				-- },
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
 					{ name = "path" },
+					{ name = "buffer" },
 				}, {
 					{ name = "cmdline" },
 				}),

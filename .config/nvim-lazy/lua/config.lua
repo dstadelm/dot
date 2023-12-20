@@ -16,7 +16,7 @@ local nvim = {
 	editor = {
 		enabled = true,
 		plugins = {
-			stcursorword = false,
+			stcursorword = true,
 			undotree = true,
 			eunuch = true,
 			vinegar = true,
@@ -64,6 +64,8 @@ local nvim = {
 			simple_vhdl = true,
 			treepin = true,
 			based = true,
+			conform = true,
+			nvim_lint = true,
 		},
 		lsp = {
 			enabled = true,
@@ -74,7 +76,7 @@ local nvim = {
 				neodev = true,
 				mason = true,
 				trouble = true,
-				null_ls = true,
+				none_ls = false,
 				fidget = true, -- standalone ui for nvim-lsp progress
 			},
 		},

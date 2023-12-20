@@ -98,12 +98,12 @@ map(
 
 --------------------------------------------------------------------------------
 -- Move lines
-map("i", "<A-k>", "<esc>:m .-2<CR>==i", { noremap = true, silent = true, desc = "Move current line one up" })
-map("i", "<A-j>", "<esc>:m .+1<CR>==i", { noremap = true, silent = true, desc = "Move current line one down" })
-map("n", "<A-k>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move current line one up" })
-map("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move current line one down" })
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move current line one up" })
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move current line one down" })
+-- map("i", "<A-k>", "<esc>:m .-2<CR>==i", { noremap = true, silent = true, desc = "Move current line one up" })
+-- map("i", "<A-j>", "<esc>:m .+1<CR>==i", { noremap = true, silent = true, desc = "Move current line one down" })
+-- map("n", "<A-k>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move current line one up" })
+-- map("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move current line one down" })
+-- map("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move current line one up" })
+-- map("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move current line one down" })
 
 map("v", ".", ":norm .<CR>", { noremap = true, silent = true, desc = "Execute last operation on visual selection" })
 
@@ -131,8 +131,8 @@ map(
 map("n", "n", "nzzzv", { noremap = true, silent = true, desc = "Go to next search occurance and center" })
 map("n", "N", "Nzzzv", { noremap = true, silent = true, desc = "Go to previous search occurance and center" })
 
-map("n", "<C-w>>", "<C-w>10>", { noremap = true, silent = true, desc = "Increase current window width" })
-map("n", "<C-w><", "<C-w>10<", { noremap = true, silent = true, desc = "Decrease current window width" })
+-- map("n", "<C-w>>", "<C-w>10>", { noremap = true, silent = true, desc = "Increase current window width" })
+-- map("n", "<C-w><", "<C-w>10<", { noremap = true, silent = true, desc = "Decrease current window width" })
 
 map("n", "g,", "g,zvzz", { noremap = true, silent = true, desc = "Go to newer position in the change list" })
 map("n", "g;", "g;zvzz", { noremap = true, silent = true, desc = "Go to older position in the change list" })

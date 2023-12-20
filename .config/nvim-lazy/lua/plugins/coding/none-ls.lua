@@ -1,6 +1,6 @@
 return {
-	"jose-elias-alvarez/null-ls.nvim",
-	enabled = require("config").is_enabled("null_ls"),
+	"nvimtools/none-ls.nvim",
+	enabled = require("config").is_enabled("none_ls"),
 	-- lazy = true,
 	-- event = "VeryLazy",
 	config = function()
@@ -86,13 +86,6 @@ return {
 			diagnostics.checkmake,
 			diagnostics.chktex,
 			diagnostics.gitlint,
-			formatting.latexindent,
-			formatting.isort,
-			formatting.black, -- .with({ extra_args = {"--line-length", "120"}}),
-			formatting.stylua,
-			formatting.yamlfmt,
-			vsg_lint,
-			vsg_format,
 		}
 
 		null_ls.setup({

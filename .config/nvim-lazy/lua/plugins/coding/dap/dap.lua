@@ -87,6 +87,20 @@ return {
 				end,
 				desc = "Step Into",
 			},
+			{
+				"<leader>dh",
+				function()
+					require("dap.ui.widgets").hover()
+				end,
+				desc = "Show item under cursor",
+			},
+			{
+				"<leader>df",
+				function()
+					require("dap.ui.widgets").preview()
+				end,
+				desc = "Preview",
+			},
 		},
 	},
 }

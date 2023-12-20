@@ -29,7 +29,9 @@ return {
 					unknown = "?",
 				},
 				adapters = {
-					require("neotest-python")({}),
+					require("neotest-python")({
+						pytest_discover_instances = true,
+					}),
 				},
 			})
 		end,
