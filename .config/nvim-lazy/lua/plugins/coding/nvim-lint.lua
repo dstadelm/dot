@@ -8,6 +8,7 @@ return {
 				sh = { "shellcheck" },
 				tex = { "chktex" },
 				gitcommit = { "gitlint" },
+				rst = { "rstcheck" },
 			}
 		end,
 	},

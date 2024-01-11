@@ -88,6 +88,13 @@ return {
 				desc = "Step Into",
 			},
 			{
+				"<leader>du",
+				function()
+					require("dap").run_to_cursor()
+				end,
+				desc = "Run to C[u]rsor",
+			},
+			{
 				"<leader>dh",
 				function()
 					require("dap.ui.widgets").hover()

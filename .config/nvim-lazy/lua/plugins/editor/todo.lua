@@ -3,7 +3,7 @@ return {
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		enabled = require("config").is_enabled("todo"),
-		lazy = true,
+		lazy = false,
 		event = "VeryLazy",
 		opts = {
 			-- your configuration comes here

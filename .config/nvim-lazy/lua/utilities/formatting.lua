@@ -4,7 +4,7 @@ M.autoformat = true
 local function format(_)
 	local bufnr = vim.api.nvim_get_current_buf()
 	require("conform").format({
-		timeout_ms = 1500,
+		timeout_ms = 2500,
 		bufnr = bufnr,
 		lsp_fallback = true,
 		filter = function(client)

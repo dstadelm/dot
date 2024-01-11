@@ -51,8 +51,8 @@ return {
 				},
 				completion = {
 					completeopt = "menu,menuone,noselect",
-					keyword_length = 3,
-					-- autocomplete = false,
+					keyword_length = 1,
+					-- autocomplete = true,
 				},
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine
@@ -108,7 +108,7 @@ return {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
 					{ name = "path" },
-					{ name = "buffer" },
+					-- { name = "buffer" },
 				}, {
 					{ name = "cmdline" },
 				}),

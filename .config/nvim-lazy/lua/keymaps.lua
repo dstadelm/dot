@@ -110,6 +110,12 @@ map("v", ".", ":norm .<CR>", { noremap = true, silent = true, desc = "Execute la
 map("t", "<leader>tt", "<C-\\><C-N>:ToggleTerm<CR>", { noremap = true, silent = true, desc = "[T]oggle [T]erminal" })
 map("n", "<leader>tt", "", { callback = toggle_term, noremap = true, silent = true, desc = "[T]oggle [T]erminal" })
 map(
+	"t",
+	"<leader>tf",
+	"<C-\\><C-N>:ToggleTerm<CR>",
+	{ noremap = true, silent = true, desc = "[T]oggle terminal[F]loat" }
+)
+map(
 	"n",
 	"<leader>tf",
 	"",

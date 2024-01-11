@@ -64,6 +64,28 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "sh", group = auto_source_gr
 --   }
 -- )
 
+-- local set_cursor_column = function()
+-- 	vim.notify("WinEnter")
+-- 	-- vim.wo.cursorcolumn = true
+-- 	-- vim.wo.colorcolumn = "+1"
+-- 	-- vim.cmd("redraw")
+-- end
+-- local unset_cursor_column = function()
+-- 	vim.notify("WinLeave")
+-- 	-- vim.wo.cursorcolumn = false
+-- 	-- vim.wo.colorcolumn = ""
+-- 	-- vim.cmd("redraw")
+-- end
+-- local cursor_column_group = vim.api.nvim_create_augroup("CursorColumn", { clear = true })
+-- vim.api.nvim_create_autocmd(
+-- 	{ "WinEnter" },
+-- 	{ pattern = "*.py", group = cursor_column_group, callback = set_cursor_column }
+-- )
+-- vim.api.nvim_create_autocmd(
+-- 	{ "WinLeave" },
+-- 	{ pattern = "*", group = cursor_column_group, callback = unset_cursor_column }
+-- )
+
 --------------------------------------------------------------------------------
 -- Modify the suffixesadd an the path when in .config directory to be able to
 -- jump directly to config files from plugin.lua

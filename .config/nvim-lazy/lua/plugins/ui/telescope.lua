@@ -16,6 +16,9 @@ return {
 			"ThePrimeagen/git-worktree.nvim",
 			config = true,
 		},
+		{
+			"aaronhallaert/advanced-git-search.nvim",
+		},
 	},
 	config = function(_, _)
 		local actions = require("telescope.actions")
@@ -49,6 +52,19 @@ return {
 					case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 					-- the default case_mode is "smart_case"
 				},
+				advanced_git_search = {
+					-- fugitive or diffview
+					diff_plugin = "fugitive",
+					-- customize git in previewer
+					-- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
+					git_flags = {},
+					-- customize git diff in previewer
+					-- e.g. flags such as { "--raw" }
+					git_diff_flags = {},
+					-- Show builtin git pickers when executing "show_custom_functions" or :AdvancedGitSearch
+					show_builtin_git_pickers = false,
+					entry_default_author_or_date = "author", -- one of "author" or "date"
+				},
 			},
 		})
 		require("telescope").load_extension("repo")
@@ -56,6 +72,7 @@ return {
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("git_worktree")
 		require("telescope").load_extension("notify")
+		require("telescope").load_extension("advanced_git_search")
 	end,
 	keys = {
 		{
@@ -82,7 +99,7 @@ return {
 		{
 			"<leader>ff",
 			function()
-				require("telescope.builtin").find_files({ no_ignore = true })
+				require("telescope.builtin").find_files({ no_ignore = false })
 			end,
 			desc = "Find Files",
 		},
@@ -172,6 +189,13 @@ return {
 					winblend = 10,
 					previewer = false,
 				}))
+			end,
+			desc = "Grep in files using a glob pattern",
+		},
+		{
+			"gb",
+			function()
+				require("telescope.builtin").git_branches({ use_file_path = true })
 			end,
 			desc = "Grep in files using a glob pattern",
 		},

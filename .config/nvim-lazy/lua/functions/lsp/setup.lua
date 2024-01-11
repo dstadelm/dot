@@ -133,6 +133,7 @@ function M.setup()
 		clangd = {},
 		lemminx = {},
 		texlab = {},
+		esbonio = {},
 		-- ruff_ls = {},
 		lua_ls = {
 			Lua = {
