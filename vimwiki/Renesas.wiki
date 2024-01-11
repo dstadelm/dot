@@ -1,0 +1,29 @@
+= Meeting 29.8.2023 =
+
+Tamer
+Gireesh
+Hirotaka
+
+
+- SDK
+- Also SDK as solution
+
+IP, Xilinx IP
+
+
+* They would like flexible solution for different requirements
+* RFFT output compression?
+* Power efficiency ???
+* not too much choices
+* on the PL until angel of arrival estimation
+* decompression
+* the algorithm will be provided by renesas
+* < 3Watts
+* Xilinx/AMD is expected to propose the best device
+* IP, cyber security, et. al. have to be clarified
+* Fixpoint implementations in Python
+* RAA270205
+
+* IDF?
+
+Wir machen eine Liste über was wir alles brauchen, damit wir ein Angebot machen können.

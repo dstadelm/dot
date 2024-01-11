@@ -1,3 +1,14 @@
+= Contents =
+
+== Tools to checkout ==
+chezmoi --> manage dot files with git
+Keychain --> manage ssh keys
+entr --> trigger a command when a file state changes
+moreutils --> ???
+httpie --> nicer curl
+datamash
+ngrok --> get remote tools to look like they are on your machine
+
 [[Ansibel]]
 [[AsciiDoctor]]
 [[Caps-Lock-Esc]]
@@ -36,3 +47,5 @@
 [[SearchEngines]]
 [[Version and Environment Management]]
 [[Jira Issue Story]]
+[[Renesas]]
+[[Keyboard]]

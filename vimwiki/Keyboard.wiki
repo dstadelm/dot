@@ -1,0 +1,7 @@
+= Kyria =
+
+https://github.com/kown7/qmk_firmware
+
+= 3D Printing Modeling Programs =
+https://cad.onshape.com/signin
+autodesk fusion360

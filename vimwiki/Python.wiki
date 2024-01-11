@@ -7,10 +7,18 @@ pyflyby -> allows autoimport pip3 install pyflyby
 pylsp-rope -> enables code actions through lsp
 pyls-mypy
 
-=== Virtual Env ===
-1. create a virtual env with ``` pythonx.x -m venv pyenv ```
-2. enter env with ```source pyenv/bin/activate```
-3. install requirements with ```pip3 install -r requirements```
+=== Testing ===
+pyfakefs for virtual filesystem it is registered with pytest and it can be used/passed in a pytest
+{{{
+import pytest
+import os
+
+def test_testname(fs):
+  fs.create_file("/fakedir/test.log")
+  assert os.path.exists("/fakedir/test.log")
+}}}
+
+
 
 === SCSrun.py ===
 1. requires wheel ```pip3 install wheel```
@@ -108,3 +116,20 @@ https://youtu.be/zmWf_cHyo8s
 https://martinheinz.dev/blog/50
 * from multipledispatch import dispatch
 * from functools import singledispatchmethod
+
+=== Virtual Env ===
+1. create a virtual env with ``` pythonx.x -m venv pyenv ```
+2. enter env with ```source pyenv/bin/activate```
+3. install requirements with ```pip3 install -r requirements```
+
+= Poetry =
+Create a environment with a given python version:
+1. use pyenv to install the version desired
+2. activate using
+  {{{
+  pyenv shell version
+  }}}
+3. use
+  {{{
+  poetry env use $(pyenv which python)
+  }}}

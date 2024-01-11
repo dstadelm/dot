@@ -115,3 +115,8 @@ hyperfine "nvim --headless +qa" --warmup 5 > hyperfine-packer.out
 
 == Vim und LaTeX ==
 https://www.ejmastnak.com/tutorials/vim-latex/intro/
+
+== Block Select ==
+use $ to select all lines until end
+or use> set virtualedit=all
+
