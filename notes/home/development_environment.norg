@@ -1,0 +1,13 @@
+* Terminal Tools
+  - chezmoi (Manage dotfiles)
+  - keychain (manage ssh keys)
+  - [ ] entr (trigger multiple commands at once?)
+  - [ ] moreutils (sponge, isutf8)
+  - hub git-hub cli tool
+  - tealdeer (tldr man)
+  - datamash (extract structural data from txt files)
+  - ngrok ??
+
+
+* Python Development Environment
+  {https://pythops.com/post/the-ultimate-python-development-environment.html}[Python Dev Env] is a good article on setting up a development environgment for python

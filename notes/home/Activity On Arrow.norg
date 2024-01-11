@@ -1,0 +1,8 @@
+* Tools to draw the pert graph
+  - Graphviz Digraph
+  - Plantuml Pert
+  - Mermaid
+  - Matplotlib Pyplot?
+  - AnyChart Pert/Gant -> full solution
+  - iGraph MaxFlow
+

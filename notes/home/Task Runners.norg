@@ -1,0 +1,148 @@
+* Objective
+  The objective of this HackDay is to evaluate a bunch of build tools, or more generally speaking task runners.
+
+* Requirements
+   _*Requirements*_
+   - cache results
+   - only run if a defined set of files has changed
+   - define dependent tasks
+   - provide conditional execution of tasks e.g. on git branch x
+
+   _*Soft Requirements*_
+   - easy to read
+   - easy to reason
+   - open source
+  -- testable
+  -- debuggable
+
+   _*Non Requirements*_
+   - hermetic build (shall not be responsibility of the task runner)
+
+
+* List of contenders
+   - {https://bazel.build}[bazel]
+   - buck2
+   - {https://dagger.io}[dagger]
+   - {https://earthly.dev}[earthly]
+   - {https://github.com/casey/just}[justfile]
+   - {https://magefile.org}[mage]
+   - make
+   - {https://pydoit.org}[doit]
+   - {https://taskfile.dev/installation/}[taskfile]
+   - pants
+   - please
+  -- rake
+   - tup
+* Bazel
+
+   _Pros_
+   - Incredibly powerful
+  - Uses a scripting language (StarLark)
+
+
+   _Cons_
+   - Bazel can be used to setup hermetic builds with workspaces
+   -- The way this is realized is very cryptic
+   -- uses sources which are hard to verify
+   - The setup for tasks is very complicated
+  - The scripting language is StarLark the Language Server is bound to VsCode
+
+* buck2
+
+  similar to bazel and also uses StarLark
+
+* Dagger
+   (I have to admit, I did not get it)
+   _Pros_
+
+   _Cons_
+   - Not open source
+   - Replaces CI/CD, not actually the tasks
+   - Runs as web application?
+* earthly
+   Very cool
+
+  _Pros_
+ -- Syntax like Docker files
+  - Uses same approach like Docker with the layers
+  - Define your Docker images in earthly
+  - Make artifacts in an container available in an other task (container)
+  - Make artifacts available outside the container
+
+  _Cons_
+  - Seems like more a replacement of CI pipelines, not an actual build tool
+
+* justfile
+   Only a task runner, not a build tool
+
+   _Pros_
+   - potentially good integration with docker
+
+   _Cons_
+   - Similar to make (cryptic to the author)
+   - More limitations than make
+   - Does not allow for file dependencies
+
+* Mage
+
+   DSL in go
+
+   _Pros_
+   - uses go as scripting language
+
+   _Cons_
+   - Use case is centered around go projects
+   - Only uses timestamps no hashes?
+   - No non-file dependencies?
+
+   Could be better than what one sees on first glance
+
+* Make
+
+   Good old make
+
+   _Pros_
+   - very flexible
+   - proven in uses
+   - can handle most use cases
+
+   _Cons_
+   - Missing non-file dependencies
+   - Cryptic for non Makefile illiterates
+
+* DoIt
+
+    _Pros_
+    - uses python scripting language
+    - very flexible
+    - testable (use pytest and pyfakefs)
+    - debuggable (pdb)
+
+    _Cons_
+    - flexibility invites for complexity by user
+
+* taskfile
+
+   _Pros_
+   - easy to read recipes in YAML
+  -- can be called from any subdirectory, searches up to find Taskfile.yaml
+  -- import Taskfiles from subdirectories
+
+   _Cons_
+   - not as flexible as e.g. doit
+  -- templating isn't possible
+
+* tup
+
+  A sientific approach which works if everything adheres to the world of tup
+
+  _Pros_
+  - corect
+  - fails if dependencies aren't listed (monitors files in the subprocess and if files are read that aren't defined as dependencies it will report these)
+
+  _Cons_
+  - theory isn't always the reality
+
+* Follow up tasks
+   - look at asdf
+   - look at devenv
