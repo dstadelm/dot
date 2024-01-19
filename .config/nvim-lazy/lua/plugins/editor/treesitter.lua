@@ -6,7 +6,6 @@ return {
 	event = "BufRead",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		"nvim-treesitter/nvim-treesitter-context",
 		"nvim-treesitter/playground",
 	},
 	build = ":TSUpdate",
@@ -41,10 +40,12 @@ return {
 
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = "all",
-			-- ignore_install = { "vhdl" },
+			ignore_install = { "help" },
+			sync_install = false,
+			auto_install = true,
 			highlight = {
 				enable = true,
-				disable = { "help" },
+				disable = { "vimdoc", "help" },
 			},
 			incremental_selection = {
 				enable = true,
@@ -54,19 +55,15 @@ return {
 					scope_incremental = "<leader>gs",
 					node_decremental = "<leader>.",
 				},
-				-- disable = { "help" }
+				disable = { "vimdoc", "help" },
 			},
 			indent = {
 				enable = true,
-				disable = { "yaml" },
+				disable = { "vimdoc", "yaml", "help" },
 			},
-		})
 
-		vim.wo.foldmethod = "expr"
-		vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-
-		require("nvim-treesitter.configs").setup({
 			textobjects = {
+				disable = { "vimdoc", "yaml", "help" },
 				select = {
 					enable = true,
 
@@ -97,5 +94,8 @@ return {
 				},
 			},
 		})
+
+		vim.wo.foldmethod = "expr"
+		vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 	end,
 }

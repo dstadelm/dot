@@ -193,7 +193,7 @@ return {
 			desc = "Grep in files using a glob pattern",
 		},
 		{
-			"gb",
+			"<leader>gb",
 			function()
 				require("telescope.builtin").git_branches({ use_file_path = true })
 			end,

@@ -44,7 +44,14 @@ local function on_attach(client, bufnr)
 	vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
 	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.buf.inlay_hint(bufnr, true)
+		vim.lsp.inlay_hint.enable(bufnr, true)
+	end
+
+	local ok, navic = pcall(require, "nvim-navic")
+	if ok then
+		if client.server_capabilities.documentSymbolProvider then
+			navic.attach(client, bufnr)
+		end
 	end
 end
 
@@ -134,25 +141,75 @@ function M.setup()
 		lemminx = {},
 		texlab = {},
 		esbonio = {},
-		-- ruff_ls = {},
 		lua_ls = {
 			Lua = {
-				runtime = {
-					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-					version = "LuaJIT",
-				},
-				diagnostics = {
-					-- Get the language server to recognize the `vim` global
-					globals = { "vim" },
-				},
 				workspace = {
 					-- Make the server aware of Neovim runtime files
 					library = vim.api.nvim_get_runtime_file("", true),
 					checkThirdParty = false,
 				},
+				completion = {
+					workspaceWord = true,
+					callSnippet = "Both",
+				},
+				misc = {
+					parameters = {
+						-- "--log-level=trace",
+					},
+				},
+				hover = { expandAlias = false },
+				hint = {
+					enable = true,
+					setType = false,
+					paramType = true,
+					paramName = "Disable",
+					semicolon = "Disable",
+					arrayIndex = "Disable",
+				},
+				doc = {
+					privateName = { "^_" },
+				},
+				type = {
+					castNumberToInteger = true,
+				},
+				diagnostics = {
+					disable = { "incomplete-signature-doc", "trailing-space" },
+					-- enable = false,
+					groupSeverity = {
+						strong = "Warning",
+						strict = "Warning",
+					},
+					groupFileStatus = {
+						["ambiguity"] = "Opened",
+						["await"] = "Opened",
+						["codestyle"] = "None",
+						["duplicate"] = "Opened",
+						["global"] = "Opened",
+						["luadoc"] = "Opened",
+						["redefined"] = "Opened",
+						["strict"] = "Opened",
+						["strong"] = "Opened",
+						["type-check"] = "Opened",
+						["unbalanced"] = "Opened",
+						["unused"] = "Opened",
+					},
+					unusedLocalExclude = { "_*" },
+				},
 				-- Do not send telemetry data containing a randomized but unique identifier
 				telemetry = {
 					enable = false,
+				},
+				format = {
+					enable = false,
+					defaultConfig = {
+						indent_style = "space",
+						indent_syze = "2",
+						continuation_indent_size = "2",
+					},
+				},
+				runtime = {
+					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+					version = "LuaJIT",
 				},
 			},
 		},

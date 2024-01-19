@@ -24,13 +24,14 @@ map(
 	"n",
 	"<leader>e",
 	':e <C-R>=expand("%:p:h") . "/" <CR>',
-	{ noremap = true, silent = false, desc = "Open file relative to current file" }
+	{ noremap = true, silent = false, desc = "[E]dit file relative to current file" }
 )
+map("n", "<leader>m", ":mak<CR>", { noremap = true, silent = false, desc = "Run [M]ake" })
 map(
 	"n",
 	"<leader>rf",
 	':read <C-R>=expand("%:p:h") . "/" <CR>',
-	{ noremap = true, silent = true, desc = "Read content of file to this file" }
+	{ noremap = true, silent = true, desc = "[R]ead content of [f]ile to this file" }
 )
 map(
 	"n",
