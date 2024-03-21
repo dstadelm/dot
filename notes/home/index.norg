@@ -1,3 +1,19 @@
 {:Task Runners:}
 {:development_environment:}[Development Environment]
 {:Activity On Arrow:}
+{:Sphinx:}
+
+* Index
+** Uncategorised
+  - {:$/Activity On Arrow:}[Tools To Draw The Pert Graph]
+  - {:$/ChatGPT:}[Prompt Training]
+  - {:$/Sphinx:}[Collection On Stuff For Sphinx]
+  - {:$/Task Runners:}[Objective]
+  - {:$/arch_linux:}[Arch Linux Installation] - Describes the installation of arch linux with btrfs luks and swapfile for hibernation on the thinkpad-p14s
+  - {:$/development_environment:}[Terminal Tools]
+  - {:$/getting_things_done:}[Links]
+  - {:$/index:}[Index]
+  - {:$/neovim_plugins:}[Neovim Plugins To Explore]
+  - {:$/projects:}[Links]
+  - {:$/python/python:}[Python]
+  - {:$/python/libraries/click:}[Click]

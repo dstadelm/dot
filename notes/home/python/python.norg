@@ -1,0 +1,14 @@
+@document.meta
+title: python
+description: things to know about python
+authors: dstadelmann
+categories: [Programing]
+created: 2024-03-01T15:50:47+0100
+updated: 2024-03-01T15:50:47+0100
+version: 1.1.1
+@end
+
+* Python
+
+* Libraries
+{:click:}

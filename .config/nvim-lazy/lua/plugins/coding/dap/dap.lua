@@ -32,34 +32,6 @@ return {
 
 		keys = {
 			{
-				"<leader>duo",
-				function()
-					require("dapui").open()
-				end,
-				desc = "Dap Ui Open",
-			},
-			{
-				"<leader>duc",
-				function()
-					require("dapui").close()
-				end,
-				desc = "Dap Ui Close",
-			},
-			{
-				"<leader>dut",
-				function()
-					require("dapui").toggle()
-				end,
-				desc = "Dap Ui Toggle",
-			},
-			{
-				"<leader>due",
-				function()
-					require("dapui").eval()
-				end,
-				desc = "Dap Ui Eval",
-			},
-			{
 				"<leader>db",
 				function()
 					require("dap").toggle_breakpoint()
@@ -67,32 +39,26 @@ return {
 				desc = "Toggle Breakpoint",
 			},
 			{
-				"<leader>dc",
+				"<leader>dcb",
+				function()
+					local cond = vim.fn.input("condition: ")
+					require("dap").set_breakpoint(cond)
+				end,
+				desc = "Continue",
+			},
+			{
+				"<leader>dcc",
 				function()
 					require("dap").continue()
 				end,
 				desc = "Continue",
 			},
 			{
-				"<leader>ds",
+				"<leader>df",
 				function()
-					require("dap").step_over()
+					require("dap.ui.widgets").preview()
 				end,
-				desc = "Step Over",
-			},
-			{
-				"<leader>di",
-				function()
-					require("dap").step_into()
-				end,
-				desc = "Step Into",
-			},
-			{
-				"<leader>du",
-				function()
-					require("dap").run_to_cursor()
-				end,
-				desc = "Run to C[u]rsor",
+				desc = "Preview",
 			},
 			{
 				"<leader>dh",
@@ -102,11 +68,60 @@ return {
 				desc = "Show item under cursor",
 			},
 			{
-				"<leader>df",
+				"<leader>di",
 				function()
-					require("dap.ui.widgets").preview()
+					require("dap").step_into()
 				end,
-				desc = "Preview",
+				desc = "Step Into",
+			},
+			{
+				"<leader>ds",
+				function()
+					require("dap").step_over()
+				end,
+				desc = "Step Over",
+			},
+			{
+				"<leader>dt",
+				function()
+					require("dap").terminate()
+				end,
+				desc = "Terminate",
+			},
+			{
+				"<leader>du",
+				function()
+					require("dap").run_to_cursor()
+				end,
+				desc = "Run to C[u]rsor",
+			},
+			{
+				"<leader>duc",
+				function()
+					require("dapui").close()
+				end,
+				desc = "Dap Ui Close",
+			},
+			{
+				"<leader>due",
+				function()
+					require("dapui").eval()
+				end,
+				desc = "Dap Ui Eval",
+			},
+			{
+				"<leader>duo",
+				function()
+					require("dapui").open()
+				end,
+				desc = "Dap Ui Open",
+			},
+			{
+				"<leader>dut",
+				function()
+					require("dapui").toggle()
+				end,
+				desc = "Dap Ui Toggle",
 			},
 		},
 	},

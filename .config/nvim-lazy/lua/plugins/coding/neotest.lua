@@ -31,6 +31,9 @@ return {
 				adapters = {
 					require("neotest-python")({
 						pytest_discover_instances = true,
+						dap = { justMyCode = false },
+						runner = "pytest",
+						python = ".venv/bin/python3",
 					}),
 				},
 			})

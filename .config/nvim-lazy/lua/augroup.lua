@@ -55,36 +55,33 @@ vim.api.nvim_create_autocmd(
 )
 vim.api.nvim_create_autocmd("FileType", { pattern = "sh", group = auto_source_group, callback = runner_keymap("bash") })
 
--- -- moved this code to null_ls config
--- local auto_format_group = vim.api.nvim_create_augroup("AutoFormatGroup", { clear = true })
--- vim.api.nvim_create_autocmd("BufWritePre",
---   { pattern = "*.py",
---     group = auto_format_group,
---     command = "lua vim.lsp.buf.format{ filter = function(client) return client.name ~= 'pylsp' end }"
---   }
--- )
-
--- local set_cursor_column = function()
--- 	vim.notify("WinEnter")
--- 	-- vim.wo.cursorcolumn = true
--- 	-- vim.wo.colorcolumn = "+1"
--- 	-- vim.cmd("redraw")
--- end
--- local unset_cursor_column = function()
--- 	vim.notify("WinLeave")
--- 	-- vim.wo.cursorcolumn = false
--- 	-- vim.wo.colorcolumn = ""
--- 	-- vim.cmd("redraw")
--- end
--- local cursor_column_group = vim.api.nvim_create_augroup("CursorColumn", { clear = true })
--- vim.api.nvim_create_autocmd(
--- 	{ "WinEnter" },
--- 	{ pattern = "*.py", group = cursor_column_group, callback = set_cursor_column }
--- )
--- vim.api.nvim_create_autocmd(
--- 	{ "WinLeave" },
--- 	{ pattern = "*", group = cursor_column_group, callback = unset_cursor_column }
--- )
+local set_cursor_column = function()
+	-- vim.notify("BufEnter")
+	-- vim.wo.cursorcolumn = true
+	local buf = vim.api.nvim_get_current_buf()
+	-- vim.notify("BufEnter " .. tostring(buf))
+	vim.opt_local.colorcolumn = "120"
+	-- vim.cmd("redraw")
+end
+local unset_cursor_column = function()
+	-- vim.notify("BufLeave")
+	-- vim.wo.cursorcolumn = false
+	-- vim.wo.colorcolumn = 0
+	local buf = vim.api.nvim_get_current_buf()
+	-- vim.notify("BufLeave " .. tostring(buf))
+	vim.opt_local.colorcolumn = "0"
+	-- vim.api.nvim_buf_set_option(buf, "colorcolumn", "0")
+	-- vim.cmd("redraw")
+end
+local cursor_column_group = vim.api.nvim_create_augroup("CursorColumn", { clear = true })
+vim.api.nvim_create_autocmd(
+	{ "BufEnter" },
+	{ pattern = "*.py", group = cursor_column_group, callback = set_cursor_column }
+)
+vim.api.nvim_create_autocmd(
+	{ "BufLeave" },
+	{ pattern = "*.py", group = cursor_column_group, callback = unset_cursor_column }
+)
 
 --------------------------------------------------------------------------------
 -- Modify the suffixesadd an the path when in .config directory to be able to

@@ -101,17 +101,38 @@ return {
 			})
 
 			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+			-- cmp.setup.cmdline(":", {
+			-- 	-- completion = {
+			-- 	-- 	autocomplete = false,
+			-- 	-- },
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = "path" },
+			-- 		-- { name = "buffer" },
+			-- 	}, {
+			-- 		{ name = "cmdline" },
+			-- 	}),
+			-- })
+			--
+
+			-- `:` cmdline setup.
+			-- Use cmp.cmdline only for '/' search completion because it does not play nice
+			-- with:
+			-- - $ENV_VARS
+			-- - wildcard expansion (%:h:p, ...)
+			-- - */** notation
+			-- Skipping the setup entirely prevents cmdline completion from working after
+			-- searching once (insertion of '^I' when pressing Tab).
+			local function send_wildchar()
+				local char = vim.fn.nr2char(vim.opt.wildchar:get())
+				local key = vim.api.nvim_replace_termcodes(char, true, false, true)
+				vim.api.nvim_feedkeys(key, "nt", true)
+			end
 			cmp.setup.cmdline(":", {
-				-- completion = {
-				-- 	autocomplete = false,
-				-- },
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-					-- { name = "buffer" },
-				}, {
-					{ name = "cmdline" },
-				}),
+				mapping = {
+					["<Tab>"] = { c = send_wildchar },
+				},
+				sources = cmp.config.sources({}),
 			})
 		end,
 	},
