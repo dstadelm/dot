@@ -125,7 +125,7 @@ local nvim = {
 			alpha = true,
 			lualine = true,
 			telescope = true,
-			which_key = true,
+			which_key = false,
 			dressing = true,
 		},
 	},

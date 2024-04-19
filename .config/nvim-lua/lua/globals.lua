@@ -1,3 +1,0 @@
-_G.dstadelm = {
-  mappings = {},
-}

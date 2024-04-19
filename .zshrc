@@ -11,7 +11,7 @@ export FZF_DEFAULT_COMMAND='fdfind'
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 unsetopt BEEP
 #
-
+eval "$(direnv hook zsh)"
 ###############################################################################
 #
 # Theme -> moved to .zsh_prompt
@@ -145,8 +145,8 @@ source $ZSH/oh-my-zsh.sh
 #
 ###############################################################################
 
-# bindkey -v
-# export KEYTIMEOUT=1
+bindkey -v
+export KEYTIMEOUT=1
 
 # User configuration
 
@@ -180,7 +180,8 @@ BINPATH="${BINPATH}:${HOME}/.cargo/bin/"
 BINPATH="${BINPATH}:${HOME}/.go/bin/"
 BINPATH="${BINPATH}:${HOME}/.go/src/github.com/junegunn/fzf/bin/"
 BINPATH="${BINPATH}:${HOME}/.local/share/nvim/lsp_servers/latex/"
-
+export DENO_INSTALL="${HOME}/.deno"
+BINPATH="${BINPATH}:${DENO_INSTALL}/bin"
 if ! [[ "$PATH" =~ "$BINPATH" ]]; then
   export PATH="${BINPATH}:${PATH}"
   export GOPATH="${HOME}/.go"
