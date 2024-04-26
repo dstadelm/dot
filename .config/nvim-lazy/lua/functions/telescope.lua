@@ -2,10 +2,10 @@ local M = {}
 
 function M.find_nvim_config()
 	local opts = {}
-	opts.search_dirs = { "~/.config/nvim" }
+	opts.search_dirs = { "~/.config/nvim-lazy/" }
 	opts.prompt_title = "Neovim Config Files"
 	opts.prompt_prefix = ""
-	-- opts.hidden = true
+	opts.hidden = true
 	require("telescope.builtin").find_files(opts)
 end
 

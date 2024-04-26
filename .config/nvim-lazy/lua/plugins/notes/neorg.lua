@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-neorg/neorg",
 		enabled = require("config").is_enabled("neorg"),
-		lazy = true,
+		lazy = false,
 		ft = { "norg" },
 		cmd = { "Neorg" },
 		dependencies = {
@@ -13,9 +13,13 @@ return {
 			{
 				"folke/zen-mode.nvim",
 			},
+		        {
+				"vhyrro/luarocks.nvim",
+				priority = 1000,
+				config = true,
+			},
 			opts = {},
 		},
-		build = ":Neorg sync-parsers",
 		opts = {
 			load = {
 				["core.defaults"] = {},
@@ -43,10 +47,9 @@ return {
 				["core.presenter"] = { config = { zen_mode = "zen-mode" } },
 				["core.qol.toc"] = { config = { default_split_mode = "split" } },
 				["core.qol.todo_items"] = {},
-				["core.ui.calendar"] = {},
+				-- ["core.ui.calendar"] = {},
 				["core.pivot"] = {},
 				["core.tangle"] = {},
-				["core.upgrade"] = {},
 			},
 		},
 		config = function(_, opts)

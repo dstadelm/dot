@@ -52,7 +52,7 @@ set undodir=~/.vimundo
 
 -- enable embeded script highlighting for lua and python
 vim.g.vimsyn_embed = "lP"
-vim.g.python3_host_prog = "~/.nvim-python3.10/bin/python"
+vim.g.python3_host_prog = "~/.nvim-python3/bin/python"
 vim.cmd([[
 set title
 set titlestring=%{hostname()}\ \ %F\ \ %{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}

@@ -8,6 +8,9 @@ return {
 		dependencies = {
 			{
 				"rcarriga/nvim-dap-ui",
+				dependencies = {
+					"nvim-neotest/nvim-nio",
+				},
 				config = function()
 					require("dapui").setup()
 					-- nnoremap("<leader>duo", ':lua require("dapui").open()<CR>', { silent = false })
