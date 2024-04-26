@@ -14,7 +14,6 @@ if ! [[ "$PATH" =~ "$BINPATH" ]]; then
   export PATH="${HOME}/.go/src/github.com/junegunn/fzf/bin/:${HOME}/bin/":$PATH
   export GOPATH="${HOME}/.go"
 fi
-#${HOME}/bin/bin/vim --version &> /dev/null && export PATH="${HOME}/bin/bin":$PATH
 export TERM=xterm-256color
 
 if [ -f /etc/bash_completion.d/git ];then
@@ -36,7 +35,6 @@ fi
 
 if [ $(command -v module) ]; then
   module use --append ${HOME}/.modules
-#  module use --append ${HOME}/projects/daimler/stixel-cpu-opt/env-modules
 fi
 
 export NCURSES_NO_UTF8_ACS=1
@@ -47,3 +45,6 @@ export NCURSES_NO_UTF8_ACS=1
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.cargo/env ] && . "$HOME/.cargo/env"
+
+export XDG_CONFIG_HOME=~/.config
+export PATH="~/.local/bin:$PATH"
