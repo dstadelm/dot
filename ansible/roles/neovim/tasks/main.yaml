@@ -1,0 +1,52 @@
+- name: Install neovim dependencies
+  include_tasks: "{{ item }}"
+  loop:
+    - deno.yaml # requried for peek.nvim
+    - bob.yaml # neovim installer
+- name: Install Neovim
+  become: false
+  ansible.builtin.shell: ~/.cargo/bin/bob install latest
+  tags: neovim
+- name: export neovim path
+  set_fact:
+    path_vars: "{{ path_vars | default({})| combine({'NEOVIM_PATH': '$HOME/.local/share/bob/nvim-bin'}) }}"
+  tags: neovim
+# used for the neovim python provider
+- name: Create a python venv for neovim
+  become: false
+  pip:
+    name: neovim
+    virtualenv: ~/.nvim-python3
+    virtualenv_command: python3 -m venv
+  tags: neovim
+# used for latex tree sitter as it has to be generated
+- name: Check if tree-sitter is installed
+  ansible.builtin.shell: command -v tree-sitter
+  register: tree_sitter_exists
+  ignore_errors: true
+  tags:
+    - tree-sitter
+    - neovim
+- name: Install tree-sitter-cli
+  become: false
+  when: tree_sitter_exists is failed
+  ansible.builtin.shell: npm install -g tree-sitter-cli
+  tags:
+    - tree-sitter
+    - neovim
+# used for neorg (at least in neovim version 0.10
+- name: Install lua, luadev
+  apt:
+    pkg:
+      - liblua5.1-dev
+      - lua5.1
+    state: present
+  tags: neovim
+- name: Install ripgrep
+  apt:
+    name: ripgrep
+    state: present
+- name: Install fd-find
+  apt:
+    name: fd-find
+    state: present

@@ -1,0 +1,52 @@
+- name: Add i3 key to apt
+  ansible.builtin.get_url:
+    url: https://baltocdn.com/i3-window-manager/signing.asc
+    dest: /etc/apt/trusted.gpg.d/i3-window-manager.asc
+    mode: '0644'
+  tags: i3
+
+- name: Install 
+  apt:
+    name: apt-transport-https
+    state: present
+  tags: i3
+
+- name: Update Source List
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/i3-window-manager.asc] https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main"
+    state: present
+    update_cache: yes
+  tags: i3
+
+- name: Install i3
+  apt:
+    name: i3
+    state: present
+  tags: i3
+
+- name: Install dependencies
+  apt:
+    pkg:
+      - picom
+      - kitty
+      - budgie-network-manager-applet
+      - nitrogen
+      - suckless-tools
+    state: present
+  tags: i3
+
+- name: Get Autotiling
+  become: false
+  ansible.builtin.git:
+    repo: 'https://github.com/nwg-piotr/autotiling.git'
+    dest: ~/.config/i3/autotiling
+    update: yes
+    force: true
+  tags: i3
+
+- name: Make autotiling executalbe
+  become: false
+  ansible.builtin.file:
+    path: ~/.config/i3/autotiling/autotiling/main.py
+    mode: u+x
+  tags: i3

@@ -1,0 +1,8 @@
+{% for key, value in path_vars.items() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+export PATH="${{ path_vars.keys() | join(':$') }}:$PATH"
+{% for value in env_setup.values() %}
+{{ value }}
+{% endfor %}
+

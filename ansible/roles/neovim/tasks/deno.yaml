@@ -1,0 +1,25 @@
+- name: Check if deno already exists
+  become: false
+  ansible.builtin.shell: test -f ~/.deno/bin/deno
+  register: deno_exists
+  ignore_errors: true
+  tags: deno
+- name: Fetch deno install script
+  become: false
+  when: deno_exists is failed
+  ansible.builtin.get_url:
+    url: https://deno.land/install.sh
+    dest: /tmp/install.sh
+  tags: deno
+- name: Install Deno
+  become: false
+  when: deno_exists is failed
+  ansible.builtin.shell: sh /tmp/install.sh
+  tags: deno
+- name: export deno path
+  set_fact:
+    path_vars: "{{ path_vars | default({}) | combine({'DENO_PATH': '$HOME/.deno/bin'}) }}"
+  tags: deno
+- name: upgrade deno
+  become: false
+  ansible.builtin.shell: ~/.deno/bin/deno upgrade

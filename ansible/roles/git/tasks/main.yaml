@@ -1,0 +1,7 @@
+- name: Install git
+  ansible.builtin.apt:
+    pkg:
+      - git
+      - git-lfs
+      - git-doc
+    state: present

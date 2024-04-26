@@ -1,0 +1,4 @@
+dependencies:
+  - role: cargo
+  - role: python
+  - role: node

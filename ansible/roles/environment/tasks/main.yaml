@@ -1,0 +1,5 @@
+- name: Create environment settings
+  become: false
+  template:
+    src: bash_env.j2
+    dest: "~/.bash_ansible"

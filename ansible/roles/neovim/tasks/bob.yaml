@@ -1,0 +1,5 @@
+- name: Install bob
+  become: false
+  ansible.builtin.shell: |
+    ~/.cargo/bin/cargo install bob-nvim
+

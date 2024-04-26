@@ -1,0 +1,11 @@
+- name: Install python venv
+  apt:
+    pkg:
+      - python3-venv
+      - python3-pip
+    state: present
+- name: Install poetry
+  include_tasks: "{{ item }}"
+  loop:
+    - poetry.yaml
+    - pyenv.yaml

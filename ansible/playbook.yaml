@@ -1,0 +1,36 @@
+- name: Setup Developmen Environment on Ubuntu
+  hosts: dev
+  become: true
+  vars:
+    path_vars: {}
+    env_setup: {}
+  roles:
+    - role: distupgrade
+      tags: distupgrade
+    - role: git
+      tags: git
+    - role: i3
+      tags: i3
+    - role: neovim
+      tags: neovim
+    - role: virtualbox
+      tags: virtualbox
+      when: ansible_facts['virtualization_type'] == "virtualbox"
+    - role: environment
+  tasks:
+    - name: Install Additional Packages
+      apt:
+        pkg:
+          - curl
+          - jq
+          - firefox
+          - tree
+          - ncdu
+          - htop
+          - btop
+          - bat
+        state: present
+
+#    - name: Show Facts
+#      ansible.builtin.debug:
+#        var: ansible_facts
