@@ -235,8 +235,4 @@ function v(){
 
 # alias luamake=/home/dstadelmann/bin/lua-language-server/3rd/luamake/luamake
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 . ~/.bash_alias
