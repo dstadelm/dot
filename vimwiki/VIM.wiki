@@ -120,3 +120,11 @@ https://www.ejmastnak.com/tutorials/vim-latex/intro/
 use $ to select all lines until end
 or use> set virtualedit=all
 
+== Error Format Demistified ==
+https://flukus.github.io/vim-errorformat-demystified.html
+
+== Formating comments ==
+"https://vi.stackexchange.com/questions/8360/gqip-for-vhdl-comments-does-not-work" formatting - gqip for VHDL comments does not work - Vi and Vim Stack Exchange
+
+== Global command ==
+- [Discovering Vim Global Command - DEV Community](https://dev.to/iggredible/discovering-vim-global-command-49ad)
