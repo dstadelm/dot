@@ -13,7 +13,6 @@
   become: false
   when: pyenv.stat.exists == False
   ansible.builtin.shell: bash /tmp/pyenv.run
-
 - name: Setup shell environment for pyenv [.bashrc, .profile]
   become: false
   blockinfile:
@@ -22,10 +21,9 @@
     block: |
       export PYENV_ROOT="$HOME/.pyenv"
       command -v pyenv >/dev/null || export PATH="${PYENV_ROOT}/bin:$PATH"
-      $(pyenv init -)
+      eval "$(pyenv init -)"
     state: present
     create: true
-
 - name: Setup shell environment for pyenv .zshrc
   become: false
   blockinfile:
@@ -38,32 +36,37 @@
     state: present
     create: true
 
-- name: Check if pyenv is installed
-  become: false
-  ansible.builtin.stat:
-    path: /usr/bin/fish
-  register: fish
-
-- name: Check if PYENV_ROOT is already set
-  ansible.builtin.shell:
-    executable: /usr/bin/fish
-    cmd: set -q PYENV_ROOT
-  register: pyenv_root
-
-- name: Setup fish for pyenv
-  become: false
-  when: (fish.stat.exists == True) and (pyenv is failed)
-  ansible.builtin.shell:
-    executable: /usr/bin/fish
-    cmd: |
-      set -Ux PYENV_ROOT $HOME/.pyenv
-      fish_add_path $PYENV_ROOT/bin
-
-- name: Setup shell environment for pyenv config.fish
-  become: false
-  when: fish.stat.exists == True
-  lineinfile:
-    path: ~/.config/fish/config.fish
-    line: pyenv init - | source
-    state: present
-    create: false
+#- name: Install fish if missing
+#  ansible.builtin.package:
+#    name: fish
+#    state: present
+#
+#- name: Check if pyenv is installed
+#  become: false
+#  ansible.builtin.stat:
+#    path: /usr/bin/fish
+#  register: fish
+#
+#- name: Check if PYENV_ROOT is already set
+#  ansible.builtin.shell:
+#    executable: /usr/bin/fish
+#    cmd: set -q PYENV_ROOT
+#  register: pyenv_root
+#
+#- name: Setup fish for pyenv
+#  become: false
+#  when: (fish.stat.exists == True) and (pyenv is failed)
+#  ansible.builtin.shell:
+#    executable: /usr/bin/fish
+#    cmd: |
+#      set -Ux PYENV_ROOT $HOME/.pyenv
+#      fish_add_path $PYENV_ROOT/bin
+#
+#- name: Setup shell environment for pyenv config.fish
+#  become: false
+#  when: fish.stat.exists == True
+#  lineinfile:
+#    path: ~/.config/fish/config.fish
+#    line: pyenv init - | source
+#    state: present
+#    create: false

@@ -3,6 +3,12 @@
     name: zsh
     state: present
 
+- name: Create direcotry for zsh_plugins
+  become: false
+  ansible.builtin.file:
+    path: ~/.zsh_plugins
+    state: directory
+
 - name: Downloas Autosuggestions
   become: false
   ansible.builtin.git:

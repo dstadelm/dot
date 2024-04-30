@@ -3,6 +3,7 @@
     name: direnv
     state: present
 - name: Setup direnv
+  become: false
   ansible.builtin.lineinfile:
     dest: "{{ loop_value.dest }}"
     line: 'eval "$(direnv hook {{ loop_value.shell }})"'
@@ -15,7 +16,9 @@
   loop_control:
     loop_var: loop_value
 
+
 - name: create poetry layout
+  become: false
   copy:
     dest: ~/.direnvrc
     content: |

@@ -54,3 +54,4 @@ function v(){
 . ~/.zsh_ansible
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$HOME/.local/bin:$PATH"

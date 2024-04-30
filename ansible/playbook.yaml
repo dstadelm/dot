@@ -10,6 +10,8 @@
   roles:
     - role: distupgrade
       tags: distupgrade
+    - role: zsh
+      tags: zsh
     - role: git
       tags: git
     - role: i3
@@ -19,19 +21,19 @@
     - role: virtualbox
       tags: virtualbox
       when: ansible_facts['virtualization_type'] == "virtualbox"
-        #    - role: environment
+      #    - role: environment
     - role: font-SF-Mono-Nerd
       tags: font
     - role: starship
       tags: starship
     - role: fzf
       tags: fzf
-    - role: zsh
-      tags: zsh
     - role: tmux
       tags: tmux
     - role: direnv
       tags: direnv
+    - role: python
+      tags: python
   tasks:
     - name: Install Additional Packages
       apt:
