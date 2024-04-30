@@ -39,12 +39,14 @@ fi
 
 export NCURSES_NO_UTF8_ACS=1
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.cargo/env ] && . "$HOME/.cargo/env"
+[ -f ~/.bash_ansible ] && . "$HOME/.bash_ansible"
 . ~/.bash_alias
 . ~/.bash_prompt
 . ~/.bash_ssh_agent
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/.cargo/env ] && . "$HOME/.cargo/env"
-
 export XDG_CONFIG_HOME=~/.config
 export PATH="~/.local/bin:$PATH"
+
