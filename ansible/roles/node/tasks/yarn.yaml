@@ -10,7 +10,7 @@
     update_cache: yes
 
 - name: Install Yarn
-  apt:
+  ansible.builtin.apt:
     name: yarn
     install_recommends: false
     state: present

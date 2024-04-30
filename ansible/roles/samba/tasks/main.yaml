@@ -1,6 +1,6 @@
 - name: Install Samba
-  ansible.builtin.apt:
-    pkg: 
+  ansible.builtin.package:
+    name:
       - samba
       - avahi-daemon
     state: present

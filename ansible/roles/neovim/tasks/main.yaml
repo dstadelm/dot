@@ -44,16 +44,16 @@
     - neovim
 # used for neorg (at least in neovim version 0.10
 - name: Install lua, luadev
-  apt:
+  ansible.builtin.apt:
     pkg:
       - liblua5.1-dev
       - lua5.1
     state: present
 - name: Install ripgrep
-  apt:
+  ansible.builtin.apt:
     name: ripgrep
     state: present
 - name: Install fd-find
-  apt:
+  ansible.builtin.apt:
     name: fd-find
     state: present

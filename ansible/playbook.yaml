@@ -36,8 +36,8 @@
       tags: python
   tasks:
     - name: Install Additional Packages
-      apt:
-        pkg:
+      ansible.builtin.package:
+        name:
           - curl
           - jq
           - firefox
@@ -50,6 +50,7 @@
           - xclip
           - wl-clipboard
           - fd-find
+          - kitty
         state: present
 
 #    - name: Show Facts

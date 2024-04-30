@@ -1,6 +1,6 @@
 - name: Install git
-  ansible.builtin.apt:
-    pkg:
+  ansible.builtin.package:
+    name:
       - git
       - git-lfs
       - git-doc

@@ -5,28 +5,28 @@
     mode: '0644'
   tags: i3
 
-- name: Install 
-  apt:
+- name: Install
+  ansible.builtin.apt:
     name: apt-transport-https
     state: present
   tags: i3
 
 - name: Update Source List
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [signed-by=/etc/apt/trusted.gpg.d/i3-window-manager.asc] https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main"
     state: present
     update_cache: yes
   tags: i3
 
 - name: Install i3
-  apt:
+  ansible.builtin.apt:
     name: i3
     state: present
   tags: i3
 
 - name: Install dependencies
-  apt:
-    pkg:
+  ansible.builtin.package:
+    name:
       - picom
       - kitty
       - budgie-network-manager-applet
