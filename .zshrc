@@ -6,6 +6,7 @@ export TERM=xterm-256color
 export EDITOR=nvim
 export XDG_CONFIG_HOME=${HOME}/.config
 export FZF_DEFAULT_COMMAND='fdfind'
+
 unsetopt BEEP
 
 eval "$(direnv hook zsh)"
@@ -55,3 +56,7 @@ function v(){
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$HOME/.local/bin:$PATH"
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
