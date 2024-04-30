@@ -1,0 +1,22 @@
+- name: Download SF-Mono-Nerd-Font
+  become: false
+  ansible.builtin.git:
+    repo: 'https://github.com/epk/SF-Mono-Nerd-Font.git'
+    dest: /tmp/SF-Mono-Nerd
+    update: true
+
+- name: ensure font directory exists
+  become: false
+  ansible.builtin.file:
+    path: "~/.fonts"
+    state: directory
+    mode: 0755
+
+- name: Copy OTF to .fonts
+  become: false
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/.fonts/."
+  with_fileglob:
+    - "/tmp/SF-Mono-Nerd/*.otf"
+  notify: update font-cache

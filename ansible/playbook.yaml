@@ -1,6 +1,9 @@
 - name: Setup Developmen Environment on Ubuntu
   hosts: dev
   become: true
+  vars_files:
+    - vault/vars.yaml
+    - vault/vault.yaml
   vars:
     path_vars: {}
     env_setup: {}
@@ -16,7 +19,19 @@
     - role: virtualbox
       tags: virtualbox
       when: ansible_facts['virtualization_type'] == "virtualbox"
-    - role: environment
+        #    - role: environment
+    - role: font-SF-Mono-Nerd
+      tags: font
+    - role: starship
+      tags: starship
+    - role: fzf
+      tags: fzf
+    - role: zsh
+      tags: zsh
+    - role: tmux
+      tags: tmux
+    - role: direnv
+      tags: direnv
   tasks:
     - name: Install Additional Packages
       apt:
@@ -29,6 +44,10 @@
           - htop
           - btop
           - bat
+          - xsel
+          - xclip
+          - wl-clipboard
+          - fd-find
         state: present
 
 #    - name: Show Facts

@@ -1,0 +1,2 @@
+- name: update font-cache
+  ansible.builtin.command: fc-cache -fv

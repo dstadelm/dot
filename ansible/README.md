@@ -8,7 +8,7 @@ sudo apt install ansible
 
 ## How to run
 ```console
-ansible-playbook playbook.yaml -i localhost.yaml
+ansible-playbook playbook.yaml -i localhost.yaml -bK --ask-vault-pass
 ```
 
 ## TODO

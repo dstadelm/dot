@@ -3,106 +3,67 @@
   ansible.builtin.stat:
     path: ~/.pyenv/bin/pyenv
   register: pyenv
-  tags: pyenv
 - name: Download pyenv installer
   become: false
   when: pyenv.stat.exists == False
   ansible.builtin.get_url:
     url: https://pyenv.run
     dest: /tmp/pyenv.run
-  tags: pyenv
 - name: Install pyenv
   become: false
   when: pyenv.stat.exists == False
   ansible.builtin.shell: bash /tmp/pyenv.run
-  tags: pyenv
+
 - name: Setup shell environment for pyenv [.bashrc, .profile]
   become: false
   blockinfile:
-    path: "~/.bashrc"
-    marker: "# {mark} PYENV MANAGED BY ANSIBLE"
+    path: "~/.bash_ansible"
+    marker: "# {mark} ANSIBLE MANAGED pyenv setup"
     block: |
       export PYENV_ROOT="$HOME/.pyenv"
-      command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+      command -v pyenv >/dev/null || export PATH="${PYENV_ROOT}/bin:$PATH"
       $(pyenv init -)
     state: present
     create: true
-- name: Setup shell environment for pyenv .profile
-  become: false
-  blockinfile:
-    path: "~/.profile"
-    marker: "# {mark} PYENV MANAGED BY ANSIBLE"
-    block: |
-      export PYENV_ROOT="$HOME/.pyenv"
-      command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-      $(pyenv init -)
-    state: present
-    create: true
-- name: stat .bash_profile
-  become: false
-  ansible.builtin.stat:
-    path: ~/.bash_profile
-  register: bash_profile
-- name: Setup shell environment for pyenv .bash_profile
-  when: bash_profile.stat.exists == True
-  become: false
-  blockinfile:
-    path: "~/.bash_profile"
-    marker: "# {mark} PYENV MANAGED BY ANSIBLE"
-    block: |
-      export PYENV_ROOT="$HOME/.pyenv"
-      command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-      $(pyenv init -)
-    state: present
-    create: false
-- name: stat .bash_login
-  become: false
-  ansible.builtin.stat:
-    path: ~/.bash_login
-  register: bash_login
-- name: Setup shell environment for pyenv .bash_login
-  when: bash_login.stat.exists == True
-  become: false
-  blockinfile:
-    path: "~/.bash_login"
-    marker: "# {mark} PYENV MANAGED BY ANSIBLE"
-    block: |
-      export PYENV_ROOT="$HOME/.pyenv"
-      command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-      $(pyenv init -)
-    state: present
-    create: false
-- name: stat .zshrc
-  become: false
-  ansible.builtin.stat:
-    path: ~/.zshrc
-  register: zshrc
+
 - name: Setup shell environment for pyenv .zshrc
-  when: zshrc.stat.exists == True
   become: false
   blockinfile:
-    path: ~/.zshrc
-    marker: "# {mark} PYENV MANAGED BY ANSIBLE"
+    path: ~/.zsh_ansible
+    marker: "# {mark} ANSIBLE MANAGED pyenv setup"
     block: |
       export PYENV_ROOT="$HOME/.pyenv"
       [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
       eval "$(pyenv init -)"
     state: present
-    create: false
+    create: true
 
-# - name: Check if fish is installed
-#   ansible.builtin.shell: command -v fish
-#   register: fish_exists
-#   ignore_errors: true
-# - name: Setup fish for pyenv
-#   when: fish_exists is succeeded
-#   ansible.builtin.shell: |
-#     fish -c "set -Ux PYENV_ROOT $HOME/.pyenv && fish_add_path $PYENV_ROOT/bin"
-# - name: Setup shell environment for pyenv config.fish
-#   become: false
-#   blockinfile:
-#     path: ~/.config/fish/config.fish
-#     block: |
-#       pyenv init - | source
-#     state: present
-#     create: false
+- name: Check if pyenv is installed
+  become: false
+  ansible.builtin.stat:
+    path: /usr/bin/fish
+  register: fish
+
+- name: Check if PYENV_ROOT is already set
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: set -q PYENV_ROOT
+  register: pyenv_root
+
+- name: Setup fish for pyenv
+  become: false
+  when: (fish.stat.exists == True) and (pyenv is failed)
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -Ux PYENV_ROOT $HOME/.pyenv
+      fish_add_path $PYENV_ROOT/bin
+
+- name: Setup shell environment for pyenv config.fish
+  become: false
+  when: fish.stat.exists == True
+  lineinfile:
+    path: ~/.config/fish/config.fish
+    line: pyenv init - | source
+    state: present
+    create: false

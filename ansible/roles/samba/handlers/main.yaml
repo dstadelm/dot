@@ -1,0 +1,14 @@
+- name: Restart avahi
+  ansible.builtin.systemd:
+    name: avahi-daemon
+    state: restarted
+    enabled: true
+
+- name: Restart smbd
+  ansible.builtin.systemd:
+    name: smbd
+    state: restarted
+    enabled: true
+
+      # - name: Set password
+      #   ansible.builtin.shell: smbpasswd -a {{ ansible_user_id }}:

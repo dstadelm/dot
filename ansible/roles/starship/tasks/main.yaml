@@ -1,0 +1,33 @@
+- name: Download starship install script
+  become: false
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+
+- name: Install starship
+  become: false
+  ansible.builtin.shell: sh /tmp/starship_install.sh -y
+
+- name: Setup for Bash
+  become: false
+  lineinfile:
+    path: ~/.bash_ansible
+    line: eval "$(starship init bash)"
+    create: true
+    state: present
+
+- name: Setup for ZSH
+  become: false
+  lineinfile:
+    path: ~/.zsh_ansible
+    line: eval "$(starship init zsh)"
+    state: "absent"
+
+- name: Setup for Fish
+  become: false
+  lineinfile:
+    path: ~/.config/fish/config.fish
+    line: starship init fish | source
+
+
+

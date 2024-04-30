@@ -16,10 +16,25 @@
   when: deno_exists is failed
   ansible.builtin.shell: sh /tmp/install.sh
   tags: deno
-- name: export deno path
-  set_fact:
-    path_vars: "{{ path_vars | default({}) | combine({'DENO_PATH': '$HOME/.deno/bin'}) }}"
-  tags: deno
+# - name: export deno path
+#   set_fact:
+#     path_vars: "{{ path_vars | default({}) | combine({'DENO_PATH': '$HOME/.deno/bin'}) }}"
+#   tags: deno
+
+- name: Set PATH for deno
+  become: false
+  lineinfile:
+    path: "{{ cfg_file }}"
+    line: PATH="$HOME/.deno/bin:$PATH"
+    regexp: '^PATH=.*deno.*'
+    state: present
+    create: false
+  loop:
+    - ~/.bash_ansible
+    - ~/.zsh_ansible
+  loop_control:
+    loop_var: cfg_file
+
 - name: upgrade deno
   become: false
   ansible.builtin.shell: ~/.deno/bin/deno upgrade
