@@ -13,7 +13,7 @@
   become: false
   ansible.builtin.lineinfile:
     path: "{{ cfg_path }}"
-    line: PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+    line: PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"
     state: present
     create: false
   loop:

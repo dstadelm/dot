@@ -1,6 +1,6 @@
 - name: check if cargo is installed
   become: false
-  ansible.builtin.stat: 
+  ansible.builtin.stat:
     path: ~/.cargo/bin/rustup
   register: cargo_exists
   tags: rust
@@ -31,13 +31,17 @@
 - name: Source environment for cargo
   become: false
   lineinfile:
-    dest: "{{ cfg_path }}"
+    dest: ".bash_ansible"
     line: '[ -f ~/.cargo/env ] && source "$HOME/.cargo/env"'
-    regexp: '^[ -f ~/.cargo/env ]'
+    regexp: '^[ -f ~/.cargo/env ].*'
     state: present
     create: true
-  loop:
-    - ~/.bash_ansible
-    - ~/.zsh_ansible
-  loop_control:
-    loop_var: cfg_path
+
+- name: Source environment for cargo
+  become: false
+  lineinfile:
+    dest: ".zsh_ansible"
+    line: '[ -f ~/.cargo/env ] && source "$HOME/.cargo/env"'
+    regexp: '^[ -f ~/.cargo/env ].*'
+    state: present
+    create: true

@@ -1,0 +1,4 @@
+- name: Install cmake
+  ansible.builtin.package:
+    name: cmake
+    state: present

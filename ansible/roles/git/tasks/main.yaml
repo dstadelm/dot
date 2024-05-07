@@ -5,3 +5,7 @@
       - git-lfs
       - git-doc
     state: present
+
+- name: Install git-delta
+  become: false
+  ansible.builtin.shell: ~/.cargo/bin/cargo install git-delta

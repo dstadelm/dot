@@ -1,0 +1,12 @@
+- name: Install dependencies
+  ansible.builtin.package:
+    name:
+      - fontconfig
+      - librust-servo-fontconfig-sys-dev
+      - lib-servo-fontconfig-sys-dev
+    state: present
+
+- name: Install alacritty
+  ansible.builtin.shell: |
+    cargo install alacritty
+

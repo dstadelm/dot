@@ -12,7 +12,7 @@
 - name: Install zsh fzf plugin
   become: false
   ansible.builtin.git:
-    repo: https://github.com/unixorn/fzf-zsh-plugin.git 
+    repo: https://github.com/unixorn/fzf-zsh-plugin.git
     dest: ~/.zsh_plugins/fzf
     depth: 1
 
@@ -30,5 +30,13 @@
     path: ~/.zsh_ansible
     line: source ~/.zsh_plugins/fzf/fzf-zsh-plugin.plugin.zsh
     regexp: '^source .*zsh.*fzf'
+
+
+- name: Source fzf-tab plugin
+  become: false
+  ansible.builtin.lineinfile:
+    path: ~/.zsh_ansible
+    line: source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
+    regexp: '^source .*zsh.*fzf-tab'
 
 
