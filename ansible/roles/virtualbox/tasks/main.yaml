@@ -5,3 +5,8 @@
     content: |
       export LIBGL_ALWAYS_SOFTWARE=true
       export GALLIUM_DRIVER=llvmpipe
+      [ -f ~/.cargo/env ] && source "$HOME/.cargo/env"
+      export XDG_CONFIG_HOME="$HOME/.config"
+      export PATH="$HOME/.deno/bin:$PATH"
+      export PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"
+      unclutter &
