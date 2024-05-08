@@ -1,12 +1,12 @@
 - name: Check if deno already exists
   become: false
-  ansible.builtin.shell: test -f ~/.deno/bin/deno
-  register: deno_exists
-  ignore_errors: true
+  ansible.builtin.stat:
+    path: ~/.deno/bin/deno
+  register: deno
   tags: deno
 - name: Fetch deno install script
   become: false
-  when: deno_exists is failed
+  when: deno.stat.exists == False
   ansible.builtin.get_url:
     url: https://deno.land/install.sh
     dest: /tmp/install.sh
