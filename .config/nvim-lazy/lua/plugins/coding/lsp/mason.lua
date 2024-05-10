@@ -16,6 +16,7 @@ return {
 				"isort",
 				"black",
 				"yamlfmt",
+        "gitlint",
 			},
 		})
 	end,
