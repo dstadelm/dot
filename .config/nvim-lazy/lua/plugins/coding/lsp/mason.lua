@@ -17,6 +17,12 @@ return {
 				"black",
 				"yamlfmt",
         "gitlint",
+        "shellcheck",
+        "marksman",
+        "lua-language-server",
+        "stylua",
+        "lemmix",
+        "ruff_lsp",
 			},
 		})
 	end,
