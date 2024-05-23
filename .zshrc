@@ -52,11 +52,11 @@ function v(){
 # alias luamake=/home/dstadelmann/bin/lua-language-server/3rd/luamake/luamake
 
 . ~/.bash_alias
-. ~/.zsh_ansible
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$HOME/.local/bin:$PATH"
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
+[ -f $HOME/.zsh_ansible ] && . $HOME/.zsh_ansible
