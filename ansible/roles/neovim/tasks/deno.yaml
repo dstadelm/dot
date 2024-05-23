@@ -13,7 +13,7 @@
   tags: deno
 - name: Install Deno
   become: false
-  when: deno_exists is failed
+  when: deno.stat.exists == False
   ansible.builtin.shell: sh /tmp/install.sh
   tags: deno
 # - name: export deno path
@@ -34,7 +34,9 @@
     - ~/.zsh_ansible
   loop_control:
     loop_var: cfg_file
+  tags: deno
 
 - name: upgrade deno
   become: false
   ansible.builtin.shell: ~/.deno/bin/deno upgrade
+  tags: deno

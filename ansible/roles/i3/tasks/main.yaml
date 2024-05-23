@@ -50,3 +50,48 @@
     path: ~/.config/i3/autotiling/autotiling/main.py
     mode: u+x
   tags: i3
+
+- name: Source cargo env variables in ~/.xsessionrc
+  become: false
+  ansible.builtin.lineinfile:
+    path: ~/.xsessionrc
+    line: '[ -f $HOME/.cargo/env ] && source "$HOME/.cargo/env"'
+    regexp: '[ -f .*cargo/env ].*'
+    create: true
+    state: present
+
+- name: Set XDG_CONFIG_HOME variable in ~/.xsessionrc
+  become: false
+  ansible.builtin.lineinfile:
+    path: ~/.xsessionrc
+    line: 'export XDG_CONFIG_HOME="$HOME/.config"'
+    regexp: 'export XDG_CONFIG_HOME.*'
+    create: true
+    state: present
+
+- name: Set deno path
+  become: false
+  ansible.builtin.lineinfile:
+    path: ~/.xsessionrc
+    line: 'export PATH="$HOME/.deno/bin:$PATH"'
+    regexp: 'export PATH=.*deno.*'
+    create: true
+    state: present
+
+- name: Set neovim path
+  become: false
+  ansible.builtin.lineinfile:
+    path: ~/.xsessionrc
+    line: 'export PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"'
+    regexp: 'export PATH=.*bob/nvim-bin.*'
+    create: true
+    state: present
+
+- name: Start unclutter to remove mouse pointer when unused
+  become: false
+  ansible.builtin.lineinfile:
+    path: ~/.xsessionrc
+    line: 'unclutter &'
+    regexp: '^unclutter &'
+    create: true
+    state: present

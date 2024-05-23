@@ -10,5 +10,5 @@
     state: restarted
     enabled: true
 
-      # - name: Set password
-      #   ansible.builtin.shell: smbpasswd -a {{ ansible_user_id }}:
+- name: Set password
+  ansible.builtin.shell: echo {{ samba_password }} | smbpasswd -s -a {{ ansible_user_id }}

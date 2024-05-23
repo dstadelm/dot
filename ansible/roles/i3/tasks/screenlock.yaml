@@ -1,0 +1,22 @@
+- name: create screenlock script
+  become: false
+  ansible.builtin.copy:
+    dest: ~/.config/i3/scripts/screenlock
+    content: |
+      import pyautogui
+      import os
+      from PIL import ImageFilter
+
+      im0 = pyautogui.screenshot()
+      im1 = im0.filter(ImageFilter.GaussianBlur(15))
+      im1.save('/tmp/scls.png')
+      os.popen('i3lock -i /tmp/scls.png')
+- name: install dependencies for the screen lock
+  ansible.builtin.packages:
+    name:
+      - scrot
+
+- name:
+  become: false
+  ansible.builtin.shell: pip3 install pillow pyautogui
+

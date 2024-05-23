@@ -6,6 +6,9 @@
 - name: Install Neovim
   become: false
   ansible.builtin.shell: ~/.cargo/bin/bob install latest
+- name: Use latest Neovim
+  become: false
+  ansible.builtin.shell: ~/.cargo/bin/bob use latest
 # - name: export neovim path
 #   set_fact:
 #     path_vars: "{{ path_vars | default({})| combine({'NEOVIM_PATH': '$HOME/.local/share/bob/nvim-bin'}) }}"

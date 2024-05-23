@@ -1,6 +1,6 @@
 - name: Settings for Virtualbox
   become: false
-  copy:
+  ansible.builtin.copy:
     dest: ~/.xsessionrc
     content: |
       export LIBGL_ALWAYS_SOFTWARE=true

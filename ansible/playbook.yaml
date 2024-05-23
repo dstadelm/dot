@@ -51,6 +51,9 @@
           - wl-clipboard
           - fd-find
           - kitty
+          - imagemagick
+          - graphviz
+          - libgraphviz-dev
         state: present
 
 #    - name: Show Facts
