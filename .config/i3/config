@@ -78,7 +78,8 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminawl --full-screen
 # bindsym $mod+Return exec gnome-terminal
-bindsym $mod+Return exec --no-startup-id kitty
+# bindsym $mod+Return exec --no-startup-id kitty
+bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -248,7 +249,9 @@ assign [class="vsim"] $ws3
 assign [class="Vivado"] $ws4
 
 for_window [class="mybookmarks"] floating enable, resize 1200 800
-bindsym $mod+n exec ~/.cargo/bin/alacritty --class mybookmarks -e nvim -u ~/.config/nvim/init.lua ~/bookmarks.md
+bindsym $mod+n exec ~/.cargo/bin/alacritty --class mybookmarks -e nvim -c 'colorscheme doom-one' -u ~/.config/nvim/init.lua -c 'e ~/bookmarks.md'
 
 set $fzf_bookmarks  "awk '/^\s*-/ {print \$0}' ~/bookmarks.md | tr '\t' ' ' | sed -e 's/\s*-.*\[\(.*\)\](\(.*\)).*/\1\t\2/' | ~/.fzf/bin/fzf --delimiter='\t' --with-nth=1 --bind 'enter:execute-silent(nohup xdg-open {2}& > /tmp/nohup.out)+abort'"
 bindsym $mod+b exec --no-startup-id ~/.cargo/bin/alacritty --class mybookmarks -e bash -c $fzf_bookmarks
+
+bindsym $mod+x exec "python3 ~/.config/i3/scripts/screenlock"
