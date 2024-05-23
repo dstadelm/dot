@@ -21,7 +21,7 @@ return {
         "marksman",
         "lua-language-server",
         "stylua",
-        "lemmix",
+        "lemminx",
         "ruff_lsp",
 			},
 		})

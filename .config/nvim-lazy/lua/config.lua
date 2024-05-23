@@ -7,6 +7,7 @@ local nvim = {
 		enabled = true,
 		plugins = {
 			markdown_preview = true,
+      follow_md_links = true,
 			peek = true,
 			neorg = true,
 			vimwiki = true,
