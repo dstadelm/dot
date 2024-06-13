@@ -1,0 +1,13 @@
+- name: Download rofi scripts
+  become: false
+  ansible.builtin.git:
+    repo: 'https://github.com/adi1090x/rofi'
+    dest: /tmp/rofi
+    update: yes
+    force: true
+  tags: i3
+
+- name: Install rofi scripts
+  become: false
+  ansible.builtin.shell: bash -c 'cd /tmp/rofi/; ./setup.sh'
+  tags: i3

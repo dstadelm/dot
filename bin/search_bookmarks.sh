@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 awk '/^\s*-/ {print $0}' ~/bookmarks.md | tr '\t' ' ' | sed -e 's/\s*-.*\[\(.*\)\](\(.*\)).*/\1\t\2/' | ~/.fzf/bin/fzf --delimiter='\t' --with-nth=1 --bind 'enter:execute-silent(nohup xdg-open {2}& > /tmp/nohup.out)+abort'
 
-
 counter=1
 while [ $counter -le 50 ]
 do

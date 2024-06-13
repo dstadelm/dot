@@ -11,12 +11,13 @@
       im1 = im0.filter(ImageFilter.GaussianBlur(15))
       im1.save('/tmp/scls.png')
       os.popen('i3lock -i /tmp/scls.png')
+
 - name: install dependencies for the screen lock
-  ansible.builtin.packages:
+  ansible.builtin.package:
     name:
       - scrot
 
-- name:
+- name: Install dependencies for screenlock
   become: false
   ansible.builtin.shell: pip3 install pillow pyautogui
 
