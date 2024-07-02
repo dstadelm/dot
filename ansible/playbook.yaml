@@ -18,6 +18,8 @@
       tags: i3
     - role: neovim
       tags: neovim
+    - role: alacritty
+      tags: alacritty
     - role: virtualbox
       tags: virtualbox
       when: ansible_facts['virtualization_type'] == "virtualbox"

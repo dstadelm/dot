@@ -3,10 +3,8 @@
     name:
       - fontconfig
       - librust-servo-fontconfig-sys-dev
-      - lib-servo-fontconfig-sys-dev
     state: present
-
 - name: Install alacritty
+  become: false
   ansible.builtin.shell: |
     cargo install alacritty
-
