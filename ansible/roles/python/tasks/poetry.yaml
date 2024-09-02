@@ -16,3 +16,8 @@
   when: poetry.stat.exists == False
   ansible.builtin.shell: python3 /tmp/poetry_installer.py
   tags: poetry
+- name: Config poetry
+  become: false
+  when: poetry.stat.exists == False
+  ansible.builtin.shell: poetry config virtualenvs.in-project true
+  tags: poetry

@@ -35,6 +35,14 @@
       eval "$(pyenv init -)"
     state: present
     create: true
+- name: Install dependencies for pyenv to be able to install python versions
+  ansible.builtin.package:
+    name:
+      - libssl-dev
+      - liblzma-dev
+      - libsqlite3-dev
+      - libffi-dev
+      - libbz2-dev
 
 #- name: Install fish if missing
 #  ansible.builtin.package:
