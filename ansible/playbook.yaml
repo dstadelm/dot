@@ -9,33 +9,21 @@
     env_setup: {}
   roles:
     - role: distupgrade
-      tags: distupgrade
     - role: zsh
-      tags: zsh
     - role: git
-      tags: git
     - role: i3
-      tags: i3
     - role: neovim
-      tags: neovim
     - role: alacritty
-      tags: alacritty
     - role: virtualbox
-      tags: virtualbox
       when: ansible_facts['virtualization_type'] == "virtualbox"
       #    - role: environment
     - role: font-SF-Mono-Nerd
-      tags: font
     - role: starship
-      tags: starship
     - role: fzf
-      tags: fzf
     - role: tmux
-      tags: tmux
     - role: direnv
-      tags: direnv
     - role: python
-      tags: python
+    - role: autojump
   tasks:
     - name: Install Additional Packages
       ansible.builtin.package:
