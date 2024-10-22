@@ -29,14 +29,6 @@ return {
 				branch = "main",
 			},
 		}
-		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-		parser_config.vhdl = {
-			install_info = {
-				url = "https://github.com/alemuller/tree-sitter-vhdl",
-				files = { "src/parser.c" },
-				branch = "main",
-			},
-		}
 
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {

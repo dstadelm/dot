@@ -44,7 +44,7 @@ local function on_attach(client, bufnr)
 	vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
 	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(bufnr, true)
+		vim.lsp.inlay_hint.enable(true)
 	end
 
 	local ok, navic = pcall(require, "nvim-navic")
@@ -114,7 +114,7 @@ function M.setup()
 		update_in_insert = false,
 	})
 
-	require("lspconfig")["pyright"].setup({
+	require("lspconfig")["basedpyright"].setup({
 		capablities = capabilities(),
 		on_attach = on_attach,
 		settings = {

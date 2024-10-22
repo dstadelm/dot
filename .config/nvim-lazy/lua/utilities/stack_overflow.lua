@@ -13,7 +13,7 @@ function M.stack_overflow()
 		else
 			cmd = input
 		end
-		cmd = "so " .. cmd
+		cmd = "socli " .. cmd
 		open_term(cmd, { direction = "float" })
 	end)
 end
