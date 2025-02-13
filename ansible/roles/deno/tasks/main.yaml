@@ -3,40 +3,34 @@
   ansible.builtin.stat:
     path: ~/.deno/bin/deno
   register: deno
-  tags: deno
 - name: Fetch deno install script
   become: false
   when: deno.stat.exists == False
   ansible.builtin.get_url:
     url: https://deno.land/install.sh
     dest: /tmp/install.sh
-  tags: deno
 - name: Install Deno
   become: false
   when: deno.stat.exists == False
   ansible.builtin.shell: sh /tmp/install.sh
-  tags: deno
-# - name: export deno path
-#   set_fact:
-#     path_vars: "{{ path_vars | default({}) | combine({'DENO_PATH': '$HOME/.deno/bin'}) }}"
-#   tags: deno
-
-- name: Set PATH for deno
+- name: Set PATH for deno for bash
   become: false
-  lineinfile:
-    path: "{{ cfg_file }}"
-    line: PATH="$HOME/.deno/bin:$PATH"
-    regexp: '^PATH=.*deno.*'
+  blockinfile:
+    path: "~/.bash_ansible"
+    marker: "# {mark} ANSIBLE MANAGED deno setup DON'T MODIFY OR DELETE"
+    block: |
+      PATH="$HOME/.deno/bin:$PATH"
     state: present
-    create: false
-  loop:
-    - ~/.bash_ansible
-    - ~/.zsh_ansible
-  loop_control:
-    loop_var: cfg_file
-  tags: deno
-
+    create: true
+- name: Set PATH for deno for zsh
+  become: false
+  blockinfile:
+    path: "~/.zsh_ansible"
+    marker: "# {mark} ANSIBLE MANAGED deno setup DON'T MODIFY OR DELETE"
+    block: |
+      PATH="$HOME/.deno/bin:$PATH"
+    state: present
+    create: true
 - name: upgrade deno
   become: false
   ansible.builtin.shell: ~/.deno/bin/deno upgrade
-  tags: deno

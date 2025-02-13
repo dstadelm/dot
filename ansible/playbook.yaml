@@ -23,6 +23,8 @@
     - role: tmux
     - role: direnv
     - role: python
+    - role: pyenv
+    - role: poetry
     - role: autojump
   tasks:
     - name: Install Additional Packages

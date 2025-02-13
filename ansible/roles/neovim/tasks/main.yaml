@@ -9,21 +9,24 @@
 - name: Use latest Neovim
   become: false
   ansible.builtin.shell: ~/.cargo/bin/bob use latest
-# - name: export neovim path
-#   set_fact:
-#     path_vars: "{{ path_vars | default({})| combine({'NEOVIM_PATH': '$HOME/.local/share/bob/nvim-bin'}) }}"
-- name: Set PATH for neovim
+- name: Setup shell environment for neovim [.bash_ansible]
   become: false
-  ansible.builtin.lineinfile:
-    path: "{{ cfg_path }}"
-    line: PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"
+  blockinfile:
+    path: "~/.bash_ansible"
+    marker: "# {mark} ANSIBLE MANAGED neovim setup DON'T MODIFY OR DELETE"
+    block: |
+      PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"
     state: present
-    create: false
-  loop:
-    - ~/.bash_ansible
-    - ~/.zsh_ansible
-  loop_control:
-    loop_var: cfg_path
+    create: true
+- name: Setup shell environment for neovim [.zsh_ansible]
+  become: false
+  blockinfile:
+    path: "~/.zsh_ansible"
+    marker: "# {mark} ANSIBLE MANAGED neovim setup DON'T MODIFY OR DELETE"
+    block: |
+      PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"
+    state: present
+    create: true
 # used for the neovim python provider
 - name: Create a python venv for neovim
   become: false
@@ -45,7 +48,7 @@
   tags:
     - tree-sitter
     - neovim
-# used for neorg (at least in neovim version 0.10
+# used for neorg (at least in neovim version 0.10)
 - name: Install lua, luadev
   ansible.builtin.package:
     pkg:
@@ -60,7 +63,7 @@
   ansible.builtin.package:
     name: fd-find
     state: present
-- name: Install fd-find
+- name: Install unclutter
   ansible.builtin.package:
     name: unclutter
     state: present

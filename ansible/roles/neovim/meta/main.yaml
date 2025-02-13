@@ -1,4 +1,5 @@
 dependencies:
-  - role: cargo
+  - role: bob
+  - role: deno
   - role: python
   - role: node

@@ -13,11 +13,11 @@
   become: false
   when: pyenv.stat.exists == False
   ansible.builtin.shell: bash /tmp/pyenv.run
-- name: Setup shell environment for pyenv [.bashrc, .profile]
+- name: Setup shell environment for pyenv [.bashrc]
   become: false
   blockinfile:
     path: "~/.bash_ansible"
-    marker: "# {mark} ANSIBLE MANAGED pyenv setup"
+    marker: "# {mark} ANSIBLE MANAGED pyenv setup DON'T MODIFY OR DELETE"
     block: |
       export PYENV_ROOT="$HOME/.pyenv"
       command -v pyenv >/dev/null || export PATH="${PYENV_ROOT}/bin:$PATH"
@@ -28,7 +28,7 @@
   become: false
   blockinfile:
     path: ~/.zsh_ansible
-    marker: "# {mark} ANSIBLE MANAGED pyenv setup"
+    marker: "# {mark} ANSIBLE MANAGED pyenv setup DON'T MODIFY OR DELETE"
     block: |
       export PYENV_ROOT="$HOME/.pyenv"
       [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -36,6 +36,7 @@
     state: present
     create: true
 - name: Install dependencies for pyenv to be able to install python versions
+  become: true
   ansible.builtin.package:
     name:
       - libssl-dev
@@ -43,38 +44,4 @@
       - libsqlite3-dev
       - libffi-dev
       - libbz2-dev
-
-#- name: Install fish if missing
-#  ansible.builtin.package:
-#    name: fish
-#    state: present
-#
-#- name: Check if pyenv is installed
-#  become: false
-#  ansible.builtin.stat:
-#    path: /usr/bin/fish
-#  register: fish
-#
-#- name: Check if PYENV_ROOT is already set
-#  ansible.builtin.shell:
-#    executable: /usr/bin/fish
-#    cmd: set -q PYENV_ROOT
-#  register: pyenv_root
-#
-#- name: Setup fish for pyenv
-#  become: false
-#  when: (fish.stat.exists == True) and (pyenv is failed)
-#  ansible.builtin.shell:
-#    executable: /usr/bin/fish
-#    cmd: |
-#      set -Ux PYENV_ROOT $HOME/.pyenv
-#      fish_add_path $PYENV_ROOT/bin
-#
-#- name: Setup shell environment for pyenv config.fish
-#  become: false
-#  when: fish.stat.exists == True
-#  lineinfile:
-#    path: ~/.config/fish/config.fish
-#    line: pyenv init - | source
-#    state: present
-#    create: false
+      - tk-dev
