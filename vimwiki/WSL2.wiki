@@ -53,3 +53,7 @@ Make sure that public access is granted.
 
 === X410 ===
 Payware no actual benefit
+
+[Anleitung für WM](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://gist.github.com/tdcosta100/e28636c216515ca88d1f2e7a2e188912&ved=2ahUKEwi7n-q7qI6LAxVh_7sIHap5J7oQFnoECBgQAQ&usg=AOvVaw2qC-kflG4S9iYa_UOS5nlR)
+[Sway](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://github.com/jordankoehn/sway-wsl2/actions&ved=2ahUKEwjF-duVqo6LAxUviP0HHVOmMgwQFnoECBcQAQ&usg=AOvVaw0MRTL7AU1MjDnY_i9rVEjq)
+[Wm](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://aymen-furter.medium.com/running-a-window-manager-on-top-of-wsl2-a82bdc8f3c88&ved=2ahUKEwjF-duVqo6LAxUviP0HHVOmMgwQFnoECBsQAQ&usg=AOvVaw0u8gQhtp7VRVlAJpS73v5v)

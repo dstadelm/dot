@@ -130,6 +130,117 @@ Create a environment with a given python version:
   pyenv shell version
   }}}
 3. use
-  {{{
+  {{{class="brush: console"
   poetry env use $(pyenv which python)
   }}}
+
+
+= Installing a custom python version with pyenv =
+To install a custom python version that differs from the system python version
+pyenv was used in this Project. Follow the installation instructions on pyenv_.
+Or as for the moment when writing this document you can use
+
+{{{
+   > curl https://pyenv.run | bash
+}}}
+
+To install your desired version through pyenv use the following command, where
+version could be 3.11.2
+
+{{{
+   > pyenv install <version> console
+}}}
+
+== [[Using]] the custom python version ==
+
+=== Installing poetry ===
+
+There are various possibilities to install poetry you can follow the
+instructions on  poetry_installation_. The method used and tested in this
+project is using the official installer poetry_official_installer_.
+
+=== Setting up the virtual environment ===
+
+By default poetry creates the virtual environment in the cache directory. The
+authors opinion is that it is better to use a in project virtual environment.
+This can be achieved by configuring poetry.
+
+{{{
+   :name: Setting up in project virtual environemnt
+
+   > poetry config virtualenvs.in-project true
+}}}
+
+This shoud add an entry in ~/.config/pypoetry/config.toml
+
+{{{
+   > cat ~/.config/pypoetry/config.toml
+   [virtualenvs]
+   in-project = true
+}}}
+
+
+Once you have your desired python version installed you can setup the virtual
+environment with poetry
+
+
+{{{
+   > pyenv shell <version>
+   > poetry env use $(pyenv which python)
+}}}
+
+=== Installing the dependencies ===
+
+
+{{{
+   > poetry install
+}}}
+
+
+If poetry fails to install any dependencies try to remove any existing
+poetry.lock file.
+
+== Entering the poetry environment ==
+Following command can be used to enter the environment
+
+{{{
+   > poetry shell
+}}}
+
+To leave the virtual environment
+
+{{{
+   > exit
+}}}
+
+=== Automate environment entry with *direnv* ===
+
+To automate the process of entering and leaving the virtual environment an
+.envrc exists which can be used with direnv. For direnv to work with poetry,
+direnv requires following lines in ~/.direnvrc
+
+{{{
+
+   layout_poetry() {
+     if [[ ! -f pyproject.toml ]]; then
+       log_error 'No pyproject.toml found.  Use `poetry new` or `poetry init` to create one first.'
+       exit 2
+     fi
+
+     local VENV=$(dirname $(poetry run which python))
+     export VIRTUAL_ENV=$(echo "$VENV" | rev | cut -d'/' -f2- | rev)
+     export POETRY_ACTIVE=1
+     PATH_add "$VENV"
+   }
+}}}
+
+Then you need to allow direnv to execute the .envrc file. For that, change to
+the root directory of the project and execute
+
+{{{
+   > direnv allow .
+}}}
+
+From now on the virtual environment is activated automatically as soon as you
+enter the directory, assuming you are using the terminal. As soon as you leave
+the directory the environment is deactivated.
