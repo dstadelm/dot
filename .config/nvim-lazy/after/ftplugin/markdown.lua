@@ -1,4 +1,8 @@
-    vim.cmd [[highlight Headline1 guibg=#1e2718]]
-    vim.cmd [[highlight Headline2 guibg=#21262d]]
-    vim.cmd [[highlight CodeBlock guibg=#1c1c1c]]
-    vim.cmd [[highlight Dash guibg=#D19A66 gui=bold]]
+vim.cmd([[highlight Headline1 guibg=#4f4259]])
+vim.cmd([[highlight Headline2 guibg=#2f4456]])
+vim.cmd([[highlight Headline3 guibg=#3f4153]])
+vim.cmd([[highlight Headline4 guibg=#3c463d]])
+vim.cmd([[highlight Headline5 guibg=#4b4641]])
+vim.cmd([[highlight Headline6 guibg=#483c38]])
+vim.cmd([[highlight CodeBlock guibg=#112211]])
+vim.cmd([[highlight Dash guibg=#D19A66 gui=bold]])

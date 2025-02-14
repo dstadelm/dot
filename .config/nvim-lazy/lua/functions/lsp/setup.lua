@@ -135,8 +135,8 @@ function M.setup()
 	})
 
 	local servers = {
-		ruff_lsp = {},
-    marksman = {},
+		-- ruff = {},
+		marksman = {},
 		vimls = {},
 		clangd = {},
 		lemminx = {},

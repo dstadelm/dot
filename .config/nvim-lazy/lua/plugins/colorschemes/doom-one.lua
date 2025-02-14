@@ -34,6 +34,7 @@ return {
 		vim.g.doom_one_plugin_whichkey = true
 		vim.g.doom_one_plugin_indent_blankline = true
 		vim.g.doom_one_plugin_vim_illuminate = true
+		vim.g.background = "dark"
 	end,
 	opts = {
 		colors = {

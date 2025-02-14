@@ -9,7 +9,12 @@ local function format(_)
 		lsp_fallback = true,
 		filter = function(client)
 			if client.supports_method("textDocument/formatting") then
-				if client.name ~= "lua_ls" and client.name ~= "pyright" and client.name ~= "pylsp" then
+				if
+					client.name ~= "lua_ls"
+					and client.name ~= "pyright"
+					and client.name ~= "pylsp"
+					and client.name ~= "ruff"
+				then
 					return true
 				end
 			end

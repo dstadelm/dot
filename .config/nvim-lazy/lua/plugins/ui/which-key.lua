@@ -13,45 +13,61 @@ return {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		})
-
-		wk.register({ c = { name = "change" } }, { prefix = "<leader>", mode = "n" })
-		wk.register({ c = { name = "change" } }, { prefix = "<leader>", mode = "x" })
-		wk.register({ d = { name = "delete" } }, { prefix = "<leader>", mode = "n" })
-		wk.register({ d = { name = "delete" } }, { prefix = "<leader>", mode = "x" })
-		--------------------------------------------------------------------------------
-		-- Telescope <find>
-		wk.register({ f = { name = "find" } }, { prefix = "<leader>" })
-
-		--------------------------------------------------------------------------------
-		-- refactoring
-		wk.register({
-			r = {
-				name = "refactoring",
-				e = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>", "extract function" },
-				f = {
-					[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
-					"extract function to file",
+		wk.add({
+			{ "<leader>c", group = "change" },
+			{ "<leader>c", group = "change", mode = "x" },
+			{ "<leader>d", group = "delete" },
+			{ "<leader>d", group = "delete", mode = "x" },
+			--------------------------------------------------------------------------------
+			-- Telescope <find>
+			{ "<leader>f", group = "find" },
+			--------------------------------------------------------------------------------
+			-- refactoring
+			{
+				mode = { "v" },
+				{ "<leader>r", group = "refactoring" },
+				{
+					"<leader>re",
+					"<Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>",
+					desc = "extract function",
 				},
-				v = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], "extract variable" },
-				i = { [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "inline variable" },
-				r = { [[ <Esc><Cmd>lua require('refactoring').select_refactor()<CR> ]], "select refactoring" },
-			},
-		}, {
-			prefix = "<leader>",
-			mode = "v",
-		})
-		wk.register({
-			r = {
-				name = "refactoring",
-				b = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], "extract block" },
-				f = {
-					[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
-					"extract function to file",
+				{
+					"<leader>rf",
+					" <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>",
+					desc = "extract function to file",
 				},
-				i = { [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "inline variable" },
+				{
+					"<leader>ri",
+					" <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>",
+					desc = "inline variable",
+				},
+				{
+					"<leader>rr",
+					" <Esc><Cmd>lua require('refactoring').select_refactor()<CR> ",
+					desc = "select refactoring",
+				},
+				{
+					"<leader>rv",
+					" <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>",
+					desc = "extract variable",
+				},
 			},
-		}, {
-			prefix = "<leader>",
+			{ "<leader>r", group = "refactoring" },
+			{
+				"<leader>rb",
+				" <Esc><Cmd>lua require('refactoring').refactor('Extract Block')<CR>",
+				desc = "extract block",
+			},
+			{
+				"<leader>rf",
+				" <Esc><Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>",
+				desc = "extract function to file",
+			},
+			{
+				"<leader>ri",
+				" <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>",
+				desc = "inline variable",
+			},
 		})
 
 		--------------------------------------------------------------------------------
@@ -59,47 +75,19 @@ return {
 		local augroup_vhdl_buflocal_keymaps = vim.api.nvim_create_augroup("vhdl_buflocal_keymaps", { clear = true })
 
 		local vhdl_buflocal_keymaps = function()
-			local curr_buf = vim.api.nvim_get_current_buf()
-			wk.register({
-				v = {
-					name = "VHDL",
-					i = { "<cmd>VhdlInsertInstanceFromTag<cr>", "Insert an instance from tags" },
-					c = { "<cmd>VhdlUpdateCtags<cr>", "Update vhdl ctags" },
-					p = { "<cmd>VhdlPasteSignals<cr>", "Paste signals from copied instance" },
-					s = { "<cmd>VhdlUpdateSensitivityList<cr><cr>", "Update sensitivity list" },
-					b = { "<cmd>VhdlBeautify<cr><cr>", "Format buffer" },
-				},
-			}, {
-				prefix = "<leader>",
-				buffer = curr_buf,
+			wk.add({
+				{ "<leader>v", group = "VHDL" },
+				{ "<leader>vi", "<cmd>VhdlInsertInstanceFromTag<cr>", desc = "Insert an instance from tags" },
+				{ "<leader>vc", "<cmd>VhdlUpdateCtags<cr>", desc = "Update vhdl ctags" },
+				{ "<leader>vp", "<cmd>VhdlPasteSignals<cr>", desc = "Paste signals from copied instance" },
+				{ "<leader>vs", "<cmd>VhdlUpdateSensitivityList<cr><cr>", desc = "Update sensitivity list" },
+				{ "<leader>vb", "<cmd>VhdlBeautify<cr><cr>", desc = "Format buffer" },
 			})
 		end
 
 		vim.api.nvim_create_autocmd(
 			{ "BufNew", "BufRead" },
 			{ pattern = "*.vhd", group = augroup_vhdl_buflocal_keymaps, callback = vhdl_buflocal_keymaps }
-		)
-
-		--------------------------------------------------------------------------------
-		-- Norg mappings
-		--
-		local augroup_norg_buflocal_keymaps = vim.api.nvim_create_augroup("ag_norg_buflocal_keymaps", { clear = true })
-		local norg_buflocal_keymaps = function()
-			local curr_buf = vim.api.nvim_get_current_buf()
-			wk.register({
-				["p"] = {
-					"<cmd>Neorg presenter start<cr><cmd>set nonumber norelativenumber conceallevel=3<cr>",
-					"Start presenter mode",
-				},
-			}, {
-				prefix = "<localleader>",
-				buffer = curr_buf,
-			})
-		end
-
-		vim.api.nvim_create_autocmd(
-			{ "BufNew", "BufRead" },
-			{ pattern = "*.norg", group = augroup_norg_buflocal_keymaps, callback = norg_buflocal_keymaps }
 		)
 	end,
 }

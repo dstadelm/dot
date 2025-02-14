@@ -57,3 +57,4 @@ vim.cmd([[
 set title
 set titlestring=%{hostname()}\ \ %F\ \ %{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}
 ]])
+vim.treesitter.language.register("markdown", "vimwiki")

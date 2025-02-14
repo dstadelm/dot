@@ -58,6 +58,7 @@ map(
 	":cd %:p:h<CR>",
 	{ noremap = true, silent = true, desc = "Change directory to directory of current file" }
 )
+map("n", "<leader>cn", ":cnext<CR>", { noremap = true, silent = true, desc = "cnext" })
 --------------------------------------------------------------------------------
 -- Initial idea from here http://www.kevinli.co/posts/2017-01-19-multiple-cursors-in-500-bytes-of-vimscript/
 -- Mappings from here https://github.com/olimorris/dotfiles/blob/main/.config/nvim/lua/Oli/core/mappings.lua
@@ -76,24 +77,24 @@ map(
 -- 3. Once you are done with the macro, go back to normal mode.
 -- 4. Hit Enter to repeat the macro over search matches.
 --
-local mc = vim.api.nvim_replace_termcodes([[y/\V<C-r>=escape(@", '/')<CR><CR>]], true, true, true)
-map("n", "<leader>cn", "*``cgn", { noremap = true, silent = true, desc = "Multicurser change next occurance" })
-map("n", "<leader>cN", "*``cgN", { noremap = true, silent = true, desc = "Multicurser change previous occurance" })
-map(
-	"n",
-	"<leader>cq",
-	":<C-u>lua require('functions.multicursor').setup()<CR>*``qz",
-	{ noremap = true, silent = true, desc = "Multicurser change using macro" }
-)
-
-map("x", "<leader>cn", mc .. "``cgn", { noremap = true, silent = true, desc = "Multicurser change next occurance" })
-map("x", "<leader>cN", mc .. "``cgN", { noremap = true, silent = true, desc = "Multicurser change previous occurance" })
-map(
-	"x",
-	"<leader>cq",
-	":<C-u>lua require('functions.multicursor').setup()<CR>gv" .. mc .. "``qz",
-	{ noremap = true, silent = true, desc = "Multicurser change using macro" }
-)
+-- local mc = vim.api.nvim_replace_termcodes([[y/\V<C-r>=escape(@", '/')<CR><CR>]], true, true, true)
+-- map("n", "<leader>cn", "*``cgn", { noremap = true, silent = true, desc = "Multicurser change next occurance" })
+-- map("n", "<leader>cN", "*``cgN", { noremap = true, silent = true, desc = "Multicurser change previous occurance" })
+-- map(
+-- 	"n",
+-- 	"<leader>cq",
+-- 	":<C-u>lua require('functions.multicursor').setup()<CR>*``qz",
+-- 	{ noremap = true, silent = true, desc = "Multicurser change using macro" }
+-- )
+--
+-- map("x", "<leader>cn", mc .. "``cgn", { noremap = true, silent = true, desc = "Multicurser change next occurance" })
+-- map("x", "<leader>cN", mc .. "``cgN", { noremap = true, silent = true, desc = "Multicurser change previous occurance" })
+-- map(
+-- 	"x",
+-- 	"<leader>cq",
+-- 	":<C-u>lua require('functions.multicursor').setup()<CR>gv" .. mc .. "``qz",
+-- 	{ noremap = true, silent = true, desc = "Multicurser change using macro" }
+-- )
 --
 --------------------------------------------------------------------------------
 

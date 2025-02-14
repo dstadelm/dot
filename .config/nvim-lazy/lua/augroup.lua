@@ -2,7 +2,7 @@ vim.cmd([[
 let blacklist = ['gitcommit']
 augroup MyAugroup
   autocmd!
-  autocmd BufWritePre * silent! %s/\s\+$//e
+  " autocmd BufWritePre * silent! %s/\s\+$//e
   autocmd BufWritePost *.vim :source %
   autocmd BufWritePost *.lua :source %
   autocmd FileType tex setl suffixesadd+=tex
