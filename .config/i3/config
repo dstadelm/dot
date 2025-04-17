@@ -51,7 +51,7 @@ set $crust #11111b
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id dbus-update-activation-environment --systemd --aLl
+exec --no-startup-id dbus-update-activation-environment --systemd --all
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -78,8 +78,8 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminawl --full-screen
 # bindsym $mod+Return exec gnome-terminal
-# bindsym $mod+Return exec --no-startup-id kitty
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec --no-startup-id kitty
+# bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -257,5 +257,5 @@ bindsym $mod+n exec ~/.cargo/bin/alacritty --class mybookmarks -e nvim -c 'color
 #set $fzf_bookmarks  "awk '/^\s*-/ {print \$0}' ~/bookmarks.md | tr '\t' ' ' | sed -e 's/\s*-.*\[\(.*\)\](\(.*\)).*/\1\t\2/' | ~/.fzf/bin/fzf --delimiter='\t' --with-nth=1 --bind 'enter:execute-silent(nohup xdg-open {2}& > /tmp/nohup.out)+abort'i3-msg '[urgent=latest] focus'"
 bindsym $mod+b exec --no-startup-id ~/.cargo/bin/alacritty --class mybookmarks -e bash -c ~/bin/search_bookmarks.sh
 
-bindsym $mod+x exec "python3 ~/.config/i3/scripts/screenlock"
+bindsym $mod+x exec "~/.config/i3/scripts/.venv/bin/python3 ~/.config/i3/scripts/screenlock"
 bindsym $mod+z exec "~/.config/rofi/scripts/powermenu_t1"
