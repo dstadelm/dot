@@ -1,3 +1,9 @@
+- name: create script directory for screenlock script
+  become: false
+  ansible.builtin.file:
+    path: ~/.config/i3/scripts
+    state: directory
+    mode: '0755'
 - name: create screenlock script
   become: false
   ansible.builtin.copy:

@@ -4,26 +4,22 @@
     dest: /etc/apt/trusted.gpg.d/i3-window-manager.asc
     mode: '0644'
   tags: i3
-
 - name: Install
   ansible.builtin.apt:
     name: apt-transport-https
     state: present
   tags: i3
-
 - name: Update Source List
   ansible.builtin.apt_repository:
     repo: "deb [signed-by=/etc/apt/trusted.gpg.d/i3-window-manager.asc] https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main"
     state: present
     update_cache: yes
   tags: i3
-
 - name: Install i3
   ansible.builtin.apt:
     name: i3
     state: present
   tags: i3
-
 - name: Install dependencies
   ansible.builtin.package:
     name:
@@ -34,14 +30,13 @@
       - suckless-tools
       - rofi
       - maim
+      - imagemagick
     state: present
   tags: i3
-
 - name: Check if betterlockscreen already exists
   ansible.builtin.stat:
     path: /usr/local/bin/betterlockscreen
   register: betterlockscreen
-
 - name: Fetch betterlockscreen installation script
   when: betterlockscreen.stat.exists == False
   ansible.builtin.get_url:
@@ -49,11 +44,9 @@
     dest: /tmp/install_betterlockscreen.sh
     mode: '0755'
   tags: i3
-
 - name: Install betterlockscreen
   when: betterlockscreen.stat.exists == False
   ansible.builtin.shell: bash /tmp/install_betterlockscreen.sh system
-
 - name: Get Autotiling
   become: false
   ansible.builtin.git:
@@ -62,14 +55,12 @@
     update: yes
     force: true
   tags: i3
-
 - name: Make autotiling executable
   become: false
   ansible.builtin.file:
     path: ~/.config/i3/autotiling/autotiling/main.py
     mode: u+x
   tags: i3
-
 - name: Source cargo env variables in ~/.xsessionrc
   become: false
   ansible.builtin.lineinfile:
@@ -78,7 +69,6 @@
     regexp: '[ -f .*cargo/env ].*'
     create: true
     state: present
-
 - name: Set XDG_CONFIG_HOME variable in ~/.xsessionrc
   become: false
   ansible.builtin.lineinfile:
@@ -87,7 +77,6 @@
     regexp: 'export XDG_CONFIG_HOME.*'
     create: true
     state: present
-
 - name: Set deno path
   become: false
   ansible.builtin.lineinfile:
@@ -96,7 +85,6 @@
     regexp: 'export PATH=.*deno.*'
     create: true
     state: present
-
 - name: Set neovim path
   become: false
   ansible.builtin.lineinfile:
@@ -105,7 +93,6 @@
     regexp: 'export PATH=.*bob/nvim-bin.*'
     create: true
     state: present
-
 - name: Start unclutter to remove mouse pointer when unused
   become: false
   ansible.builtin.lineinfile:
@@ -114,8 +101,6 @@
     regexp: '^unclutter &'
     create: true
     state: present
-
-
 - name: Install additional niceties
   include_tasks: "{{ item }}"
   loop:
