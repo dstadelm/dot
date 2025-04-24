@@ -18,6 +18,6 @@
     path: ~/.bash_ansible
     marker: "# {mark} ANSIBLE MANAGED autojump setup"
     block: |
-      source /usr/share/autojump/autojump.zsh
+      source /usr/share/autojump/autojump.bash
     state: present
     create: true
