@@ -4,7 +4,7 @@ return {
 	-- lazy = true,
 	-- event = "VeryLazy",
 	opts = {
-		top_down = true,
+		top_down = false,
 		background_colour = "#000000",
 	},
 	config = function(_, opts)

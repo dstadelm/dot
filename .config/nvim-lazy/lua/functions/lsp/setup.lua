@@ -36,6 +36,7 @@ end
 local function on_attach(client, bufnr)
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
+	vim.notify("Attaching to LSP server: " .. client.name, vim.log.levels.INFO, { title = "LSP" })
 	lsp_keymaps(bufnr)
 
 	-- Enable completion triggered by <c-x><c-o>
@@ -63,36 +64,36 @@ local function capabilities()
 	return _capabilities
 end
 
-local function setup_rust_hdl()
-	local lspconfig = require("lspconfig")
-	local configs = require("lspconfig.configs")
-
-	if not configs.rust_hdl then
-		configs.rust_hdl = {
-			default_config = {
-				cmd = { "/home/dstadelmann/rust/rust_hdl/target/release/vhdl_ls" },
-				filetypes = { "vhdl" },
-				root_dir = function(fname)
-					return lspconfig.util.find_git_ancestor(fname)
-					------------------------------------------------------------
-					-- alternatively one could define the toml file as root
-					-- return lspconfig.util.root_pattern('vhdl_ls.toml')(fname)
-				end,
-				autostart = true,
-				settings = {},
-				flags = {
-					allow_incremental_sync = true,
-					debounce_text_changes = 5000,
-				},
-			},
-		}
-	end
-
-	lspconfig.rust_hdl.setup({
-		on_attach = on_attach,
-		capabilities = capabilities(),
-	})
-end
+-- local function setup_rust_hdl()
+-- 	local lspconfig = require("lspconfig")
+-- 	local configs = require("lspconfig.configs")
+--
+-- 	if not configs.rust_hdl then
+-- 		configs.rust_hdl = {
+-- 			default_config = {
+-- 				cmd = { "/home/dstadelmann/rust/rust_hdl/target/release/vhdl_ls" },
+-- 				filetypes = { "vhdl" },
+-- 				root_dir = function(fname)
+-- 					return lspconfig.util.find_git_ancestor(fname)
+-- 					------------------------------------------------------------
+-- 					-- alternatively one could define the toml file as root
+-- 					-- return lspconfig.util.root_pattern('vhdl_ls.toml')(fname)
+-- 				end,
+-- 				autostart = true,
+-- 				settings = {},
+-- 				flags = {
+-- 					allow_incremental_sync = true,
+-- 					debounce_text_changes = 5000,
+-- 				},
+-- 			},
+-- 		}
+-- 	end
+--
+-- 	lspconfig.rust_hdl.setup({
+-- 		on_attach = on_attach,
+-- 		capabilities = capabilities(),
+-- 	})
+-- end
 
 function M.setup()
 	if not package.loaded["noice"] then
@@ -135,7 +136,16 @@ function M.setup()
 	})
 
 	local servers = {
-		-- ruff = {},
+		vhdl_ls = {
+			default_config = {
+				flags = {
+					allow_incremental_sync = true,
+					debounce_text_changes = 5000,
+				},
+			},
+		},
+		ruff = {},
+		emmet_ls = {},
 		marksman = {},
 		vimls = {},
 		clangd = {},
@@ -228,17 +238,17 @@ function M.setup()
 		ensure_installed = vim.tbl_keys(servers),
 	})
 
-	mason_lspconfig.setup_handlers({
-		function(server_name)
-			require("lspconfig")[server_name].setup({
-				capablities = capabilities(),
-				on_attach = on_attach,
-				settings = servers[server_name],
-			})
-		end,
-	})
+	-- mason_lspconfig.setup_handlers({
+	-- 	function(server_name)
+	-- 		require("lspconfig")[server_name].setup({
+	-- 			capablities = capabilities(),
+	-- 			on_attach = on_attach,
+	-- 			settings = servers[server_name],
+	-- 		})
+	-- 	end,
+	-- })
 
-	setup_rust_hdl()
+	-- setup_rust_hdl()
 
 	-- local util = require 'lspconfig.util'
 	-- require'lspconfig'.pylsp.setup{

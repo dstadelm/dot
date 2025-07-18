@@ -47,7 +47,7 @@ return {
 					local cond = vim.fn.input("condition: ")
 					require("dap").set_breakpoint(cond)
 				end,
-				desc = "Continue",
+				desc = "Conditional Breakpoint",
 			},
 			{
 				"<leader>dcc",

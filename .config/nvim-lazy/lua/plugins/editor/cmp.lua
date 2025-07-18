@@ -17,6 +17,7 @@ return {
 					vim.g.UltiSnipsJumpBackwardTrigger = "<C-j>"
 				end,
 			},
+			"zbirenbaum/copilot-cmp",
 			"honza/vim-snippets",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp",
@@ -34,6 +35,7 @@ return {
 		config = function(plugin, opts)
 			local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
+			require("copilot_cmp").setup()
 			vim.o.completeopt = "menu,menuone,noselect"
 			local lspkind = require("lspkind")
 			local cmp = require("cmp")
@@ -89,6 +91,10 @@ return {
 					{ name = "calc" },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "neorg" },
+					{
+						name = "lazydev",
+						group_index = 0,
+					},
 				}),
 			})
 

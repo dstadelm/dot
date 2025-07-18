@@ -13,7 +13,7 @@ local nvim = {
 			vimwiki = true,
 			headlines = false,
 			render_markdown = true,
-			image = true,
+			image = false,
 		},
 	},
 	editor = {
@@ -26,7 +26,7 @@ local nvim = {
 			exchange = true,
 			hawtkeys = true,
 			hlsearch = true,
-			hydra = true,
+			hydra = false,
 			indent_blankline = false,
 			overlength = false,
 			neoclip = false,
@@ -39,6 +39,10 @@ local nvim = {
 			undotree = true,
 			vinegar = true,
 			yanky = true,
+			copilot = true,
+			copilot_chat = false,
+			avante = true,
+			multicursor = true,
 		},
 		completion = {
 			enabled = true,
@@ -78,7 +82,7 @@ local nvim = {
 			simple_vhdl = true,
 			surround = true,
 			treepin = true,
-			vunit = true,
+			vunit = false,
 		},
 		lsp = {
 			enabled = true,
@@ -86,11 +90,13 @@ local nvim = {
 				lspconfig = true,
 				lspsaga = true,
 				neoconf = true,
-				neodev = true,
+				neodev = false,
 				mason = true,
 				trouble = true,
 				none_ls = false,
 				fidget = true, -- standalone ui for nvim-lsp progress
+				signup = false,
+				lazydev = true,
 			},
 		},
 		dap = {

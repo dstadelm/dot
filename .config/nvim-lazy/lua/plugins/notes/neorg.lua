@@ -12,8 +12,13 @@ return {
 			"nvim-cmp",
 			{
 				"folke/zen-mode.nvim",
+				opts = {
+					window = {
+						width = 240,
+					},
+				},
 			},
-		        {
+			{
 				"vhyrro/luarocks.nvim",
 				priority = 1000,
 				config = true,
