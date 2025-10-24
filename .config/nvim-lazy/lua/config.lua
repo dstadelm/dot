@@ -1,6 +1,6 @@
 local M = {}
 
-M.colorscheme = "material"
+M.colorscheme = "kanagawa"
 
 local nvim = {
 	notes = {
@@ -43,6 +43,7 @@ local nvim = {
 			copilot_chat = false,
 			avante = true,
 			multicursor = true,
+			scrollbar = true,
 		},
 		completion = {
 			enabled = true,

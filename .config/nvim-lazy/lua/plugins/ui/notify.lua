@@ -6,6 +6,7 @@ return {
 	opts = {
 		top_down = false,
 		background_colour = "#000000",
+		timeout = 50,
 	},
 	config = function(_, opts)
 		require("notify").setup(opts)

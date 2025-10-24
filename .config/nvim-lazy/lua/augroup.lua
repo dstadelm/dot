@@ -125,8 +125,11 @@ vim.api.nvim_create_autocmd(
 -- vim.api.nvim_create_autocmd({"ModeChanged"}, {pattern='*', group = set_winbar_color_group, callback = set_winbar_color})
 --------------------------------------------------------------------------------
 -- Set the cursor line to the middle of the screen
--- local cursor_line_group = vim.api.nvim_create_augroup("CursorLine", {clear = true})
--- vim.api.nvim_create_autocmd({"BufEnter", "WinEnter", "VimResized", "WinNew"}, {pattern="*,*.*", group = cursor_line_group, command="let &scrolloff=winheight(win_getid())/2"})
+-- local cursor_line_group = vim.api.nvim_create_augroup("CursorLine", { clear = true })
+-- vim.api.nvim_create_autocmd(
+-- 	{ "BufEnter", "WinEnter", "VimResized", "WinNew" },
+-- 	{ pattern = "*,*.*", group = cursor_line_group, command = "let &scrolloff=(winheight(win_getid())+1)/2" }
+-- )
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("dave-lsp-attach", { clear = true }),

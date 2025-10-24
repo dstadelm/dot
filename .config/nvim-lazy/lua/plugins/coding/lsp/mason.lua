@@ -22,7 +22,7 @@ return {
 				"lua-language-server",
 				"stylua",
 				"lemminx",
-				"ruff",
+				--				"ruff",
 			},
 		})
 	end,

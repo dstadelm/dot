@@ -12,8 +12,6 @@ local function lsp_keymaps(bufnr)
 	-- Mappings.
 	-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 	nmap("<space>e", vim.diagnostic.open_float, "Open diacnostic float")
-	nmap("[d", vim.diagnostic.goto_prev, "Diagnostic go to previous")
-	nmap("]d", vim.diagnostic.goto_next, "Diagnostic go to next")
 	nmap("<space>q", vim.diagnostic.setqflist, "Diagnostic set [q]uickfix list")
 	nmap("<leader>gf", vim.diagnostic.setloclist, "Diagnostic set location list")
 
@@ -96,25 +94,6 @@ end
 -- end
 
 function M.setup()
-	if not package.loaded["noice"] then
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "single",
-		})
-
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-			border = "single",
-		})
-	end
-
-	-- Enable diagnostics
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		underline = false,
-		virtual_text = true,
-		virtual_lines = false,
-		signs = true,
-		update_in_insert = false,
-	})
-
 	require("lspconfig")["basedpyright"].setup({
 		capablities = capabilities(),
 		on_attach = on_attach,
@@ -122,13 +101,13 @@ function M.setup()
 			pyright = {
 				pyright = {
 					disableOrganizeImports = true,
-					openFilesOnly = true,
+					-- openFilesOnly = true,
 				},
 				python = {
 					analysis = {
 						autoSearchPaths = true,
 						useLibraryCodeForTypes = true,
-						diagnosticMode = "openFilesOnly",
+						-- diagnosticMode = "openFilesOnly",
 					},
 				},
 			},
@@ -144,7 +123,9 @@ function M.setup()
 				},
 			},
 		},
-		ruff = {},
+		-- ts_ls = {},
+		angularls = {},
+		-- ruff = {},
 		emmet_ls = {},
 		marksman = {},
 		vimls = {},
@@ -237,54 +218,6 @@ function M.setup()
 	mason_lspconfig.setup({
 		ensure_installed = vim.tbl_keys(servers),
 	})
-
-	-- mason_lspconfig.setup_handlers({
-	-- 	function(server_name)
-	-- 		require("lspconfig")[server_name].setup({
-	-- 			capablities = capabilities(),
-	-- 			on_attach = on_attach,
-	-- 			settings = servers[server_name],
-	-- 		})
-	-- 	end,
-	-- })
-
-	-- setup_rust_hdl()
-
-	-- local util = require 'lspconfig.util'
-	-- require'lspconfig'.pylsp.setup{
-	--   on_attach = on_attach,
-	--   capabilities = capabilities,
-	--   root_dir = function(fname)
-	--     local root_files = {
-	--       'pyproject.toml',
-	--       'setup.py',
-	--       'setup.cfg',
-	--       'requirements.txt',
-	--       'Pipfile',
-	--     }
-	--     return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-	--   end,
-	--   single_file_support = true,
-	--   settings = {
-	--     pylsp = {
-	--       plugins = {
-	--         -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-	--         pycodestyle = {enabled = false},
-	--         pydocstyle = {enabled = false},
-	--         autopep8 = {enabled = false},
-	--         flake8 = {enabled = false},
-	--         pyflakes = {enabled = false},
-	--         yapf = {enabled = false},
-	--         pylint = {
-	--           enabled = true,
-	--           args = {'--rcfile', 'pyproject.toml' },
-	--         },
-	--         isort = {enabled = false},
-	--         pyls_mypy = {enabled = false},
-	--       }
-	--     }
-	--   }
-	-- }
 end
 
 return M

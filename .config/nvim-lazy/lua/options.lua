@@ -40,6 +40,8 @@ vim.o.termguicolors = true
 vim.o.formatoptions = "jcroqlnt"
 vim.o.conceallevel = 3
 
+vim.o.winborder = "rounded" -- borders for floating windows like the lsp documentation popup
+
 vim.o.mouse = "a"
 vim.o.diffopt = "internal,filler,algorithm:histogram,iwhiteall,vertical,linematch:200"
 vim.o.shortmess = vim.o.shortmess .. "c"
