@@ -3,3 +3,66 @@
 More modern tools: https://hackaday.com/2021/06/21/a-collection-of-linux-tools-on-steroids/
 FZF tipps        : https://pragmaticpineapple.com/four-useful-fzf-tricks-for-your-terminal/
 rich-cli         : https://github.com/Textualize/rich-cli
+
+== SSH ==
+
+It is possible to use scp to copy files from one remote server to another
+without downloading them to your local machine first. Using the `-3` option
+with `scp`, allows you to copy files between two remote hosts through your
+local machine. Without the `-3` option, `scp` will only copy files between your
+local machine and a remote host.
+
+=== Jump Host ===
+A jump host is a server that you connect to first, and then from there you can
+connect to other servers. This is useful for security and network management.
+To use a jump host, you can set up your SSH config file (`~/.ssh/config`) like
+this:
+```
+Host jump-host
+    HostName jump.example.com
+    User your-username
+Host target-host
+    HostName target.example.com
+    User your-username
+    ProxyJump jump-host
+```
+
+This configuration allows you to connect to `target-host` through `jump-host`
+without needing to specify the jump host each time.
+
+
+=== SSH Agent Forwarding ===
+SSH agent forwarding allows you to use your local SSH keys on a remote server
+without copying them over. This is useful for accessing other servers from the
+remote server using your local keys. To enable SSH agent forwarding, you can
+add the following to your SSH config file:
+```
+Host remote-server
+    HostName remote.example.com
+    User your-username
+    ForwardAgent yes
+```
+This configuration forwards your SSH agent to the `remote-server`, allowing you
+to use your local SSH keys for authentication.
+
+=== Connection Timeout ===
+To set a connection timeout for SSH, you can use the `ConnectTimeout` option in
+your SSH config file: ``` Host example-host HostName example.com User
+your-username ConnectTimeout [[1]] ``` This sets a timeout of 1 second for
+establishing a connection to `example-host`. If the connection cannot be
+established within this time, it will fail.
+
+Or you can use the `-o ConnectTimeout=1` option when running the `ssh` command:
+```bash ssh -o ConnectTimeout=10 ```
+
+=== Strict Host Key Checking === To disable strict host key checking, which can
+be useful for testing or in environments where you trust the hosts, you can add
+the following to your SSH config file: ``` Host example-host HostName
+example.com User your-username StrictHostKeyChecking network ``` or you can use
+the `-o StrictHostKeyChecking=no` option when running the `ssh` command:
+```bash ssh -o StrictHostKeyChecking=no example.command ```
+
+=== SSH update update host keys === With ```ssh -o UpdateHostKeys``` you can
+update the host keys of a server. This is useful when the server's host keys
+have changed, and you want to update your known hosts file without manually
+editing it.

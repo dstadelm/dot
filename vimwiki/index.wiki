@@ -47,5 +47,4 @@ ngrok --> get remote tools to look like they are on your machine
 [[SearchEngines]]
 [[Version and Environment Management]]
 [[Jira Issue Story]]
-[[Renesas]]
 [[Keyboard]]

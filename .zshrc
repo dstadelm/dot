@@ -61,3 +61,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 [ -f $HOME/.zsh_ansible ] && . $HOME/.zsh_ansible
 export TRAINING_PATH="$HOME/xilinx/training"
+
+# Enable jj autocompletion
+autoload -U compinit
+compinit
+source <(jj util completion zsh)

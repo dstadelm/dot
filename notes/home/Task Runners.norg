@@ -52,13 +52,14 @@
   similar to bazel and also uses StarLark
 
 * Dagger
-   (I have to admit, I did not get it)
+  (I have to admit, I don't get it)
    _Pros_
 
    _Cons_
    - Not open source
    - Replaces CI/CD, not actually the tasks
    - Runs as web application?
+
 * earthly
    Very cool
 
