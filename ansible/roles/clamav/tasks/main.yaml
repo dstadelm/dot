@@ -1,0 +1,54 @@
+###############################################################################
+#
+# This role installs and configures ClamAV antivirus software on the target
+# system.
+#
+###############################################################################
+- name: Install clamav
+  become: true
+  ansible.builtin.package:
+    name:
+      - clamav
+      - clamav-daemon
+      - clamav-freshclam
+      - clamdscan
+    state: present
+- name: Configure clamav
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/clamav/freshclam.conf
+    regex: '^DatabaseMirror'
+    line: 'DatabaseMirror db.ch.clamav.net'
+- name: Configure clamd OnAccessExcludeRootUID for scan
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/clamav/clamd.conf
+    regex: '^OnAccessExcludeRootUID'
+    line: 'OnAccessExcludeRootUID yes'
+- name: Configure clamd OnAccessMaxFileSize for scan
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/clamav/clamd.conf
+    regex: '^OnAccessMaxFileSize'
+    line: 'OnAccessMaxFileSize 2000M'
+- name: Configure paths to scan
+  become: true
+  ansible.builtin.blockinfile:
+    path: /etc/clamav/clamd.conf
+    marker: "# {mark} ANSIBLE MANAGED clamd scan paths"
+    block: |
+      OnAccessIncludePath /home
+      OnAccessIncludePath /var
+      OnAccessIncludePath /opt
+- name: Ensure clamav-freshclam service is started and enabled
+  become: true
+  ansible.builtin.systemd:
+    name: clamav-freshclam
+    state: started
+    enabled: true
+- name: Ensure clamav-clamonacc service is started and enabled
+  become: true
+  ansible.builtin.systemd:
+    name: clamav-clamonacc
+    state: started
+    enabled: true

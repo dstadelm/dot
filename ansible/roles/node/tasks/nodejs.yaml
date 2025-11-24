@@ -2,13 +2,12 @@
   ansible.builtin.get_url:
     url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
     dest: /etc/apt/trusted.gpg.d/nodesource-repo.asc
-
+    force: true
 - name: Add apt repository
   ansible.builtin.apt_repository:
     repo: "deb https://deb.nodesource.com/node_20.x nodistro main"
     state: present
     update_cache: yes
-
 - name: Install Nodejs
   ansible.builtin.apt:
     name: nodejs

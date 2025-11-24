@@ -1,47 +1,29 @@
-- name: check if cargo is installed
-  become: false
-  ansible.builtin.stat:
-    path: ~/.cargo/bin/rustup
-  register: cargo_exists
-  tags: rust
-
 - name: Download installer
   become: false
-  when: cargo_exists.stat.exists == False
   ansible.builtin.get_url:
     url: https://sh.rustup.rs
     dest: /tmp/sh.rustup.rs
     mode: '0755'
     force: yes
-  tags: rust
-
 - name: install rust/cargo
   become: false
-  when: cargo_exists.stat.exists == False
   ansible.builtin.shell: /tmp/sh.rustup.rs -y
-  tags: rust
-
 - name: update rust/cargo
   become: false
   ansible.builtin.shell: |
     $HOME/.cargo/bin/rustup update stable
     $HOME/.cargo/bin/rustup default stable
-  tags: rust
-
-- name: Source environment for cargo
+- name: Source environment for cargo in .bash_ansible
   become: false
-  lineinfile:
-    dest: ".bash_ansible"
-    line: '[ -f ~/.cargo/env ] && source "$HOME/.cargo/env"'
-    regexp: '^[ -f ~/.cargo/env ].*'
-    state: present
-    create: true
-
-- name: Source environment for cargo
+  ansible.builtin.blockinfile:
+    path: "~/.bash_ansible"
+    marker: "# {mark} ANSIBLE MANAGED cargo setup"
+    block: |
+      '[ -f ~/.cargo/env ] && source "$HOME/.cargo/env"'
+- name: Source environment for cargo in .zsh_ansible
   become: false
-  lineinfile:
-    dest: ".zsh_ansible"
-    line: '[ -f ~/.cargo/env ] && source "$HOME/.cargo/env"'
-    regexp: '^[ -f ~/.cargo/env ].*'
-    state: present
-    create: true
+  ansible.builtin.blockinfile:
+    path: "~/.zsh_ansible"
+    marker: "# {mark} ANSIBLE MANAGED cargo setup"
+    block: |
+      '[ -f ~/.cargo/env ] && source "$HOME/.cargo/env"'

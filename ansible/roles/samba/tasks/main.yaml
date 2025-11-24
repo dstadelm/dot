@@ -1,34 +1,29 @@
 - name: Install Samba
+  become: true
   ansible.builtin.package:
     name:
       - samba
       - avahi-daemon
     state: present
-
 - name: Configure Samba
-  include_tasks: smb.conf.yaml
-
+  ansible.builtin.include_tasks: smb.conf.yaml
 - name: shell - create samba users
+  become: true
   ansible.builtin.shell: >
-    set -e -o pipefail
-    && (pdbedit --user={{ samba.username }} 2>&1 > /dev/null)
-    || (echo '{{ samba.password }}'; echo '{{ samba.password }}')
-    | smbpasswd -s -a {{ samba.username }}
+    set -e -o pipefail && (pdbedit --user={{ samba.username }} 2>&1 > /dev/null) || (echo '{{ samba.password }}'; echo '{{ samba.password }}') | smbpasswd -s -a {{ samba.username }}
+
   args:
     executable: /bin/bash
   register: samba_create_users
   changed_when: "'Added user' in samba_create_users.stdout"
   no_log: true
-
 - name: shell - set samba passwords correctly
+  become: true
   ansible.builtin.shell: >
-    set -e -o pipefail
-    && (smbclient -U {{ samba.username }}%{{ samba.password }} -L 127.0.0.1 2>&1 > /dev/null)
-    || (echo '{{ samba.password }}'; echo '{{ samba.password }}')
-    | smbpasswd {{ samba.username }}
+    set -e -o pipefail && (smbclient -U {{ samba.username }}%{{ samba.password }} -L 127.0.0.1 2>&1 > /dev/null) || (echo '{{ samba.password }}'; echo '{{ samba.password }}') | smbpasswd {{ samba.username }}
+
   args:
     executable: /bin/bash
   register: samba_verify_users
   changed_when: "'New SMB password' in samba_verify_users.stdout"
   no_log: true
-

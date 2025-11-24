@@ -1,0 +1,25 @@
+- name: Some settings for bash
+  become: false
+  ansible.builtin.blockinfile:
+    path: ~/.bash_ansible
+    marker: "# {mark} ANSIBLE MANAGED bash settings"
+    block: |
+      # Environment Variables
+      BINPATH=${HOME}/.local/bin
+      [ ":$PATH:" != *":${BINPATH}:"* ] && export PATH="${BINPATH}:${PATH}"
+      export NCURSES_NO_UTF8_ACS=1
+      export XDG_CONFIG_HOME="${HOME}/.config"
+      export TERM=xterm-256color
+      # Sourcing of scripts
+      [ -f /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
+      [ -f /etc/bash_completion.d/git-prompt ] && source /etc/bash_completion.d/git-prompt
+      [ -f "${HOME}/.bash_alias" ] && source "${HOME}/.bash_alias"
+      [ -f "${HOME}/.bash_prompt" ] && source "${HOME}/.bash_prompt"
+      [ -f "${HOME}/.bash_ssh_agent" ] && source "${HOME}/.bash_ssh_agent"
+- name: Source .bash_ansible in .bashrc
+  become: false
+  ansible.builtin.blockinfile:
+    path: ~/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED source bash_ansible"
+    block: |
+      [ -f ~/.bash_ansible ] && source ~/.bash_ansible

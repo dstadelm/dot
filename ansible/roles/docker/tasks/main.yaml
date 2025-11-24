@@ -1,0 +1,35 @@
+- name: Install CA Certificates and curl for Docker
+  become: true
+  ansible.builtin.package:
+    name:
+      - ca-certificates
+      - curl
+    state: present
+- name: Add Docker’s official GPG key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+- name: Set up the Docker stable repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_facts.distribution_release }} stable
+    state: present
+    filename: docker
+    update_cache: yes
+- name: Install Docker Engine
+  become: true
+  ansible.builtin.package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+- name: Ensure Docker service is running
+  become: true
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true

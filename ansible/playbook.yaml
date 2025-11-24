@@ -1,5 +1,11 @@
 - name: Setup Developmen Environment on Ubuntu
   hosts: dev
+  module_defaults:
+    ansible.builtin.blockinfile:
+      create: true
+      prepend_newline: true
+      append_newline: true
+      state: present
   become: true
   vars_files:
     - vault/vars.yaml
@@ -16,7 +22,6 @@
     - role: alacritty
     - role: virtualbox
       when: ansible_facts['virtualization_type'] == "virtualbox"
-      #    - role: environment
     - role: font-SF-Mono-Nerd
     - role: starship
     - role: fzf
@@ -26,6 +31,9 @@
     - role: pyenv
     - role: poetry
     - role: autojump
+    - role: docker
+    - role: uv
+    - role: bash
   tasks:
     - name: Install Additional Packages
       ansible.builtin.package:
@@ -45,6 +53,7 @@
           - kitty
           - imagemagick
           - graphviz
+          - eza
           - libgraphviz-dev
         state: present
 

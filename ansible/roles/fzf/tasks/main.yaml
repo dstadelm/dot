@@ -4,39 +4,21 @@
     repo: https://github.com/junegunn/fzf.git
     depth: 1
     dest: ~/.fzf
-
 - name: Install fzf
   become: false
   ansible.builtin.shell: ~/.fzf/install
-
 - name: Install zsh fzf plugin
   become: false
   ansible.builtin.git:
     repo: https://github.com/unixorn/fzf-zsh-plugin.git
     dest: ~/.zsh_plugins/fzf
     depth: 1
-
-- name: Add bin path of fzf-zsh to path
-  become: false
-  ansible.builtin.lineinfile:
-    path: ~/.zsh_ansible
-    line: export PATH="~/.zsh_plugins/fzf/bin:$PATH"
-    regexp: '^export PATH.*zsh.*fzf'
-    create: true
-
 - name: Source fzf plugin
   become: false
-  ansible.builtin.lineinfile:
+  ansible.builtin.blockinfile:
     path: ~/.zsh_ansible
-    line: source ~/.zsh_plugins/fzf/fzf-zsh-plugin.plugin.zsh
-    regexp: '^source .*zsh.*fzf'
-
-
-- name: Source fzf-tab plugin
-  become: false
-  ansible.builtin.lineinfile:
-    path: ~/.zsh_ansible
-    line: source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
-    regexp: '^source .*zsh.*fzf-tab'
-
-
+    marker: "# {mark} ANSIBLE MANAGED fzf zsh plugin setup"
+    block: |
+      export PATH="~/.zsh_plugins/fzf/bin:$PATH"
+      source ~/.zsh_plugins/fzf/fzf-zsh-plugin.plugin.zsh
+      source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh

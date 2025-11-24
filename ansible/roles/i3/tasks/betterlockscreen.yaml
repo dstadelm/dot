@@ -1,0 +1,10 @@
+- name: Get betterlockscreen
+  become: false
+  ansible.builtin.git:
+    repo: 'https://github.com/betterlockscreen/betterlockscreen.git'
+    dest: /tmp/betterlockscreen.git
+    update: yes
+    force: true
+- name: Install betterlockscreen
+  become: true
+  ansible.builtin.shell: bash -c 'cd /tmp/betterlockscreen.git/; bash install.sh system'

@@ -1,0 +1,14 @@
+- name: Get Autotiling
+  become: false
+  ansible.builtin.git:
+    repo: 'https://github.com/nwg-piotr/autotiling.git'
+    dest: ~/.config/i3/autotiling
+    update: yes
+    force: true
+  tags: i3
+- name: Make autotiling executable
+  become: false
+  ansible.builtin.file:
+    path: ~/.config/i3/autotiling/autotiling/main.py
+    mode: u+x
+  tags: i3

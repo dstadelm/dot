@@ -2,34 +2,24 @@
   ansible.builtin.package:
     name: direnv
     state: present
-- name: Setup direnv
+- name: Setup direnv in .bash_ansible
   become: false
-  ansible.builtin.lineinfile:
-    dest: "{{ loop_value.dest }}"
-    line: 'eval "$(direnv hook {{ loop_value.shell }})"'
-    regexp: 'eval .*direnv .*'
-    state: present
-    create: true
-  loop:
-    - { dest: ~/.bash_ansible, shell: bash}
-    - { dest: ~/.zsh_ansible, shell: zsh}
-  loop_control:
-    loop_var: loop_value
-
-
+  ansible.builtin.blockinfile:
+    path: "~/.bash_ansible"
+    marker: "# {mark} ANSIBLE MANAGED direnv setup"
+    block: |
+      eval "$(direnv hook bash)"
+- name: Setup direnv in .zsh_ansible
+  become: false
+  ansible.builtin.blockinfile:
+    path: "~/.zsh_ansible"
+    marker: "# {mark} ANSIBLE MANAGED direnv setup"
+    block: |
+      eval "$(direnv hook zsh)"
 - name: create poetry layout
   become: false
   copy:
+    src: direnvrc
     dest: ~/.direnvrc
-    content: |
-      layout_poetry() {
-        if [[ ! -f pyproject.toml ]]; then
-          log_error 'No pyproject.toml found.  Use `poetry new` or `poetry init` to create one first.'
-          exit 2
-        fi
-
-        local VENV=$(dirname $(poetry run which python))
-        export VIRTUAL_ENV=$(echo "$VENV" | rev | cut -d'/' -f2- | rev)
-        export POETRY_ACTIVE=1
-        PATH_add "$VENV"
-      }
+    mode: '0644'
+    force: true

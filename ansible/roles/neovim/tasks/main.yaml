@@ -6,22 +6,18 @@
   ansible.builtin.shell: ~/.cargo/bin/bob use latest
 - name: Setup shell environment for neovim [.bash_ansible]
   become: false
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "~/.bash_ansible"
     marker: "# {mark} ANSIBLE MANAGED neovim setup DON'T MODIFY OR DELETE"
     block: |
       PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"
-    state: present
-    create: true
 - name: Setup shell environment for neovim [.zsh_ansible]
   become: false
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "~/.zsh_ansible"
     marker: "# {mark} ANSIBLE MANAGED neovim setup DON'T MODIFY OR DELETE"
     block: |
       PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"
-    state: present
-    create: true
 # used for the neovim python provider
 - name: Create a python venv for neovim
   become: false
@@ -30,15 +26,7 @@
     virtualenv: ~/.nvim-python3
     virtualenv_command: python3 -m venv
 # used for latex tree sitter as it has to be generated
-- name: Check if tree-sitter is installed
-  ansible.builtin.shell: command -v tree-sitter
-  register: tree_sitter_exists
-  ignore_errors: true
-  tags:
-    - tree-sitter
-    - neovim
 - name: Install tree-sitter-cli
-  when: tree_sitter_exists is failed
   ansible.builtin.shell: npm install --no-save -g tree-sitter-cli
   tags:
     - tree-sitter

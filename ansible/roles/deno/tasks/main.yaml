@@ -1,36 +1,26 @@
-- name: Check if deno already exists
-  become: false
-  ansible.builtin.stat:
-    path: ~/.deno/bin/deno
-  register: deno
 - name: Fetch deno install script
   become: false
-  when: deno.stat.exists == False
   ansible.builtin.get_url:
     url: https://deno.land/install.sh
     dest: /tmp/install.sh
+    force: true
 - name: Install Deno
   become: false
-  when: deno.stat.exists == False
   ansible.builtin.shell: sh /tmp/install.sh
 - name: Set PATH for deno for bash
   become: false
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "~/.bash_ansible"
     marker: "# {mark} ANSIBLE MANAGED deno setup DON'T MODIFY OR DELETE"
     block: |
       PATH="$HOME/.deno/bin:$PATH"
-    state: present
-    create: true
 - name: Set PATH for deno for zsh
   become: false
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "~/.zsh_ansible"
     marker: "# {mark} ANSIBLE MANAGED deno setup DON'T MODIFY OR DELETE"
     block: |
       PATH="$HOME/.deno/bin:$PATH"
-    state: present
-    create: true
 - name: upgrade deno
   become: false
   ansible.builtin.shell: ~/.deno/bin/deno upgrade

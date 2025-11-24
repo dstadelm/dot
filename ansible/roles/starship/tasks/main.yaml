@@ -3,19 +3,21 @@
   ansible.builtin.get_url:
     url: https://starship.rs/install.sh
     dest: /tmp/starship_install.sh
+    force: true
 - name: Install starship
   become: false
   ansible.builtin.shell: sh /tmp/starship_install.sh -y
 - name: Setup for Bash
   become: false
-  lineinfile:
+  ansible.builtin.blockinfile:
     path: ~/.bash_ansible
-    line: eval "$(starship init bash)"
-    create: true
-    state: present
+    marker: "# {mark} ANSIBLE MANAGED starship setup"
+    block: |
+      eval "$(starship init bash)"
 - name: Setup for ZSH
   become: false
-  lineinfile:
+  ansible.builtin.blockinfile:
     path: ~/.zsh_ansible
-    line: eval "$(starship init zsh)"
-    state: "absent"
+    marker: "# {mark} ANSIBLE MANAGED starship setup"
+    block: |
+      eval "$(starship init zsh)"

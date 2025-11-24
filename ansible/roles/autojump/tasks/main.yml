@@ -1,23 +1,20 @@
 - name: Install Autojump
+  become: true
   ansible.builtin.package:
     name:
       - autojump
     state: present
 - name: Setup zsh environment for autojump
   become: false
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: ~/.zsh_ansible
     marker: "# {mark} ANSIBLE MANAGED autojump setup"
     block: |
       source /usr/share/autojump/autojump.zsh
-    state: present
-    create: true
 - name: Setup bash environment for autojump
   become: false
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: ~/.bash_ansible
     marker: "# {mark} ANSIBLE MANAGED autojump setup"
     block: |
       source /usr/share/autojump/autojump.bash
-    state: present
-    create: true

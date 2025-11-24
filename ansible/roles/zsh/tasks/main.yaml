@@ -2,59 +2,54 @@
   ansible.builtin.apt:
     name: zsh
     state: present
-
 - name: Create direcotry for zsh_plugins
   become: false
   ansible.builtin.file:
     path: ~/.zsh_plugins
     state: directory
-
-- name: Downloas Autosuggestions
+- name: Download Autosuggestions
   become: false
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
     dest: ~/.zsh_plugins/zsh-autosuggestions
-
-- name: Setup autosuggestions
+- name: Setup Autosuggestions
   become: false
-  ansible.builtin.lineinfile:
+  ansible.builtin.blockinfile:
     path: ~/.zsh_ansible
-    line: source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    state: present
-    create: true
-
-- name: FZF Tab completion
+    marker: "# {mark} ANSIBLE MANAGED zsh-autosuggestions setup"
+    block: |
+      source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+- name: Download FZF Tab completion
   become: false
   ansible.builtin.git:
     repo: https://github.com/Aloxaf/fzf-tab
     dest: ~/.zsh_plugins/fzf-tab
-
 - name: Setup FZF Tab completion
   become: false
   ansible.builtin.blockinfile:
     path: ~/.zsh_ansible
+    marker: "# {mark} ANSIBLE MANAGED FZF tab completion"
     block: |
       autoload -U compinit; compinit
       source ~/.zsh_plugins/fzf-tab/fzf-tab.plugin.zsh
-    marker: "# {mark} ANSIBLE MANAGED FZF tab completion"
-    state: present
-    create: true
-
-- name: Download pure prompt
+- name: Download Pure Prompt
   become: false
   ansible.builtin.git:
     repo: https://github.com/sindresorhus/pure.git
     dest: ~/.zsh_plugins/pure
-
 - name: Setup Pure Prompt
   become: false
   ansible.builtin.blockinfile:
     path: ~/.zsh_ansible
+    marker: "# {mark} ANSIBLE MANAGED pure prompt setup"
     block: |
       fpath+=$HOME/.zsh_plugins/pure
       autoload -U promptinit; promptinit
       prompt pure
-    marker: "# {mark} ANSIBLE MANAGED pure prompt setup"
-    state: present
-    create: true
-
+- name: Source zsh_ansible in .zshrc
+  become: false
+  ansible.builtin.blockinfile:
+    path: ~/.zshrc
+    marker: "# {mark} ANSIBLE MANAGED source zsh_ansible"
+    block: |
+      source ~/.zsh_ansible

@@ -1,0 +1,11 @@
+- name: Install UV from source
+  become: true
+  ansible.builtin.get_url:
+    url: https://astral.sh/uv/install.sh
+    return_content: yes
+  retister: uv_install_script
+- name: Run UV install script
+  become: false
+  ansible.builtin.shell:
+    cmd: sh -s
+    stdin: '{{ uv_install_script.content }}'

@@ -1,0 +1,13 @@
+- name: Install Dagger CLI
+  become: false
+  ansible.builtin.get_url:
+    url: https://dl.dagger.io/dagger/install.sh
+    return_content: yes
+  register: dagger_install_script
+- name: Run Dagger install script
+  become: true
+  ansible.builtin.shell:
+    cmd: sh -s
+    stdin: '{{ dagger_install_script.content }}'
+  environment:
+    BIN_DIR: /usr/local/bin

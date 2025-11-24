@@ -1,26 +1,28 @@
 - name: Add i3 key to apt
+  become: true
   ansible.builtin.get_url:
     url: https://baltocdn.com/i3-window-manager/signing.asc
     dest: /etc/apt/trusted.gpg.d/i3-window-manager.asc
     mode: '0644'
-  tags: i3
+    force: true
 - name: Install
+  become: true
   ansible.builtin.apt:
     name: apt-transport-https
     state: present
-  tags: i3
 - name: Update Source List
+  become: true
   ansible.builtin.apt_repository:
     repo: "deb [signed-by=/etc/apt/trusted.gpg.d/i3-window-manager.asc] https://baltocdn.com/i3-window-manager/i3/i3-autobuild-ubuntu/ all main"
     state: present
     update_cache: yes
-  tags: i3
 - name: Install i3
+  become: true
   ansible.builtin.apt:
     name: i3
     state: present
-  tags: i3
-- name: Install dependencies
+- name: Install dependencies for i3 setup
+  become: true
   ansible.builtin.package:
     name:
       - picom
@@ -32,77 +34,22 @@
       - maim
       - imagemagick
     state: present
-  tags: i3
-- name: Check if betterlockscreen already exists
-  ansible.builtin.stat:
-    path: /usr/local/bin/betterlockscreen
-  register: betterlockscreen
-- name: Fetch betterlockscreen installation script
-  when: betterlockscreen.stat.exists == False
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh
-    dest: /tmp/install_betterlockscreen.sh
-    mode: '0755'
-  tags: i3
-- name: Install betterlockscreen
-  when: betterlockscreen.stat.exists == False
-  ansible.builtin.shell: bash /tmp/install_betterlockscreen.sh system
-- name: Get Autotiling
+- name: Setup .xsessionrc for i3
   become: false
-  ansible.builtin.git:
-    repo: 'https://github.com/nwg-piotr/autotiling.git'
-    dest: ~/.config/i3/autotiling
-    update: yes
-    force: true
-  tags: i3
-- name: Make autotiling executable
-  become: false
-  ansible.builtin.file:
-    path: ~/.config/i3/autotiling/autotiling/main.py
-    mode: u+x
-  tags: i3
-- name: Source cargo env variables in ~/.xsessionrc
-  become: false
-  ansible.builtin.lineinfile:
+  ansible.builtin.blockinfile:
     path: ~/.xsessionrc
-    line: '[ -f $HOME/.cargo/env ] && source "$HOME/.cargo/env"'
-    regexp: '[ -f .*cargo/env ].*'
-    create: true
-    state: present
-- name: Set XDG_CONFIG_HOME variable in ~/.xsessionrc
-  become: false
-  ansible.builtin.lineinfile:
-    path: ~/.xsessionrc
-    line: 'export XDG_CONFIG_HOME="$HOME/.config"'
-    regexp: 'export XDG_CONFIG_HOME.*'
-    create: true
-    state: present
-- name: Set deno path
-  become: false
-  ansible.builtin.lineinfile:
-    path: ~/.xsessionrc
-    line: 'export PATH="$HOME/.deno/bin:$PATH"'
-    regexp: 'export PATH=.*deno.*'
-    create: true
-    state: present
-- name: Set neovim path
-  become: false
-  ansible.builtin.lineinfile:
-    path: ~/.xsessionrc
-    line: 'export PATH="$HOME/.local/share/bob/nvim-bin:~/.local/share/nvim/mason/bin:$PATH"'
-    regexp: 'export PATH=.*bob/nvim-bin.*'
-    create: true
-    state: present
-- name: Start unclutter to remove mouse pointer when unused
-  become: false
-  ansible.builtin.lineinfile:
-    path: ~/.xsessionrc
-    line: 'unclutter &'
-    regexp: '^unclutter &'
-    create: true
-    state: present
+    marker: "# {mark} ANSIBLE MANAGED cargo setup"
+    block: |
+      [ -f $HOME/.cargo/env ] && source "$HOME/.cargo/env"
+      export XDG_CONFIG_HOME="$HOME/.config"
+      export PATH="$HOME/.deno/bin:$PATH"
+      export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+      export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+      unclutter &
 - name: Install additional niceties
-  include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ item }}"
   loop:
     - screenlock.yaml
     - rofi.yaml
+    - betterlockscreen.yaml
+    - autotiling.yaml
